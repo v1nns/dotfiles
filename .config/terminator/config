@@ -1,0 +1,50 @@
+[global_config]
+  geometry_hinting = True
+  borderless = True
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler
+  always_split_with_profile = True
+
+  title_use_system_font = False
+  title_font = Hack 11
+
+  title_inactive_bg_color = "#4C566A"
+  title_inactive_fg_color = "#D8DEE9"
+  title_receive_bg_color = "#8FBCBB"
+  title_receive_fg_color = "#2E3440"
+  title_transmit_bg_color = "#81A1C1"
+  title_transmit_fg_color = "#2E3440"
+[keybindings]
+[profiles]
+  [[default]]
+    cursor_color = "#AAAAAA"
+  [[Nord]]
+    font = Hack 11
+    background_color = "#1F1726"
+    background_darkness = 0.95
+    background_type = transparent
+    cursor_color = "#D8DEE9"
+    foreground_color = "#D8DEE9"
+    palette = "#3B4252:#BF616A:#A3BE8C:#EBCB8B:#81A1C1:#B48EAD:#88C0D0:#E5E9F0:#4C566A:#BF616A:#A3BE8C:#EBCB8B:#81A1C1:#B48EAD:#8FBCBB:#ECEFF4"
+  [[WildCherry]]
+    background_color = "#1F1726"
+    cursor_color = "#DD00FF"
+    font = Hack 11
+    foreground_color = "#DAFAFF"
+    palette = "#000507:#D94085:#2AB250:#FFD16F:#883CDC:#ECECEC:#C1B8B7:#FFF8DE:#009CC9:#DA6BAC:#F4DCA5:#EAC066:#308CBA:#AE636B:#FF919D:#E4838D"
+    use_system_font = False
+  [[Material-Palenight]]
+    background_color = "#292D3E"
+    cursor_color = "#FFCC00"
+    cursor_color_fg = False
+    foreground_color = "#A6ACCD"
+    palette = "#2E3436:#FF5370:#C3E88D:#FFCB6B:#82AAFF:#C792EA:#89DDFF:#D3D7CF:#555753:#F07178:#C3E88D:#F78C6C:#729FCF:#BB80B3:#89DDFF:#EEEEEC"
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = Nord
+[plugins]

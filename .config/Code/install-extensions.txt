@@ -1,0 +1,16 @@
+Here we have all extensions I've using on VS Code lately.
+
+code --install-extension CoenraadS.bracket-pair-colorizer-2
+code --install-extension eamodio.gitlens
+code --install-extension esbenp.prettier-vscode
+code --install-extension kamikillerto.vscode-colorize
+code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-python.python
+code --install-extension ms-python.vscode-pylance
+code --install-extension ms-vscode.cmake-tools
+code --install-extension ms-vscode.cpptools
+code --install-extension PKief.material-icon-theme
+code --install-extension shardulm94.trailing-spaces
+code --install-extension stackbreak.comment-divider
+code --install-extension stkb.rewrap
+code --install-extension zhuangtongfa.material-theme

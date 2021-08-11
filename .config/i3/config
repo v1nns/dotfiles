@@ -42,7 +42,8 @@ set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9:camera" # I do have a special workspace for own CFTV system, so you can ignore this name
+# I do have a special workspace for my own CCTV system, so you can ignore this "camera" string
+set $ws9 "9:camera"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -206,6 +207,12 @@ exec --no-startup-id nm-applet
 # scroll velocity
 exec --no-startup-id imwheel -b "4 5"
 
+# start compositor
+exec --no-startup-id picom -CGb
+
+# start pasystray (only one instance)
+exec --no-startup-id "pkill pasystray; pasystray &"
+
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
@@ -215,9 +222,6 @@ exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
 
 # enable NUMLOCK on startup
 exec_always --no-startup-id numlockx &
-
-# run pasystray on startup (only one instance)
-exec_always --no-startup-id "pkill pasystray; pasystray &"
 
 # setup wallpaper
 exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/cosmonaut.png

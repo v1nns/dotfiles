@@ -1,0 +1,57 @@
+{
+    // vscode settings
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": -1,
+    "editor.minimap.enabled": false,
+    "editor.detectIndentation": false,
+    "editor.suggestSelection": "first",
+    "editor.rulers": [
+        100,
+        120
+    ],
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.iconTheme": "material-icon-theme",
+
+    "C_Cpp.updateChannel": "Insiders",
+
+    // file associations
+    "files.associations": {
+        "config": "shellscript"
+    },
+
+    // code formatting
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    // extension configs
+    "rewrap.wrappingColumn": 80,
+
+    "python.formatting.provider": "black",
+    "python.pythonPath": "/usr/bin/python3",
+    "python.autoComplete.extraPaths": [
+        "/home/vinicius/.cache/fakegir/"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/vinicius/.cache/fakegir/"
+    ],
+
+    "colorize.include": [
+        "**/*.css",
+        "**/*.scss",
+        "**/*.sass",
+        "**/*.less",
+        "**/*.styl",
+        "**/*config*"
+    ],
+
+    "vsicons.dontShowNewVersionMessage": true,
+}

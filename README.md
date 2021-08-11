@@ -20,7 +20,7 @@ There a few things missing, like:
 
 ## Motivation
 
-Using the default GNOME was getting really boring, and a few stutterings were annoying me.
+Using the GNOME as default GUI was getting really boring, and a few stutterings were annoying me.
 
 ## Package dependencies
 
@@ -29,10 +29,14 @@ Using the default GNOME was getting really boring, and a few stutterings were an
 * powerlevel10k theme for zsh
 * feh
 * imwheel
-* i3-gaps (I'm using Ubuntu distro, so the easiest way is to add PPA from Regolith, so you can install it using *apt install*)
-* polybar
+* i3-gaps*
+* polybar*
+* picom*
 * spotify
 
+Also, I've installed Hack font.
+
+**I'm using Ubuntu distro, so the easiest way is to add PPA from Regolith, so you can install it using *apt install*)*
 ## Installation guide (still fixing it)
 
 ```bash
