@@ -47,14 +47,5 @@
         "/home/vinicius/.cache/fakegir/"
     ],
 
-    "colorize.include": [
-        "**/*.css",
-        "**/*.scss",
-        "**/*.sass",
-        "**/*.less",
-        "**/*.styl",
-        "**/*config*"
-    ],
-
     "vsicons.dontShowNewVersionMessage": true,
 }

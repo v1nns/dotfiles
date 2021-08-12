@@ -4,14 +4,14 @@ Surely, dotfiles are really personal, but yet it is something good to share and 
 
 Lately, I've been using i3-gaps + polybar with my own custom theme, and there is one thing I can tell you for sure: ricing can be very addictive!
 
-### TODO:
+### TODO
 
 There a few things missing, like:
 
 * Improve installation guide;
 * Add git config;
-* A good script to install these files automatically, including dependencies;
 * Check all package dependencies;
+* A good script to install these files automatically, including dependencies;
 * Improve color palette on Cosmonaut's theme.
 
 ### Screenshot
@@ -29,14 +29,15 @@ Using the GNOME as default GUI was getting really boring, and a few stutterings 
 * powerlevel10k theme for zsh
 * feh
 * imwheel
-* i3-gaps*
-* polybar*
-* picom*
+* i3-gaps
+* polybar
+* picom
 * spotify
+* yad
 
 Also, I've installed Hack font.
 
-**I'm using Ubuntu distro, so the easiest way is to add PPA from Regolith, so you can install it using *apt install**
+**I'm using Ubuntu distro and some of these packages are not available by default. In order for you to install it using your default package manager, the easiest way is to add PPA from Regolith.*
 ## Installation guide (still fixing it)
 
 ```bash
