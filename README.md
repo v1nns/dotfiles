@@ -36,7 +36,7 @@ Using the GNOME as default GUI was getting really boring, and a few stutterings 
 
 Also, I've installed Hack font.
 
-**I'm using Ubuntu distro, so the easiest way is to add PPA from Regolith, so you can install it using *apt install*)*
+**I'm using Ubuntu distro, so the easiest way is to add PPA from Regolith, so you can install it using *apt install**
 ## Installation guide (still fixing it)
 
 ```bash

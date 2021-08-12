@@ -32,6 +32,9 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
 
+    // debugging
+    "debug.javascript.autoAttachFilter": "onlyWithFlag",
+
     // extension configs
     "rewrap.wrappingColumn": 80,
 

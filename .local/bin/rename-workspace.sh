@@ -5,10 +5,10 @@
 
 # my own path to get custom theme for rofi
 dir="~/.config/rofi/nord"
-rofi_command="rofi  -theme $dir/renameworkspace.rasi"
+rofi_command="rofi -theme $dir/renameworkspace.rasi"
 
 # open rofi window asking for new name
-input="$($rofi_command -dmenu -lines 0 -p 'New name for this workspace:')"
+input="$($rofi_command -dmenu -lines 0 -p 'New name for this workspace:' &)"
 
 # if rofi has exitted by Esc, just exit from script
 [[ ${PIPESTATUS[0]} -ne 0 ]] && exit 0
