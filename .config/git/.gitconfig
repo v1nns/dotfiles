@@ -1,0 +1,12 @@
+[color]
+	ui = true
+[user]
+	name = Vinicius Longaray
+	email = vmouralongaray@gmail.com
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD

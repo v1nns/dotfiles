@@ -9,14 +9,14 @@ Lately, I've been using i3-gaps + polybar with my own custom theme, and there is
 There a few things missing, like:
 
 * Improve installation guide;
-* Add git config;
 * Check all package dependencies;
 * A good script to install these files automatically, including dependencies;
+* Add global gitignore config;
 * Improve color palette on Cosmonaut's theme.
 
 ### Screenshot
 
-![](screenshot/screenshot1.png?raw=true)
+![](screenshot/screenshot2.png?raw=true)
 
 ## Motivation
 
