@@ -210,8 +210,8 @@ exec --no-startup-id imwheel -b "4 5"
 # start compositor
 exec --no-startup-id picom -CGb
 
-# start pasystray (only one instance)
-exec --no-startup-id "pkill pasystray; pasystray &"
+# start pasystray *not using it anymore, using pactl to set default sink and source
+#  exec --no-startup-id "pkill pasystray; pasystray &"
 
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -239,3 +239,9 @@ bindsym $mod+t [title="dropdown-terminal"] scratchpad show
 
 # created as popup on click from module in polybar
 for_window [class="Yad" title="yad-calendar"] floating enable
+
+# if you use chrome as default browser and it is not autocompleting any saved
+# password, check if gnome-keyring-daemon is running, if not, add this:
+#  exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+# also, must add this argument to chrome.desktop:
+#  --password-store=gnome
