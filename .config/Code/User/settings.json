@@ -47,5 +47,22 @@
         "/home/vinicius/.cache/fakegir/"
     ],
 
+    "todohighlight.isEnable": true,
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.scss",
+        "**/*.sh",
+        "**/*.h",
+        "**/*.cc",
+        "**/*.py",
+        "**/config",
+    ],
+
     "vsicons.dontShowNewVersionMessage": true,
 }
