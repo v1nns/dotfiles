@@ -182,6 +182,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# list all windows opened and choose which one you want to switch to
+bindsym $mod+Tab exec --no-startup-id switch-window.sh
+
 # start custom-themed rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id launcher.sh
 

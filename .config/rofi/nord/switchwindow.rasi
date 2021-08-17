@@ -1,23 +1,20 @@
 /**
  * Nordic rofi theme
- * Adapted by undiabler <undiabler@gmail.com>
+ * Adapted by Vinicius <vmouralongaray@gmail.com>
  *
  * Nord Color palette imported from https://www.nordtheme.com/
  *
+ * TODO: fix icons size
  */
 
 configuration {
 
     font: "JetBrains Mono 10";
-    width: 30;
+    width: 900;
     line-margin: 10;
-    lines: 6;
-    columns: 2;
+    lines: 20;
+    columns: 1;
 
-    display-ssh:    "";
-    display-run:    "";
-    display-drun:   "";
-    display-window: "";
     display-combi:  "";
     show-icons:     true;
 }
@@ -104,7 +101,6 @@ listview {
     border-color: @nord10;
     border: 0px 1px 1px 1px;
     background-color: rgba(46,52,64,0.9);
-    dynamic: false;
 }
 
 element {
@@ -116,22 +112,12 @@ element {
     text-color: rgb(216, 222, 233);
 }
 
-element selected.normal {
-    background-color: @nord7;
+element active, element selected.active {
+    background-color: @nord10;
     text-color: #2e3440;
 }
 
-button {
-    padding: 6px;
-    color: @foreground;
-    horizontal-align: 0.5;
-
-    border: 2px 0px 2px 2px;
-    border-radius: 4px 0px 0px 4px;
-    border-color: @foreground;
-}
-
-button selected normal {
-    border: 2px 0px 2px 2px;
-    border-color: @foreground;
+element selected.normal {
+    background-color: @nord7;
+    text-color: #2e3440;
 }
