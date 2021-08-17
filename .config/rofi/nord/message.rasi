@@ -8,7 +8,6 @@
 
 configuration {
     font: "JetBrains Mono 10";
-    width: 30;
 }
 
 * {
@@ -54,7 +53,7 @@ window {
     background-color: rgba(46,52,64,0.9);
     spacing: 0;
 
-    width:    320px;
+    width:    370px;
     padding:  25px;
     y-offset:-2em;
 }
