@@ -176,6 +176,9 @@ bindsym $mod+Print exec --no-startup-id "maim -s --format=png /dev/stdout | xcli
 # rename current workspace
 bindsym $mod+u exec --no-startup-id rename-workspace.sh
 
+# create new workspace
+bindsym $mod+Control+t exec --no-startup-id new-workspace.py
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
@@ -214,7 +217,7 @@ exec --no-startup-id imwheel -b "4 5"
 exec --no-startup-id picom -CGb
 
 # start pasystray *not using it anymore, using pactl to set default sink and source
-#  exec --no-startup-id "pkill pasystray; pasystray &"
+exec --no-startup-id "pkill pasystray; pasystray &"
 
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -242,6 +245,9 @@ bindsym $mod+t [title="dropdown-terminal"] scratchpad show
 
 # created as popup on click from module in polybar
 for_window [class="Yad" title="yad-calendar"] floating enable
+
+# volume control
+for_window [class="Pavucontrol"] floating enable, resize set 800px 600px, move position center
 
 # if you use chrome as default browser and it is not autocompleting any saved
 # password, check if gnome-keyring-daemon is running, if not, add this:
