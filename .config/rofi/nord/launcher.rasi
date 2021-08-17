@@ -107,6 +107,10 @@ listview {
     dynamic: false;
 }
 
+element-icon {
+    size: 2.3ch;
+}
+
 element {
     padding: 3px;
     vertical-align: 0.5;

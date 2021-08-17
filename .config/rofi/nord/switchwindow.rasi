@@ -4,7 +4,6 @@
  *
  * Nord Color palette imported from https://www.nordtheme.com/
  *
- * TODO: fix icons size
  */
 
 configuration {
@@ -12,7 +11,7 @@ configuration {
     font: "JetBrains Mono 10";
     width: 900;
     line-margin: 10;
-    lines: 20;
+    lines: 12;
     columns: 1;
 
     display-combi:  "";
@@ -101,6 +100,10 @@ listview {
     border-color: @nord10;
     border: 0px 1px 1px 1px;
     background-color: rgba(46,52,64,0.9);
+}
+
+element-icon {
+    size: 2.3ch;
 }
 
 element {
