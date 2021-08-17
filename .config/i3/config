@@ -177,7 +177,10 @@ bindsym $mod+Print exec --no-startup-id "maim -s --format=png /dev/stdout | xcli
 bindsym $mod+u exec --no-startup-id rename-workspace.sh
 
 # create new workspace
-bindsym $mod+Control+t exec --no-startup-id new-workspace.py
+bindsym $mod+Control+t exec --no-startup-id new-workspace.py --create
+
+# move container to new workspace
+bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --move
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
