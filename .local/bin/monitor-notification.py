@@ -15,8 +15,20 @@ last_string = "dummy"
 # utility
 def remove_html_tags(text):
     """Remove html tags from a string"""
-    TAG_RE = re.compile(r'<[^>]+>(.|\n)*?<[^>]+>')
-    return TAG_RE.sub('', text)
+    TAG_RE = re.compile(r"<[^>]+>(.|\n)*?<[^>]+>")
+    return TAG_RE.sub("", text)
+
+
+def filter_message(app, summary, body):
+    """Filter notification message to display a friendly message"""
+    if app == "notify-send":
+        if summary == "DUNST_COMMAND_RESUME":
+            summary = "Notifications resumed"
+        elif summary == "DUNST_COMMAND_PAUSE":
+            summary = "Notifications paused"
+
+    return summary, body
+
 
 # Callback for any notification received from D-BUS
 def notifications(bus, message):
@@ -29,13 +41,17 @@ def notifications(bus, message):
 
     if len(app_name) > 0:
         global last_string
-        summary = args[3].replace('\n', '')
-        body = args[4].replace('\n', '')
+        summary = args[3].replace("\n", "")
+        body = args[4].replace("\n", "")
 
         # strip any HTML tag from summary and body
         summary = remove_html_tags(summary)
         body = remove_html_tags(body)
 
+        # for aesthetics, filter notification message
+        summary, body = filter_message(app_name, summary, body)
+
+        # get current timestamp
         timestamp = time.strftime("%Y/%m/%d %H:%M")
 
         # format string
@@ -47,10 +63,10 @@ def notifications(bus, message):
         if string != last_string:
             # sometimes a blank line would appear out of nowhere, in order to
             # prevent this, get file object in binary mode
-            file = open(log_file, 'a')
+            file = open(log_file, "a")
 
             # write string to log file
-            print(string, file=file, end='')
+            print(string, file=file, end="")
             file.close()
 
             # save it
@@ -68,6 +84,7 @@ def main():
 
     main_loop = GLib.MainLoop()
     main_loop.run()
+
 
 # ensure there is only one instance of this script
 with pid.PidFile():
