@@ -20,7 +20,7 @@ def remove_html_tags(text):
 
 
 def filter_message(app, summary, body):
-    """Filter notification message to display a friendly message"""
+    """Filter notification to display a friendly message"""
     if app == "notify-send":
         if summary == "DUNST_COMMAND_RESUME":
             summary = "Notifications resumed"
