@@ -233,7 +233,7 @@ exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
 exec_always --no-startup-id numlockx &
 
 # setup wallpaper
-exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/cosmonaut.png
+exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/pixelnaut.png
 
 # run monitor to save any notification message sent through DBus
 exec_always --no-startup-id monitor-notification.py &> /dev/null
