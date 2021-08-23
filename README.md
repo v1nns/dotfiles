@@ -10,12 +10,12 @@ one thing I can tell you for sure: ricing can be very addictive!
 
 ![](screenshot/screenshot2.png?raw=true)
 
-## Motivation
+## Motivation :monocle_face:
 
 Using the GNOME as default GUI was getting really boring, and a few stutterings
 were annoying me.
 
-## Package dependencies
+## Package dependencies :link:
 
 * zsh
 * oh-my-zsh
@@ -40,12 +40,12 @@ git clone (...)
 cd ./dotfiles
 cp ./wallpaper/* ~/Pictures/Wallpapers/
 cp -rs ./.config/* ~/.config/
-cp -rs ./.local/* ~/.config/
+cp -rs ./.local/* ~/.local/
 ```
 
 *GNU **cp** has an option to create symlinks instead of copying (-s).
 
-### A journey into sound :notes:
+### A journey into sound :musical_note:
 
 We both know that sometimes it is not possible to code without any background
 music, so I went on a quest in search of an alternative to Spotify client which
@@ -70,7 +70,7 @@ working really fine!*
 
 Last but not least, a rice is never *done*.
 
-### TODO :memo:
+## TODO :memo:
 
 There a few things missing, like:
 
