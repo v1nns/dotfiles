@@ -8,7 +8,9 @@ one thing I can tell you for sure: ricing can be very addictive!
 
 ### Screenshot :star_struck:
 
-![](screenshot/screenshot2.png?raw=true)
+![](screenshot/screenshot3.png?raw=true)
+
+**You can check the older ones inside the **screenshot** folder.*
 
 ## Motivation :monocle_face:
 
