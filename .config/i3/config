@@ -251,10 +251,10 @@ exec_always --no-startup-id monitor-notification.py &> /dev/null
 # ================================= CUSTOM ====================================
 
 # floating terminal using terminator
-for_window [title="dropdown-terminal"] sticky enable border none
-for_window [title="dropdown-terminal"] move scratchpad
-exec --no-startup-id terminator -T dropdown-terminal
-bindsym $mod+t [title="dropdown-terminal"] scratchpad show
+for_window [class="X-terminal-emulator" title="dropdown-terminal"] sticky enable border none
+for_window [class="X-terminal-emulator" title="dropdown-terminal"] move scratchpad
+exec --no-startup-id terminator -T dropdown-terminal --command='zsh -o ignoreeof'
+bindsym $mod+t [class="X-terminal-emulator" title="dropdown-terminal"] scratchpad show
 
 # created as popup on click from module in polybar
 for_window [class="Yad" title="yad-calendar"] floating enable
