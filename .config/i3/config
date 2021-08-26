@@ -221,7 +221,14 @@ exec --no-startup-id imwheel -b "4 5"
 # start compositor
 exec --no-startup-id picom -CGb
 
-# start pasystray *not using it anymore, using pactl to set default sink and source
+# Alright, there are two things I gotta tell you, these are:
+# - restarting pulseaudio like this, is the easiest way to run pulseaudio along
+#   with user and start its tcp server in order to Mopidy connect and play;
+# - I've added a few commands in /etc/pulse/default.pa (set-default-sink,
+#   set-default-source and set-source-volume)
+exec --no-startup-id "pulseaudio --kill; pulseaudio --start"
+
+# start pasystray
 exec --no-startup-id "pkill pasystray; pasystray &"
 
 # start polybar
