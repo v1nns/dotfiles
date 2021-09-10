@@ -25,8 +25,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Audio related key bindings (currently using MPD)
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id mpc volume +2
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id mpc volume -2
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id snu -v +2
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id snu -v -2
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioStop exec --no-startup-id mpc stop
 bindsym XF86AudioPrev exec --no-startup-id mpc prev
@@ -201,6 +201,9 @@ bindsym $mod+e exec --no-startup-id nautilus
 
 # lock window
 bindsym $mod+Control+l exec i3lock -c 000000
+
+# work mode
+bindsym $mod+w exec --no-startup-id work-mode.sh
 
 # =========================== STARTUP APPLICATIONS ============================
 

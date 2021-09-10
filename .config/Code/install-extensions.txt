@@ -1,6 +1,5 @@
-Here we have all extensions I've using on VS Code lately.
+Here we have all extensions I've been using on vscode lately.
 
-code --install-extension CoenraadS.bracket-pair-colorizer-2
 code --install-extension eamodio.gitlens
 code --install-extension esbenp.prettier-vscode
 code --install-extension naumovs.color-highlight

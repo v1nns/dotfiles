@@ -2,6 +2,7 @@
     // vscode settings
     "window.titleBarStyle": "custom",
     "window.zoomLevel": -1,
+    "editor.bracketPairColorization.enabled": true,
     "editor.minimap.enabled": false,
     "editor.detectIndentation": false,
     "editor.suggestSelection": "first",
@@ -22,12 +23,19 @@
 
     // code formatting
     "javascript.updateImportsOnFileMove.enabled": "always",
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "[javascript]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[c]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
+    "[javascriptreact]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -40,6 +48,8 @@
     "debug.javascript.autoAttachFilter": "onlyWithFlag",
 
     // extension configs
+    "comment-divider.shouldLengthIncludeIndent": true,
+
     "rewrap.wrappingColumn": 80,
 
     "python.formatting.provider": "black",
