@@ -11,7 +11,7 @@
         120
     ],
     "workbench.editor.wrapTabs": true,
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "GitHub Dark Default",
     "workbench.iconTheme": "material-icon-theme",
 
     "C_Cpp.updateChannel": "Insiders",
