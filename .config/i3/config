@@ -188,7 +188,7 @@ bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --move
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+q [con_id="__focused__" title="^(?!dropdown-terminal).*$"] kill
 
 # list all windows opened and choose which one you want to switch to
 bindsym $mod+Tab exec --no-startup-id switch-window.sh
