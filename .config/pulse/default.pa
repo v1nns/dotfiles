@@ -144,7 +144,7 @@ load-module module-filter-heuristics
 load-module module-filter-apply
 
 ### Make some devices default
-set-default-sink alsa_output.usb-FX-AUDIO-DAC-X6_FX-AUDIO-DAC-X6-01.analog-stereo
+set-default-sink alsa_output.usb-Astro_Gaming_Astro_A50-00.stereo-game
 set-default-source alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.analog-stereo
 
 ### Change default volume for microphone to 70% (65536 * 0.7)

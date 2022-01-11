@@ -22,6 +22,9 @@ were annoying me.
 * zsh
 * oh-my-zsh
 * powerlevel10k theme for zsh
+* rofi
+* dunst
+* jq
 * feh
 * imwheel
 * i3-gaps
@@ -29,6 +32,10 @@ were annoying me.
 * picom
 * spotify
 * yad
+* maim
+* pasystray
+* numlockx
+* lxappearance
 
 Also, I've installed Hack font.
 
@@ -41,11 +48,23 @@ easiest way is to add PPA from Regolith.*
 git clone (...)
 cd ./dotfiles
 cp ./wallpaper/* ~/Pictures/Wallpapers/
-cp -rs ./.config/* ~/.config/
-cp -rs ./.local/* ~/.local/
+cp -sR .../full/path/dotfiles/.config/* ~/.config/
+cp -sR .../full/path/dotfiles/.local/* ~/.local/
 ```
 
-*GNU **cp** has an option to create symlinks instead of copying (-s).
+**GNU **cp** has an option to create symlinks instead of copying (-s).*
+
+
+### Possible modifications you may want to do
+
+About polybar, there are a few things which can change on different computers:
+* Change "**monitor**" value in *.config/polybar/cosmonaut/config.ini* to
+match your own monitor which you want to show the bar;
+* Change "**hwmon-path**" value in *.config/polybar/cosmonaut/modules.ini* to
+  match your own CPU temperature.
+
+And if you use *pulseaudio*, you can modify the last lines in
+*.config/pulse/default.pa* to match your own sink and source.
 
 ### A journey into sound :musical_note:
 
