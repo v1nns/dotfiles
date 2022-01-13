@@ -251,6 +251,9 @@ exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/pixelnaut.p
 # run monitor to save any notification message sent through DBus
 exec_always --no-startup-id monitor-notification.py &> /dev/null
 
+# set default keyboard layout (PT-BR)
+exec "setxkbmap -model abnt2 -layout br"
+
 # ================================= CUSTOM ====================================
 
 # floating terminal using terminator
