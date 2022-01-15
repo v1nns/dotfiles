@@ -269,7 +269,7 @@ for_window [class="Yad" title="yad-calendar"] floating enable
 for_window [class="Pavucontrol"] floating enable, resize set 800px 600px, move position center
 
 # configure popups from google-chrome as floating
-for_window [class="Google-chrome"] window_role="pop-up"] floating enable
+for_window [class="Google-chrome" window_role="pop-up"] floating enable
 
 # if you use chrome as default browser and it is not autocompleting any saved
 # password, check if gnome-keyring-daemon is running, if not, add this:
