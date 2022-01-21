@@ -9,14 +9,14 @@
 configuration {
 
     font: "JetBrains Mono 10";
-    width: 30;
+    width: 50;
     line-margin: 10;
-    lines: 6;
-    columns: 2;
+    lines: 10;
+    columns: 3;
 
     display-ssh:    "";
     display-run:    "";
-    display-drun:   "";
+    display-drun:   "";
     display-window: "";
     display-combi:  "";
     show-icons:     true;

@@ -13,6 +13,7 @@
     "workbench.editor.wrapTabs": true,
     "workbench.colorTheme": "GitHub Dark Default",
     "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "none",
 
     "C_Cpp.updateChannel": "Insiders",
 

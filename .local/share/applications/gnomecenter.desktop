@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Gnome Control Center
+GenericName=Settings
+Icon=gnome-settings-theme
+Exec=gnome-control-center
+Terminal=false
+Categories=Settings;
