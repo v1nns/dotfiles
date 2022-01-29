@@ -7,6 +7,7 @@
     "editor.detectIndentation": false,
     "editor.suggestSelection": "first",
     "editor.rulers": [
+        80,
         100,
         120
     ],
@@ -15,7 +16,9 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
 
-    "C_Cpp.updateChannel": "Insiders",
+    "C_Cpp.default.cppStandard": "c++17",
+
+    "git.autofetch": true,
 
     // file associations
     "files.associations": {
@@ -25,7 +28,12 @@
     // code formatting
     "javascript.updateImportsOnFileMove.enabled": "always",
     "[c]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": false
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.formatOnSave": false
     },
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"

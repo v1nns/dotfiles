@@ -25,7 +25,7 @@ were annoying me.
 * rofi
 * dunst
 * jq
-* feh
+* feh *~OR~* nitrogen (used this to set a different background for each monitor)
 * imwheel
 * i3-gaps
 * polybar
