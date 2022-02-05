@@ -113,7 +113,7 @@ load-module module-always-sink
 load-module module-intended-roles
 
 ### Automatically suspend sinks/sources that become idle for too long
-load-module module-suspend-on-idle
+#load-module module-suspend-on-idle
 
 ### If autoexit on idle is enabled we want to make sure we only quit
 ### when no local session needs us anymore.
@@ -147,5 +147,5 @@ load-module module-filter-apply
 set-default-sink alsa_output.usb-Astro_Gaming_Astro_A50-00.stereo-game
 set-default-source alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.analog-stereo
 
-### Change default volume for microphone to 70% (65536 * 0.7)
-set-source-volume alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.analog-stereo 49807
+### Change default volume for microphone to 90% (65536 * 0.9)
+set-source-volume alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.analog-stereo 58982
