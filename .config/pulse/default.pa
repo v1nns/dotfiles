@@ -143,9 +143,11 @@ load-module module-snap-policy
 load-module module-filter-heuristics
 load-module module-filter-apply
 
-### Make some devices default
+### Make some devices default using its name. To list them, use these commands:
+### pacmd list-sinks | grep -e 'name:' -e 'index:'
+### pacmd list-sources | grep -e 'name:' -e 'index:'
 set-default-sink alsa_output.usb-Astro_Gaming_Astro_A50-00.stereo-game
 set-default-source alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.analog-stereo
 
-### Change default volume for microphone to 90% (65536 * 0.9)
-set-source-volume alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.analog-stereo 58982
+### Change default volume for microphone to 90% (65536 * 0.95)
+set-source-volume alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.analog-stereo 62259
