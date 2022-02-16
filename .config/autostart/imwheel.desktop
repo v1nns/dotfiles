@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=imwheel -b "4 5"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Scroll Velocity
+Name=Scroll Velocity
+Comment[en_US]=Change mouse scroll velocity
+Comment=Change mouse scroll velocity
