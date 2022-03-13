@@ -48,8 +48,8 @@ choose_the_red_pill() {
     data[name]=teams
     data[command]='teams'
     data[className]='^Microsoft Teams'
-    data[workspaceId]=2
-    data[workspaceName]='2: teams'
+    data[workspaceId]=11
+    data[workspaceName]='11:teams '
     data[outputMonitor]='DP-0'
 
     do_the_magic_with data
