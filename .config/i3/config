@@ -121,16 +121,16 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # move any window container to specific workspace in monitor 2
-bindsym $mod+Control+Shift+11 move container to workspace number $ws11
-bindsym $mod+Control+Shift+12 move container to workspace number $ws12
-bindsym $mod+Control+Shift+13 move container to workspace number $ws13
-bindsym $mod+Control+Shift+14 move container to workspace number $ws14
-bindsym $mod+Control+Shift+15 move container to workspace number $ws15
-bindsym $mod+Control+Shift+16 move container to workspace number $ws16
-bindsym $mod+Control+Shift+17 move container to workspace number $ws17
-bindsym $mod+Control+Shift+18 move container to workspace number $ws18
-bindsym $mod+Control+Shift+19 move container to workspace number $ws19
-bindsym $mod+Control+Shift+20 move container to workspace number $ws20
+bindsym $mod+Control+Shift+1 move container to workspace number $ws11
+bindsym $mod+Control+Shift+2 move container to workspace number $ws12
+bindsym $mod+Control+Shift+3 move container to workspace number $ws13
+bindsym $mod+Control+Shift+4 move container to workspace number $ws14
+bindsym $mod+Control+Shift+5 move container to workspace number $ws15
+bindsym $mod+Control+Shift+6 move container to workspace number $ws16
+bindsym $mod+Control+Shift+7 move container to workspace number $ws17
+bindsym $mod+Control+Shift+8 move container to workspace number $ws18
+bindsym $mod+Control+Shift+9 move container to workspace number $ws19
+bindsym $mod+Control+Shift+0 move container to workspace number $ws20
 
 # ============================ WORKSPACE-RELATED ==============================
 
