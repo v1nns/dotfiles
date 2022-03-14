@@ -248,7 +248,7 @@ bindsym $mod+Control+t exec --no-startup-id new-workspace.py --create
 bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --move
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q [con_id="__focused__" title="^(?!dropdown-terminal).*$"] kill
@@ -320,11 +320,11 @@ exec "setxkbmap -model abnt2 -layout br"
 
 # ================================= CUSTOM ====================================
 
-# floating terminal using terminator
-for_window [class="Terminator" title="dropdown-terminal"] sticky enable border none
-for_window [class="Terminator" title="dropdown-terminal"] move scratchpad
-exec --no-startup-id terminator -T dropdown-terminal --command='zsh -o ignoreeof'
-bindsym $mod+t [class="Terminator" title="dropdown-terminal"] scratchpad show
+# floating terminal with kitty
+for_window [class="kitty" title="dropdown-terminal"] sticky enable
+for_window [class="kitty" title="dropdown-terminal"] move scratchpad
+exec --no-startup-id kitty @ launch --title dropdown-terminal zsh -o ignoreeof
+bindsym $mod+t [class="kitty" title="dropdown-terminal"] scratchpad show
 
 # created as popup on click from module in polybar
 for_window [class="Yad" title="yad-calendar"] floating enable
