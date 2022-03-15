@@ -321,10 +321,10 @@ exec --no-startup-id "setxkbmap -model abnt2 -layout br"
 # ================================= CUSTOM ====================================
 
 # floating terminal with kitty
-for_window [class="kitty" title="dropdown-terminal"] sticky enable
-for_window [class="kitty" title="dropdown-terminal"] move scratchpad
-exec --no-startup-id kitty -1 --title dropdown-terminal zsh -o 'ignoreeof'
-bindsym $mod+t [class="kitty" title="dropdown-terminal"] scratchpad show
+for_window [class="Alacritty" title="dropdown-terminal"] sticky enable
+for_window [class="Alacritty" title="dropdown-terminal"] move scratchpad
+exec --no-startup-id alacritty --title dropdown-terminal -e zsh -o 'ignoreeof'
+bindsym $mod+t [class="Alacritty" title="dropdown-terminal"] scratchpad show
 
 # created as popup on click from module in polybar
 for_window [class="Yad" title="yad-calendar"] floating enable
