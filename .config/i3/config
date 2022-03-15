@@ -248,7 +248,7 @@ bindsym $mod+Control+t exec --no-startup-id new-workspace.py --create
 bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --move
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q [con_id="__focused__" title="^(?!dropdown-terminal).*$"] kill
@@ -316,14 +316,14 @@ exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id monitor-notification.py &> /dev/null
 
 # set default keyboard layout (PT-BR)
-exec "setxkbmap -model abnt2 -layout br"
+exec --no-startup-id "setxkbmap -model abnt2 -layout br"
 
 # ================================= CUSTOM ====================================
 
 # floating terminal with kitty
 for_window [class="kitty" title="dropdown-terminal"] sticky enable
 for_window [class="kitty" title="dropdown-terminal"] move scratchpad
-exec --no-startup-id kitty @ launch --title dropdown-terminal zsh -o ignoreeof
+exec --no-startup-id kitty -1 --title dropdown-terminal zsh -o 'ignoreeof'
 bindsym $mod+t [class="kitty" title="dropdown-terminal"] scratchpad show
 
 # created as popup on click from module in polybar
