@@ -1,6 +1,7 @@
 {
     // vscode settings
     "window.titleBarStyle": "custom",
+    "window.zoomLevel": -1,
     "editor.bracketPairColorization.enabled": true,
     "editor.minimap.enabled": false,
     "editor.detectIndentation": false,
@@ -88,8 +89,8 @@
     ],
 
     "vsicons.dontShowNewVersionMessage": true,
-    "window.zoomLevel": -1,
     "diffEditor.ignoreTrimWhitespace": false,
     "git.confirmSync": false,
     "cmake.configureOnOpen": false,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
 }

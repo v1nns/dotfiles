@@ -22,7 +22,7 @@ were annoying me.
 * zsh
 * oh-my-zsh
 * powerlevel10k theme for zsh
-* kitty
+* alacritty
 * rofi
 * dunst
 * jq

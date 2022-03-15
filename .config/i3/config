@@ -248,7 +248,7 @@ bindsym $mod+Control+t exec --no-startup-id new-workspace.py --create
 bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --move
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q [con_id="__focused__" title="^(?!dropdown-terminal).*$"] kill
