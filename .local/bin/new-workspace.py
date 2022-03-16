@@ -5,6 +5,8 @@ import argparse
 import json
 import subprocess
 
+from numpy import empty
+
 
 def get_args_parsed():
     parser = argparse.ArgumentParser(
@@ -33,8 +35,15 @@ def main():
     # convert into dict
     workspaces = json.loads(output)
 
-    # get next workspace number
-    number = (max(workspace["num"] for workspace in workspaces)) + 1
+    # get next workspace number (using list comprehension)
+    active = next(workspace["num"] for workspace in workspaces if workspace["focused"] == True)
+    # extract a sorted sub-list with values starting from the active workspace number
+    numbers = sorted([workspace["num"] for workspace in workspaces if workspace["num"] >= active])
+    # generate a new set containing only the non-existent values based on the previous list
+    missing_numbers = sorted(set(range(numbers[0], numbers[-1])) - set(numbers))
+
+    # define number for the new workspace
+    number = next(iter(missing_numbers)) if len(missing_numbers) > 0 else (numbers[-1] + 1)
 
     if args.create:
         # just create a new workspace
@@ -44,9 +53,7 @@ def main():
         move = subprocess.run(
             ["i3-msg", "move", "container", "to", "workspace", "number", str(number)]
         )
-        goto = subprocess.run(
-            ["i3-msg", "workspace", str(number)]
-        )
+        goto = subprocess.run(["i3-msg", "workspace", str(number)])
 
 
 main()

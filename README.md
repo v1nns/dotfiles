@@ -23,6 +23,7 @@ were annoying me.
 * oh-my-zsh
 * powerlevel10k theme for zsh
 * alacritty
+* neovim
 * rofi
 * dunst
 * jq
