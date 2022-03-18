@@ -93,4 +93,5 @@
     "git.confirmSync": false,
     "cmake.configureOnOpen": false,
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "vscode-neovim.textDecorationsAtTop":true,
 }

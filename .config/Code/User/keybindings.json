@@ -83,5 +83,9 @@
         "key": "ctrl+k f",
         "command": "-workbench.action.closeFolder",
         "when": "emptyWorkspaceSupport && workbenchState != 'empty'"
+    },
+    {
+        "key": "shift+\\",
+        "command": "workbench.action.splitEditorDown"
     }
 ]
