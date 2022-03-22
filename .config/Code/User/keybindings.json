@@ -86,6 +86,7 @@
     },
     {
         "key": "shift+\\",
-        "command": "workbench.action.splitEditorDown"
+        "command": "workbench.action.splitEditorDown",
+        "when": "!editorTextFocus"
     }
 ]

@@ -10,3 +10,5 @@
 	st = status
 	unstage = reset HEAD --
 	last = log -1 HEAD
+[pull]
+	ff = only
