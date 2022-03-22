@@ -11,7 +11,7 @@
         120
     ],
     "workbench.editor.wrapTabs": true,
-    "workbench.colorTheme": "Visual Studio Dark - C++",
+    "workbench.colorTheme": "GitHub Dark Default",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
 
@@ -92,6 +92,7 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "git.confirmSync": false,
     "cmake.configureOnOpen": false,
+    "cmake.configureOnEdit": false,
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "vscode-neovim.textDecorationsAtTop": true,
 }

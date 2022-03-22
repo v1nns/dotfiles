@@ -140,11 +140,15 @@ button selected normal {
     border-color: @foreground;
 }
 
-error-message, textbox {
-    transparency: "screenshot";
-    padding: 5px;
+error-message {
     border:  1px;
     border-radius: 6px;
+    border-color: @nord10;
+}
+
+textbox {
+    transparency: "screenshot";
+    padding: 5px;
 
     color: @foreground;
     text-color: rgb(216, 222, 233);
