@@ -1,98 +1,96 @@
 {
-    // vscode settings
-    "window.titleBarStyle": "custom",
-    "window.zoomLevel": -1,
-    "editor.bracketPairColorization.enabled": true,
-    "editor.minimap.enabled": false,
-    "editor.detectIndentation": false,
-    "editor.suggestSelection": "first",
-    "editor.rulers": [
-        100,
-        120
-    ],
-    "workbench.editor.wrapTabs": true,
-    "workbench.colorTheme": "GitHub Dark Default",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.startupEditor": "none",
+  // vscode settings
+  "window.titleBarStyle": "custom",
+  "workbench.activityBar.visible": false,
+  "window.zoomLevel": -1,
+  "editor.fontFamily": "Fira Code Retina",
+  "editor.fontLigatures": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.minimap.enabled": false,
+  "editor.detectIndentation": false,
+  "editor.suggestSelection": "first",
+  "editor.rulers": [100, 120],
+  "explorer.autoReveal": false,
+  "terminal.integrated.fontSize": 14,
+  "workbench.editor.wrapTabs": true,
+  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
 
-    "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.default.cppStandard": "c++17",
 
-    "git.autofetch": true,
+  "git.autofetch": true,
 
-    // file associations
-    "files.associations": {
-        "config": "shellscript"
-    },
+  // file associations
+  "files.associations": {
+    "config": "shellscript"
+  },
 
-    // code formatting
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "[c]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools",
-        "editor.formatOnSave": false
-    },
-    "[cpp]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools",
-        "editor.formatOnSave": true
-    },
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascriptreact]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
+  // code formatting
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.formatOnSave": false
+  },
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.formatOnSave": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
-    // debugging
-    "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  // debugging
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
 
-    // extension configs
-    "comment-divider.shouldLengthIncludeIndent": true,
-    "comment-divider.length": 100,
-    "comment-divider.lineFiller": "*",
+  // extension configs
+  "comment-divider.shouldLengthIncludeIndent": true,
+  "comment-divider.length": 100,
+  "comment-divider.lineFiller": "*",
 
-    "rewrap.wrappingColumn": 80,
+  "rewrap.wrappingColumn": 80,
 
-    "python.formatting.provider": "black",
-    "python.pythonPath": "/usr/bin/python3",
-    "python.autoComplete.extraPaths": [
-        "/home/vinicius/.cache/fakegir/"
-    ],
-    "python.analysis.extraPaths": [
-        "/home/vinicius/.cache/fakegir/"
-    ],
+  "python.formatting.provider": "black",
+  "python.pythonPath": "/usr/bin/python3",
+  "python.autoComplete.extraPaths": ["/home/vinicius/.cache/fakegir/"],
+  "python.analysis.extraPaths": ["/home/vinicius/.cache/fakegir/"],
 
-    "todohighlight.isEnable": true,
-    "todohighlight.include": [
-        "**/*.js",
-        "**/*.jsx",
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.html",
-        "**/*.php",
-        "**/*.css",
-        "**/*.scss",
-        "**/*.sh",
-        "**/*.h",
-        "**/*.cc",
-        "**/*.py",
-        "**/config",
-    ],
+  "todohighlight.isEnable": true,
+  "todohighlight.include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.html",
+    "**/*.php",
+    "**/*.css",
+    "**/*.scss",
+    "**/*.sh",
+    "**/*.h",
+    "**/*.cc",
+    "**/*.py",
+    "**/config"
+  ],
 
-    "vsicons.dontShowNewVersionMessage": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "git.confirmSync": false,
-    "cmake.configureOnOpen": false,
-    "cmake.configureOnEdit": false,
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "vscode-neovim.textDecorationsAtTop": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "git.confirmSync": false,
+  "cmake.configureOnOpen": false,
+  "cmake.configureOnEdit": false,
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.textDecorationsAtTop": true
 }

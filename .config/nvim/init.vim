@@ -9,6 +9,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'unblevable/quick-scope'
 Plug 'asvetliakov/vim-easymotion'
+Plug 'ray-x/lsp_signature.nvim'
 call plug#end()
 
 " another try in the future...
