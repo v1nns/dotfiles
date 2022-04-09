@@ -95,5 +95,15 @@
     {
         "key": "f1",
         "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    {
+        "key": "ctrl+up",
+        "command": "-vscode-neovim.send",
+        "when": "neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+down",
+        "command": "-vscode-neovim.send",
+        "when": "neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert'"
     }
 ]
