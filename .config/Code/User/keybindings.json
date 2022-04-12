@@ -105,5 +105,18 @@
         "key": "ctrl+down",
         "command": "-vscode-neovim.send",
         "when": "neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert'"
-    }
+    },
+    {
+        "key": "ctrl+alt+e",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.files.action.focusFilesExplorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
 ]
