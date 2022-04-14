@@ -16,7 +16,6 @@ call plug#end()
 " Plug 'easymotion/vim-easymotion', Cond(!exists('g:vscode'))
 " Plug 'asvetliakov/vim-easymotion', Cond(exists('g:vscode'), { 'as': 'vsc-easymotion' })
 
-
 " quick scope
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
