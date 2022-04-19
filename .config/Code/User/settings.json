@@ -3,10 +3,10 @@
   "window.titleBarStyle": "custom",
   "workbench.activityBar.visible": false,
   "window.zoomLevel": -1,
-//   "editor.fontFamily": "Fira Code Retina",
-  "editor.fontFamily": "Victor Mono",
-  "editor.fontSize": 14,
-  "editor.fontWeight": "600",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontSize": 15,
+  //   "editor.fontFamily": "Victor Mono",
+  //   "editor.fontWeight": "300",
   "editor.fontLigatures": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.minimap.enabled": false,
@@ -95,5 +95,5 @@
   "cmake.configureOnOpen": false,
   "cmake.configureOnEdit": false,
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.textDecorationsAtTop": true
+  "vscode-neovim.textDecorationsAtTop": true,
 }
