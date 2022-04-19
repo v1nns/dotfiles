@@ -23,6 +23,7 @@
   "C_Cpp.default.cppStandard": "c++17",
 
   "git.autofetch": true,
+  "git.confirmSync": false,
 
   // file associations
   "files.associations": {
@@ -91,9 +92,51 @@
 
   "vsicons.dontShowNewVersionMessage": true,
   "diffEditor.ignoreTrimWhitespace": false,
-  "git.confirmSync": false,
   "cmake.configureOnOpen": false,
   "cmake.configureOnEdit": false,
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.textDecorationsAtTop": true,
+  //   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  //   "vscode-neovim.textDecorationsAtTop": true,
+  // ...
+  //   "vim.enableNeovim": true,
+  //   "vim.neovimPath": "/usr/bin/nvim",
+  //   "vim.neovimUseConfigFile": true,
+  //   "vim.neovimConfigPath": "/home/vinicius/.config/nvim/init.vim",
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.surround": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.camelCaseMotion.enable": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.easymotionMarkerBackgroundColor": "#7e57c2",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
+    },
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    },
+    {
+      "before": ["<leader>", "w"],
+      "after": ["leader", "leader", "leader", "b", "d", "w"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  }
 }
