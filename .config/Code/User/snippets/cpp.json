@@ -1,0 +1,61 @@
+{
+  // Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "Boilerplate for c++ class": {
+    "prefix": "boilerplate",
+    "body": [
+      "/**",
+      " * \\file",
+      " * \\brief  Class for $1",
+      " */",
+      "",
+      "#ifndef $2_H_",
+      "#define $2_H_",
+      "",
+      "/**",
+      " * @brief TODO:...",
+      " */",
+      "class $3 {",
+      " public:",
+      "  /**",
+      "   * @brief Construct a new $3 object",
+      "   */",
+      "  $3();",
+      "",
+      "  /**",
+      "   * @brief Destroy the $3 object",
+      "   */",
+      "  virtual ~$3() = default;",
+      "",
+
+      "",
+      "};",
+      "",
+      "#endif  // $2_H_"
+    ],
+    "description": "Boilerplate for new class in C++"
+  },
+  "Remove constructors (based on rule of five)": {
+    "prefix": "deleteconstructors",
+    "body": [
+      "/* ******************************************************************************************** */",
+      "//! Remove these",
+      "$3(const $3& other) = delete;             // copy constructor",
+      "$3($3&& other) = delete;                  // move constructor",
+      "$3& operator=(const $3& other) = delete;  // copy assignment",
+      "$3& operator=($3&& other) = delete;       // move assignment"
+    ],
+    "description": "Remove unused constructors (based on the rule of five)"
+  }
+}
