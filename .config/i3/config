@@ -285,7 +285,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id imwheel -b "4 5"
 
 # start compositor
-exec --no-startup-id picom -b --experimental-backends
+exec --no-startup-id "picom -b --experimental-backends"
 
 # Alright, there are two things I gotta tell you, these are:
 # - restarting pulseaudio like this, is the easiest way to run pulseaudio along
@@ -308,9 +308,14 @@ exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
 # enable NUMLOCK on startup
 exec_always --no-startup-id numlockx &
 
-# setup wallpaper
+# (old way) setup wallpaper
 #exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/pixelnaut.png
-exec_always --no-startup-id nitrogen --restore
+#exec_always --no-startup-id nitrogen --restore
+
+# 2.0: now it is the time for the live wallpaper (yeah, I'm living the dream! 'til I get bored...)
+# P.S.: I won't upload mp4 here, so if you want to use it something similar, just look for any
+# wallpaper from Wallpaper Engine Workshop.
+exec_always --no-startup-id "pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4"
 
 # run monitor to save any notification message sent through DBus
 exec_always --no-startup-id monitor-notification.py &> /dev/null
