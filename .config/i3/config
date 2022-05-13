@@ -284,8 +284,8 @@ exec --no-startup-id nm-applet
 # scroll velocity
 exec --no-startup-id imwheel -b "4 5"
 
-# start compositor
-exec --no-startup-id "picom -b --experimental-backends"
+# start compositor (old command: picom -b --experimental-backends)
+exec --no-startup-id "picom --backend glx --vsync --no-use-damage --experimental-backends &"
 
 # Alright, there are two things I gotta tell you, these are:
 # - restarting pulseaudio like this, is the easiest way to run pulseaudio along
