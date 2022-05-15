@@ -13,21 +13,21 @@ rule_webcam_mic = {
     }
 }
 
-rule_dac_input = {
-    matches = {{{"node.name", "equals", "alsa_input.usb-FX-AUDIO-DAC-X6_FX-AUDIO-DAC-X6-01.analog-stereo"}}},
+rule_dac_name = {
+    matches = {{{"device.name", "equals", "alsa_card.usb-FX-AUDIO-DAC-X6_FX-AUDIO-DAC-X6-01"}}},
     apply_properties = {
-        ["node.disabled"] = true
+        ["device.description"] = "DAC FX-AUDIO X6"
     }
 }
 
-rule_dac_name = {
-    matches = {{{"node.name", "equals", "alsa_output.usb-FX-AUDIO-DAC-X6_FX-AUDIO-DAC-X6-01.analog-stereo"}}},
-    apply_properties = {
-        ["node.description"] = "DAC FX-AUDIO X6"
-    }
-}
+-- rule_dac_input = {
+--     matches = {{{"node.name", "equals", "alsa_input.usb-FX-AUDIO-DAC-X6_FX-AUDIO-DAC-X6-01.analog-stereo"}}},
+--     apply_properties = {
+--         ["node.disabled"] = true
+--     }
+-- }
 
 table.insert(alsa_monitor.rules, rule_nvidia)
 table.insert(alsa_monitor.rules, rule_webcam_mic)
-table.insert(alsa_monitor.rules, rule_dac_input)
 table.insert(alsa_monitor.rules, rule_dac_name)
+-- table.insert(alsa_monitor.rules, rule_dac_input)
