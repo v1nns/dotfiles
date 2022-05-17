@@ -1,0 +1,14 @@
+[Unit]
+Description=Librespot (an open source Spotify client)
+Documentation=https://github.com/librespot-org/librespot
+Documentation=https://github.com/librespot-org/librespot/wiki/Options
+Wants=network.target sound.target
+After=network.target sound.target
+
+[Service]
+Restart=always
+RestartSec=10
+ExecStart=/home/vinicius/.cargo/bin/librespot --name "%u@%H" -b 320 -c /home/vinicius/.cache/librespot --enable-volume-normalisation --initial-volume 75
+
+[Install]
+WantedBy=default.target
