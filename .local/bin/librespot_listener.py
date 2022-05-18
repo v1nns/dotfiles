@@ -36,7 +36,7 @@ from gi.repository import GObject, Notify
 # ----------------------------------- Cache from temporary file ---------------------------------- #
 
 DEFAULT_TMP_FILE = "/home/vinicius/.cache/librespot/custom_cache.json"
-# no-commit
+
 CLIENT_ID = ""
 CLIENT_SECRET = ""
 
