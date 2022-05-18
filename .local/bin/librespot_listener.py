@@ -19,9 +19,15 @@ Pass this script as argument to librespot initialization, for example:
     "librespot --onevent librespot_listener.py"
 
 """
-import base64, gi, json, requests, os
+import base64
+import gi
+import json
+import requests
+import os
+
 from dataclasses import dataclass, field
-from secrets import *
+from pid import PidFileError
+from pid.decorator import pidfile
 
 gi.require_version('Notify', '0.7')
 
@@ -30,6 +36,9 @@ from gi.repository import GObject, Notify
 # ----------------------------------- Cache from temporary file ---------------------------------- #
 
 DEFAULT_TMP_FILE = "/home/vinicius/.cache/librespot/custom_cache.json"
+# no-commit
+CLIENT_ID = ""
+CLIENT_SECRET = ""
 
 
 @dataclass
@@ -102,14 +111,14 @@ class LibrespotNotifier(GObject.Object):
 # Wrapper for Spotify Web API using Client Credential flow
 class SpotifyWebApi:
 
-    def __init__(self):
+    def __init__(self, client_id, client_secret):
         self.access_token = ""
+        self.client_id = client_id
+        self.client_secret = client_secret
         self.urls = {
             "authentication": "https://accounts.spotify.com/api/token",
             "track_info": "https://api.spotify.com/v1/tracks/{id}",
         }
-        self.client_id = ""
-        self.client_secret = ""
 
     def _update_access_token(self, cache=None, forced=False):
         # Use token loaded from cache
@@ -163,9 +172,8 @@ class SpotifyWebApi:
 
             # Only get info in case of success
             if req.status_code == 200:
-                cache.artist = track_info["artist"] = data["artists"][0][
-                    "name"]
-                cache.name = track_info["name"] = data["name"]
+                track_info["artist"] = data["artists"][0]["name"]
+                track_info["name"] = data["name"]
                 retry = False
 
             # Check if token has expired
@@ -184,11 +192,8 @@ class SpotifyWebApi:
 # ------------------------------------------ Main method ----------------------------------------- #
 
 
+@pidfile()
 def main():
-    # initialize cache and spotify
-    cache = Cache()
-    spotify = SpotifyWebApi()
-
     # filter event from librespot
     state = os.getenv("PLAYER_EVENT")
 
@@ -196,6 +201,13 @@ def main():
     ignored_states = ["volume_set", "started", "changed", "preloading"]
     if state is None or state in ignored_states:
         return
+
+    # initialize cache and spotify
+    cache = Cache()
+    spotify = SpotifyWebApi(CLIENT_ID, CLIENT_SECRET)
+
+    # Update state in cache
+    cache.state = state
 
     # Get song info using Spotify API
     track_uri = os.getenv("TRACK_ID")
@@ -221,4 +233,8 @@ def main():
 # ------------------------------------------------------------------------------------------------ #
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except PidFileError as e:
+        # that's ok, you can have only one instance running simultaneously
+        pass

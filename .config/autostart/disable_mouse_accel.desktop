@@ -2,3 +2,6 @@
 Name=Disable mouse acceleration
 Exec=xset m 0 0
 Type=Application
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
