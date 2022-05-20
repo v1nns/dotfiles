@@ -31,7 +31,6 @@ from pid import PidFileError
 from pid.decorator import pidfile
 
 gi.require_version('Notify', '0.7')
-
 from gi.repository import GObject, Notify
 
 # ----------------------------------- Cache from temporary file ---------------------------------- #
@@ -149,7 +148,7 @@ class SpotifyWebApi:
         cache.access_token = self.access_token = token
 
     def get_track_info(self, track_uri, cache=None):
-        # default values
+        # Default values
         info = {"artist": "", "song": ""}
 
         if track_uri is None:
@@ -173,8 +172,8 @@ class SpotifyWebApi:
 
             # Only get info in case of success
             if req.status_code == 200:
-                cache.artist = info["artist"] = data["artists"][0]["name"]
-                cache.song = info["song"] = data["name"]
+                info["artist"] = data["artists"][0]["name"]
+                info["song"] = data["name"]
                 retry = False
 
             # Check if token has expired
@@ -202,7 +201,7 @@ def notify_system(state, info, error):
     if not error:
         message = f"ARTIST: {info['artist']}\nTRACK: {info['song']}"
 
-    # Otherwise, show output from Spotify Web API request
+    # Otherwise, show error output from Spotify Web API request
     else:
         message = f"Error {info['error']['status']}: {info['error']['message']}"
 
@@ -217,14 +216,10 @@ def notify_daemon(state, info, error):
         pass
 
     try:
-        # get the session bus
+        # Get published interface methods by Music Event Daemon (MED)
         bus = dbus.SessionBus()
-
-        # get object
         object = bus.get_object("org.vinns.musicdaemon",
                                 "/org/vinns/musicdaemon")
-
-        # get the interface
         interface = dbus.Interface(object, "org.vinns.musicdaemon")
 
         artist = info["artist"]
@@ -238,7 +233,7 @@ def notify_daemon(state, info, error):
             interface.stop()
 
     except Exception as e:
-        # just ignore the exception, possibly, it didn't find any running music daemon to notify
+        # Just ignore the exception, possibly, it didn't find any running music daemon to notify
         pass
 
 
@@ -247,34 +242,52 @@ def notify_daemon(state, info, error):
 
 @pidfile()
 def main():
-    # filter event from librespot
+    # Filter event from librespot
     state = os.getenv("PLAYER_EVENT")
 
-    # simply ignore this event
-    ignored_states = ["volume_set", "started", "changed", "preloading"]
+    # Simply ignore this event
+    ignored_states = ["volume_set", "started", "preloading"]
     if state is None or state in ignored_states:
         return
 
-    # initialize cache and spotify
+    # Initialize cache and spotify
     cache = Cache()
     spotify = SpotifyWebApi(CLIENT_ID, CLIENT_SECRET)
 
-    # Update state in cache
-    cache.state = state
-
-    # Get song info using Spotify API
+    # Get song information using Spotify API
     track_uri = os.getenv("TRACK_ID")
     info = spotify.get_track_info(track_uri, cache)
 
     error = True if "error" in info else False
+
+    if not error:
+        if cache.song == info["song"]:
+            # Necessary to check if values are already in a valid state. In
+            # other words, it has already been updated.
+            already_updated = True if cache.state == "playing" and (
+                state == "changed" or state == "playing") else False
+
+            # Ignore the event and that's it, life moves on
+            if already_updated:
+                return
+
+        # In some situations, librespot sends "changed" and "playing" events
+        # almost at the same time, so by using the lock by PID, this script
+        # wasn't being properly executed, and that's why it will interpret
+        # "changed" in the same way as "playing" state
+        state = "playing" if state == "changed" else state
+
+        # Update cache information
+        cache.state = state
+        cache.artist = info["artist"]
+        cache.song = info["song"]
+        cache.save_to_file()
 
     # send a notification to show in OS as a popup
     notify_system(state, info, error)
 
     # and finally, notify the custom music daemon
     notify_daemon(state, info, error)
-
-    cache.save_to_file()
 
 
 # ------------------------------------------------------------------------------------------------ #
