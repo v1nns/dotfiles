@@ -20,6 +20,7 @@ Pass this script as argument to librespot initialization, for example:
 
 """
 import base64
+import dbus
 import gi
 import json
 import requests
@@ -46,7 +47,7 @@ class Cache():
     state: str = field(default="")
     access_token: str = field(default="", repr=False)
     artist: str = field(default="")
-    name: str = field(default="")
+    song: str = field(default="")
 
     def __post_init__(self):
         self.load_from_file()
@@ -61,8 +62,8 @@ class Cache():
                     self.access_token = obj["access_token"]
                 if "artist" in obj:
                     self.artist = obj["artist"]
-                if "name" in obj:
-                    self.name = obj["name"]
+                if "song" in obj:
+                    self.song = obj["song"]
 
     def save_to_file(self):
         with open(DEFAULT_TMP_FILE, 'w+') as out:
@@ -149,10 +150,10 @@ class SpotifyWebApi:
 
     def get_track_info(self, track_uri, cache=None):
         # default values
-        track_info = {"artist": "", "name": ""}
+        info = {"artist": "", "song": ""}
 
         if track_uri is None:
-            return track_info
+            return info
 
         if not self.access_token:
             self._update_access_token(cache)
@@ -172,8 +173,8 @@ class SpotifyWebApi:
 
             # Only get info in case of success
             if req.status_code == 200:
-                track_info["artist"] = data["artists"][0]["name"]
-                track_info["name"] = data["name"]
+                cache.artist = info["artist"] = data["artists"][0]["name"]
+                cache.song = info["song"] = data["name"]
                 retry = False
 
             # Check if token has expired
@@ -183,10 +184,62 @@ class SpotifyWebApi:
 
             # Otherwise, there is nothing we can do
             else:
-                track_info = data
+                info = data
                 retry = False
 
-        return track_info
+        return info
+
+
+# ------------------------------------------- Notify OS ------------------------------------------ #
+
+
+def notify_system(state, info, error):
+    # Instantiate notifier object
+    notifier = LibrespotNotifier()
+    message = ""
+
+    # Create message based on information
+    if not error:
+        message = f"ARTIST: {info['artist']}\nTRACK: {info['song']}"
+
+    # Otherwise, show output from Spotify Web API request
+    else:
+        message = f"Error {info['error']['status']}: {info['error']['message']}"
+
+    notifier.send_notification(state, message, error)
+
+
+# -------------------------------------- Notify Music Daemon ------------------------------------- #
+
+
+def notify_daemon(state, info, error):
+    if error:
+        pass
+
+    try:
+        # get the session bus
+        bus = dbus.SessionBus()
+
+        # get object
+        object = bus.get_object("org.vinns.musicdaemon",
+                                "/org/vinns/musicdaemon")
+
+        # get the interface
+        interface = dbus.Interface(object, "org.vinns.musicdaemon")
+
+        artist = info["artist"]
+        song = info["song"]
+
+        if state == "playing":
+            interface.play(artist, song)
+        elif state == "paused":
+            interface.pause(artist, song)
+        else:
+            interface.stop()
+
+    except Exception as e:
+        # just ignore the exception, possibly, it didn't find any running music daemon to notify
+        pass
 
 
 # ------------------------------------------ Main method ----------------------------------------- #
@@ -211,22 +264,16 @@ def main():
 
     # Get song info using Spotify API
     track_uri = os.getenv("TRACK_ID")
-    song = spotify.get_track_info(track_uri, cache)
+    info = spotify.get_track_info(track_uri, cache)
 
-    # Instantiate notifier object
-    notifier = LibrespotNotifier()
-    message = ""
-    error = True if "error" in song else False
+    error = True if "error" in info else False
 
-    # Create message based on information
-    if not error:
-        message = "ARTIST: {}\nTRACK: {}".format(song["artist"], song["name"])
-    else:
-        # Otherwise, show output from Spotify Web API request
-        message = "Error {}: {}".format(song["error"]["status"],
-                                        song["error"]["message"])
+    # send a notification to show in OS as a popup
+    notify_system(state, info, error)
 
-    notifier.send_notification(state, message, error)
+    # and finally, notify the custom music daemon
+    notify_daemon(state, info, error)
+
     cache.save_to_file()
 
 
