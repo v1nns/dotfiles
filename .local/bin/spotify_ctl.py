@@ -11,19 +11,21 @@ In order to execute it, the script requires that you have an app created in
 Developer's dashboard from Spotify account, otherwise, you won't be able to
 retrieve information from the current song playing. After you have created the
 app, set CLIENT_ID and CLIENT_SECRET properly. You must also set DEFAULT_DEVICE
-and DEFAULT_CACHE_PATH,
+and DEFAULT_CACHE_PATH.
 
 Usage example:
 > spotify_ctl.py --toggle-play
 
 """
 import argparse
+import dbus
 import spotipy
 import sys
 import os
 
 from pathlib import Path
 from spotipy.oauth2 import SpotifyOAuth
+from time import sleep
 
 CLIENT_ID = ""
 CLIENT_SECRET = ""
@@ -94,6 +96,31 @@ def authenticate_on_spotify(client_id, client_secret) -> spotipy.Spotify:
     return spotify
 
 
+# -------------------------------------- Notify Music Daemon ------------------------------------- #
+
+
+def notify_daemon_music_stopped():
+    """
+    This is the multiverse of MEDness, as Spotify doesn't have an API method
+    to stop the music (other than 'pause'), we do what we gotta do to notify
+    to daemon that music has stopped
+    """
+    try:
+        # Get published interface methods by Music Event Daemon (MED)
+        bus = dbus.SessionBus()
+        object = bus.get_object("org.vinns.musicdaemon",
+                                "/org/vinns/musicdaemon")
+        interface = dbus.Interface(object, "org.vinns.musicdaemon")
+
+        # Wait for librespot to receive the event
+        sleep(1)
+        interface.stop()
+
+    except Exception as e:
+        # Just ignore the exception, possibly, it didn't find any running music daemon to notify
+        pass
+
+
 # ------------------------------------------ Main method ----------------------------------------- #
 
 
@@ -135,6 +162,7 @@ def main():
     # Simply pause playback
     if args.stop:
         spotify.pause_playback(device_id=device_id)
+        notify_daemon_music_stopped()
 
     # Skip to next song
     if args.next:
