@@ -89,7 +89,6 @@
     "**/config"
   ],
 
-  "vsicons.dontShowNewVersionMessage": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "cmake.configureOnOpen": false,
   "cmake.configureOnEdit": false,
