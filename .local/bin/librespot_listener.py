@@ -284,18 +284,12 @@ def update_cache_and_save(state: str, info: str, cache: Cache):
     if cache.song == info["song"]:
         # Necessary to check if values are already in a valid state. In
         # other words, it has already been updated.
-        already_updated = True if cache.state == "playing" and (
-            state == "changed" or state == "playing") else False
+        already_updated = True if (cache.state == "playing"
+                                   and state == "playing") else False
 
         # Ignore the event and that's it, life moves on
         if already_updated:
             return
-
-    # In some situations, librespot sends "changed" and "playing" events
-    # almost at the same time, so by using the lock by PID, this script
-    # wasn't being properly executed, and that's why it will interpret
-    # "changed" in the same way as "playing" state
-    state = "playing" if state == "changed" else state
 
     # Update cache information
     cache.state = state
@@ -334,7 +328,12 @@ def main():
         notify_system(state, info, error=True)
         return
 
-    # else:
+    # In some situations, librespot sends "changed" and "playing" events
+    # almost at the same time, so by using the lock by PID, this script
+    # wasn't being properly executed, and that's why it will interpret
+    # "changed" in the same way as "playing" state
+    state = "playing" if state == "changed" else state
+
     # Update information in cache file
     update_cache_and_save(state, info, cache)
 
