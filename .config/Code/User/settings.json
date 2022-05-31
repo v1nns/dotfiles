@@ -1,24 +1,27 @@
 {
   // vscode settings
   "window.titleBarStyle": "custom",
-  "workbench.activityBar.visible": false,
   "window.zoomLevel": -1,
+  "terminal.integrated.fontSize": 14,
   "editor.fontFamily": "Fira Code",
   "editor.fontSize": 15,
   //   "editor.fontFamily": "Victor Mono",
   //   "editor.fontWeight": "300",
   "editor.fontLigatures": true,
   "editor.bracketPairColorization.enabled": true,
-  "editor.minimap.enabled": false,
   "editor.detectIndentation": false,
+  "editor.inlayHints.enabled": "on",
   "editor.suggestSelection": "first",
   "editor.rulers": [100, 120],
   "explorer.autoReveal": false,
-  "terminal.integrated.fontSize": 14,
+  "explorer.openEditors.visible": 40,
+  "explorer.openEditors.sortOrder": "editorOrder",
   "workbench.editor.wrapTabs": true,
   "workbench.colorTheme": "GitHub Dark Default",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.showTabs": false,
 
   "C_Cpp.default.cppStandard": "c++17",
 
@@ -69,8 +72,14 @@
   "rewrap.wrappingColumn": 80,
 
   "python.formatting.provider": "yapf",
-  "python.autoComplete.extraPaths": ["/home/vinicius/.cache/fakegir/", "/home/vinicius/.local/lib/python3.10/site-packages"],
-  "python.analysis.extraPaths": ["/home/vinicius/.cache/fakegir/", "/home/vinicius/.local/lib/python3.10/site-packages"],
+  "python.autoComplete.extraPaths": [
+    "/home/vinicius/.cache/fakegir/",
+    "/home/vinicius/.local/lib/python3.10/site-packages"
+  ],
+  "python.analysis.extraPaths": [
+    "/home/vinicius/.cache/fakegir/",
+    "/home/vinicius/.local/lib/python3.10/site-packages"
+  ],
 
   "todohighlight.isEnable": true,
   "todohighlight.include": [
@@ -135,5 +144,7 @@
   "vim.leader": "<space>",
   "vim.handleKeys": {
     "<C-f>": false
-  }
+  },
+  "editor.minimap.enabled": false,
+  "workbench.activityBar.visible": false
 }

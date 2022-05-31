@@ -79,11 +79,10 @@ class LibrespotNotifier(GObject.Object):
         Notify.init("librespot_notifier")
         self.title = "Spotify"
 
-    def send_notification(self, state, text, title="", error=False):
-        curr_title = title if title else self.title
+    def send_notification(self, state, text, error=False):
         icon_path = self._get_icon_path(state, error)
 
-        notify = Notify.Notification.new(curr_title, text, icon_path)
+        notify = Notify.Notification.new(self.title, text, icon_path)
         notify.show()
 
     # TODO: get a default path from somewhere
@@ -118,6 +117,8 @@ class SpotifyWebApi:
         self.urls = {
             "authentication": "https://accounts.spotify.com/api/token",
             "track_info": "https://api.spotify.com/v1/tracks/{id}",
+            "podcast_info":
+            "https://api.spotify.com/v1/episodes/{id}?market=BR",
         }
 
     def _update_access_token(self, cache=None, forced=False):
@@ -188,11 +189,53 @@ class SpotifyWebApi:
 
         return info
 
+    def get_podcast_info(self, track_uri, cache=None):
+        # Default values
+        info = {"artist": "", "song": ""}
+
+        if track_uri is None:
+            return info
+
+        if not self.access_token:
+            self._update_access_token(cache)
+
+        retry = True
+        while retry:
+            # HTTPS GET
+            url = self.urls["podcast_info"].format(id=track_uri)
+            headers = {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer {}".format(self.access_token)
+            }
+
+            req = requests.get(url, headers=headers)
+            data = req.json()
+
+            # Only get info in case of success
+            if req.status_code == 200:
+                info["artist"] = data["show"]
+                info["song"] = data["name"]
+                retry = False
+
+            # Check if token has expired
+            elif req.status_code == 401:
+                # Get new token and retry GET in the next loop
+                self._update_access_token(cache, forced=True)
+
+            # Otherwise, there is nothing we can do
+            else:
+                print("aff", "url", url, "data", data)
+                info = data
+                retry = False
+
+        return info
+
 
 # ------------------------------------------- Notify OS ------------------------------------------ #
 
 
-def notify_system(state, info, error):
+def notify_system(state: str, info: object, error: bool = False):
     # Instantiate notifier object
     notifier = LibrespotNotifier()
     message = ""
@@ -211,10 +254,7 @@ def notify_system(state, info, error):
 # -------------------------------------- Notify Music Daemon ------------------------------------- #
 
 
-def notify_daemon(state, info, error):
-    if error:
-        pass
-
+def notify_daemon(state: str, info: object):
     try:
         # Get published interface methods by Music Event Daemon (MED)
         bus = dbus.SessionBus()
@@ -235,6 +275,33 @@ def notify_daemon(state, info, error):
     except Exception as e:
         # Just ignore the exception, possibly, it didn't find any running music daemon to notify
         pass
+
+
+# ------------------------------------ Update values in Cache ------------------------------------ #
+
+
+def update_cache_and_save(state: str, info: str, cache: Cache):
+    if cache.song == info["song"]:
+        # Necessary to check if values are already in a valid state. In
+        # other words, it has already been updated.
+        already_updated = True if cache.state == "playing" and (
+            state == "changed" or state == "playing") else False
+
+        # Ignore the event and that's it, life moves on
+        if already_updated:
+            return
+
+    # In some situations, librespot sends "changed" and "playing" events
+    # almost at the same time, so by using the lock by PID, this script
+    # wasn't being properly executed, and that's why it will interpret
+    # "changed" in the same way as "playing" state
+    state = "playing" if state == "changed" else state
+
+    # Update cache information
+    cache.state = state
+    cache.artist = info["artist"]
+    cache.song = info["song"]
+    cache.save_to_file()
 
 
 # ------------------------------------------ Main method ----------------------------------------- #
@@ -258,36 +325,24 @@ def main():
     track_uri = os.getenv("TRACK_ID")
     info = spotify.get_track_info(track_uri, cache)
 
-    error = True if "error" in info else False
+    # In case of error, may be a podcast episode, so try again
+    if "error" in info:
+        info = spotify.get_podcast_info(track_uri, cache)
 
-    if not error:
-        if cache.song == info["song"]:
-            # Necessary to check if values are already in a valid state. In
-            # other words, it has already been updated.
-            already_updated = True if cache.state == "playing" and (
-                state == "changed" or state == "playing") else False
+    # Alright, there is no way to get the info, so just send a notification error
+    if "error" in info:
+        notify_system(state, info, error=True)
+        return
 
-            # Ignore the event and that's it, life moves on
-            if already_updated:
-                return
+    # else:
+    # Update information in cache file
+    update_cache_and_save(state, info, cache)
 
-        # In some situations, librespot sends "changed" and "playing" events
-        # almost at the same time, so by using the lock by PID, this script
-        # wasn't being properly executed, and that's why it will interpret
-        # "changed" in the same way as "playing" state
-        state = "playing" if state == "changed" else state
+    # Send a notification to show in OS as a popup
+    notify_system(state, info)
 
-        # Update cache information
-        cache.state = state
-        cache.artist = info["artist"]
-        cache.song = info["song"]
-        cache.save_to_file()
-
-    # send a notification to show in OS as a popup
-    notify_system(state, info, error)
-
-    # and finally, notify the custom music daemon
-    notify_daemon(state, info, error)
+    # And finally, notify the custom music daemon
+    notify_daemon(state, info)
 
 
 # ------------------------------------------------------------------------------------------------ #
