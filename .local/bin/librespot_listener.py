@@ -280,7 +280,7 @@ def notify_daemon(state: str, info: object):
 # ------------------------------------ Update values in Cache ------------------------------------ #
 
 
-def update_cache_and_save(state: str, info: str, cache: Cache):
+def update_cache(state: str, info: str, cache: Cache):
     if cache.song == info["song"]:
         # Necessary to check if values are already in a valid state. In
         # other words, it has already been updated.
@@ -289,13 +289,15 @@ def update_cache_and_save(state: str, info: str, cache: Cache):
 
         # Ignore the event and that's it, life moves on
         if already_updated:
-            return
+            return False
 
     # Update cache information
     cache.state = state
     cache.artist = info["artist"]
     cache.song = info["song"]
     cache.save_to_file()
+
+    return True
 
 
 # ------------------------------------------ Main method ----------------------------------------- #
@@ -335,13 +337,12 @@ def main():
     state = "playing" if state == "changed" else state
 
     # Update information in cache file
-    update_cache_and_save(state, info, cache)
+    if update_cache(state, info, cache):
+        # Send a notification to show in OS as a popup
+        notify_system(state, info)
 
-    # Send a notification to show in OS as a popup
-    notify_system(state, info)
-
-    # And finally, notify the custom music daemon
-    notify_daemon(state, info)
+        # And finally, notify the custom music daemon
+        notify_daemon(state, info)
 
 
 # ------------------------------------------------------------------------------------------------ #
