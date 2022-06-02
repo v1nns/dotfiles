@@ -129,4 +129,8 @@
         "command": "-workbench.action.files.openFile",
         "when": "true"
     },
+    {
+        "key": "ctrl+alt+s",
+        "command": "workbench.action.toggleAuxiliaryBar"
+    },
 ]
