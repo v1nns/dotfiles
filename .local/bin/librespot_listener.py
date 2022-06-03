@@ -18,6 +18,10 @@ event.
 Pass this script as argument to librespot initialization, for example:
     "librespot --onevent librespot_listener.py"
 
+P.S. If you want to see cute icons on notification popup, copy icons from
+'dotfiles/.local/share/icons' to any location that you prefer and save this path
+to DEFAULT_ICON_PATH.
+
 """
 import base64
 import dbus
@@ -36,6 +40,7 @@ from gi.repository import GObject, Notify
 # ----------------------------------- Cache from temporary file ---------------------------------- #
 
 DEFAULT_TMP_FILE = "/home/vinicius/.cache/librespot/custom_cache.json"
+DEFAULT_ICON_PATH = "/home/vinicius/.local/share/icons/custom"
 
 CLIENT_ID = ""
 CLIENT_SECRET = ""
@@ -85,22 +90,28 @@ class LibrespotNotifier(GObject.Object):
         notify = Notify.Notification.new(self.title, text, icon_path)
         notify.show()
 
-    # TODO: get a default path from somewhere
     def _get_icon_path(self, state, error):
-        if error:
-            icon = "/usr/share/icons/Humanity/status/48/error.svg"
+        icon = ""
+
+        # alright, do not use any icon
+        if not os.path.exists(DEFAULT_ICON_PATH):
             return icon
 
-        icon = "/usr/share/icons/Humanity/actions/48/"
-
-        if state == "playing":
-            icon += "player_play"
+        if error:
+            icon = "error"
+        elif state == "playing":
+            icon = "play"
         elif state == "paused":
-            icon += "player_pause"
+            icon += "pause"
         elif state == "stopped":
-            icon += "player_stop"
+            icon += "stop"
 
-        icon += ".svg"
+        icon = f"{DEFAULT_ICON_PATH}/{icon}.png"
+
+        # directory exists, but icon doesn't
+        if not os.path.exists(icon):
+            icon = ""
+
         return icon
 
 
