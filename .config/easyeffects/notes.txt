@@ -1,0 +1,9 @@
+I have started using EasyEffects to apply an EQ preset on playback. I did this
+just 'cause I wanna enjoy my headphone to the fullest. Based on that, I've got a
+EQ made by oratory1990 specific for my headphone model.
+
+To apply this EQ on linux, I had to install EasyEffects
+(https://github.com/wwmm/easyeffects) using Flatpak :/
+
+And finally, I also created a Systemd service to run it as a background service
+after the login.

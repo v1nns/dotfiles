@@ -13,6 +13,7 @@
   "editor.inlayHints.enabled": "on",
   "editor.suggestSelection": "first",
   "editor.rulers": [100, 120],
+  "editor.minimap.enabled": false,
   "explorer.autoReveal": false,
   "explorer.openEditors.visible": 40,
   "explorer.openEditors.sortOrder": "editorOrder",
@@ -22,6 +23,7 @@
   "workbench.startupEditor": "none",
   "workbench.editor.enablePreview": false,
   "workbench.editor.showTabs": false,
+  "workbench.activityBar.visible": false,
 
   "C_Cpp.default.cppStandard": "c++17",
 
@@ -145,6 +147,4 @@
   "vim.handleKeys": {
     "<C-f>": false
   },
-  "editor.minimap.enabled": false,
-  "workbench.activityBar.visible": false
 }

@@ -1,0 +1,13 @@
+[Unit]
+Description=EasyEffects service
+Documentation=https://github.com/wwmm/easyeffects
+Wants=network.target sound.target
+After=network.target sound.target
+
+[Service]
+Restart=always
+RestartSec=10
+ExecStart=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=easyeffects com.github.wwmm.easyeffects --gapplication-service
+
+[Install]
+WantedBy=default.target
