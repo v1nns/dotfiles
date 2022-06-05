@@ -21,7 +21,7 @@
   "workbench.colorTheme": "GitHub Dark Default",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
-  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreview": true,
   "workbench.editor.showTabs": false,
   "workbench.activityBar.visible": false,
 
@@ -147,4 +147,9 @@
   "vim.handleKeys": {
     "<C-f>": false
   },
+
+  "cmakeFormat.args": [
+    "--config-file",
+    "/home/vinicius/projects/dotfiles/.config/cmakeformat/.cmake-format.py"
+  ]
 }
