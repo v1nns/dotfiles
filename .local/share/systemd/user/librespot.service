@@ -8,7 +8,7 @@ After=network.target sound.target
 [Service]
 Restart=always
 RestartSec=10
-ExecStart=/home/vinicius/.cargo/bin/librespot --name "%u@%H" -b 320 -c /home/vinicius/.cache/librespot --format F32 --enable-volume-normalisation --initial-volume 75 --onevent /home/vinicius/.local/bin/librespot_listener.py
+ExecStart=/home/vinicius/.cargo/bin/librespot --name "%u@%H" -b 320 -c /home/vinicius/.cache/librespot --format F32 --initial-volume 75 --dither none --onevent /home/vinicius/.local/bin/librespot_listener.py
 
 [Install]
 WantedBy=default.target

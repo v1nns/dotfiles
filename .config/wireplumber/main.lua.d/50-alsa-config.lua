@@ -2,8 +2,8 @@
 golden_rule = {
     matches = {{{"node.name", "matches", "alsa_input.*"}}, {{"node.name", "matches", "alsa_output.*"}}},
     apply_properties = {
-        ["api.alsa.period-size"] = 256,
-        ["api.alsa.headroom"] = 8192
+        -- ["api.alsa.period-size"] = 256,
+        ["api.alsa.headroom"] = 2048
     }
 }
 
