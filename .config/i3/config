@@ -136,7 +136,7 @@ bindsym $mod+Control+Shift+0 move container to workspace number $ws20
 
 # as the name says (i3-gaps), I'm using smart_gaps with a custom margin
 smart_gaps on
-gaps inner 7
+gaps inner 3
 #gaps outer 10
 for_window [class="^.*"] border pixel 2
 
@@ -315,13 +315,16 @@ exec_always --no-startup-id nitrogen --restore
 # 2.0: now it is the time for the live wallpaper (yeah, I'm living the dream! 'til I get bored...)
 # P.S.: I won't upload mp4 here, so if you want to use it something similar, just look for any
 # wallpaper from Wallpaper Engine Workshop.
-exec_always --no-startup-id "pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4"
+# exec_always --no-startup-id "pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4"
 
 # run monitor to save any notification message sent through DBus
 exec_always --no-startup-id monitor-notification.py &> /dev/null
 
 # set default keyboard layout (PT-BR)
-exec --no-startup-id "setxkbmap -model abnt2 -layout br"
+#exec --no-startup-id "setxkbmap -model abnt2 -layout br"
+
+# set default keyboard layout (EN-US)
+exec_always --no-startup-id "setxkbmap -layout us -variant alt-intl"
 
 # ================================= CUSTOM ====================================
 
