@@ -12,18 +12,32 @@
   "editor.detectIndentation": false,
   "editor.inlayHints.enabled": "on",
   "editor.suggestSelection": "first",
-  "editor.rulers": [100, 120],
+  "editor.rulers": [
+    {
+      "column": 100,
+      "color": "#ff0022"
+    }
+  ],
   "editor.minimap.enabled": false,
   "explorer.autoReveal": false,
   "explorer.openEditors.visible": 40,
   "explorer.openEditors.sortOrder": "editorOrder",
   "workbench.editor.wrapTabs": true,
-  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.colorTheme": "Kanagawa",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
   "workbench.editor.enablePreview": true,
   "workbench.editor.showTabs": false,
   "workbench.activityBar.visible": false,
+  "workbench.colorCustomizations": {
+    "[Kanagawa]": {
+      "titleBar.activeBackground": "#181821",
+      "titleBar.activeForeground": "#DCD7DA",
+      "sideBar.background": "#181821",
+      "sideBar.foreground": "#DCD7DA",
+      "statusBar.foreground": "#FFFFFF"
+    }
+  },
 
   "C_Cpp.default.cppStandard": "c++17",
 

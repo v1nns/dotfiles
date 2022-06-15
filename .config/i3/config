@@ -324,7 +324,7 @@ exec_always --no-startup-id monitor-notification.py &> /dev/null
 #exec --no-startup-id "setxkbmap -model abnt2 -layout br"
 
 # set default keyboard layout (EN-US)
-exec_always --no-startup-id "setxkbmap -layout us -variant alt-intl"
+exec_always --no-startup-id "setxkbmap -layout us -variant intl"
 
 # ================================= CUSTOM ====================================
 
