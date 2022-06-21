@@ -35,7 +35,8 @@
       "titleBar.activeForeground": "#DCD7DA",
       "sideBar.background": "#181821",
       "sideBar.foreground": "#DCD7DA",
-      "statusBar.foreground": "#FFFFFF"
+      "statusBar.foreground": "#FFFFFF",
+      "scrollbarSlider.background": "#54546D59"
     }
   },
 
