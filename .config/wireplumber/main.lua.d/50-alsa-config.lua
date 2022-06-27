@@ -1,3 +1,5 @@
+alsa_monitor.enabled = true
+
 -- Matches all sources and sinks. This is necessary to avoid "Broken pipe" errors
 golden_rule = {
     matches = {{{"node.name", "matches", "alsa_input.*"}}, {{"node.name", "matches", "alsa_output.*"}}},
