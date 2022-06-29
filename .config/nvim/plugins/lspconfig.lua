@@ -1,0 +1,1 @@
+/home/vinicius/.config/nvim/lua/custom/plugins/lspconfig.lua
