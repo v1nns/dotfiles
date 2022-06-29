@@ -1,14 +1,23 @@
 local M = {}
 
-local pluginConfs = require "custom.plugins.configs"
-local interfaceConfs = require "custom.interface"
-local mappingConfs = require "custom.mappings"
+local pluginCfg = require "custom.plugins.configs"
+local uiCfg = require "custom.ui.configs"
+local mappingCfg = require "custom.mappings"
 
 M.ui = {
+    hl_override = {
+        AlphaHeader = {
+           fg = "#c273a2",
+        },
+        -- AlphaButtons = {
+        --     fg = "#ff2233",
+        -- },
+    },
+
     theme = "aquarium",
 
     tabufline = {
-        override = interfaceConfs.tabufline
+        override = uiCfg.tabufline
     }
 }
 
@@ -25,11 +34,12 @@ M.plugins = {
 
     -- Override default config of a plugin (merging)
     override = {
-        ["nvim-treesitter/nvim-treesitter"] = pluginConfs.treesitter,
-        ["kyazdani42/nvim-tree.lua"] = pluginConfs.nvimtree,
-        ["hrsh7th/nvim-cmp"] = pluginConfs.cmp,
-        ["lukas-reineke/indent-blankline.nvim"] = pluginConfs.blankline,
-        ["nvim-telescope/telescope.nvim"] = pluginConfs.telescope,
+        ["goolord/alpha-nvim"] = pluginCfg.alpha,
+        ["nvim-treesitter/nvim-treesitter"] = pluginCfg.treesitter,
+        ["kyazdani42/nvim-tree.lua"] = pluginCfg.nvimtree,
+        ["hrsh7th/nvim-cmp"] = pluginCfg.cmp,
+        ["lukas-reineke/indent-blankline.nvim"] = pluginCfg.blankline,
+        ["nvim-telescope/telescope.nvim"] = pluginCfg.telescope,
     },
 
     -- Replace default config of a plugin (or add a new plugin)
@@ -42,6 +52,6 @@ M.plugins = {
      },
 }
 
-M.mappings = mappingConfs
+M.mappings = mappingCfg
 
 return M
