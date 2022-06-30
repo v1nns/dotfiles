@@ -7,7 +7,11 @@ local mappingCfg = require "custom.mappings"
 M.options = {
     -- load custom options here
     user = function()
+        -- visual column
         vim.opt.colorcolumn = '100'
+        -- show trailing spaces and tabs
+        vim.opt.list = true
+        vim.opt.listchars = { trail = '~', tab = '>>' }
     end,
 }
 
@@ -24,7 +28,10 @@ M.ui = {
         },
         Comment = {
             fg = "#4CAF50",
-        }
+        },
+        NonText = {
+            fg = "#FF2233",
+        },
     },
 
     theme = "aquarium",
@@ -64,6 +71,7 @@ M.plugins = {
 
         ["nvim-telescope/telescope-file-browser.nvim"] = {},
         ["easymotion/vim-easymotion"] = {},
+        ["shatur/neovim-session-manager"] = {},
      },
 }
 

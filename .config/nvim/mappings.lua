@@ -22,16 +22,20 @@ M.telescope = {
         ["<leader>pt"] = {},
 
         -- general navigation
-        ["<C-S-p>"] = { "<cmd> Telescope keymaps <CR>", "  show keys" },
+        ["<C-S-p>"] = { "<cmd> Telescope commands<CR>", "  show commands" },
+        -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "  show keyboard shortcuts" },
         ["<C-o>"] = { "<cmd> Telescope file_browser prompt_title=Open\\ folder<CR>", "  open folder" },
         ["<C-p>"] = { "<cmd> Telescope find_files prompt_title=Open\\ file hidden=true<CR>", "  open file" },
-        ["<C-S-b>"] = { "<cmd> Telescope marks <CR>", "  open bookmarks" },
-        ["<C-S-f>"] = { "<cmd> Telescope live_grep prompt_title=Search\\ all <CR>", "  search all" },
-        ["<A-Tab>"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
+        ["<C-S-b>"] = { "<cmd> Telescope marks<CR>", "  open bookmarks" },
+        ["<C-S-f>"] = { "<cmd> Telescope live_grep prompt_title=Search\\ all<CR>", "  search all" },
+        ["<A-Tab>"] = { "<cmd> Telescope buffers<CR>", "  find buffers" },
 
         -- git
         ["<C-g>c"] = { "<cmd> Telescope git_commits <CR>", "  git commits" },
         ["<C-g>t"] = { "<cmd> Telescope git_status <CR>", "  git status" },
+
+        -- lsp
+        ["<C-S-o>"] = { "<cmd> Telescope lsp_document_symbols<CR>", "   show lsp symbols" },
      },
 }
 

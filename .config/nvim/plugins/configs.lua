@@ -33,8 +33,6 @@ local ascii = {
 --     [[⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⢸⣿⣿⣿⣿⣿⣿⣿⠁⣿⣿⣿⣿⣿⣿⣿⣿⣿]],
 -- }
 
-local present, alpha = pcall(require, "alpha")
-
 local function button(sc, txt, keybind)
    local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
 
