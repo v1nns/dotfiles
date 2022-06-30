@@ -74,9 +74,9 @@ M.plugins = {
         -- ["nvim-telescope/telescope-project.nvim"] = {},
         ["easymotion/vim-easymotion"] = {},
 
-        ["stevearc/dressing.nvim"] = {},
-        ["shatur/neovim-session-manager"] = {},
-     },
+        -- ["stevearc/dressing.nvim"] = {},
+        -- ["shatur/neovim-session-manager"] = {},
+    },
 }
 
 M.mappings = mappingCfg

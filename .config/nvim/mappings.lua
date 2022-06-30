@@ -19,7 +19,14 @@ M.disabled = {
 M.general = {
     n = {
         -- easymotion (for navigation)
-        ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "  easymotion word" },
+        ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "   easymotion word" },
+
+        -- window adjusts
+        -- TODO: create function for width based on window position
+        ["<C-S-w>"] = { "<cmd> winc > <CR>", "  increase width"},
+        ["<C-S-x>"] = { "<cmd> winc < <CR>", "  decrease width"},
+        ["<C-S-y>"] = { "<cmd> winc - <CR>", "  increase height"},
+        ["<C-S-z>"] = { "<cmd> winc + <CR>", "  decrease height"},
     },
 }
 
@@ -28,8 +35,8 @@ M.telescope = {
         -- general navigation
         ["<C-S-p>"] = { "<cmd> Telescope commands<CR>", "  show commands" },
         -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "  show keyboard shortcuts" },
-        ["<C-o>"] = { "<cmd> Telescope file_browser prompt_title=Open\\ folder<CR>", "  open folder" },
-        ["<C-p>"] = { "<cmd> Telescope find_files prompt_title=Open\\ file<CR>", "  open file" },
+        ["<C-o>"] = { "<cmd> Telescope file_browser hidden=true prompt_title=Open\\ folder<CR>", "  open folder" },
+        ["<C-p>"] = { "<cmd> Telescope find_files hidden=true prompt_title=Open\\ file<CR>", "  open file" },
         ["<C-S-b>"] = { "<cmd> Telescope marks<CR>", "  open bookmarks" },
         ["<C-S-f>"] = { "<cmd> Telescope live_grep prompt_title=Search\\ all<CR>", "  search all" },
         ["<A-Tab>"] = { "<cmd> Telescope buffers<CR>", "  find buffers" },
