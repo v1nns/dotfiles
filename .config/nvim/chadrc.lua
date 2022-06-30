@@ -70,7 +70,11 @@ M.plugins = {
         },
 
         ["nvim-telescope/telescope-file-browser.nvim"] = {},
+        -- ["nvim-telescope/telescope-ui-select.nvim"] = {},
+        -- ["nvim-telescope/telescope-project.nvim"] = {},
         ["easymotion/vim-easymotion"] = {},
+
+        ["stevearc/dressing.nvim"] = {},
         ["shatur/neovim-session-manager"] = {},
      },
 }

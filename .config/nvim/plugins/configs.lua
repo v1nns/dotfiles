@@ -70,6 +70,7 @@ M.alpha = {
             button("Ctrl o", "  Open folder  ", ":Telescope file_browser prompt_title=Open\\ folder<CR>"),
             button("Ctrl p", "  Open file  ", ":Telescope find_files prompt_title=Open\\ file hidden=true<CR>"),
             -- button("SPC f o", "  Recent File  ", ":Telescope oldfiles<CR>"),
+            -- button("Ctrl i", " Recent Folders", ":SessionManager load_session<CR>"),
             -- button("SPC f w", "  Find Word  ", ":Telescope live_grep<CR>"),
             button("Ctrl Shift b", "  Bookmarks  ", ":Telescope marks<CR>"),
         },
@@ -142,8 +143,38 @@ M.blankline = {
     },
 }
 
-M.telescope = {
-    extensions_list = { "themes", "terms", "file_browser" },
-}
+M.telescope = function()
+    return {
+        defaults = {
+            mappings = {
+                i = {
+                    -- remap to change cwd and close window
+                    ["<C-Enter>"] = function(prompt_bufnr)
+                        local buf_name = vim.api.nvim_buf_get_name(0)
+                        if buf_name ~= "" and vim.bo.modified then
+                        print "save the file bruh"
+                        else
+                        require("telescope").extensions.file_browser.actions.change_cwd(prompt_bufnr)
+                        require("telescope.actions").close(prompt_bufnr)
+                        vim.cmd(":NvimTreeClose")
+                        vim.cmd("bufdo bd")
+                        vim.cmd(":NvimTreeOpen")
+                        end
+                    end,
+
+                    -- disable default change_cwd
+                    ["<C-t>"] = false,
+                    -- ["<C-x>"] = function(prompt_bufnr)
+                    --   -- your custom function
+                    -- end
+                },
+                n = {
+                    ["q"] = require("telescope.actions").close,
+                }
+            }
+        },
+        extensions_list = { "themes", "terms", "file_browser" },
+    }
+end
 
 return M

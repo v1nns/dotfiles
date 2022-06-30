@@ -1,13 +1,6 @@
 local M = {}
 
-M.general = {
-    n = {
-        -- easymotion (for navigation)
-        ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "  easymotion word" },
-    },
-}
-
-M.telescope = {
+M.disabled = {
     n = {
         -- disable defaults
         ["<leader>ff"] = {},
@@ -20,12 +13,23 @@ M.telescope = {
         ["<leader>cm"] = {},
         ["<leader>gt"] = {},
         ["<leader>pt"] = {},
+    },
+}
 
+M.general = {
+    n = {
+        -- easymotion (for navigation)
+        ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "  easymotion word" },
+    },
+}
+
+M.telescope = {
+    n = {
         -- general navigation
         ["<C-S-p>"] = { "<cmd> Telescope commands<CR>", "  show commands" },
         -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "  show keyboard shortcuts" },
         ["<C-o>"] = { "<cmd> Telescope file_browser prompt_title=Open\\ folder<CR>", "  open folder" },
-        ["<C-p>"] = { "<cmd> Telescope find_files prompt_title=Open\\ file hidden=true<CR>", "  open file" },
+        ["<C-p>"] = { "<cmd> Telescope find_files prompt_title=Open\\ file<CR>", "  open file" },
         ["<C-S-b>"] = { "<cmd> Telescope marks<CR>", "  open bookmarks" },
         ["<C-S-f>"] = { "<cmd> Telescope live_grep prompt_title=Search\\ all<CR>", "  search all" },
         ["<A-Tab>"] = { "<cmd> Telescope buffers<CR>", "  find buffers" },
@@ -36,7 +40,7 @@ M.telescope = {
 
         -- lsp
         ["<C-S-o>"] = { "<cmd> Telescope lsp_document_symbols<CR>", "   show lsp symbols" },
-     },
+    },
 }
 
 return M
