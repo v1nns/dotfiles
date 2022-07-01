@@ -76,7 +76,6 @@ M.plugins = {
         ["easymotion/vim-easymotion"] = {},
 
         -- ["shatur/neovim-session-manager"] = {},
-        -- ["filipdutescu/renamer.nvim"] = {},
         ["RRethy/vim-illuminate"] = {},
     },
 }

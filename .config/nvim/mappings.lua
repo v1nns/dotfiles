@@ -34,6 +34,9 @@ M.general = {
 
         -- git
         ["<C-g>b"] = { "<cmd> Gitsigns toggle_current_line_blame<CR>", "  toggle git blame" },
+
+        -- rename
+        ["<F2>"] = { "<cmd>lua require(\"nvchad.ui.renamer\").open()<CR>", "凜 rename object" },
     }
 }
 
@@ -53,7 +56,7 @@ M.telescope = {
         ["<C-g>t"] = { "<cmd> Telescope git_status <CR>", "  git status" },
 
         -- lsp
-        ["<C-S-o>"] = { "<cmd> Telescope lsp_document_symbols<CR>", "   show lsp symbols" },
+        ["<C-S-o>"] = { "<cmd> Telescope lsp_document_symbols<CR>", "  show lsp symbols" },
     },
 }
 
