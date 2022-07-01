@@ -10,14 +10,20 @@ M.setup_lsp = function(attach, capabilities)
 
     for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
-       on_attach = attach,
-       capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          attach(client, bufnr)
+          require 'illuminate'.on_attach(client)
+        end,
+        capabilities = capabilities,
     }
     end
 
     -- lspserver with custom config for ccls
     lspconfig["ccls"].setup {
-        on_attach = attach,
+        on_attach = function(client, bufnr)
+          attach(client, bufnr)
+          require 'illuminate'.on_attach(client)
+        end,
         capabilities = capabilities,
         init_options = {
             compilationDatabaseDirectory = "build",
