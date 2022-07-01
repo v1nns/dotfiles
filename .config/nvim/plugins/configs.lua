@@ -193,6 +193,11 @@ M.telescope = function()
                 }
             }
         },
+        pickers = {
+          find_files = {
+            find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "-H", "-E", ".git", "-E", "node_modules" }
+          },
+        },
         extensions_list = { "themes", "terms", "file_browser" },
     }
 end

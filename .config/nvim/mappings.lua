@@ -35,8 +35,8 @@ M.telescope = {
         -- general navigation
         ["<C-S-p>"] = { "<cmd> Telescope commands<CR>", "  show commands" },
         -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "  show keyboard shortcuts" },
-        ["<C-o>"] = { "<cmd> Telescope file_browser hidden=true prompt_title=Open\\ folder<CR>", "  open folder" },
-        ["<C-p>"] = { "<cmd> Telescope find_files hidden=true prompt_title=Open\\ file<CR>", "  open file" },
+        ["<C-o>"] = { "<cmd> Telescope file_browser quiet=true files=false hidden=true prompt_title=Open\\ folder<CR>", "  open folder" },
+        ["<C-p>"] = { "<cmd> Telescope find_files prompt_title=Open\\ file<CR>", "  open file" },
         ["<C-S-b>"] = { "<cmd> Telescope marks<CR>", "  open bookmarks" },
         ["<C-S-f>"] = { "<cmd> Telescope live_grep prompt_title=Search\\ all<CR>", "  search all" },
         ["<A-Tab>"] = { "<cmd> Telescope buffers<CR>", "  find buffers" },
