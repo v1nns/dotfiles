@@ -61,6 +61,7 @@ M.plugins = {
         ["hrsh7th/nvim-cmp"] = pluginCfg.cmp,
         ["lukas-reineke/indent-blankline.nvim"] = pluginCfg.blankline,
         ["nvim-telescope/telescope.nvim"] = pluginCfg.telescope,
+        ["lewis6991/gitsigns.nvim"] = pluginCfg.gitsigns,
     },
 
     -- Replace default config of a plugin (or add a new plugin)
@@ -74,7 +75,6 @@ M.plugins = {
         -- ["nvim-telescope/telescope-project.nvim"] = {},
         ["easymotion/vim-easymotion"] = {},
 
-        -- ["stevearc/dressing.nvim"] = {},
         -- ["shatur/neovim-session-manager"] = {},
     },
 }

@@ -161,6 +161,13 @@ M.blankline = {
     },
 }
 
+M.gitsigns = {
+  current_line_blame_opts = {
+    delay = 300,
+  },
+  current_line_blame_formatter = "<abbrev_sha> (<author>, <author_time:%Y-%m-%d>) <summary>",
+}
+
 M.telescope = function()
     return {
         defaults = {
