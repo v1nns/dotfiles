@@ -36,20 +36,23 @@ M.ui = {
 
     theme = "aquarium",
 
+    statusline = {
+        separator_style = "block",
+        override = {
+          fileInfo = uiCfg.statusline_fileinfo,
+          cursor_position = uiCfg.statusline_cursorposition,
+        }
+    },
+
     tabufline = {
         override = uiCfg.tabufline
     }
-
 }
 
 M.plugins = {
     options = {
         lspconfig = {
             setup_lspconf = "custom.plugins.lspconfig",
-        },
-
-        statusline = {
-            separator_style = "block",
         },
     },
 
