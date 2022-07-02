@@ -1,6 +1,5 @@
 local M = {}
 
-local pluginCfg = require("custom.plugins.configs")
 local uiCfg = require("custom.ui.configs")
 local mappingCfg = require("custom.mappings")
 
@@ -12,9 +11,6 @@ M.options = {
         -- show trailing spaces and tabs
         vim.opt.list = true
         vim.opt.listchars = { trail = "~", tab = ">>" }
-        -- setup formatters
-        vim.g.neoformat_lua_stylua = { exe = "stylua" }
-        vim.g.neoformat_enabled_lua = { "autopep8" }
     end,
 }
 
@@ -61,14 +57,18 @@ M.plugins = {
 
     -- Override default config of a plugin (merging)
     override = {
-        ["goolord/alpha-nvim"] = pluginCfg.alpha,
-        ["nvim-treesitter/nvim-treesitter"] = pluginCfg.treesitter,
-        ["kyazdani42/nvim-tree.lua"] = pluginCfg.nvimtree,
-        ["hrsh7th/nvim-cmp"] = pluginCfg.cmp,
-        ["lukas-reineke/indent-blankline.nvim"] = pluginCfg.blankline,
-        ["nvim-telescope/telescope.nvim"] = pluginCfg.telescope,
-        ["lewis6991/gitsigns.nvim"] = pluginCfg.gitsigns,
-        ["willthbill/opener.nvim"] = pluginCfg.opener,
+        ["goolord/alpha-nvim"] = require("custom.plugins.alpha"),
+        ["nvim-treesitter/nvim-treesitter"] = require(
+            "custom.plugins.treesitter"
+        ),
+        ["kyazdani42/nvim-tree.lua"] = require("custom.plugins.nvimtree"),
+        ["hrsh7th/nvim-cmp"] = require("custom.plugins.cmp"),
+        ["lukas-reineke/indent-blankline.nvim"] = require(
+            "custom.plugins.blankline"
+        ),
+        ["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
+        ["lewis6991/gitsigns.nvim"] = require("custom.plugins.gitsigns"),
+        ["willthbill/opener.nvim"] = require("custom.plugins.opener"),
     },
 
     -- Replace default config of a plugin (or add a new plugin)
