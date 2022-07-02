@@ -16,7 +16,7 @@ configuration {
 
     display-ssh:    "";
     display-run:    "";
-    display-drun:   "";
+    display-drun:   "省";
     display-window: "";
     display-combi:  "";
     show-icons:     true;
@@ -99,7 +99,7 @@ prompt {
 }
 
 listview {
-    padding: 8px;
+    padding: 6px 4px;
     border-radius: 0px 0px 6px 6px;
     border-color: @nord10;
     border: 0px 1px 1px 1px;
@@ -108,21 +108,23 @@ listview {
 }
 
 element-icon {
-    size: 2.3ch;
+    padding: 0px 0px 0px 5px;
+    size: 2.7ch;
 }
 
-element {
-    padding: 3px;
-    vertical-align: 0.5;
+element-text {
+    padding: 8px 8px;
     border-radius: 4px;
+    vertical-align: 0.5;
+    border-radius: 0px 0px 6px 6px;
+    border: 0px 1px 1px 1px;
     background-color: transparent;
-    color: @foreground;
-    text-color: rgb(216, 222, 233);
+    text-color: @nord4;
 }
 
-element selected.normal {
+element selected, element-text selected {
     background-color: @nord7;
-    text-color: #2e3440;
+    text-color: @nord0;
 }
 
 button {

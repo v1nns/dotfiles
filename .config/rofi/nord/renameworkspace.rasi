@@ -20,7 +20,7 @@ configuration {
     disable-history:false;
     fullscreen:     false;
     hide-scrollbar: true;
-    sidebar-mode: 	false;
+    sidebar-mode:   false;
 }
 
 * {
