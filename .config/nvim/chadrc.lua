@@ -1,17 +1,20 @@
 local M = {}
 
-local pluginCfg = require "custom.plugins.configs"
-local uiCfg = require "custom.ui.configs"
-local mappingCfg = require "custom.mappings"
+local pluginCfg = require("custom.plugins.configs")
+local uiCfg = require("custom.ui.configs")
+local mappingCfg = require("custom.mappings")
 
 M.options = {
     -- load custom options here
     user = function()
         -- visual column
-        vim.opt.colorcolumn = '100'
+        vim.opt.colorcolumn = "100"
         -- show trailing spaces and tabs
         vim.opt.list = true
-        vim.opt.listchars = { trail = '~', tab = '>>' }
+        vim.opt.listchars = { trail = "~", tab = ">>" }
+        -- setup formatters
+        vim.g.neoformat_lua_stylua = { exe = "stylua" }
+        vim.g.neoformat_enabled_lua = { "autopep8" }
     end,
 }
 
@@ -39,14 +42,14 @@ M.ui = {
     statusline = {
         separator_style = "block",
         override = {
-          fileInfo = uiCfg.statusline_fileinfo,
-          cursor_position = uiCfg.statusline_cursorposition,
-        }
+            fileInfo = uiCfg.statusline_fileinfo,
+            cursor_position = uiCfg.statusline_cursorposition,
+        },
     },
 
     tabufline = {
-        override = uiCfg.tabufline
-    }
+        override = uiCfg.tabufline,
+    },
 }
 
 M.plugins = {
@@ -65,21 +68,36 @@ M.plugins = {
         ["lukas-reineke/indent-blankline.nvim"] = pluginCfg.blankline,
         ["nvim-telescope/telescope.nvim"] = pluginCfg.telescope,
         ["lewis6991/gitsigns.nvim"] = pluginCfg.gitsigns,
+        ["willthbill/opener.nvim"] = pluginCfg.opener,
     },
 
     -- Replace default config of a plugin (or add a new plugin)
     user = {
+        -- enable greeter screen
         ["goolord/alpha-nvim"] = {
             disable = false,
         },
 
-        ["nvim-telescope/telescope-file-browser.nvim"] = {},
+        -- open directories and session management
+        ["willthbill/opener.nvim"] = {},
+        ["rmagatti/auto-session"] = {},
+
+        -- ["nvim-telescope/telescope-file-browser.nvim"] = {},
         -- ["nvim-telescope/telescope-ui-select.nvim"] = {},
         -- ["nvim-telescope/telescope-project.nvim"] = {},
-        ["easymotion/vim-easymotion"] = {},
-
         -- ["shatur/neovim-session-manager"] = {},
+
+        -- code navigation and highlight
+        ["easymotion/vim-easymotion"] = {},
         ["RRethy/vim-illuminate"] = {},
+
+        -- format and lint
+        ["jose-elias-alvarez/null-ls.nvim"] = {
+            after = "nvim-lspconfig",
+            config = function()
+                require("custom.plugins.null-ls").setup()
+            end,
+        },
     },
 }
 

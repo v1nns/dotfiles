@@ -52,31 +52,31 @@ local ascii = {
 -- }
 
 local function button(sc, txt, keybind)
-   local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
+    local sc_ = sc:gsub("%s", ""):gsub("SPC", "<leader>")
 
-   local opts = {
-      position = "center",
-      text = txt,
-      shortcut = sc,
-      cursor = 5,
-      width = 36,
-      align_shortcut = "right",
-      hl = "AlphaButtons",
-   }
+    local opts = {
+        position = "center",
+        text = txt,
+        shortcut = sc,
+        cursor = 5,
+        width = 36,
+        align_shortcut = "right",
+        hl = "AlphaButtons",
+    }
 
-   if keybind then
-      opts.keymap = { "n", sc_, keybind, { noremap = true, silent = true } }
-   end
+    if keybind then
+        opts.keymap = { "n", sc_, keybind, { noremap = true, silent = true } }
+    end
 
-   return {
-      type = "button",
-      val = txt,
-      on_press = function()
-         local key = vim.api.nvim_replace_termcodes(sc_, true, false, true)
-         vim.api.nvim_feedkeys(key, "normal", false)
-      end,
-      opts = opts,
-   }
+    return {
+        type = "button",
+        val = txt,
+        on_press = function()
+            local key = vim.api.nvim_replace_termcodes(sc_, true, false, true)
+            vim.api.nvim_feedkeys(key, "normal", false)
+        end,
+        opts = opts,
+    }
 end
 
 M.alpha = {
@@ -85,8 +85,16 @@ M.alpha = {
     },
     buttons = {
         val = {
-            button("Ctrl o", "  Open folder  ", ":Telescope file_browser prompt_title=Open\\ folder<CR>"),
-            button("Ctrl p", "  Open file  ", ":Telescope find_files prompt_title=Open\\ file hidden=true<CR>"),
+            button(
+                "Ctrl o",
+                "  Open folder  ",
+                ":Telescope file_browser prompt_title=Open\\ folder<CR>"
+            ),
+            button(
+                "Ctrl p",
+                "  Open file  ",
+                ":Telescope find_files prompt_title=Open\\ file hidden=true<CR>"
+            ),
             -- button("SPC f o", "  Recent File  ", ":Telescope oldfiles<CR>"),
             -- button("Ctrl i", " Recent Folders", ":SessionManager load_session<CR>"),
             -- button("SPC f w", "  Find Word  ", ":Telescope live_grep<CR>"),
@@ -108,13 +116,13 @@ M.treesitter = {
         "cpp",
         "bash",
         "lua",
-        "python"
-   },
+        "python",
+    },
 }
 
 M.nvimtree = {
     view = {
-        hide_root_folder = false
+        hide_root_folder = false,
     },
     git = {
         enable = true,
@@ -122,7 +130,7 @@ M.nvimtree = {
     actions = {
         change_dir = {
             restrict_above_cwd = true,
-        }
+        },
     },
     renderer = {
         highlight_git = true,
@@ -162,10 +170,10 @@ M.blankline = {
 }
 
 M.gitsigns = {
-  current_line_blame_opts = {
-    delay = 300,
-  },
-  current_line_blame_formatter = "<abbrev_sha> (<author>, <author_time:%Y-%m-%d>) <summary>",
+    current_line_blame_opts = {
+        delay = 300,
+    },
+    current_line_blame_formatter = "<abbrev_sha> (<author>, <author_time:%Y-%m-%d>) <summary>",
 }
 
 M.telescope = function()
@@ -174,18 +182,18 @@ M.telescope = function()
             mappings = {
                 i = {
                     -- remap to change cwd and close window
-                    ["<C-Enter>"] = function(prompt_bufnr)
-                        local buf_name = vim.api.nvim_buf_get_name(0)
-                        if buf_name ~= "" and vim.bo.modified then
-                        print "save the file bruh"
-                        else
-                        require("telescope").extensions.file_browser.actions.change_cwd(prompt_bufnr)
-                        require("telescope.actions").close(prompt_bufnr)
-                        vim.cmd(":NvimTreeClose")
-                        vim.cmd("bufdo bd")
-                        vim.cmd(":NvimTreeOpen")
-                        end
-                    end,
+                    -- ["<C-Enter>"] = function(prompt_bufnr)
+                    --     local buf_name = vim.api.nvim_buf_get_name(0)
+                    --     if buf_name ~= "" and vim.bo.modified then
+                    --       print "save the file bruh"
+                    --     else
+                    --     require("telescope").extensions.file_browser.actions.change_cwd(prompt_bufnr)
+                    --     require("telescope.actions").close(prompt_bufnr)
+                    --     vim.cmd(":NvimTreeClose")
+                    --     vim.cmd("bufdo bd")
+                    --     vim.cmd(":NvimTreeOpen")
+                    --     end
+                    -- end,
 
                     -- disable default change_cwd
                     ["<C-o>"] = false,
@@ -197,16 +205,33 @@ M.telescope = function()
                 },
                 n = {
                     ["q"] = require("telescope.actions").close,
-                }
-            }
+                },
+            },
         },
         pickers = {
-          find_files = {
-            find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "-H", "-E", ".git", "-E", "node_modules" }
-          },
+            find_files = {
+                -- find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "-H", "-E", ".git", "-E", "node_modules" }
+                -- file_ignore_patterns = { ".git", "node_modules" },
+            },
         },
-        extensions_list = { "themes", "terms", "file_browser" },
+        extensions_list = { "themes", "terms", "opener" },
     }
 end
+
+M.opener = {
+    pre_open = {
+        function()
+            vim.cmd("SaveSession")
+        end,
+    },
+    post_open = {
+        "NvimTreeOpen",
+        function(dir)
+            local Lib = require("auto-session-library")
+            Lib.conf.last_loaded_session = nil
+            vim.cmd("RestoreSession")
+        end,
+    },
+}
 
 return M
