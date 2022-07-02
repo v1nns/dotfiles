@@ -8,6 +8,13 @@ rule_nvidia = {
     }
 }
 
+rule_intel = {
+    matches = {{{"device.name", "equals", "alsa_card.pci-0000_00_1f.3"}}},
+    apply_properties = {
+        ["device.disabled"] = true
+    }
+}
+
 rule_webcam_mic = {
     matches = {{{"device.name", "equals", "alsa_card.usb-046d_Logitech_Webcam_C925e_3E5E5DCF-02"}}},
     apply_properties = {
@@ -24,5 +31,6 @@ rule_dac_name = {
 
 
 table.insert(alsa_monitor.rules, rule_nvidia)
+table.insert(alsa_monitor.rules, rule_intel)
 table.insert(alsa_monitor.rules, rule_webcam_mic)
 table.insert(alsa_monitor.rules, rule_dac_name)

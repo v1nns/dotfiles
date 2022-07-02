@@ -26,7 +26,8 @@ switch_to_dac = {
     matches = {{{"node.name", "matches",
                  "alsa_output.usb-GuangZhou_FiiO_Electronics_Co._Ltd_FiiO_K5_Pro-00.playback.0.0"}}},
     apply_properties = {
-        ["priority.session"] = 10000
+        ["priority.session"] = 10000,
+        ["audio.rate"] = 96000,
     }
 }
 
