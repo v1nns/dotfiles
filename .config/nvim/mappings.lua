@@ -51,10 +51,8 @@ M.telescope = {
         -- general navigation
         ["<C-S-p>"] = { "<cmd> Telescope commands<CR>", "  show commands" },
         -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "  show keyboard shortcuts" },
-        -- ["<C-o>"] = { "<cmd> Telescope file_browser depth=1 quiet=true files=false prompt_title=Open\\ folder<CR>", "  open folder" },
-        -- ["<C-o>"] = { "<cmd> Telescope find_files find_command=fd,--type,d,-d,1,--strip-cwd-prefix,-H prompt_title=Open\\ folder<CR>", "  open folder" },
         ["<C-o>"] = {
-            "<cmd> Telescope opener hidden=false respect_gitignore=true root_dir=~ prompt_title=Open\\ folder<CR>",
+            "<cmd> Telescope file_browser prompt_title=Open\\ folder<CR>",
             "  open folder",
         },
         ["<C-p>"] = {

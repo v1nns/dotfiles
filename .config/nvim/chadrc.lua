@@ -68,7 +68,7 @@ M.plugins = {
         ),
         ["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
         ["lewis6991/gitsigns.nvim"] = require("custom.plugins.gitsigns"),
-        ["willthbill/opener.nvim"] = require("custom.plugins.opener"),
+        -- ["willthbill/opener.nvim"] = require("custom.plugins.opener"),
     },
 
     -- Replace default config of a plugin (or add a new plugin)
@@ -79,10 +79,13 @@ M.plugins = {
         },
 
         -- open directories and session management
-        ["willthbill/opener.nvim"] = {},
-        ["rmagatti/auto-session"] = {},
+        -- ["rmagatti/auto-session"] = {},
+        ["nvim-telescope/telescope-file-browser.nvim"] = {
+            -- config = function()
+            --     require("custom.plugins.filebrowser").setup()
+            -- end,
+        },
 
-        -- ["nvim-telescope/telescope-file-browser.nvim"] = {},
         -- ["nvim-telescope/telescope-ui-select.nvim"] = {},
         -- ["nvim-telescope/telescope-project.nvim"] = {},
         -- ["shatur/neovim-session-manager"] = {},
