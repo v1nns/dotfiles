@@ -20,6 +20,8 @@ M.general = {
     n = {
         -- for navigation
         ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "   easymotion word" },
+        ["<M-j>"] = { "5j", "move lines 5x downwards" },
+        ["<M-k>"] = { "5k", "move lines 5x upwards" },
 
         -- window adjusts
         -- TODO: create function for width based on window position

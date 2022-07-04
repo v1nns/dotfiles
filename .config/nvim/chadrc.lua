@@ -68,7 +68,6 @@ M.plugins = {
         ),
         ["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
         ["lewis6991/gitsigns.nvim"] = require("custom.plugins.gitsigns"),
-        -- ["willthbill/opener.nvim"] = require("custom.plugins.opener"),
     },
 
     -- Replace default config of a plugin (or add a new plugin)
