@@ -12,6 +12,9 @@ local M = {
         "bash",
         "lua",
         "python",
+        "cmake",
+        "make",
+        "comment",
     },
 }
 

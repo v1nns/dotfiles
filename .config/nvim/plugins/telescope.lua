@@ -9,7 +9,17 @@ local M = function()
         },
         pickers = {
             find_files = {
-                -- find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "-H", "-E", ".git", "-E", "node_modules" }
+                find_command = {
+                    "fd",
+                    "--type",
+                    "f",
+                    "--strip-cwd-prefix",
+                    "-H",
+                    "-E",
+                    ".git",
+                    "-E",
+                    "node_modules",
+                },
                 -- file_ignore_patterns = { ".git", "node_modules" },
             },
             live_grep = {

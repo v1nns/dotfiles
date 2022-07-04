@@ -8,15 +8,24 @@ M.options = {
     user = function()
         -- visual column
         vim.opt.colorcolumn = "100"
+
         -- show trailing spaces and tabs
         vim.opt.list = true
         vim.opt.listchars = { trail = "~", tab = ">>" }
+
         -- quickscope highlight colors
         vim.cmd(
             [[highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline]]
         )
         vim.cmd(
             [[highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
+        )
+
+        -- highlight config files
+        local autocmd = vim.api.nvim_create_autocmd
+        autocmd(
+            { "BufEnter", "BufRead" },
+            { pattern = "*conf*", command = "setf dosini" }
         )
     end,
 }
@@ -86,11 +95,7 @@ M.plugins = {
 
         -- open directories and session management
         -- ["rmagatti/auto-session"] = {},
-        ["nvim-telescope/telescope-file-browser.nvim"] = {
-            -- config = function()
-            --     require("custom.plugins.filebrowser").setup()
-            -- end,
-        },
+        ["nvim-telescope/telescope-file-browser.nvim"] = {},
 
         -- ["nvim-telescope/telescope-ui-select.nvim"] = {},
         -- ["nvim-telescope/telescope-project.nvim"] = {},
