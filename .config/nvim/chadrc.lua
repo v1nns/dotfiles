@@ -11,6 +11,13 @@ M.options = {
         -- show trailing spaces and tabs
         vim.opt.list = true
         vim.opt.listchars = { trail = "~", tab = ">>" }
+        -- quickscope highlight colors
+        vim.cmd(
+            [[highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline]]
+        )
+        vim.cmd(
+            [[highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
+        )
     end,
 }
 
@@ -92,6 +99,7 @@ M.plugins = {
         -- code navigation and highlight
         ["easymotion/vim-easymotion"] = {},
         ["RRethy/vim-illuminate"] = {},
+        ["unblevable/quick-scope"] = {},
 
         -- format and lint
         ["jose-elias-alvarez/null-ls.nvim"] = {
