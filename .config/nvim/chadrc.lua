@@ -5,7 +5,7 @@ local uiCfg = require("custom.ui.configs")
 M.options = {
     -- load custom options here
     user = function()
-        -- visual column (used with virt-column plugin)
+        -- visual column
         vim.opt.colorcolumn = "100"
 
         -- show trailing spaces and tabs
@@ -30,7 +30,18 @@ M.options = {
         )
 
         -- set winbar with breadcrumbs and file path
-        vim.o.winbar = " %{%v:lua.require'nvim-navic'.get_location()%}%=%m %f"
+        -- and also, set virtual column
+        autocmd({
+            "CursorMoved",
+            "BufWinEnter",
+            "BufFilePost",
+            "InsertEnter",
+            "BufWritePost",
+        }, {
+            callback = function()
+                require("custom.ui.winbar").setup()
+            end,
+        })
 
         -- to debug lspconfig, use this below and :LspLog
         -- vim.lsp.set_log_level("debug")
@@ -42,11 +53,8 @@ M.ui = {
         AlphaHeader = {
             fg = "#B388FF",
         },
-        -- AlphaButtons = {
-        --     fg = "#FF2233",
-        -- },
         ColorColumn = {
-            bg = "#C36854",
+            bg = "#592929",
         },
         Comment = {
             fg = "#4CAF50",
@@ -129,11 +137,6 @@ M.plugins = {
 
         -- UI improvement
         ["luukvbaal/stabilize.nvim"] = {},
-        ["lukas-reineke/virt-column.nvim"] = {
-            config = function()
-                require("custom.plugins.virt-column")
-            end,
-        },
     },
 }
 
