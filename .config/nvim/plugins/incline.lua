@@ -54,7 +54,7 @@ local options = {
             signcolumn = "no",
             wrap = false,
         },
-        padding = 0,
+        padding = 1,
         padding_char = " ",
         placement = {
             horizontal = "left",

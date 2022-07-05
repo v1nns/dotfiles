@@ -5,7 +5,7 @@ local uiCfg = require("custom.ui.configs")
 M.options = {
     -- load custom options here
     user = function()
-        -- visual column
+        -- visual column (used with virt-column plugin)
         vim.opt.colorcolumn = "100"
 
         -- show trailing spaces and tabs
@@ -22,15 +22,15 @@ M.options = {
             [[highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
         )
 
-        -- to debug lspconfig, use this below and :LspLog
-        -- vim.lsp.set_log_level("debug")
-
         -- highlight config files
         local autocmd = vim.api.nvim_create_autocmd
         autocmd(
             { "BufEnter", "BufRead" },
             { pattern = "*conf*", command = "setf dosini" }
         )
+
+        -- to debug lspconfig, use this below and :LspLog
+        -- vim.lsp.set_log_level("debug")
     end,
 }
 
@@ -119,6 +119,11 @@ M.plugins = {
 
         -- UI improvement
         ["luukvbaal/stabilize.nvim"] = {},
+        ["lukas-reineke/virt-column.nvim"] = {
+            config = function()
+                require("custom.plugins.virt-column")
+            end,
+        },
         ["b0o/incline.nvim"] = {
             config = function()
                 require("custom.plugins.incline")
