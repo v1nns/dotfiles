@@ -43,7 +43,7 @@ M.ui = {
         --     fg = "#FF2233",
         -- },
         ColorColumn = {
-            bg = "#C34864",
+            bg = "#C36854",
         },
         Comment = {
             fg = "#4CAF50",
@@ -119,6 +119,11 @@ M.plugins = {
 
         -- UI improvement
         ["luukvbaal/stabilize.nvim"] = {},
+        ["b0o/incline.nvim"] = {
+            config = function()
+                require("custom.plugins.incline")
+            end,
+        },
     },
 }
 
