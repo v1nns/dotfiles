@@ -1,7 +1,5 @@
 local M = {}
 
-local uiCfg = require("custom.ui.configs")
-
 M.options = {
     -- load custom options here
     user = function()
@@ -30,7 +28,6 @@ M.options = {
         )
 
         -- set winbar with breadcrumbs and file path
-        -- and also, set virtual column
         autocmd({
             "CursorMoved",
             "BufWinEnter",
@@ -47,6 +44,8 @@ M.options = {
         -- vim.lsp.set_log_level("debug")
     end,
 }
+
+local uiCfg = require("custom.ui.configs")
 
 M.ui = {
     hl_override = {
@@ -99,6 +98,7 @@ M.plugins = {
         ),
         ["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
         ["lewis6991/gitsigns.nvim"] = require("custom.plugins.gitsigns"),
+        ["sudormrfbin/cheatsheet.nvim"] = require("custom.plugins.cheatsheet"),
     },
 
     -- Replace default config of a plugin (or add a new plugin)
@@ -137,6 +137,13 @@ M.plugins = {
 
         -- UI improvement
         ["luukvbaal/stabilize.nvim"] = {},
+
+        -- cheatsheet
+        ["nvim-telescope/telescope.nvim"] = {
+            module = "telescope",
+        },
+        ["nvim-lua/popup.nvim"] = {},
+        ["sudormrfbin/cheatsheet.nvim"] = {},
     },
 }
 
