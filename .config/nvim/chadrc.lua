@@ -29,6 +29,9 @@ M.options = {
             { pattern = "*conf*", command = "setf dosini" }
         )
 
+        -- set winbar with breadcrumbs and file path
+        vim.o.winbar = " %{%v:lua.require'nvim-navic'.get_location()%}%=%m %f"
+
         -- to debug lspconfig, use this below and :LspLog
         -- vim.lsp.set_log_level("debug")
     end,
@@ -109,11 +112,18 @@ M.plugins = {
         ["easymotion/vim-easymotion"] = {},
         ["unblevable/quick-scope"] = {},
 
+        -- breadcrumbs
+        ["SmiteshP/nvim-navic"] = {
+            config = function()
+                require("custom.plugins.navic")
+            end,
+        },
+
         -- format and lint
         ["jose-elias-alvarez/null-ls.nvim"] = {
             after = "nvim-lspconfig",
             config = function()
-                require("custom.plugins.null-ls").setup()
+                require("custom.plugins.null-ls")
             end,
         },
 
@@ -122,11 +132,6 @@ M.plugins = {
         ["lukas-reineke/virt-column.nvim"] = {
             config = function()
                 require("custom.plugins.virt-column")
-            end,
-        },
-        ["b0o/incline.nvim"] = {
-            config = function()
-                require("custom.plugins.incline")
             end,
         },
     },

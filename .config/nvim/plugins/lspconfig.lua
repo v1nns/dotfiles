@@ -1,10 +1,12 @@
 -- lsp configs!
 
+local navic = require("nvim-navic")
+
 local M = {}
 
 local symbol_highlight = function(client)
     -- add syntax highlight for current symbol
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.documentHighlightProvider then
         vim.cmd([[
                 hi! LspReferenceRead cterm=bold ctermbg=63 guibg=SteelBlue guifg=#e3f2fd
                 hi! LspReferenceText cterm=bold ctermbg=63 guibg=SteelBlue guifg=#e3f2fd
@@ -34,6 +36,7 @@ M.setup_lsp = function(attach, capabilities)
         lspconfig[lsp].setup({
             on_attach = function(client, bufnr)
                 attach(client, bufnr)
+                navic.attach(client, bufnr)
                 symbol_highlight(client)
             end,
             capabilities = capabilities,
@@ -44,6 +47,7 @@ M.setup_lsp = function(attach, capabilities)
     lspconfig.ccls.setup({
         on_attach = function(client, bufnr)
             attach(client, bufnr)
+            navic.attach(client, bufnr)
             symbol_highlight(client)
         end,
         capabilities = capabilities,
