@@ -1,7 +1,6 @@
 local M = {}
 
 local uiCfg = require("custom.ui.configs")
-local mappingCfg = require("custom.mappings")
 
 M.options = {
     -- load custom options here
@@ -11,7 +10,9 @@ M.options = {
 
         -- show trailing spaces and tabs
         vim.opt.list = true
-        vim.opt.listchars = { trail = "~", tab = ">>" }
+        vim.opt.listchars = {
+            trail = "~", --[[ tab = ">>" ]]
+        }
 
         -- quickscope highlight colors
         vim.cmd(
@@ -20,6 +21,9 @@ M.options = {
         vim.cmd(
             [[highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
         )
+
+        -- to debug lspconfig, use this below and :LspLog
+        -- vim.lsp.set_log_level("debug")
 
         -- highlight config files
         local autocmd = vim.api.nvim_create_autocmd
@@ -103,7 +107,6 @@ M.plugins = {
 
         -- code navigation and highlight
         ["easymotion/vim-easymotion"] = {},
-        ["RRethy/vim-illuminate"] = {},
         ["unblevable/quick-scope"] = {},
 
         -- format and lint
@@ -113,9 +116,12 @@ M.plugins = {
                 require("custom.plugins.null-ls").setup()
             end,
         },
+
+        -- UI improvement
+        ["luukvbaal/stabilize.nvim"] = {},
     },
 }
 
-M.mappings = mappingCfg
+M.mappings = require("custom.mappings")
 
 return M
