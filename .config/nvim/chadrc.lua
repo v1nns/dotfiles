@@ -98,7 +98,6 @@ M.plugins = {
         ),
         ["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
         ["lewis6991/gitsigns.nvim"] = require("custom.plugins.gitsigns"),
-        ["sudormrfbin/cheatsheet.nvim"] = require("custom.plugins.cheatsheet"),
     },
 
     -- Replace default config of a plugin (or add a new plugin)
@@ -143,7 +142,11 @@ M.plugins = {
             module = "telescope",
         },
         ["nvim-lua/popup.nvim"] = {},
-        ["sudormrfbin/cheatsheet.nvim"] = {},
+        ["sudormrfbin/cheatsheet.nvim"] = {
+            config = function()
+                require("custom.plugins.cheatsheet")
+            end,
+        },
     },
 }
 
