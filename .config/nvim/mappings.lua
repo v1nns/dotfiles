@@ -22,6 +22,8 @@ M.general = {
         ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "   easymotion word" },
         ["<M-j>"] = { "5j", "move lines 5x downwards" },
         ["<M-k>"] = { "5k", "move lines 5x upwards" },
+        ["<M-h>"] = { "b", "move back a word" },
+        ["<M-l>"] = { "w", "move forward a word" },
 
         -- window adjusts
         -- TODO: create function for width based on window position
