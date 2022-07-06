@@ -143,8 +143,9 @@ M.plugins = {
         },
         ["nvim-lua/popup.nvim"] = {},
         ["sudormrfbin/cheatsheet.nvim"] = {
+            cmd = "Cheatsheet",
             config = function()
-                require("custom.plugins.cheatsheet")
+                require("custom.plugins.cheat_sheet")
             end,
         },
     },

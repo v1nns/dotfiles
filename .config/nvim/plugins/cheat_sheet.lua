@@ -4,7 +4,7 @@ if not present then
     return
 end
 
-local defaults = {
+local opts = {
     -- For generic cheatsheets like default, unicode, nerd-fonts, etc
     -- bundled_cheatsheets = {
     --     enabled = {},
@@ -29,10 +29,10 @@ local defaults = {
 
     -- Key mappings bound inside the telescope window
     telescope_mappings = {
-        ["<CR>"] = require("cheatsheet.telescope.actions").select_or_execute,
-        ["<A-CR>"] = require("cheatsheet.telescope.actions").select_or_fill_commandline,
-        ["<C-Y>"] = require("cheatsheet.telescope.actions").copy_cheat_value,
+        ["<CR>"] = cheatsheet.telescope.actions.select_or_execute,
+        ["<A-CR>"] = cheatsheet.telescope.actions.select_or_fill_commandline,
+        ["<C-Y>"] = cheatsheet.telescope.actions.copy_cheat_value,
     },
 }
 
-cheatsheet.setup(defaults)
+cheatsheet.setup(opts)

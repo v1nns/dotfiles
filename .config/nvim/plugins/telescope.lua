@@ -25,7 +25,13 @@ local M = function()
             live_grep = {
                 grep_open_files = false,
                 additional_args = function()
-                    return { "--hidden" }
+                    return {
+                        "--hidden",
+                        "-g",
+                        "!.git/*",
+                        "-g",
+                        "!node_modules/*",
+                    }
                 end,
             },
         },
