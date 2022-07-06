@@ -6,6 +6,8 @@ M.options = {
         -- visual column
         vim.opt.colorcolumn = "100"
 
+        vim.opt.guifont = "Fira_Code:h9"
+
         -- show trailing spaces and tabs
         vim.opt.list = true
         vim.opt.listchars = {

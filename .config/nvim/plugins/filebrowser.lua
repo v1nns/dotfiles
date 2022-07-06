@@ -12,7 +12,7 @@ local browse_files = function(opts)
     -- returns copy with properly set cwd for entry maker
     local entry_maker = opts.entry_maker({ cwd = opts.path })
     local parent_path = Path:new(opts.path):parent():absolute()
-    local args = { "-a", "--type", "d", "-d", "1", "--strip-cwd-prefix" }
+    local args = { "-a", "--type", "d", "-d", "1", "--strip-cwd-prefix", "-I" }
 
     return async_oneshot_finder({
         fn_command = function()

@@ -13,6 +13,7 @@ M.disabled = {
         ["<leader>cm"] = {},
         ["<leader>gt"] = {},
         ["<leader>pt"] = {},
+        ["<M-h>"] = {},
     },
 }
 

@@ -20,6 +20,8 @@ local M = function()
                     "-E",
                     "node_modules",
                 },
+                no_ignore = true,
+                no_ignore_parent = true,
                 -- file_ignore_patterns = { ".git", "node_modules" },
             },
             live_grep = {
