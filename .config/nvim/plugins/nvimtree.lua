@@ -11,6 +11,7 @@ local M = {
         },
     },
     renderer = {
+        symlink_destination = false,
         highlight_git = true,
         icons = {
             show = {

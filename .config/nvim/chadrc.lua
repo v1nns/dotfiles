@@ -6,21 +6,11 @@ M.options = {
         -- visual column
         vim.opt.colorcolumn = "100"
 
-        vim.opt.guifont = "Fira Code:h9"
-
         -- show trailing spaces and tabs
         vim.opt.list = true
         vim.opt.listchars = {
             trail = "~", --[[ tab = ">>" ]]
         }
-
-        -- quickscope highlight colors
-        vim.cmd(
-            [[highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline]]
-        )
-        vim.cmd(
-            [[highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline]]
-        )
 
         -- highlight config files
         local autocmd = vim.api.nvim_create_autocmd
@@ -50,6 +40,16 @@ M.options = {
 local uiCfg = require("custom.ui.configs")
 
 M.ui = {
+    hl_add = {
+        -- quickscope highlight colors
+        QuickScopePrimary = {
+            fg = "#AFFF5F",
+        },
+        QuickScopeSecondary = {
+            fg = "#5FFFFF",
+        },
+    },
+
     hl_override = {
         AlphaHeader = {
             fg = "#B388FF",

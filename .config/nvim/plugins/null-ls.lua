@@ -27,7 +27,6 @@ local sources = {
     b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
 }
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
     debug = true,
     sources = sources,
@@ -35,24 +34,5 @@ null_ls.setup({
     -- on init
     on_init = function(new_client, _)
         new_client.offset_encoding = "utf-32"
-    end,
-
-    -- format on save
-    on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    vim.lsp.buf.format({
-                        bufnr = bufnr,
-                        filter = function(cli)
-                            return cli.name == "null-ls"
-                        end,
-                    })
-                end,
-            })
-        end
     end,
 })
