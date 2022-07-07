@@ -7,9 +7,10 @@ local sources = {
     b.formatting.prettierd.with({ filetypes = { "html", "markdown", "css" } }),
 
     -- Lua
-    b.formatting.stylua,
     b.diagnostics.luacheck.with({ extra_args = { "--global vim" } }),
+    b.formatting.stylua,
     b.formatting.stylua.with({
+        command = "/home/vinicius/.cargo/bin/stylua",
         extra_args = { "--column-width", "80", "--indent-type", "Spaces" },
     }),
 
