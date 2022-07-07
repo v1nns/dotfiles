@@ -7,6 +7,6 @@ if exists('g:GuiLoaded')
   set title
   augroup dirchange
       autocmd!
-      autocmd DirChanged * let &titlestring=v:event['cwd']
+      autocmd DirChanged * let &titlestring=fnamemodify(v:event['cwd'], ':t') . ' - ' . v:event['cwd']
   augroup END
 endif

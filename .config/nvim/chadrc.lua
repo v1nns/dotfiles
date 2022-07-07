@@ -12,25 +12,9 @@ M.options = {
             trail = "~", --[[ tab = ">>" ]]
         }
 
-        -- highlight config files
-        local autocmd = vim.api.nvim_create_autocmd
-        autocmd(
-            { "BufEnter", "BufRead" },
-            { pattern = "*conf*", command = "setf dosini" }
-        )
-
-        -- set winbar with breadcrumbs and file path
-        autocmd({
-            "CursorMoved",
-            "BufWinEnter",
-            "BufFilePost",
-            "InsertEnter",
-            "BufWritePost",
-        }, {
-            callback = function()
-                require("custom.ui.winbar").setup()
-            end,
-        })
+        -- setup commands
+        require("custom.commands").setup_autocommands()
+        require("custom.commands").setup_commands()
 
         -- to debug lspconfig, use this below and :LspLog
         -- vim.lsp.set_log_level("debug")
