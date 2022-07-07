@@ -28,11 +28,11 @@ local opts = {
     include_only_installed_plugins = true,
 
     -- Key mappings bound inside the telescope window
-    telescope_mappings = {
-        ["<CR>"] = cheatsheet.telescope.actions.select_or_execute,
-        ["<A-CR>"] = cheatsheet.telescope.actions.select_or_fill_commandline,
-        ["<C-Y>"] = cheatsheet.telescope.actions.copy_cheat_value,
-    },
+    -- telescope_mappings = {
+    --     ["<CR>"] = cheatsheet.telescope.actions.select_or_execute,
+    --     ["<A-CR>"] = cheatsheet.telescope.actions.select_or_fill_commandline,
+    --     ["<C-Y>"] = cheatsheet.telescope.actions.copy_cheat_value,
+    -- },
 }
 
 cheatsheet.setup(opts)
