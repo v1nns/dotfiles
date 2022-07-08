@@ -26,6 +26,10 @@ M.general = {
         ["<A-h>"] = { "b", "move back a word" },
         ["<A-l>"] = { "w", "move forward a word" },
 
+        -- jumplist
+        ["<A-Left>"] = { "<C-O>zz", "move back" },
+        ["<A-Right>"] = { "<C-I>zz", "move forward" },
+
         -- window adjusts
         -- TODO: create function for width based on window position
         ["<C-S-w>"] = { "<cmd> winc > <CR>", "  increase width" },
@@ -98,6 +102,13 @@ M.telescope = {
         ["<C-S-o>"] = {
             "<cmd> Telescope lsp_document_symbols<CR>",
             "  show lsp symbols",
+        },
+    },
+
+    v = {
+        ["<C-S-f>"] = {
+            "<cmd> SearchForTextSelection<CR>",
+            "  search all",
         },
     },
 }

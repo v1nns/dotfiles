@@ -121,6 +121,7 @@ M.plugins = {
         -- UI improvement
         ["luukvbaal/stabilize.nvim"] = {},
         ["lukas-reineke/virt-column.nvim"] = {
+            module = "virt-column",
             config = function()
                 require("custom.plugins.virtcolumn")
             end,

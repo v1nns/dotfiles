@@ -54,7 +54,7 @@ M.setup_lsp = function(attach, capabilities)
         init_options = {
             compilationDatabaseDirectory = "build",
             cache = {
-                directory = "/home/vinicius/.cache/ccls",
+                directory = vim.env.HOME .. "/.cache/ccls",
             },
             clang = {
                 excludeArgs = { "-frounding-math" },

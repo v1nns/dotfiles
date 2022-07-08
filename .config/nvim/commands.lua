@@ -41,6 +41,16 @@ M.setup_commands = function()
     cmd("RemoveTrailingSpace", function()
         vim.cmd([[%s/\s\+$//e]])
     end, {})
+
+    cmd("SearchForTextSelection", function()
+        -- get selected text from visual mode
+        vim.cmd('noau normal! "vy"')
+        local text = vim.fn.getreg("v")
+
+        -- run live_grep picker from telescope
+        local tb = require("telescope.builtin")
+        tb.live_grep({ default_text = text, prompt_title = "Search all" })
+    end, {})
 end
 
 return M

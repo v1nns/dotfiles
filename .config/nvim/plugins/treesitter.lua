@@ -15,6 +15,7 @@ local M = {
         "cmake",
         "make",
         "comment",
+        "yang",
     },
 }
 
