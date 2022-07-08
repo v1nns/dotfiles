@@ -13,7 +13,7 @@ M.disabled = {
         ["<leader>cm"] = {},
         ["<leader>gt"] = {},
         ["<leader>pt"] = {},
-        ["<M-h>"] = {},
+        ["<A-h>"] = {},
     },
 }
 
@@ -21,10 +21,10 @@ M.general = {
     n = {
         -- for navigation
         ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "   easymotion word" },
-        ["<M-j>"] = { "5j", "move lines 5x downwards" },
-        ["<M-k>"] = { "5k", "move lines 5x upwards" },
-        ["<M-h>"] = { "b", "move back a word" },
-        ["<M-l>"] = { "w", "move forward a word" },
+        ["<A-j>"] = { "5j", "move lines 5x downwards" },
+        ["<A-k>"] = { "5k", "move lines 5x upwards" },
+        ["<A-h>"] = { "b", "move back a word" },
+        ["<A-l>"] = { "w", "move forward a word" },
 
         -- window adjusts
         -- TODO: create function for width based on window position
@@ -34,19 +34,35 @@ M.general = {
         ["<C-S-z>"] = { "<cmd> winc + <CR>", "  decrease height" },
 
         -- move lines
-        ["<M-Down>"] = { "<cmd> :m .+1<CR>==", "  move line upwards" },
-        ["<M-Up>"] = { "<cmd> :m .-2<CR>==", "  move line downwards" },
+        ["<A-Down>"] = { "<cmd> :m .+1<CR>==", "  move line upwards" },
+        ["<A-Up>"] = { "<cmd> :m .-2<CR>==", "  move line downwards" },
 
         -- git
         ["<C-g>b"] = {
             "<cmd> Gitsigns toggle_current_line_blame<CR>",
             "  toggle git blame",
         },
+        ["<C-g>s"] = {
+            "<cmd> Gitsigns preview_hunk<CR>",
+            "  show current hunk",
+        },
+        ["<C-g>p"] = {
+            "<cmd> Gitsigns prev_hunk<CR>",
+            "  go to previous hunk",
+        },
+        ["<C-g>n"] = {
+            "<cmd> Gitsigns next_hunk<CR>",
+            "  go to next hunk",
+        },
+        ["<C-g>u"] = {
+            "<cmd> Gitsigns reset_hunk<CR>",
+            "  undo current hunk",
+        },
 
         -- rename
         ["<F2>"] = {
             '<cmd>lua require("nvchad.ui.renamer").open()<CR>',
-            "凜 rename object",
+            "凜  rename object",
         },
     },
 }
