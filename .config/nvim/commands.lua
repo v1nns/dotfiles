@@ -22,6 +22,15 @@ M.setup_autocommands = function()
             require("custom.ui.winbar").setup()
         end,
     })
+
+    -- disable ruler (aka virtual column) for some filetypes
+    autocmd("FileType", {
+        pattern = { "alpha", "packer", "*telescope*" },
+        callback = function(bufnr)
+            bufnr = bufnr or vim.api.nvim_get_current_buf()
+            require("virt-column").setup_buffer({ virtcolumn = "" })
+        end,
+    })
 end
 
 -- Commands

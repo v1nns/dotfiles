@@ -3,9 +3,6 @@ local M = {}
 M.options = {
     -- load custom options here
     user = function()
-        -- visual column
-        vim.opt.colorcolumn = "100"
-
         -- show trailing spaces and tabs
         vim.opt.list = true
         vim.opt.listchars = {
@@ -32,14 +29,15 @@ M.ui = {
         QuickScopeSecondary = {
             fg = "#5FFFFF",
         },
+        -- virt-column color
+        VirtColumn = {
+            fg = "#592929",
+        },
     },
 
     hl_override = {
         AlphaHeader = {
             fg = "#B388FF",
-        },
-        ColorColumn = {
-            bg = "#592929",
         },
         Comment = {
             fg = "#4CAF50",
@@ -122,6 +120,11 @@ M.plugins = {
 
         -- UI improvement
         ["luukvbaal/stabilize.nvim"] = {},
+        ["lukas-reineke/virt-column.nvim"] = {
+            config = function()
+                require("custom.plugins.virtcolumn")
+            end,
+        },
 
         -- cheatsheet
         ["nvim-telescope/telescope.nvim"] = {

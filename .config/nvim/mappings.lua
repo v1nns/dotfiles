@@ -73,7 +73,7 @@ M.telescope = {
         ["<C-S-p>"] = { "<cmd> Cheatsheet<CR>", "  show commands" },
         -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "  show keyboard shortcuts" },
         ["<C-o>"] = {
-            "<cmd> Telescope file_browser path=~ prompt_title=Open\\ folder<CR>",
+            "<cmd> Telescope file_browser path=$HOME prompt_title=Open\\ folder<CR>",
             "  open folder",
         },
         ["<C-p>"] = {
