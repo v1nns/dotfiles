@@ -7,7 +7,8 @@ After=network.target sound.target
 [Service]
 Restart=always
 RestartSec=10
-ExecStart=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=easyeffects com.github.wwmm.easyeffects --gapplication-service
+; ExecStart=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=easyeffects com.github.wwmm.easyeffects --gapplication-service
+ExecStart=/usr/bin/easyeffects --load-preset music --gapplication-service
 
 [Install]
 WantedBy=default.target
