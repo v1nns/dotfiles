@@ -9,20 +9,23 @@ local M = function()
         },
         pickers = {
             find_files = {
-                find_command = {
-                    "fd",
-                    "--type",
-                    "f",
-                    "--strip-cwd-prefix",
-                    "-H",
-                    "-E",
-                    ".git",
-                    "-E",
-                    "node_modules",
-                },
+                find_command = function()
+                    return {
+                        "fd",
+                        "--type",
+                        "f",
+                        "--strip-cwd-prefix",
+                        "-H",
+                        "-E",
+                        ".git",
+                        "-E",
+                        "node_modules",
+                        "-E",
+                        "build",
+                    }
+                end,
                 no_ignore = true,
                 no_ignore_parent = true,
-                -- file_ignore_patterns = { ".git", "node_modules" },
             },
             live_grep = {
                 grep_open_files = false,
@@ -33,6 +36,8 @@ local M = function()
                         "!.git/*",
                         "-g",
                         "!node_modules/*",
+                        "-g",
+                        "!build/*",
                     }
                 end,
             },

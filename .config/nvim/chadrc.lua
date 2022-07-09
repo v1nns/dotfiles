@@ -45,6 +45,9 @@ M.ui = {
         NonText = {
             fg = "#FF2233",
         },
+        WinSeparator = {
+            fg = "#484852",
+        },
     },
 
     theme = "aquarium",
