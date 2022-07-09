@@ -9,10 +9,10 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 # Path to oh-my-zsh installation.
-export ZSH="/home/vinicius/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 # Standard themes can be found in ~/.oh-my-zsh/themes/*
 # Custom themes may be added to ~/.oh-my-zsh/custom/themes/
@@ -45,21 +45,18 @@ function bgnotify_formatted {
 source $HOME/.oh-my-zsh/plugins/bgnotify/bgnotify.plugin.zsh
 
 # enable fzf keybindings
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/fzf/key-bindings.zsh
 # enable fuzzy auto-completion
-source /usr/share/doc/fzf/examples/completion.zsh
-
-# set layout to ABNT2 (a.k.a. PT-BR)
-setxkbmap -model abnt2 -layout br -variant abnt2
+source /usr/share/fzf/completion.zsh
 
 # Do not enter command lines into the history list if they are duplicates of the
 # previous one.
 setopt histignorealldups
 
 # Bindkeys - Backward delete word
-bindkey -M emacs '^[[3;5~' kill-word
-bindkey -M emacs '^H' backward-kill-word
-bindkey -M emacs '^[[3;6~' kill-line
+#bindkey -M emacs '^[[3;5~' kill-word
+#bindkey -M emacs '^H' backward-kill-word
+#bindkey -M emacs '^[[3;6~' kill-line
 
 # Git related
 alias amend='git commit --amend'
@@ -77,3 +74,13 @@ dev() {
   fi
 }
 compctl -/ -W ~/projects dev
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd
+unsetopt beep
+
+# use ssh with this alias
+alias s="kitty +kitten ssh"

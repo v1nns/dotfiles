@@ -24,7 +24,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Audio related key bindings (currently using a custom Python script to control device from Spotify Connect)
+# Audio related key bindings (currently using a custom Python script to control device with Spotify Connect)
 bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id spotify_ctl.py --inc-volume
 bindsym $mod+XF86AudioLowerVolume exec --no-startup-id spotify_ctl.py --dec-volume
 bindsym XF86AudioPlay exec --no-startup-id spotify_ctl.py --toggle-play
@@ -61,28 +61,32 @@ set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
 
-# Bind workspaces to only one monitor
-workspace $ws1 output DP-2
-workspace $ws2 output DP-2
-workspace $ws3 output DP-2
-workspace $ws4 output DP-2
-workspace $ws5 output DP-2
-workspace $ws6 output DP-2
-workspace $ws7 output DP-2
-workspace $ws8 output DP-2
-workspace $ws9 output DP-2
-workspace $ws10 output DP-2
+# TODO: move this to some shell script/python
+set $primary "DP-4"
+set $secondary "DP-2"
 
-workspace $ws11 output DP-0
-workspace $ws12 output DP-0
-workspace $ws13 output DP-0
-workspace $ws14 output DP-0
-workspace $ws15 output DP-0
-workspace $ws16 output DP-0
-workspace $ws17 output DP-0
-workspace $ws18 output DP-0
-workspace $ws19 output DP-0
-workspace $ws20 output DP-0
+# Bind workspaces to only one monitor
+workspace $ws1 output $primary
+workspace $ws2 output $primary
+workspace $ws3 output $primary
+workspace $ws4 output $primary
+workspace $ws5 output $primary
+workspace $ws6 output $primary
+workspace $ws7 output $primary
+workspace $ws8 output $primary
+workspace $ws9 output $primary
+workspace $ws10 output $primary
+
+workspace $ws11 output $secondary
+workspace $ws12 output $secondary
+workspace $ws13 output $secondary
+workspace $ws14 output $secondary
+workspace $ws15 output $secondary
+workspace $ws16 output $secondary
+workspace $ws17 output $secondary
+workspace $ws18 output $secondary
+workspace $ws19 output $secondary
+workspace $ws20 output $secondary
 
 # switch to workspace in monitor 1
 bindsym $mod+1 workspace number $ws1
@@ -136,8 +140,10 @@ bindsym $mod+Control+Shift+0 move container to workspace number $ws20
 
 # as the name says (i3-gaps), I'm using smart_gaps with a custom margin
 smart_gaps on
+smart_borders on
 gaps inner 3
 #gaps outer 10
+border_radius 3
 for_window [class="^.*"] border pixel 2
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -230,9 +236,17 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+# ============================= DUNST KEYBINDS ================================
+
+# close notification
+bindsym Control+space exec --no-startup-id dunstctl close
+
+# reopen notification
+bindsym $mod+n exec --no-startup-id dunstctl history-pop
+
 # ============================== KEY BINDINGS =================================
 
-#i nteractive screenshot by pressing printscreen
+# interactive screenshot by pressing printscreen
 bindsym Print exec --no-startup-id gnome-screenshot -i
 
 # crop-area screenshot by pressing Mod + printscreen
@@ -248,7 +262,8 @@ bindsym $mod+Control+t exec --no-startup-id new-workspace.py --create
 bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --move
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q [con_id="__focused__" title="^(?!dropdown-terminal).*$"] kill
@@ -260,7 +275,7 @@ bindsym $mod+Tab exec --no-startup-id switch-window.sh
 bindsym $mod+d exec --no-startup-id launcher.sh
 
 # open explorer
-bindsym $mod+e exec --no-startup-id nautilus
+# bindsym $mod+e exec --no-startup-id nautilus
 
 # lock window
 bindsym $mod+Control+l exec i3lock -c 000000
@@ -277,62 +292,15 @@ bindsym $mod+w exec --no-startup-id work-mode.sh
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
-
-# scroll velocity
-exec --no-startup-id imwheel -b "4 5"
-
-# start compositor (old command: picom -b --experimental-backends)
-exec --no-startup-id "picom --backend glx --vsync --no-use-damage --experimental-backends &"
-
-# Alright, there are two things I gotta tell you, these are:
-# - restarting pulseaudio like this, is the easiest way to run pulseaudio along
-#   with user and start its tcp server in order to Mopidy connect and play;
-# - I've added a few commands in /etc/pulse/default.pa (set-default-sink,
-#   set-default-source and set-source-volume)
-# - Actually, I enabled mopidy.service to run along with user instead of
-#   system
-
-# start pasystray
-exec --no-startup-id "pkill pasystray; pasystray &"
-
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# before running this command, must run NVIDIA X Server Settings to create a
-# configuration file (~/.nvidia-settings-rc)
-exec_always --no-startup-id /usr/bin/nvidia-settings --load-config-only
-
-# enable NUMLOCK on startup
-exec_always --no-startup-id numlockx &
-
-# (old way) setup wallpaper, but still need nitrogen to set wallpaper in the second monitor
-#exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/pixelnaut.png
-exec_always --no-startup-id nitrogen --restore
-
-# 2.0: now it is the time for the live wallpaper (yeah, I'm living the dream! 'til I get bored...)
-# P.S.: I won't upload mp4 here, so if you want to use it something similar, just look for any
-# wallpaper from Wallpaper Engine Workshop.
-# exec_always --no-startup-id "pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4"
-
-# run monitor to save any notification message sent through DBus
-exec_always --no-startup-id monitor-notification.py &> /dev/null
-
-# set default keyboard layout (PT-BR)
-#exec --no-startup-id "setxkbmap -model abnt2 -layout br"
-
-# set default keyboard layout (EN-US)
-exec_always --no-startup-id "setxkbmap -layout us -variant intl"
 
 # ================================= CUSTOM ====================================
 
 # floating terminal with kitty
-for_window [class="Alacritty" title="dropdown-terminal"] sticky enable
-for_window [class="Alacritty" title="dropdown-terminal"] move scratchpad
-exec --no-startup-id alacritty --title dropdown-terminal -e zsh -o 'ignoreeof'
-bindsym $mod+t [class="Alacritty" title="dropdown-terminal"] scratchpad show
+for_window [class="kitty" title="dropdown-terminal"] sticky enable
+for_window [class="kitty" title="dropdown-terminal"] move scratchpad
+bindsym $mod+t [class="kitty" title="dropdown-terminal"] scratchpad show
 
 # created as popup on click from module in polybar
 for_window [class="Yad" title="yad-calendar"] floating enable
@@ -342,9 +310,3 @@ for_window [class="Pavucontrol"] floating enable, resize set 800px 600px, move p
 
 # configure popups from google-chrome as floating
 for_window [class="Google-chrome" window_role="pop-up"] floating enable
-
-# if you use chrome as default browser and it is not autocompleting any saved
-# password, check if gnome-keyring-daemon is running, if not, add this:
-#  exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
-# also, must add this argument to chrome.desktop:
-#  --password-store=gnome
