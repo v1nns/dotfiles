@@ -6,66 +6,6 @@
 # must install theme before using it
 export GTK_THEME=Dracula
 
-# apply custom resources
-xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &
-
 # export monitor names as env variable
 export PRIMARY_MONITOR="$(xrandr -q | grep " connected primary" | cut -d ' ' -f1)"
 export SECONDARY_MONITOR="$(xrandr -q | grep " connected 1" | cut -d ' ' -f1)"
-
-####################################################################################################
-# Keyboard layout
-
-# set default keyboard layout (PT-BR)
-# setxkbmap -model abnt2 -layout br
-
-# set default keyboard layout (EN-US)
-(sleep 3; setxkbmap -layout us -variant intl) &
-
-####################################################################################################
-# Startup applications
-
-# floating terminal
-kitty --title dropdown-terminal -e zsh -o 'ignoreeof' &
-
-# enable NUMLOCK on startup
-#exec_always --no-startup-id numlockx &
-
-# run monitor to save any notification message sent through DBus
-monitor-notification.py &> /dev/null
-
-# (old way) setup wallpaper
-feh --bg-scale $HOME/Pictures/Wallpapers/monterey.jpg
-
-# use nitrogen to set wallpaper in the second monitor
-# nitrogen --restore
-
-# 2.0: now it is the time for the live wallpaper (yeah, I'm living the dream! 'til I get bored...)
-# P.S.: I won't upload mp4 here, so if you want to use it something similar, just look for any
-# wallpaper from Wallpaper Engine Workshop.
-# pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4
-
-# To setup monitor layout, apply current meta mode using NVIDIA X Server Settings
-# https://wiki.archlinux.org/title/NVIDIA#Using_nvidia-settings
-nvidia-settings --load-config-only
-
-# applet for volume control
-pasystray &
-
-# scroll velocity
-# imwheel -b "4 5"
-
-# start compositor
-picom --backend glx --experimental-backends -b
-# flashfocus
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-# nm-applet &
-
-# if you use chrome as default browser and it is not autocompleting any saved
-# password, check if gnome-keyring-daemon is running, if not, add this:
-#  gnome-keyring-daemon --start --components=secrets
-# also, must add this argument to chrome.desktop:
-#  --password-store=gnome
-

@@ -141,10 +141,10 @@ bindsym $mod+Control+Shift+0 move container to workspace number $ws20
 # as the name says (i3-gaps), I'm using smart_gaps with a custom margin
 smart_gaps on
 smart_borders on
-gaps inner 3
+gaps inner 2
 #gaps outer 10
 border_radius 3
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -285,15 +285,68 @@ bindsym $mod+w exec --no-startup-id work-mode.sh
 
 # =========================== STARTUP APPLICATIONS ============================
 
-# Combination of xss-lock, nm-applet and pactl is a popular choice, and I liked,
+# Combination of xss-lock and pactl is a popular choice, and I liked,
 # so they are included here.
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
+# set default keyboard layout (PT-BR)
+# setxkbmap -model abnt2 -layout br
+
+# set default keyboard layout (EN-US)
+exec --no-startup-id setxkbmap -layout us -variant intl
+
+# floating terminal
+exec --no-startup-id kitty --title dropdown-terminal -e zsh -o 'ignoreeof' &
+
+# enable NUMLOCK on startup
+#exec_always --no-startup-id numlockx &
+
+# run monitor to save any notification message sent through DBus
+exec --no-startup-id monitor-notification.py &> /dev/null
+
+# (old way) setup wallpaper
+exec --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/monterey.jpg
+
+# use nitrogen to set wallpaper in the second monitor
+# nitrogen --restore
+
+# 2.0: now it is the time for the live wallpaper (yeah, I'm living the dream! 'til I get bored...)
+# P.S.: I won't upload mp4 here, so if you want to use it something similar, just look for any
+# wallpaper from Wallpaper Engine Workshop.
+# pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4
+
+# To setup monitor layout, apply current meta mode using NVIDIA X Server Settings
+# https://wiki.archlinux.org/title/NVIDIA#Using_nvidia-settings
+exec --no-startup-id nvidia-settings --load-config-only
+
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# applet for volume control
+exec --no-startup-id pasystray &
+
+# scroll velocity
+# imwheel -b "4 5"
+
+# start compositor
+exec --no-startup-id picom --backend glx --experimental-backends -b
+# flashfocus
+
+# Patchbay GUI for Pipewire
+exec --no-startup-id qpwgraph -m &
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+# nm-applet &
+
+# if you use chrome as default browser and it is not autocompleting any saved
+# password, check if gnome-keyring-daemon is running, if not, add this:
+#  gnome-keyring-daemon --start --components=secrets
+# also, must add this argument to chrome.desktop:
+#  --password-store=gnome
 
 # ================================= CUSTOM ====================================
 
