@@ -51,6 +51,7 @@ M.setup_commands = function()
         vim.cmd([[%s/\s\+$//e]])
     end, {})
 
+    -- yank current text selection on visual mode
     cmd("SearchForTextSelection", function()
         -- get selected text from visual mode
         vim.cmd('noau normal! "vy"')

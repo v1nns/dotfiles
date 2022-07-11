@@ -7,6 +7,7 @@ local M = function()
                 },
             },
         },
+        -- builtins
         pickers = {
             find_files = {
                 find_command = function()
@@ -40,6 +41,14 @@ local M = function()
                         "!build/*",
                     }
                 end,
+            },
+            lsp_document_symbols = {
+                mappings = {
+                    i = {
+                        ["<CR>"] = require("telescope.actions").select_default
+                            + require("telescope.actions").center,
+                    },
+                },
             },
         },
         extensions = {
