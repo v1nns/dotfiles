@@ -4,6 +4,15 @@ local M = {}
 M.setup_autocommands = function()
     local autocmd = vim.api.nvim_create_autocmd
 
+    -- setup title string
+    autocmd({ "VimEnter", "DirChanged" }, {
+        callback = function()
+            -- TODO: show empty when in HOME?
+            local cwd = vim.fn.getcwd()
+            vim.o.titlestring = vim.fn.fnamemodify(cwd, ":t") .. " - " .. cwd
+        end,
+    })
+
     -- highlight config files
     autocmd(
         { "BufEnter", "BufRead" },

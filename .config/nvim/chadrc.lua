@@ -3,6 +3,9 @@ local M = {}
 M.options = {
     -- load custom options here
     user = function()
+        -- enable title
+        vim.opt.title = true
+
         -- show trailing spaces and tabs
         vim.opt.list = true
         vim.opt.listchars = {
