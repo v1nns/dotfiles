@@ -97,13 +97,35 @@ M.plugins = {
             disable = false,
         },
 
-        -- open directories and session management
-        -- ["rmagatti/auto-session"] = {},
+        -- open directories
         ["nvim-telescope/telescope-file-browser.nvim"] = {},
 
-        -- ["nvim-telescope/telescope-ui-select.nvim"] = {},
-        -- ["nvim-telescope/telescope-project.nvim"] = {},
-        -- ["shatur/neovim-session-manager"] = {},
+        -- telescope
+        ["nvim-telescope/telescope.nvim"] = {
+            module = { "telescope", "telescope.actions.state" },
+            cmd = { "Telescope", "Telescope file_browser" },
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "nvim-telescope/telescope-file-browser.nvim",
+            },
+        },
+
+        -- session management
+        ["rmagatti/auto-session"] = {
+            config = function()
+                require("custom.plugins.autosession")
+            end,
+        },
+        ["rmagatti/session-lens"] = {
+            cmd = "SearchSession",
+            requires = {
+                "rmagatti/auto-session",
+                "nvim-telescope/telescope.nvim",
+            },
+            config = function()
+                require("session-lens").setup()
+            end,
+        },
 
         -- code navigation and highlight
         ["easymotion/vim-easymotion"] = {},
@@ -130,18 +152,6 @@ M.plugins = {
             module = "virt-column",
             config = function()
                 require("custom.plugins.virtcolumn")
-            end,
-        },
-
-        -- cheatsheet
-        ["nvim-telescope/telescope.nvim"] = {
-            module = "telescope",
-        },
-        ["nvim-lua/popup.nvim"] = {},
-        ["sudormrfbin/cheatsheet.nvim"] = {
-            cmd = "Cheatsheet",
-            config = function()
-                require("custom.plugins.cheat_sheet")
             end,
         },
 

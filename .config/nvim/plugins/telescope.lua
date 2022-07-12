@@ -54,7 +54,11 @@ local M = function()
         extensions = {
             file_browser = require("custom.plugins.filebrowser"),
         },
-        extensions_list = { "themes", "terms", "file_browser" },
+        extensions_list = {
+            "themes",
+            "terms",
+            "file_browser",
+        },
     }
 end
 

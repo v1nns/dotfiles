@@ -76,13 +76,17 @@ M.telescope = {
         -- general navigation
         ["<C-S-p>"] = { "<cmd> Cheatsheet<CR>", "  show commands" },
         -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "  show keyboard shortcuts" },
-        ["<C-o>"] = {
+        ["<A-o>"] = {
             "<cmd> Telescope file_browser path=$HOME prompt_title=Open\\ folder<CR>",
             "  open folder",
         },
-        ["<C-p>"] = {
+        ["<A-p>"] = {
             "<cmd> Telescope find_files hidden=true prompt_title=Open\\ file<CR>",
             "  open file",
+        },
+        ["<A-r>"] = {
+            "<cmd> SearchSession<CR>",
+            "  recent folders",
         },
         ["<C-S-b>"] = { "<cmd> Telescope marks<CR>", "  open bookmarks" },
         ["<C-S-f>"] = {

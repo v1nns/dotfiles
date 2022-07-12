@@ -93,22 +93,19 @@ local M = function()
         buttons = {
             val = {
                 button(
-                    "Ctrl o",
+                    "Alt o",
                     "  Open folder  ",
                     ":Telescope file_browser prompt_title=Open\\ folder<CR>"
                 ),
                 button(
-                    "Ctrl p",
+                    "Alt p",
                     "  Open file  ",
                     ":Telescope find_files prompt_title=Open\\ file hidden=true<CR>"
                 ),
-                -- button("SPC f o", "  Recent File  ", ":Telescope oldfiles<CR>"),
-                -- button("Ctrl i", " Recent Folders", ":SessionManager load_session<CR>"),
-                -- button("SPC f w", "  Find Word  ", ":Telescope live_grep<CR>"),
                 button(
-                    "Ctrl Shift b",
-                    "  Bookmarks  ",
-                    ":Telescope marks<CR>"
+                    "Alt r",
+                    "  Recent folders  ",
+                    ":SearchSession<CR>"
                 ),
             },
         },
