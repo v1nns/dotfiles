@@ -144,6 +144,14 @@ M.plugins = {
                 require("custom.plugins.cheat_sheet")
             end,
         },
+
+        -- code snippets to add documentation based on doxygen
+        ["danymat/neogen"] = {
+            cmd = "Neogen",
+            config = function()
+                require("neogen").setup({ snippet_engine = "luasnip" })
+            end,
+        },
     },
 }
 
