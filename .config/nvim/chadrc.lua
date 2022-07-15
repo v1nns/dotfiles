@@ -21,8 +21,6 @@ M.options = {
     end,
 }
 
-local uiCfg = require("custom.ui.configs")
-
 M.ui = {
     hl_add = {
         -- quickscope highlight colors
@@ -54,18 +52,6 @@ M.ui = {
     },
 
     theme = "aquarium",
-
-    statusline = {
-        separator_style = "block",
-        override = {
-            fileInfo = uiCfg.statusline_fileinfo,
-            cursor_position = uiCfg.statusline_cursorposition,
-        },
-    },
-
-    tabufline = {
-        override = uiCfg.tabufline,
-    },
 }
 
 M.plugins = {
@@ -77,6 +63,21 @@ M.plugins = {
 
     -- Override default config of a plugin (merging)
     override = {
+        -- customize UI from NvChad
+        ["NvChad/ui"] = {
+            statusline = {
+                separator_style = "block",
+                overriden_modules = function()
+                    return require("custom.ui.statusline")
+                end,
+            },
+            tabufline = {
+                overriden_modules = function()
+                    return require("custom.ui.tabufline")
+                end,
+            },
+        },
+
         ["goolord/alpha-nvim"] = require("custom.plugins.alpha"),
         ["nvim-treesitter/nvim-treesitter"] = require(
             "custom.plugins.treesitter"

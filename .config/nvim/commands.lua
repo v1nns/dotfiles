@@ -32,12 +32,15 @@ M.setup_autocommands = function()
         end,
     })
 
-    -- disable ruler (aka virtual column) for some filetypes
+    -- disable a few features for some filetypes
     autocmd("FileType", {
-        pattern = { "alpha", "packer", "*telescope*" },
-        callback = function(bufnr)
-            bufnr = bufnr or vim.api.nvim_get_current_buf()
+        pattern = { "alpha", "packer", "*telescope*", "terminal" },
+        callback = function()
+            -- disable ruler (aka virtual column)
             require("virt-column").setup_buffer({ virtcolumn = "" })
+
+            -- disable quickscope highlight
+            vim.b.qs_local_disable = 1
         end,
     })
 end
