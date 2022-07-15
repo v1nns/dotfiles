@@ -5,7 +5,7 @@ local sep_l = separators["left"]
 local sep_r = separators["right"]
 
 return {
-    fileinfo = function()
+    fileInfo = function()
         local fn = vim.fn
         local icon = "  "
         local filename = (fn.expand("%") == "" and "Empty ") or fn.expand("%:t")

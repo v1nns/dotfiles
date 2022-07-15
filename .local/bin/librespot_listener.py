@@ -34,7 +34,7 @@ from dataclasses import dataclass, field
 from pid import PidFileError
 from pid.decorator import pidfile
 
-gi.require_version('Notify', '0.7')
+gi.require_version('Notify', '0.8')
 from gi.repository import GObject, Notify
 
 # ----------------------------------- Cache from temporary file ---------------------------------- #
@@ -137,6 +137,9 @@ class SpotifyWebApi:
         if cache is not None and cache.access_token and not forced:
             self.access_token = cache.access_token
             return
+
+        if CLIENT_ID is None or CLIENT_SECRET is None:
+            raise Exception("Must provide Spotify application settings")
 
         url = self.urls["authentication"]
         headers = {}
