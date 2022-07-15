@@ -4,6 +4,6 @@ Version=1.0
 Type=Application
 Terminal=false
 Exec=bash -c "powermenu.sh &"
-Icon=system-shutdown
+Icon=system-shutdown-symbolic
 Name=Shutdown
 Comment=Shutdown computer

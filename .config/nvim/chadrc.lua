@@ -12,6 +12,9 @@ M.options = {
             trail = "~", --[[ tab = ">>" ]]
         }
 
+        -- change character for git diff view
+        vim.opt.fillchars = { eob = " ", diff = "⣿" }
+
         -- setup commands
         require("custom.commands").setup_autocommands()
         require("custom.commands").setup_commands()
@@ -168,6 +171,15 @@ M.plugins = {
         ["kylechui/nvim-surround"] = {
             config = function()
                 require("nvim-surround").setup()
+            end,
+        },
+
+        -- git diff view
+        ["sindrets/diffview.nvim"] = {
+            cmd = "DiffviewOpen",
+            requires = { "nvim-lua/plenary.nvim" },
+            config = function()
+                require("diffview").setup()
             end,
         },
     },
