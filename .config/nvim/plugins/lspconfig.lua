@@ -43,8 +43,8 @@ M.setup_lsp = function(attach, capabilities)
         })
     end
 
-    -- lspserver with custom config for ccls
-    lspconfig.ccls.setup({
+    -- lspserver with custom config for clangd
+    lspconfig.clangd.setup({
         on_attach = function(client, bufnr)
             attach(client, bufnr)
             navic.attach(client, bufnr)
@@ -52,13 +52,6 @@ M.setup_lsp = function(attach, capabilities)
         end,
         capabilities = capabilities,
         init_options = {
-            compilationDatabaseDirectory = "build",
-            cache = {
-                directory = vim.env.HOME .. "/.cache/ccls",
-            },
-            clang = {
-                excludeArgs = { "-frounding-math" },
-            },
             filetypes = { "c", "cc", "cpp", "objc", "objcpp", "cuda" },
         },
     })
