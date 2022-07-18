@@ -20,7 +20,7 @@ M.disabled = {
 M.general = {
     n = {
         -- for navigation
-        ["<leader>w"] = { "<Plug>(easymotion-bd-w)", "   easymotion word" },
+        ["<leader>w"] = { "<cmd> HopWord <CR>", "  word motion" },
         ["<A-j>"] = { "5j", "move lines 5x downwards" },
         ["<A-k>"] = { "5k", "move lines 5x upwards" },
         ["<A-h>"] = { "b", "move back a word" },

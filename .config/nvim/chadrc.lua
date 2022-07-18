@@ -12,8 +12,9 @@ M.options = {
             trail = "~", --[[ tab = ">>" ]]
         }
 
-        -- change character for git diff view
+        -- change character and highlight group for git diff view
         vim.opt.fillchars = { eob = " ", diff = "⣿" }
+        vim.cmd([[hi DiffText cterm=bold gui=bold guibg=#545c7e]])
 
         -- setup commands
         require("custom.commands").setup_autocommands()
@@ -131,7 +132,22 @@ M.plugins = {
         },
 
         -- code navigation and highlight
-        ["easymotion/vim-easymotion"] = {},
+        ["phaazon/hop.nvim"] = {
+            cmd = {
+                "HopAnywhere",
+                "HopChar1",
+                "HopChar2",
+                "HopLine",
+                "HopLineStart",
+                "HopVertical",
+                "HopPattern",
+                "HopWord",
+            },
+            branch = "v2",
+            config = function()
+                require("hop").setup()
+            end,
+        },
         ["unblevable/quick-scope"] = {},
 
         -- breadcrumbs
@@ -178,7 +194,7 @@ M.plugins = {
             cmd = "DiffviewOpen",
             requires = { "nvim-lua/plenary.nvim" },
             config = function()
-                require("diffview").setup()
+                require("diffview").setup({ enhanced_diff_hl = true })
             end,
         },
     },
