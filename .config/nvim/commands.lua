@@ -34,7 +34,13 @@ M.setup_autocommands = function()
 
     -- disable a few features for some filetypes
     autocmd("FileType", {
-        pattern = { "alpha", "packer", "*telescope*", "terminal" },
+        pattern = {
+            "alpha",
+            "packer",
+            "*telescope*",
+            "terminal",
+            "Diffview*",
+        },
         callback = function()
             -- disable ruler (aka virtual column)
             require("virt-column").setup_buffer({ virtcolumn = "" })

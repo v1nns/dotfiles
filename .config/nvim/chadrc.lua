@@ -25,36 +25,35 @@ M.options = {
 }
 
 M.ui = {
-    hl_add = {
-        -- quickscope highlight colors
-        QuickScopePrimary = {
-            fg = "#AFFF5F",
-        },
-        QuickScopeSecondary = {
-            fg = "#5FFFFF",
-        },
-        -- virt-column color
-        VirtColumn = {
-            fg = "#592929",
+    hl_add = require("custom.highlights").add(),
+
+    hl_override = require("custom.highlights").override(),
+
+    -- TODO: move this to another file
+    changed_themes = {
+        tokyonight = {
+            base_16 = {
+                base00 = "#1a1b26",
+                base01 = "#16161e",
+                base02 = "#2f3549",
+                base03 = "#444b6a",
+                base04 = "#787c99",
+                base05 = "#a9b1d6",
+                base06 = "#cbccd1",
+                base07 = "#d5d6db",
+                base08 = "#c0caf5",
+                base09 = "#a9b1d6",
+                base0A = "#0db9d7",
+                base0B = "#9ece6a",
+                base0C = "#b4f9f8",
+                base0D = "#2ac3de",
+                base0E = "#bb9af7",
+                base0F = "#f7768e",
+            },
         },
     },
 
-    hl_override = {
-        AlphaHeader = {
-            fg = "#B388FF",
-        },
-        Comment = {
-            fg = "#4CAF50",
-        },
-        NonText = {
-            fg = "#FF2233",
-        },
-        WinSeparator = {
-            fg = "#484852",
-        },
-    },
-
-    theme = "aquarium",
+    theme = "tokyonight",
 }
 
 M.plugins = {
