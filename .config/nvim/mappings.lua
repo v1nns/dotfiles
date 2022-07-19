@@ -63,17 +63,19 @@ M.general = {
             "  undo current hunk",
         },
         ["<C-g>d"] = {
-           "<cmd> DiffviewOpen<CR>",
-           "  show git diff",
+            "<cmd> DiffviewOpen<CR>",
+            "  show git diff",
         },
         ["<C-g>f"] = {
-           "<cmd> DiffviewFileHistory<CR>",
-           "  show file history",
+            "<cmd> DiffviewFileHistory<CR>",
+            "  show file history",
         },
 
         -- rename
         ["<F2>"] = {
-            '<cmd>lua require("nvchad.ui.renamer").open()<CR>',
+            function()
+                require("nvchad_ui.renamer").open()
+            end,
             "凜  rename object",
         },
     },
