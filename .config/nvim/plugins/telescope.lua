@@ -18,6 +18,8 @@ local M = function()
                         "--strip-cwd-prefix",
                         "-H",
                         "-E",
+                        ".cache",
+                        "-E",
                         ".git",
                         "-E",
                         "node_modules",
@@ -33,6 +35,8 @@ local M = function()
                 additional_args = function()
                     return {
                         "--hidden",
+                        "-g",
+                        "!.cache/*",
                         "-g",
                         "!.git/*",
                         "-g",
