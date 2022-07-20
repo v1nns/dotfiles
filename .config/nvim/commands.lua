@@ -74,6 +74,11 @@ M.setup_commands = function()
                 .. " prompt_title=Search\\ all"
         )
     end, {})
+
+    -- close all opened buffers
+    cmd("CloseAllBuffers", function()
+        vim.cmd("%bd!")
+    end, {})
 end
 
 return M
