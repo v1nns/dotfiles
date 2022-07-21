@@ -67,7 +67,7 @@ M.general = {
             "  show git diff",
         },
         ["<C-g>f"] = {
-            "<cmd> DiffviewFileHistory<CR>",
+            "<cmd> DiffviewFileHistory %<CR>",
             "  show file history",
         },
 
