@@ -9,3 +9,7 @@ export GTK_THEME=Dracula
 # export monitor names as env variable
 export PRIMARY_MONITOR="$(xrandr -q | grep " connected primary" | cut -d ' ' -f1)"
 export SECONDARY_MONITOR="$(xrandr -q | grep " connected 1" | cut -d ' ' -f1)"
+
+# enable gtest color by default
+# (read this: https://github.com/kovidgoyal/kitty/issues/4400#issuecomment-1002518875)
+export GTEST_COLOR=yes
