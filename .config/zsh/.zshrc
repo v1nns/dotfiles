@@ -84,3 +84,7 @@ unsetopt beep
 
 # use ssh with this alias
 alias s="kitty +kitten ssh"
+
+# enable gtest color by default
+# (read this: https://github.com/kovidgoyal/kitty/issues/4400#issuecomment-1002518875)
+export GTEST_COLOR=yes
