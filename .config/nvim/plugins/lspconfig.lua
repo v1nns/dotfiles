@@ -1,8 +1,9 @@
 -- lsp configs!
+local on_attach = require("plugins.configs.lspconfig").on_attach
+local capabilities = require("plugins.configs.lspconfig").capabilities
 
+local lspconfig = require "lspconfig"
 local navic = require("nvim-navic")
-
-local M = {}
 
 local symbol_highlight = function(client)
     -- add syntax highlight for current symbol
@@ -26,35 +27,15 @@ local symbol_highlight = function(client)
     end
 end
 
-M.setup_lsp = function(attach, capabilities)
-    local lspconfig = require("lspconfig")
+local servers = { "html", "cssls", "clangd", "pylsp" }
 
-    -- lspservers with default config
-    local servers = { "html", "cssls" }
-
-    for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup({
-            on_attach = function(client, bufnr)
-                attach(client, bufnr)
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = function(client, bufnr)
+                on_attach(client, bufnr)
                 navic.attach(client, bufnr)
                 symbol_highlight(client)
             end,
-            capabilities = capabilities,
-        })
-    end
-
-    -- lspserver with custom config for clangd
-    lspconfig.clangd.setup({
-        on_attach = function(client, bufnr)
-            attach(client, bufnr)
-            navic.attach(client, bufnr)
-            symbol_highlight(client)
-        end,
-        capabilities = capabilities,
-        init_options = {
-            filetypes = { "c", "cc", "cpp", "objc", "objcpp", "cuda" },
-        },
-    })
+    capabilities = capabilities,
+  }
 end
-
-return M

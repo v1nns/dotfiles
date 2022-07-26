@@ -57,13 +57,15 @@ M.override = function()
         },
 
         -- These groups are for the neovim tree-sitter highlights.
-        -- TSAnnotation        = { };    -- For C++ attributes, to denote some kind of meta information.
+        TSBoolean = { fg = "#7dcfff" },
+        TSConstMacro = { fg = "#9d7cd8" },
         TSDanger = { fg = "#1a1b26", bg = "#db4b4b" },
         TSFuncBuiltin = { fg = "#7aa2f7" }, -- For builtin functions: `table.insert` in Lua.
         TSFunction = { fg = "#7aa2f7" }, -- For function (calls and definitions).
         TSInclude = { fg = "#7dcfff" }, -- For includes: `#include` in C, `use` or `extern crate` in Rust, or `require` in Lua.
         TSKeyword = { fg = "#9d7cd8" }, -- For keywords that don't fall in previous categories.
         TSKeywordFunction = { fg = "#bb9af7" }, -- For keywords used to define a fuction.
+        TSKeywordOperator = { fg = "#9d7cd8" },
         TSLabel = { fg = "#7aa2f7" }, -- For labels: `label:` in C and `:label:` in Lua.
         TSMethod = { fg = "#7aa2f7" }, -- For builtin functions: `table.insert` in Lua.
         TSNamespace = { fg = "#f7768e" }, -- For identifiers referring to modules and namespaces.
