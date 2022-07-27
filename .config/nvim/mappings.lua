@@ -20,9 +20,11 @@ M.disabled = {
 M.general = {
     n = {
         -- for navigation
+        ["j"] = { "gj", "move line downwards (even with word-wrap)" },
+        ["k"] = { "gk", "move line upwards (even with word-wrap)" },
         ["<leader>w"] = { "<cmd> HopWord <CR>", "  word motion" },
-        ["<A-j>"] = { "5j", "move lines 5x downwards" },
-        ["<A-k>"] = { "5k", "move lines 5x upwards" },
+        ["<A-j>"] = { "5gj", "move lines 5x downwards" },
+        ["<A-k>"] = { "5gk", "move lines 5x upwards" },
         ["<A-h>"] = { "b", "move back a word" },
         ["<A-l>"] = { "w", "move forward a word" },
 
