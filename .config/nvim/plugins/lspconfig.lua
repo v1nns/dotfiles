@@ -2,7 +2,7 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
 local navic = require("nvim-navic")
 
 local symbol_highlight = function(client)
@@ -30,12 +30,14 @@ end
 local servers = { "html", "cssls", "clangd", "pylsp" }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = function(client, bufnr)
-                on_attach(client, bufnr)
-                navic.attach(client, bufnr)
-                symbol_highlight(client)
-            end,
-    capabilities = capabilities,
-  }
+    capabilities.offsetEncoding = { "utf-32" }
+
+    lspconfig[lsp].setup({
+        on_attach = function(client, bufnr)
+            on_attach(client, bufnr)
+            navic.attach(client, bufnr)
+            symbol_highlight(client)
+        end,
+        capabilities = capabilities,
+    })
 end
