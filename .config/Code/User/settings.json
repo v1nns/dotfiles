@@ -28,7 +28,6 @@
   "workbench.startupEditor": "none",
   "workbench.editor.enablePreview": true,
   "workbench.editor.showTabs": false,
-  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "[Kanagawa]": {
       "titleBar.activeBackground": "#181821",
@@ -166,5 +165,6 @@
   "cmakeFormat.args": [
     "--config-file",
     "/home/vinicius/projects/dotfiles/.config/cmakeformat/.cmake-format.py"
-  ]
+  ],
+  "workbench.activityBar.visible": false
 }
