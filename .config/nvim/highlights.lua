@@ -20,6 +20,7 @@ M.add = function()
         TSConstMacro = { fg = "#e0af68" },
         TSDanger = { fg = "#1a1b26", bg = "#db4b4b" },
         TSLabel = { fg = "#7aa2f7" },
+        TSNumber = { fg = "#ff9e64" },
         TSNote = { fg = "#1a1b26", bg = "#0db9d7" },
         TSOperator = { fg = "#89ddff" },
         TSTextReference = { fg = "#1abc9c" },

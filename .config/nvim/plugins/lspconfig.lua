@@ -36,7 +36,7 @@ for _, lsp in ipairs(servers) do
         on_attach = function(client, bufnr)
             on_attach(client, bufnr)
             navic.attach(client, bufnr)
-            symbol_highlight(client)
+            -- symbol_highlight(client)
         end,
         capabilities = capabilities,
     })
