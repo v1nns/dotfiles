@@ -37,16 +37,26 @@ return {
     end,
     cursor_position = function()
         local fn = vim.fn
+        local api = vim.api
         local left_sep = "%#St_pos_sep#" .. sep_l .. "%#St_pos_icon#" .. " "
 
         local current_line = fn.line(".")
         local total_line = fn.line("$")
         local percent = math.modf((current_line / total_line) * 100)
-        local text = string.format("%2d", percent) .. "%%"
+        local text_line = string.format("%2d", percent) .. "%%"
 
-        text = (current_line == 1 and "Top") or text
-        text = (current_line == total_line and "Bot") or text
+        text_line = (current_line == 1 and "Top") or text_line
+        text_line = (current_line == total_line and "Bot") or text_line
 
-        return left_sep .. "%#St_pos_text#" .. " " .. text .. " "
+        local current_column = api.nvim_win_get_cursor(0)[2]
+        local text_column = string.format("%3d", current_column)
+
+        return left_sep
+            .. "%#St_pos_text#"
+            .. " "
+            .. text_column
+            .. " "
+            .. text_line
+            .. " "
     end,
 }
