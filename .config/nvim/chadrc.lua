@@ -70,6 +70,8 @@ M.plugins = {
         ["goolord/alpha-nvim"] = {
             disable = false,
         },
+        -- enable keybind window
+        ["folke/which-key.nvim"] = { disable = false },
 
         -- language server protocol
         ["neovim/nvim-lspconfig"] = {
