@@ -141,10 +141,14 @@ bindsym $mod+Control+Shift+0 move container to workspace number $ws20
 # as the name says (i3-gaps), I'm using smart_gaps with a custom margin
 smart_gaps on
 smart_borders on
-gaps inner 2
+gaps inner 5
 #gaps outer 10
-border_radius 3
-for_window [class="^.*"] border pixel 1
+border_radius 2
+# border for active/focused window
+for_window [class="^.*"] border pixel 3
+
+# color class           border  backgr. text    indicator child_border
+client.focused          #bd93f9 #285577 #ffffff #2e9ef4   #bd93f9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
