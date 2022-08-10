@@ -19,6 +19,7 @@ local M = {
             },
         },
     },
+    filters = { custom = { "^.git$" } },
 }
 
 return M
