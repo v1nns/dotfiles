@@ -25,8 +25,9 @@ plugins=(
     bgnotify
     git
     sudo
+    fast-syntax-highlighting
     zsh-autosuggestions
-    zsh-syntax-highlighting
+    zsh-vi-mode
     docker
     docker-compose
 )
