@@ -102,7 +102,6 @@ listview {
 
 element-text {
     padding: 8px -11px;
-    vertical-align: 0.5;
     border-radius: 4px;
     background-color: transparent;
     text-color: @nord4;
