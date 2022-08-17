@@ -4,7 +4,7 @@
 # Github: @v1nns
 
 # my own path to get custom theme for rofi
-dir="~/.config/rofi/nord"
+dir="$HOME/.config/rofi/nord"
 rofi_command="rofi -theme $dir/renameworkspace.rasi"
 
 # open rofi window asking for new name

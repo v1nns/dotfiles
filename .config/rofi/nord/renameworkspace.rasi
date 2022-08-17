@@ -60,6 +60,7 @@ window {
     padding: 10px;
     border:  0px;
     border-radius: 6px;
+    height: 80px;
     width: 500px;
 
     background-color: @transparent;
@@ -70,7 +71,7 @@ window {
 
 mainbox {
     spacing: 0;
-    children: [ inputbar, message ];
+    /* children: [ inputbar, message ]; */
 }
 
 message {
