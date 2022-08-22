@@ -19,13 +19,16 @@ local sources = {
     b.formatting.clang_format.with({
         extra_args = {
             "-style",
-            "{BasedOnStyle: Google, Standard: c++17 ,ColumnLimit: 100}",
+            "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
         },
     }),
 
     -- Shell
     b.formatting.shfmt,
     b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
+
+    -- CMake
+    b.formatting.cmake_format,
 }
 
 null_ls.setup({
