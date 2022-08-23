@@ -79,6 +79,15 @@ M.setup_commands = function()
     cmd("CloseAllBuffers", function()
         vim.cmd("%bd!")
     end, {})
+
+    -- wrap text at column X (or 100 if no arg is passed)
+    -- TODO: implement this for range formatting, read this:
+    -- https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion
+    cmd("WrapTextAtColumn", function(opts)
+        local column = tonumber(opts.args) or 100
+        vim.o.textwidth = column
+        vim.api.nvim_feedkeys("gwap", "n", false)
+    end, { nargs = "?" })
 end
 
 return M
