@@ -91,14 +91,6 @@ M.general = {
             "<cmd> Gitsigns reset_hunk<CR>",
             "undo current hunk",
         },
-        ["<C-g>d"] = {
-            "<cmd> DiffviewOpen<CR>",
-            "show git diff",
-        },
-        ["<C-g>f"] = {
-            "<cmd> DiffviewFileHistory %<CR>",
-            "show file history",
-        },
 
         -- rename
         ["<F2>"] = {

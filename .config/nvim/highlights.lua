@@ -77,14 +77,6 @@ M.override = function()
             fg = "#e0af68",
         },
 
-        -- diffview
-        DiffAdd = {
-            fg = "#7ece6a",
-        },
-        DiffDelete = {
-            fg = "#f7768e",
-        },
-
         -- These groups are for the neovim tree-sitter highlights.
         TSFuncBuiltin = { fg = "#7aa2f7" }, -- For builtin functions: `table.insert` in Lua.
         TSFunction = { fg = "#7aa2f7" }, -- For function (calls and definitions).

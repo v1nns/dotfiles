@@ -170,15 +170,6 @@ M.plugins = {
             end,
         },
 
-        -- git diff view
-        ["sindrets/diffview.nvim"] = {
-            cmd = "DiffviewOpen",
-            requires = { "nvim-lua/plenary.nvim" },
-            config = function()
-                require("diffview").setup({ enhanced_diff_hl = true })
-            end,
-        },
-
         -- -- debug applications
         -- ["mfussenegger/nvim-dap"] = {
         -- },

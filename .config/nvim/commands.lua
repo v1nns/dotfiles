@@ -39,7 +39,6 @@ M.setup_autocommands = function()
             "packer",
             "*telescope*",
             "terminal",
-            "Diffview*",
         },
         callback = function()
             -- disable ruler (aka virtual column)
