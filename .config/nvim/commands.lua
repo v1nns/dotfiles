@@ -77,7 +77,15 @@ M.setup_commands = function()
 
     -- close all opened buffers
     cmd("CloseAllBuffers", function()
+        local neotree = require("neo-tree.command")
+        -- must hide neo-tree before closing all buffers
+        neotree.execute({ action = "close" })
+
+        -- close all buffers
         vim.cmd("%bd!")
+
+        -- show neo-tree again (filesystem is default option)
+        neotree.execute({ action = "show" })
     end, {})
 
     -- wrap text at column X (or 100 if no arg is passed)

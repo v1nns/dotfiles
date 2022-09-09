@@ -21,6 +21,7 @@ M.winbar_filetype_exclude = {
     "NvimTree",
     "alpha",
     "toggleterm",
+    "neo-tree",
 }
 
 local get_filename = function()

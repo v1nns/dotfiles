@@ -9,10 +9,12 @@ M.add = function()
         QuickScopeSecondary = {
             fg = "#5FFFFF",
         },
+
         -- virt-column color
         VirtColumn = {
             fg = "#592929",
         },
+
         -- neovim tree-sitter
         TSBoolean = { fg = "#7dcfff" },
         TSConstant = { fg = "#e0af68" },
@@ -28,6 +30,18 @@ M.add = function()
         TSTypeDefinition = { fg = "#7dcfff" },
         TSTypeQualifier = { fg = "#7dcfff" },
         TSWarning = { fg = "#1a1b26", bg = "#e0af68" },
+
+        -- neo-tree
+        NeoTreeNormal = { bg = "#16161e" },
+        NeoTreeNormalNC = { bg = "#16161e" },
+        NeoTreeTitle = { fg = "#16161e" },
+        NeoTreeRootName = { underline = false, bold = true },
+
+        NeoTreeCursorLine = { bg = "#292e42" },
+        -- NeoTreeDirectoryName = { fg = "#c0caf5" },
+
+        NeoTreeGitModified = { fg = "#e0af68" },
+        NeoTreeGitUntracked = { fg = "#b4f9f8" },
     }
 end
 
@@ -42,9 +56,9 @@ M.override = function()
         NonText = {
             fg = "#FF2233",
         },
-        WinSeparator = {
-            fg = "#484852",
-        },
+        -- WinSeparator = {
+        --     fg = "#484852",
+        -- },
 
         -- nvimtree
         NvimTreeRootFolder = {

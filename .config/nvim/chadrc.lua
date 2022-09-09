@@ -44,6 +44,7 @@ M.plugins = {
                 end,
             },
             tabufline = {
+                enabled = false,
                 overriden_modules = function()
                     return require("custom.ui.tabufline")
                 end,
@@ -175,6 +176,28 @@ M.plugins = {
             requires = { "nvim-lua/plenary.nvim" },
             config = function()
                 require("diffview").setup({ enhanced_diff_hl = true })
+            end,
+        },
+
+        -- -- debug applications
+        -- ["mfussenegger/nvim-dap"] = {
+        -- },
+
+        ["kyazdani42/nvim-tree.lua"] = {
+            disable = true,
+        },
+
+        ["nvim-neo-tree/neo-tree.nvim"] = {
+            branch = "v2.x",
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "kyazdani42/nvim-web-devicons",
+                "MunifTanjim/nui.nvim",
+            },
+            module = "neo-tree",
+            cmd = "Neotree",
+            config = function()
+                require("custom.plugins.neotree")
             end,
         },
     },

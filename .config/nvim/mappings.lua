@@ -14,11 +14,31 @@ M.disabled = {
         ["<leader>gt"] = {},
         ["<leader>pt"] = {},
         ["<A-h>"] = {},
+        ["<C-n>"] = {},
+        ["<leader>e"] = {},
+        ["<leader>b"] = {},
     },
 }
 
 M.general = {
     n = {
+        -- file/buffer/git tree
+        ["<leader>e"] = {
+            "<cmd>Neotree filesystem toggle left <CR>",
+            "toggle file tree",
+        },
+        ["<leader>b"] = {
+            "<cmd>Neotree buffers toggle left <CR>",
+            "toggle buffer tree",
+        },
+        ["<leader>g"] = {
+            "<cmd>Neotree git_status toggle left <CR>",
+            "toggle git status tree",
+        },
+
+        -- new buffer
+        ["<C-n>"] = { "<cmd> enew <CR>", "new buffer" },
+
         -- for navigation
         ["j"] = { "gj", "move line downwards (even with word-wrap)" },
         ["k"] = { "gk", "move line upwards (even with word-wrap)" },
@@ -32,12 +52,19 @@ M.general = {
         ["<A-Left>"] = { "<C-O>zz", "move back" },
         ["<A-Right>"] = { "<C-I>zz", "move forward" },
 
-        -- window adjusts
+        -- window adjusts (for kitty)
         -- TODO: create function for width based on window position
         ["<C-S-w>"] = { "<cmd> winc > <CR>", "increase width" },
         ["<C-S-x>"] = { "<cmd> winc < <CR>", "decrease width" },
         ["<C-S-y>"] = { "<cmd> winc - <CR>", "increase height" },
         ["<C-S-z>"] = { "<cmd> winc + <CR>", "decrease height" },
+
+        -- window adjusts (for neovim-qt)
+        -- TODO: create function for width based on window position
+        ["<C-S-Right>"] = { "<cmd> winc > <CR>", "increase width" },
+        ["<C-S-Left>"] = { "<cmd> winc < <CR>", "decrease width" },
+        ["<C-S-Up>"] = { "<cmd> winc - <CR>", "increase height" },
+        ["<C-S-Down>"] = { "<cmd> winc + <CR>", "decrease height" },
 
         -- move lines
         ["<A-Down>"] = { "<cmd> :m .+1<CR>==", "move line upwards" },

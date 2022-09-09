@@ -24,8 +24,11 @@ return {
             filename = " " .. filename .. " "
         end
 
-        -- Hide nvim-tree
-        if string.find(filename, "NvimTree") then
+        -- Hide nvim-tree/neo-tree
+        if
+            string.find(filename, "NvimTree")
+            or string.find(filename, "[1]") -- Neo-tree filesystem or buffer
+        then
             return ""
         else
             return "%#St_file_info#"
