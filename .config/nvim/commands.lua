@@ -48,6 +48,13 @@ M.setup_autocommands = function()
             vim.b.qs_local_disable = 1
         end,
     })
+
+    -- close neotree buffer before exitting (otherwise, it is buggy with autosession)
+    autocmd({ "VimLeavePre" }, {
+        callback = function()
+            vim.cmd(":Neotree close")
+        end,
+    })
 end
 
 -- Commands
