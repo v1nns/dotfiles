@@ -38,9 +38,9 @@ local M = {
                         prompt_bufnr
                     )
                     require("telescope.actions").close(prompt_bufnr)
-                    vim.cmd(":NvimTreeClose")
+                    vim.cmd(":Neotree close")
                     vim.cmd("bufdo bd")
-                    vim.cmd(":NvimTreeOpen")
+                    vim.cmd(":Neotree show")
                 end
             end,
 
