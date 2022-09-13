@@ -50,11 +50,20 @@ M.plugins = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
+            "s1n7ax/nvim-window-picker",
         },
         module = "neo-tree",
         cmd = "Neotree",
         config = function()
             require("custom.plugins.neotree")
+        end,
+    },
+
+    ["s1n7ax/nvim-window-picker"] = {
+        tag = "v1.*",
+        module = "window-picker",
+        config = function()
+            require("custom.plugins.windowpicker")
         end,
     },
 
@@ -102,6 +111,7 @@ M.plugins = {
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
+            "s1n7ax/nvim-window-picker",
         },
         override_options = require("custom.plugins.telescope"),
     },

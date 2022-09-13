@@ -84,7 +84,7 @@ local options = {
                 nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
             ["<2-LeftMouse>"] = "open",
-            ["<cr>"] = "open",
+            ["<cr>"] = "open_with_window_picker",
             ["S"] = "open_split",
             ["s"] = "open_vsplit",
             -- ["S"] = "split_with_window_picker",
