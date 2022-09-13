@@ -5,7 +5,7 @@
 #    - dash is optional
 #    - there may be a space after the //
 #
-noCommitCount=$(git diff --no-ext-diff --cached | egrep -i --count "(@No|\/\/\s?no[ -]?|\#\s?no[ -]?)commit")
+noCommitCount=$(git diff --no-ext-diff --cached | grep -E -i --count "(@No|\/\/\s?no[ -]?|\#\s?no[ -]?)commit")
 if [ "$noCommitCount" -ne "0" ]; then
    echo "WARNING: You are attempting to commit changes which include a 'no-commit'."
    echo "Please check the following files:"
