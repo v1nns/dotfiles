@@ -40,6 +40,12 @@ M.add = function()
         NeoTreeCursorLine = { bg = "#292e42" },
         -- NeoTreeDirectoryName = { fg = "#c0caf5" },
 
+        NeoTreeGitStaged = { fg = "#7ece6a" },
+        NeoTreeGitUnstaged = { fg = "#e0af68" },
+
+        NeoTreeGitAdded = { fg = "#7ece6a" },
+        NeoTreeGitDeleted = { fg = "#f7768e" },
+
         NeoTreeGitModified = { fg = "#e0af68" },
         NeoTreeGitUntracked = { fg = "#b4f9f8" },
     }

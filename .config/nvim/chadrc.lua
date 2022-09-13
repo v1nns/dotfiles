@@ -45,7 +45,7 @@ M.plugins = {
 
     -- instead, use neo-tree as file/buffer/git explorer
     ["nvim-neo-tree/neo-tree.nvim"] = {
-        branch = "v2.x",
+        branch = "main",
         requires = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
