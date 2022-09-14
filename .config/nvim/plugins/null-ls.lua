@@ -10,7 +10,6 @@ local sources = {
     b.diagnostics.luacheck.with({ extra_args = { "--global vim" } }),
     b.formatting.stylua,
     b.formatting.stylua.with({
-        command = vim.env.HOME .. "/.cargo/bin/stylua",
         extra_args = { "--column-width", "80", "--indent-type", "Spaces" },
     }),
 

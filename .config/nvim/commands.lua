@@ -55,6 +55,17 @@ M.setup_autocommands = function()
             vim.cmd(":Neotree close")
         end,
     })
+
+    -- sadly, git messenger is configured using global variables,
+    -- and that's why this autocmd is necessary
+    autocmd("FileType", {
+        pattern = { "gitmessengerpopup" },
+        callback = function()
+            vim.g.git_messenger_always_into_popup = true
+            vim.g.git_messenger_floating_win_opts = { border = "single" }
+            vim.g.git_messenger_popup_content_margins = false
+        end,
+    })
 end
 
 -- Commands

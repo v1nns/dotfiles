@@ -85,6 +85,12 @@ M.plugins = {
         override_options = require("custom.plugins.gitsigns"),
     },
 
+    -- git commit message in a popup
+    ["rhysd/git-messenger.vim"] = {
+        cmd = "GitMessenger",
+        -- config = check commands.lua...
+    },
+
     -- portable package manager
     ["williamboman/mason.nvim"] = {
         override_options = require("custom.plugins.mason"),

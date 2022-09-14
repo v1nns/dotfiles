@@ -91,6 +91,10 @@ M.general = {
             "<cmd> Gitsigns reset_hunk<CR>",
             "undo current hunk",
         },
+        ["<C-g>m"] = {
+            "<cmd> GitMessenger <CR>",
+            "show commit message from current line",
+        },
 
         -- rename
         ["<F2>"] = {
