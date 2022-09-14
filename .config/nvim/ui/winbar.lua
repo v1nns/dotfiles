@@ -27,7 +27,7 @@ M.winbar_filetype_exclude = {
 local get_filename = function()
     local filename = string.gsub(
         vim.api.nvim_buf_get_name(0),
-        vim.loop.cwd(),
+        vim.fn.getcwd() .. "/",
         ""
     )
     local extension = vim.fn.expand("%:e")
