@@ -91,6 +91,14 @@ M.plugins = {
         -- config = check commands.lua...
     },
 
+    -- git conflict (in a fancy way)
+    ["akinsho/git-conflict.nvim"] = {
+        tag = "*",
+        config = function()
+            require("git-conflict").setup()
+        end,
+    },
+
     -- portable package manager
     ["williamboman/mason.nvim"] = {
         override_options = require("custom.plugins.mason"),
