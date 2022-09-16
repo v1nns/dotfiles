@@ -84,12 +84,10 @@ M.setup_commands = function()
         local text = vim.fn.getreg("v")
 
         -- run live_grep picker from telescope
-        -- P.S. lazy loading made me use cmd...
-        vim.cmd(
-            "Telescope live_grep default_text="
-                .. text
-                .. " prompt_title=Search\\ all"
-        )
+        require("telescope.builtin").live_grep({
+            prompt_title = "Search all",
+            default_text = text,
+        })
     end, {})
 
     -- close all opened buffers
