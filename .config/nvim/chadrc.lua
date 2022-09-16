@@ -120,7 +120,12 @@ M.plugins = {
 
     -- telescope (ui for pickers: open files, search files, ...)
     ["nvim-telescope/telescope.nvim"] = {
-        module = { "telescope", "telescope.actions.state" },
+        module = {
+            "telescope",
+            "telescope.actions",
+            "telescope.actions.state",
+            "telescope.builtin",
+        },
         cmd = { "Telescope", "Telescope file_browser" },
         requires = {
             "nvim-lua/plenary.nvim",
