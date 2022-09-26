@@ -12,6 +12,7 @@ local M = {
         "norg",
         "",
     },
+    max_indent_increase = 1,
 }
 
 return M
