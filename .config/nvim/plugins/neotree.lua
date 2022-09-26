@@ -94,7 +94,7 @@ local options = {
             ["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
             ["C"] = "close_node",
             ["z"] = "close_all_nodes",
-            ["E"] = "expand_all_nodes",
+            -- ["E"] = "expand_all_nodes",
             ["a"] = {
                 "add",
                 -- some commands may take optional config options, see `:h neo-tree-mappings` for details
@@ -183,6 +183,58 @@ local options = {
                 ["<c-x>"] = "clear_filter",
                 ["[g"] = "prev_git_modified",
                 ["]g"] = "next_git_modified",
+                ["E"] = function(state, toggle_directory)
+                    local fs = require("neo-tree.sources.filesystem")
+                    local renderer = require("neo-tree.ui.renderer")
+                    local utils = require("neo-tree.utils")
+
+                    if toggle_directory == nil then
+                        toggle_directory = function(_state, node)
+                            fs.toggle_directory(_state, node, nil, true, true)
+                        end
+                    end
+
+                    local expand_node
+                    expand_node = function(node)
+                        -- custom code (based on expand_all_nodes command)
+                        if node:get_depth() > 1 then
+                            local _, folder = utils.split_path(node.path)
+                            local output = vim.fn.systemlist({
+                                "git",
+                                "check-ignore",
+                                folder,
+                            })
+
+                            if output[1] ~= nil then
+                                -- at this point, it means that this folder is part of
+                                -- .gitignore file and should not be expanded
+                                return
+                            end
+                        end
+                        -- end custom code
+
+                        local id = node:get_id()
+                        if
+                            node.type == "directory" and not node:is_expanded()
+                        then
+                            toggle_directory(state, node)
+                            node = state.tree:get_node(id)
+                        end
+                        local children = state.tree:get_nodes(id)
+                        if children then
+                            for _, child in ipairs(children) do
+                                if child.type == "directory" then
+                                    expand_node(child)
+                                end
+                            end
+                        end
+                    end
+
+                    for _, node in ipairs(state.tree:get_nodes()) do
+                        expand_node(node)
+                    end
+                    renderer.redraw(state)
+                end,
             },
         },
     },
