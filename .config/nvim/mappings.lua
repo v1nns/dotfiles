@@ -128,7 +128,7 @@ M.telescope = {
             "<cmd> Telescope live_grep prompt_title=Search\\ all<CR>",
             "search all",
         },
-        ["<A-Tab>"] = { "<cmd> Telescope buffers<CR>", "find buffers" },
+        ["<leader><Tab>"] = { "<cmd> Telescope buffers<CR>", "find buffers" },
 
         -- git
         ["<C-g>c"] = {
