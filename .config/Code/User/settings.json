@@ -1,6 +1,5 @@
 {
   // vscode settings
-  "window.titleBarStyle": "custom",
   "window.zoomLevel": -1,
   "window.menuBarVisibility": "toggle",
 
@@ -73,7 +72,7 @@
         }
       },
       {
-        "scope": ["storage.modifier.specifier"],
+        "scope": ["storage.modifier.specifier", "keyword.control.return"],
         "settings": {
           "fontStyle": ""
         }
