@@ -2,11 +2,14 @@
   // vscode settings
   "window.titleBarStyle": "custom",
   "window.zoomLevel": -1,
+  "window.menuBarVisibility": "toggle",
+
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
   "terminal.integrated.fontSize": 14,
-  "editor.fontFamily": "Fira Code",
-  "editor.fontSize": 15,
-  //   "editor.fontFamily": "Victor Mono",
-  //   "editor.fontWeight": "300",
+  "terminal.integrated.letterSpacing": 0,
+
+  "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "editor.fontSize": 14,
   "editor.fontLigatures": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.detectIndentation": false,
@@ -15,15 +18,17 @@
   "editor.rulers": [
     {
       "column": 100,
-      "color": "#ff0022"
+      "color": "#ff002242"
     }
   ],
   "editor.minimap.enabled": false,
-  "explorer.autoReveal": false,
+
   "explorer.openEditors.visible": 40,
   "explorer.openEditors.sortOrder": "editorOrder",
+
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.activityBar.visible": false,
   "workbench.editor.wrapTabs": true,
-  "workbench.colorTheme": "Kanagawa",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
   "workbench.editor.enablePreview": true,
@@ -36,7 +41,50 @@
       "sideBar.foreground": "#DCD7DA",
       "statusBar.foreground": "#FFFFFF",
       "scrollbarSlider.background": "#54546D59"
+    },
+    "[Tokyo Night]": {
+      "quickInput.foreground": "#9AA5CE",
+      "quickInputList.focusForeground": "#C0CAF5",
+      "titleBar.activeForeground": "#C0CAF5",
+      "sideBar.foreground": "#C0CAF5",
+      "sideBarTitle.foreground": "#C0CAF5",
+      "statusBar.foreground": "#C0CAF5",
+      "scrollbarSlider.background": "#54546D59",
+      "editor.selectionHighlightBackground": "#565F89",
+      "editor.selectionBackground": "#565F89",
+      "gitDecoration.modifiedResourceForeground": "#E0AF68",
+      "gitDecoration.addedResourceForeground": "#7ECE6A",
+      "gitDecoration.deletedResourceForeground": "#F7768E",
+      "gitDecoration.untrackedResourceForeground": "#B4F9F8"
     }
+  },
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          "comment",
+          "comment.block",
+          "comment.block.documentation",
+          "punctuation.definition.comment"
+        ],
+        "settings": {
+          "fontStyle": "",
+          "foreground": "#4CAF50"
+        }
+      },
+      {
+        "scope": ["storage.modifier.specifier"],
+        "settings": {
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": ["storage.type.class.doxygen"],
+        "settings": {
+          "foreground": "#73DACA"
+        }
+      }
+    ]
   },
 
   "C_Cpp.default.cppStandard": "c++17",
@@ -80,6 +128,10 @@
   // debugging
   "debug.javascript.autoAttachFilter": "onlyWithFlag",
 
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+
   // extension configs
   "comment-divider.shouldLengthIncludeIndent": true,
   "comment-divider.length": 100,
@@ -117,13 +169,7 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "cmake.configureOnOpen": false,
   "cmake.configureOnEdit": false,
-  //   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  //   "vscode-neovim.textDecorationsAtTop": true,
-  // ...
-  //   "vim.enableNeovim": true,
-  //   "vim.neovimPath": "/usr/bin/nvim",
-  //   "vim.neovimUseConfigFile": true,
-  //   "vim.neovimConfigPath": "/home/vinicius/.config/nvim/init.vim",
+
   "vim.easymotion": true,
   "vim.incsearch": true,
   "vim.surround": true,
@@ -144,8 +190,9 @@
       "after": ["d", "d"]
     },
     {
-      "before": ["<C-n>"],
-      "commands": [":nohl"]
+      "before": ["<ESC>"],
+      "commands": [":nohl"],
+      "silent": true
     },
     {
       "before": ["K"],
@@ -155,6 +202,26 @@
     {
       "before": ["<leader>", "w"],
       "after": ["leader", "leader", "leader", "b", "d", "w"]
+    },
+    {
+      "before": ["<leader>", "f", "m"],
+      "commands": ["editor.action.formatDocument"],
+      "silent": true
+    },
+    {
+      "before": ["<leader>", "e"],
+      "commands": ["workbench.view.explorer"],
+      "silent": true
+    },
+    {
+      "before": ["<leader>", "g"],
+      "commands": ["workbench.view.scm"],
+      "silent": true
+    },
+    {
+      "before": ["<leader>", "h"],
+      "commands": ["workbench.action.closeSidebar"],
+      "silent": true
     }
   ],
   "vim.leader": "<space>",
@@ -165,6 +232,5 @@
   "cmakeFormat.args": [
     "--config-file",
     "/home/vinicius/projects/dotfiles/.config/cmakeformat/.cmake-format.py"
-  ],
-  "workbench.activityBar.visible": false
+  ]
 }
