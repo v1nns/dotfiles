@@ -222,6 +222,11 @@
       "before": ["<leader>", "h"],
       "commands": ["workbench.action.closeSidebar"],
       "silent": true
+    },
+    {
+      "before": ["<C-g>", "n"],
+      "commands": ["workbench.action.editor.nextChange"],
+      "silent": true
     }
   ],
   "vim.leader": "<space>",
