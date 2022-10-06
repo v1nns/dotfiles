@@ -249,24 +249,54 @@
     "command": "workbench.action.navigateRight"
   },
   {
+    "key": "ctrl+j",
+    "command": "workbench.explorer.fileView.focus",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.files.action.focusOpenEditorsView",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'"
+  },
+  {
     "key": "space e",
     "command": "workbench.view.explorer",
-    "when": "(!sideBarVisible || activeViewlet != 'workbench.view.explorer') && editorTextFocus && !terminalFocus && vim.active && vim.mode != 'Insert'"
+    "when": "(!sideBarVisible || activeViewlet != 'workbench.view.explorer') && editorTextFocus && !terminalFocus && vim.active && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space e",
+    "command": "workbench.view.explorer",
+    "when": "sideBarFocus && activeViewlet != 'workbench.view.explorer'"
   },
   {
     "key": "space e",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && editorTextFocus && !terminalFocus && vim.active && vim.mode != 'Insert'"
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && editorTextFocus && !terminalFocus && vim.active && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space e",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'"
   },
   {
     "key": "space g",
     "command": "workbench.view.scm",
-    "when": "(!sideBarVisible || activeViewlet != 'workbench.view.scm') && editorTextFocus && !terminalFocus && vim.active && vim.mode != 'Insert'"
+    "when": "(!sideBarVisible || activeViewlet != 'workbench.view.scm') && editorTextFocus && !terminalFocus && vim.active && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space g",
+    "command": "workbench.view.scm",
+    "when": "sideBarFocus && activeViewlet != 'workbench.view.scm'"
   },
   {
     "key": "space g",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "sideBarVisible && activeViewlet == 'workbench.view.scm' && editorTextFocus && !terminalFocus && vim.active && vim.mode != 'Insert'"
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.scm' && editorTextFocus && !terminalFocus && vim.active && vim.mode == 'Normal'"
+  },
+  {
+    "key": "space g",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
   },
   {
     "key": "space w",

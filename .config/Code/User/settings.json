@@ -224,19 +224,23 @@
     },
     {
       "before": ["h"],
-      "commands": ["cursorLeft"]
+      "commands": ["cursorLeft"],
+      "silent": true
     },
     {
       "before": ["j"],
-      "commands": ["cursorDown"]
+      "commands": ["cursorDown"],
+      "silent": true
     },
     {
       "before": ["k"],
-      "commands": ["cursorUp"]
+      "commands": ["cursorUp"],
+      "silent": true
     },
     {
       "before": ["l"],
-      "commands": ["cursorRight"]
+      "commands": ["cursorRight"],
+      "silent": true
     }
   ],
   "vim.leader": "<space>",
