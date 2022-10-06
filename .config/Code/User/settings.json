@@ -21,6 +21,45 @@
     }
   ],
   "editor.minimap.enabled": false,
+  "editor.wordWrap": "on",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          "comment",
+          "comment.block",
+          "comment.block.documentation",
+          "punctuation.definition.comment"
+        ],
+        "settings": {
+          "fontStyle": "",
+          "foreground": "#4CAF50"
+        }
+      },
+      {
+        "scope": ["storage.modifier.specifier", "keyword.control.return"],
+        "settings": {
+          "fontStyle": ""
+        }
+      },
+      {
+        "scope": ["storage.type.class.doxygen"],
+        "settings": {
+          "foreground": "#73DACA"
+        }
+      },
+      {
+        "scope": [
+          "entity.name.type.cpp",
+          "storage.type.cpp",
+          "storage.type.built-in.cpp"
+        ],
+        "settings": {
+          "foreground": "#BB9AF7"
+        }
+      }
+    ]
+  },
 
   "explorer.openEditors.visible": 40,
   "explorer.openEditors.sortOrder": "editorOrder",
@@ -56,40 +95,6 @@
       "gitDecoration.deletedResourceForeground": "#F7768E",
       "gitDecoration.untrackedResourceForeground": "#B4F9F8"
     }
-  },
-  "editor.tokenColorCustomizations": {
-    "textMateRules": [
-      {
-        "scope": [
-          "comment",
-          "comment.block",
-          "comment.block.documentation",
-          "punctuation.definition.comment"
-        ],
-        "settings": {
-          "fontStyle": "",
-          "foreground": "#4CAF50"
-        }
-      },
-      {
-        "scope": ["storage.modifier.specifier", "keyword.control.return"],
-        "settings": {
-          "fontStyle": ""
-        }
-      },
-      {
-        "scope": ["storage.type.class.doxygen"],
-        "settings": {
-          "foreground": "#73DACA"
-        }
-      },
-      {
-        "scope": ["storage.type.cpp", "storage.type.built-in.cpp"],
-        "settings": {
-          "foreground": "#BB9AF7"
-        }
-      }
-    ]
   },
 
   "C_Cpp.default.cppStandard": "c++17",

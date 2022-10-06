@@ -171,11 +171,13 @@
   },
   {
     "key": "ctrl+shift+right",
-    "command": "workbench.action.increaseViewWidth"
+    "command": "workbench.action.increaseViewWidth",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
   },
   {
     "key": "ctrl+shift+left",
-    "command": "workbench.action.decreaseViewWidth"
+    "command": "workbench.action.decreaseViewWidth",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
   },
   {
     "key": "ctrl+shift+left",
@@ -184,11 +186,13 @@
   },
   {
     "key": "ctrl+shift+up",
-    "command": "workbench.action.increaseViewHeight"
+    "command": "workbench.action.increaseViewHeight",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
   },
   {
     "key": "ctrl+shift+down",
-    "command": "workbench.action.decreaseViewHeight"
+    "command": "workbench.action.decreaseViewHeight",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
   },
   {
     "key": "alt+p",
@@ -284,16 +288,12 @@
   },
   {
     "key": "ctrl+backspace",
-    "command": "-deleteLeft",
-    "when": "textInputFocus"
-  },
-  {
-    "key": "ctrl+backspace",
-    "command": "search.action.clearSearchResults"
+    "command": "search.action.clearSearchResults",
+    "when": "hasSearchResult && inSearchEditor"
   },
   {
     "key": "ctrl+j",
     "command": "search.action.focusSearchList",
-    "when": "hasSearchResult || inSearchEditor"
-  }
+    "when": "hasSearchResult && inSearchEditor"
+  },
 ]
