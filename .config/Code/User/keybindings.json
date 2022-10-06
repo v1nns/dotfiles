@@ -252,7 +252,7 @@
   {
     "key": "space e",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && !terminalFocus && vim.active && vim.mode != 'Insert'"
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.explorer' && editorTextFocus && !terminalFocus && vim.active && vim.mode != 'Insert'"
   },
   {
     "key": "space g",
@@ -262,7 +262,7 @@
   {
     "key": "space g",
     "command": "workbench.action.toggleSidebarVisibility",
-    "when": "sideBarVisible && activeViewlet == 'workbench.view.scm' && !terminalFocus && vim.active && vim.mode != 'Insert'"
+    "when": "sideBarVisible && activeViewlet == 'workbench.view.scm' && editorTextFocus && !terminalFocus && vim.active && vim.mode != 'Insert'"
   },
   {
     "key": "space w",

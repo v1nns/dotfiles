@@ -82,6 +82,12 @@
         "settings": {
           "foreground": "#73DACA"
         }
+      },
+      {
+        "scope": ["storage.type.cpp", "storage.type.built-in.cpp"],
+        "settings": {
+          "foreground": "#BB9AF7"
+        }
       }
     ]
   },
