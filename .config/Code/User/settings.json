@@ -199,33 +199,33 @@
       "silent": true
     },
     {
-      "before": ["<leader>", "w"],
-      "after": ["leader", "leader", "leader", "b", "d", "w"]
-    },
-    {
-      "before": ["<leader>", "f", "m"],
-      "commands": ["editor.action.formatDocument"],
-      "silent": true
-    },
-    {
-      "before": ["<leader>", "e"],
-      "commands": ["workbench.view.explorer"],
-      "silent": true
-    },
-    {
-      "before": ["<leader>", "g"],
-      "commands": ["workbench.view.scm"],
-      "silent": true
-    },
-    {
-      "before": ["<leader>", "h"],
-      "commands": ["workbench.action.closeSidebar"],
-      "silent": true
-    },
-    {
       "before": ["<C-g>", "n"],
       "commands": ["workbench.action.editor.nextChange"],
       "silent": true
+    },
+    {
+      "before": ["u"],
+      "commands": ["undo"]
+    },
+    {
+      "before": ["<C-r>"],
+      "commands": ["redo"]
+    },
+    {
+      "before": ["h"],
+      "commands": ["cursorLeft"]
+    },
+    {
+      "before": ["j"],
+      "commands": ["cursorDown"]
+    },
+    {
+      "before": ["k"],
+      "commands": ["cursorUp"]
+    },
+    {
+      "before": ["l"],
+      "commands": ["cursorRight"]
     }
   ],
   "vim.leader": "<space>",
