@@ -2,6 +2,7 @@
   // vscode settings
   "window.zoomLevel": -1,
   "window.menuBarVisibility": "toggle",
+  "window.title": "${rootName}${separator}${activeEditorShort}",
 
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
   "terminal.integrated.fontSize": 14,
@@ -99,6 +100,7 @@
 
   "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.clang_format_style": "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
+  "C_Cpp.enhancedColorization": "Enabled",
 
   "git.autofetch": true,
   "git.confirmSync": false,
@@ -207,7 +209,7 @@
     },
     {
       "before": ["K"],
-      "commands": ["lineBreakInsert"],
+      "commands": ["editor.action.showHover"],
       "silent": true
     },
     {
@@ -252,5 +254,5 @@
   "cmakeFormat.args": [
     "--config-file",
     "/home/vinicius/projects/dotfiles/.config/cmakeformat/.cmake-format.py"
-]
+  ],
 }
