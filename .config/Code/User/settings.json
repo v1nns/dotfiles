@@ -98,6 +98,7 @@
   },
 
   "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.clang_format_style": "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
 
   "git.autofetch": true,
   "git.confirmSync": false,
@@ -251,5 +252,5 @@
   "cmakeFormat.args": [
     "--config-file",
     "/home/vinicius/projects/dotfiles/.config/cmakeformat/.cmake-format.py"
-  ]
+]
 }
