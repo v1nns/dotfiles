@@ -1,5 +1,8 @@
-// Place your key bindings in this file to override the defaultsauto[]
 [
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                    remove default keybinds                                   */
+  /* -------------------------------------------------------------------------------------------- */
+
   {
     "key": "alt+left",
     "command": "-workbench.action.terminal.focusPreviousPane",
@@ -9,10 +12,6 @@
     "key": "alt+left",
     "command": "-gitlens.key.alt+left",
     "when": "gitlens:key:alt+left"
-  },
-  {
-    "key": "alt+left",
-    "command": "workbench.action.navigateBack"
   },
   {
     "key": "ctrl+alt+-",
@@ -27,10 +26,6 @@
     "key": "alt+right",
     "command": "-gitlens.key.alt+right",
     "when": "gitlens:key:alt+right"
-  },
-  {
-    "key": "alt+right",
-    "command": "workbench.action.navigateForward"
   },
   {
     "key": "ctrl+shift+-",
@@ -57,17 +52,8 @@
     "when": "searchViewletFocus"
   },
   {
-    "key": "alt+r",
-    "command": "workbench.action.openRecent"
-  },
-  {
     "key": "ctrl+r",
     "command": "-workbench.action.openRecent"
-  },
-  {
-    "key": "alt+k alt+o",
-    "command": "workbench.action.files.openFolder",
-    "when": "openFolderWorkspaceSupport"
   },
   {
     "key": "ctrl+k ctrl+o",
@@ -75,44 +61,17 @@
     "when": "openFolderWorkspaceSupport"
   },
   {
-    "key": "alt+k f",
-    "command": "workbench.action.closeFolder",
-    "when": "emptyWorkspaceSupport && workbenchState != 'empty'"
-  },
-  {
     "key": "ctrl+k f",
     "command": "-workbench.action.closeFolder",
     "when": "emptyWorkspaceSupport && workbenchState != 'empty'"
-  },
-  {
-    "key": "ctrl+w s",
-    "command": "workbench.action.splitEditorDown"
   },
   {
     "key": "f1",
     "command": "-workbench.action.showCommands"
   },
   {
-    "key": "f1",
-    "command": "workbench.files.action.showActiveFileInExplorer"
-  },
-  {
-    "key": "ctrl+alt+e",
-    "command": "workbench.action.toggleSidebarVisibility"
-  },
-  {
     "key": "ctrl+b",
     "command": "-workbench.action.toggleSidebarVisibility"
-  },
-  {
-    "key": "ctrl+shift+e",
-    "command": "workbench.files.action.focusFilesExplorer",
-    "when": "viewContainer.workbench.view.explorer.enabled"
-  },
-  {
-    "key": "ctrl+alt+o",
-    "command": "C_Cpp.SwitchHeaderSource",
-    "when": "editorTextFocus && editorLangId == 'c' || editorTextFocus && editorLangId == 'cpp' || editorTextFocus && editorLangId == 'cuda-cpp'"
   },
   {
     "key": "alt+o",
@@ -120,23 +79,9 @@
     "when": "editorTextFocus && editorLangId == 'c' || editorTextFocus && editorLangId == 'cpp' || editorTextFocus && editorLangId == 'cuda-cpp'"
   },
   {
-    "key": "alt+o",
-    "command": "workbench.action.files.openFile",
-    "when": "true"
-  },
-  {
     "key": "ctrl+o",
     "command": "-workbench.action.files.openFile",
     "when": "true"
-  },
-  {
-    "key": "ctrl+alt+s",
-    "command": "workbench.action.toggleAuxiliaryBar"
-  },
-  {
-    "key": "alt+i",
-    "command": "workbench.action.terminal.toggleTerminal",
-    "when": "terminal.active"
   },
   {
     "key": "ctrl+shift+[BracketLeft]",
@@ -149,16 +94,8 @@
     "when": "viewContainer.workbench.view.explorer.enabled"
   },
   {
-    "key": "ctrl+w v",
-    "command": "workbench.action.splitEditor"
-  },
-  {
     "key": "ctrl+\\",
     "command": "-workbench.action.splitEditor"
-  },
-  {
-    "key": "ctrl+w q",
-    "command": "workbench.action.closeActiveEditor"
   },
   {
     "key": "ctrl+w",
@@ -170,42 +107,13 @@
     "when": "textInputFocus"
   },
   {
-    "key": "ctrl+shift+right",
-    "command": "workbench.action.increaseViewWidth",
-    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
-  },
-  {
-    "key": "ctrl+shift+left",
-    "command": "workbench.action.decreaseViewWidth",
-    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
-  },
-  {
     "key": "ctrl+shift+left",
     "command": "-cursorWordLeftSelect",
     "when": "textInputFocus"
   },
   {
-    "key": "ctrl+shift+up",
-    "command": "workbench.action.increaseViewHeight",
-    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
-  },
-  {
-    "key": "ctrl+shift+down",
-    "command": "workbench.action.decreaseViewHeight",
-    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
-  },
-  {
-    "key": "alt+p",
-    "command": "workbench.action.quickOpen"
-  },
-  {
     "key": "ctrl+p",
     "command": "-workbench.action.quickOpen"
-  },
-  {
-    "key": "ctrl+g n",
-    "command": "workbench.action.compareEditor.nextChange",
-    "when": "textCompareEditorVisible && isInDiffEditor"
   },
   {
     "key": "alt+f5",
@@ -213,24 +121,89 @@
     "when": "textCompareEditorVisible"
   },
   {
-    "key": "ctrl+g p",
-    "command": "workbench.action.compareEditor.previousChange",
-    "when": "textCompareEditorVisible && isInDiffEditor"
-  },
-  {
     "key": "shift+alt+f5",
     "command": "-workbench.action.compareEditor.previousChange",
     "when": "textCompareEditorVisible"
   },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                            motion                                            */
+  /* -------------------------------------------------------------------------------------------- */
+
   {
-    "key": "g a",
-    "command": "git.stage",
-    "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+    "key": "alt+left",
+    "command": "workbench.action.navigateBack"
   },
   {
-    "key": "g u",
-    "command": "git.unstage",
-    "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+    "key": "alt+right",
+    "command": "workbench.action.navigateForward"
+  },
+  {
+    "key": "space w",
+    "command": "vim.remap",
+    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "args": {
+      "after": ["leader", "leader", "leader", "b", "d", "w"]
+    }
+  },
+  {
+    "key": "ctrl+g n",
+    "command": "workbench.action.compareEditor.nextChange",
+    "when": "textCompareEditorVisible && isInDiffEditor"
+  },
+  {
+    "key": "ctrl+g p",
+    "command": "workbench.action.compareEditor.previousChange",
+    "when": "textCompareEditorVisible && isInDiffEditor"
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                      project navigation                                      */
+  /* -------------------------------------------------------------------------------------------- */
+
+  {
+    "key": "alt+r",
+    "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "alt+k alt+o",
+    "command": "workbench.action.files.openFolder",
+    "when": "openFolderWorkspaceSupport"
+  },
+  {
+    "key": "alt+k f",
+    "command": "workbench.action.closeFolder",
+    "when": "emptyWorkspaceSupport && workbenchState != 'empty'"
+  },
+  {
+    "key": "alt+o",
+    "command": "workbench.action.files.openFile",
+    "when": "true"
+  },
+  {
+    "key": "alt+p",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "f1",
+    "command": "workbench.files.action.showActiveFileInExplorer"
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                 window control (editor group)                                */
+  /* -------------------------------------------------------------------------------------------- */
+
+  {
+    "key": "ctrl+w s",
+    "command": "workbench.action.splitEditorDown"
+  },
+  {
+    "key": "ctrl+w v",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+w q",
+    "command": "workbench.action.closeActiveEditor"
   },
   {
     "key": "ctrl+h",
@@ -248,6 +221,55 @@
     "key": "ctrl+l",
     "command": "workbench.action.navigateRight"
   },
+  {
+    "key": "ctrl+shift+right",
+    "command": "workbench.action.increaseViewWidth",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+shift+left",
+    "command": "workbench.action.decreaseViewWidth",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+  },
+
+  {
+    "key": "ctrl+shift+up",
+    "command": "workbench.action.increaseViewHeight",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "workbench.action.decreaseViewHeight",
+    "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                     general sidebar view                                     */
+  /* -------------------------------------------------------------------------------------------- */
+
+  {
+    "key": "ctrl+alt+e",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.toggleAuxiliaryBar"
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                         terminal view                                        */
+  /* -------------------------------------------------------------------------------------------- */
+
+  {
+    "key": "alt+i",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "terminal.active"
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                         explorer view                                        */
+  /* -------------------------------------------------------------------------------------------- */
+
   {
     "key": "ctrl+j",
     "command": "workbench.explorer.fileView.focus",
@@ -279,6 +301,26 @@
     "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'"
   },
   {
+    "key": "ctrl+shift+e",
+    "command": "workbench.files.action.focusFilesExplorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                      source control view                                     */
+  /* -------------------------------------------------------------------------------------------- */
+
+  {
+    "key": "g a",
+    "command": "git.stage",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+  },
+  {
+    "key": "g u",
+    "command": "git.unstage",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+  },
+  {
     "key": "space g",
     "command": "workbench.view.scm",
     "when": "(!sideBarVisible || activeViewlet != 'workbench.view.scm') && editorTextFocus && !terminalFocus && vim.active && vim.mode == 'Normal'"
@@ -298,14 +340,11 @@
     "command": "workbench.action.toggleSidebarVisibility",
     "when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
   },
-  {
-    "key": "space w",
-    "command": "vim.remap",
-    "when": "editorTextFocus && vim.mode == 'Normal'",
-    "args": {
-      "after": ["leader", "leader", "leader", "b", "d", "w"]
-    }
-  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                          search view                                         */
+  /* -------------------------------------------------------------------------------------------- */
+
   {
     "key": "ctrl+n",
     "command": "search.action.focusNextSearchResult",
@@ -325,5 +364,5 @@
     "key": "ctrl+j",
     "command": "search.action.focusSearchList",
     "when": "hasSearchResult && inSearchEditor"
-  },
+  }
 ]

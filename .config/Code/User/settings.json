@@ -1,19 +1,16 @@
 {
-  // vscode settings
-  "window.zoomLevel": -1,
-  "window.menuBarVisibility": "toggle",
-  "window.title": "${rootName}${separator}${activeEditorShort}",
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                        editor settings                                       */
+  /* -------------------------------------------------------------------------------------------- */
 
-  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
-  "terminal.integrated.fontSize": 14,
-  "terminal.integrated.letterSpacing": 0,
-
-  "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
-  "editor.fontSize": 14,
-  "editor.fontLigatures": true,
   "editor.bracketPairColorization.enabled": true,
   "editor.detectIndentation": false,
+  "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
   "editor.inlayHints.enabled": "on",
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on",
   "editor.suggestSelection": "first",
   "editor.rulers": [
     {
@@ -21,8 +18,6 @@
       "color": "#ff002242"
     }
   ],
-  "editor.minimap.enabled": false,
-  "editor.wordWrap": "on",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -62,16 +57,33 @@
     ]
   },
 
-  "explorer.openEditors.visible": 40,
-  "explorer.openEditors.sortOrder": "editorOrder",
+  "diffEditor.ignoreTrimWhitespace": false,
 
-  "workbench.colorTheme": "Tokyo Night",
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                       explorer settings                                      */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "explorer.openEditors.sortOrder": "editorOrder",
+  "explorer.openEditors.visible": 40,
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                        window settings                                       */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "window.menuBarVisibility": "toggle",
+  "window.title": "${rootName}${separator}${activeEditorShort}",
+  "window.zoomLevel": -1,
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                      workbench settings                                      */
+  /* -------------------------------------------------------------------------------------------- */
   "workbench.activityBar.visible": false,
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.editor.enablePreview": true,
+  "workbench.editor.showTabs": false,
   "workbench.editor.wrapTabs": true,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
-  "workbench.editor.enablePreview": true,
-  "workbench.editor.showTabs": false,
   "workbench.colorCustomizations": {
     "[Kanagawa]": {
       "titleBar.activeBackground": "#181821",
@@ -98,37 +110,55 @@
     }
   },
 
-  "C_Cpp.default.cppStandard": "c++17",
-  "C_Cpp.clang_format_style": "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
-  "C_Cpp.enhancedColorization": "Enabled",
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                       terminal settings                                      */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.letterSpacing": 0,
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                    vscode insider settings                                   */
+  /* -------------------------------------------------------------------------------------------- */
+
+  // give increased priority to avoid any stutterings while extension expects for some keybind input
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                         git settings                                         */
+  /* -------------------------------------------------------------------------------------------- */
 
   "git.autofetch": true,
   "git.confirmSync": false,
 
-  // file associations
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                       file associations                                      */
+  /* -------------------------------------------------------------------------------------------- */
+
   "files.associations": {
     "config": "shellscript"
   },
 
-  // code formatting
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                        code formatting                                       */
+  /* -------------------------------------------------------------------------------------------- */
+
   "[c]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools",
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "[cpp]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
-    "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
@@ -138,19 +168,29 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  // debugging
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                         c++ extension                                        */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
+  "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.enhancedColorization": "Enabled",
+  "C_Cpp.inlayHints.autoDeclarationTypes.enabled": true,
+  "C_Cpp.inlayHints.parameterNames.enabled": true,
+  "C_Cpp.inlayHints.referenceOperator.enabled": true,
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                      javascript settings                                     */
+  /* -------------------------------------------------------------------------------------------- */
+
   "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  "javascript.updateImportsOnFileMove.enabled": "always",
 
-  "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
-  },
-
-  // extension configs
-  "comment-divider.shouldLengthIncludeIndent": true,
-  "comment-divider.length": 100,
-  "comment-divider.lineFiller": "*",
-
-  "rewrap.wrappingColumn": 80,
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                       python extension                                       */
+  /* -------------------------------------------------------------------------------------------- */
 
   "python.formatting.provider": "yapf",
   "python.autoComplete.extraPaths": [
@@ -161,6 +201,40 @@
     "/home/vinicius/.cache/fakegir/",
     "/home/vinicius/.local/lib/python3.10/site-packages"
   ],
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                        cmake extension                                       */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "cmake.configureOnOpen": false,
+  "cmake.configureOnEdit": false,
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                    cmake-format extension                                    */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "cmakeFormat.args": [
+    "--config-file",
+    "/home/vinicius/projects/dotfiles/.config/cmakeformat/.cmake-format.py"
+  ],
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                   comment divider extension                                  */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "comment-divider.length": 100,
+  "comment-divider.lineFiller": "*",
+  "comment-divider.shouldLengthIncludeIndent": true,
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                       rewrap extension                                       */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "rewrap.wrappingColumn": 80,
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                   todo highlight extension                                   */
+  /* -------------------------------------------------------------------------------------------- */
 
   "todohighlight.isEnable": true,
   "todohighlight.include": [
@@ -179,24 +253,25 @@
     "**/config"
   ],
 
-  "diffEditor.ignoreTrimWhitespace": false,
-  "cmake.configureOnOpen": false,
-  "cmake.configureOnEdit": false,
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                         vim extension                                        */
+  /* -------------------------------------------------------------------------------------------- */
 
-  "vim.easymotion": true,
-  "vim.incsearch": true,
-  "vim.surround": true,
-  "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": true,
-  "vim.hlsearch": true,
   "vim.camelCaseMotion.enable": true,
+  "vim.easymotion": true,
+  "vim.easymotionMarkerBackgroundColor": "#7e57c2",
+  "vim.hlsearch": true,
+  "vim.incsearch": true,
+  "vim.leader": "<space>",
+  "vim.surround": true,
+  "vim.useCtrlKeys": true,
+  "vim.useSystemClipboard": true,
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "j"],
       "after": ["<Esc>"]
     }
   ],
-  "vim.easymotionMarkerBackgroundColor": "#7e57c2",
   "vim.normalModeKeyBindingsNonRecursive": [
     {
       "before": ["<leader>", "d"],
@@ -215,6 +290,21 @@
     {
       "before": ["<C-g>", "n"],
       "commands": ["workbench.action.editor.nextChange"],
+      "silent": true
+    },
+    {
+      "before": ["<C-g>", "d"],
+      "commands": ["git.revertSelectedRanges"],
+      "silent": true
+    },
+    {
+      "before": ["<C-g>", "a"],
+      "commands": ["git.stageSelectedRanges"],
+      "silent": true
+    },
+    {
+      "before": ["<C-g>", "u"],
+      "commands": ["git.unstageSelectedRanges"],
       "silent": true
     },
     {
@@ -246,13 +336,7 @@
       "silent": true
     }
   ],
-  "vim.leader": "<space>",
   "vim.handleKeys": {
     "<C-f>": false
   },
-
-  "cmakeFormat.args": [
-    "--config-file",
-    "/home/vinicius/projects/dotfiles/.config/cmakeformat/.cmake-format.py"
-  ],
 }
