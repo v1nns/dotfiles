@@ -156,6 +156,16 @@
     "command": "workbench.action.compareEditor.previousChange",
     "when": "textCompareEditorVisible && isInDiffEditor"
   },
+  {
+    "key": "tab",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
 
   /* -------------------------------------------------------------------------------------------- */
   /*                                      project navigation                                      */
