@@ -336,7 +336,17 @@
       "silent": true
     }
   ],
+  "vm.visualModeKeyBindings": [
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
   "vim.handleKeys": {
     "<C-f>": false
-  },
+  }
 }
