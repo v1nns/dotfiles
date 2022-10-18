@@ -26,6 +26,7 @@
           "comment",
           "comment.block",
           "comment.block.documentation",
+          "comment.line.double-slash",
           "punctuation.definition.comment"
         ],
         "settings": {
@@ -151,7 +152,8 @@
     "editor.defaultFormatter": "ms-vscode.cpptools"
   },
   "[cpp]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools"
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.semanticHighlighting.enabled": true
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -264,6 +266,8 @@
   "vim.hlsearch": true,
   "vim.incsearch": true,
   "vim.leader": "<space>",
+  "vim.searchHighlightColor": "#FF9900",
+  "vim.searchHighlightTextColor": "#000000",
   "vim.surround": true,
   "vim.useCtrlKeys": true,
   "vim.useSystemClipboard": true,

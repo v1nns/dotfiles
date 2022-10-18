@@ -358,21 +358,21 @@
   {
     "key": "ctrl+n",
     "command": "search.action.focusNextSearchResult",
-    "when": "hasSearchResult || inSearchEditor"
+    "when": "(hasSearchResult || inSearchEditor) && searchViewletVisible"
   },
   {
     "key": "ctrl+p",
     "command": "search.action.focusPreviousSearchResult",
-    "when": "hasSearchResult || inSearchEditor"
+    "when": "(hasSearchResult || inSearchEditor) && searchViewletVisible"
   },
   {
     "key": "ctrl+backspace",
     "command": "search.action.clearSearchResults",
-    "when": "hasSearchResult && inSearchEditor"
+    "when": "(hasSearchResult || inSearchEditor) && searchViewletVisible"
   },
   {
     "key": "ctrl+j",
     "command": "search.action.focusSearchList",
-    "when": "hasSearchResult && inSearchEditor"
+    "when": "(hasSearchResult || inSearchEditor) && searchViewletVisible"
   }
 ]
