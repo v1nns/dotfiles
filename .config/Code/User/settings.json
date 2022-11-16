@@ -65,6 +65,7 @@
   /*                                       explorer settings                                      */
   /* -------------------------------------------------------------------------------------------- */
 
+  "explorer.autoReveal": false,
   "explorer.openEditors.sortOrder": "editorOrder",
   "explorer.openEditors.visible": 40,
 
@@ -179,6 +180,7 @@
   "C_Cpp.autocompleteAddParentheses": true,
   "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
   "C_Cpp.default.cppStandard": "c++17",
+  "C_Cpp.doxygen.generatedStyle": "/**",
   "C_Cpp.enhancedColorization": "Enabled",
   "C_Cpp.errorSquiggles": "Enabled",
   "C_Cpp.inlayHints.autoDeclarationTypes.enabled": false,
@@ -300,7 +302,7 @@
       "silent": true
     },
     {
-      "before": ["<C-g>", "d"],
+      "before": ["<C-g>", "r"],
       "commands": ["git.revertSelectedRanges"],
       "silent": true
     },

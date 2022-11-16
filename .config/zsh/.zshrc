@@ -27,7 +27,6 @@ plugins=(
     sudo
     fast-syntax-highlighting
     zsh-autosuggestions
-    zsh-vi-mode
     docker
     docker-compose
 )
