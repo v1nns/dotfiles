@@ -336,7 +336,7 @@ exec --no-startup-id pasystray &
 # imwheel -b "4 5"
 
 # start compositor
-exec --no-startup-id picom --backend glx --experimental-backends -b
+exec --no-startup-id picom --backend glx -b
 # flashfocus
 
 # Patchbay GUI for Pipewire
