@@ -69,6 +69,8 @@
   "explorer.openEditors.sortOrder": "editorOrder",
   "explorer.openEditors.visible": 40,
 
+  "extensions.ignoreRecommendations": true,
+
   /* -------------------------------------------------------------------------------------------- */
   /*                                        window settings                                       */
   /* -------------------------------------------------------------------------------------------- */
@@ -80,6 +82,7 @@
   /* -------------------------------------------------------------------------------------------- */
   /*                                      workbench settings                                      */
   /* -------------------------------------------------------------------------------------------- */
+
   "workbench.activityBar.visible": false,
   "workbench.colorTheme": "Tokyo Night",
   "workbench.editor.enablePreview": true,
