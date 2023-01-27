@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Author: Vinicius M Longaray
 # Github: @v1nns
 

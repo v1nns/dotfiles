@@ -113,28 +113,28 @@ bindsym $mod+Control+9 workspace number $ws19
 bindsym $mod+Control+0 workspace number $ws20
 
 # move any window container to specific workspace in monitor 1
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 exec --no-startup-id new-workspace.py --move $ws1
+bindsym $mod+Shift+2 exec --no-startup-id new-workspace.py --move $ws2
+bindsym $mod+Shift+3 exec --no-startup-id new-workspace.py --move $ws3
+bindsym $mod+Shift+4 exec --no-startup-id new-workspace.py --move $ws4
+bindsym $mod+Shift+5 exec --no-startup-id new-workspace.py --move $ws5
+bindsym $mod+Shift+6 exec --no-startup-id new-workspace.py --move $ws6
+bindsym $mod+Shift+7 exec --no-startup-id new-workspace.py --move $ws7
+bindsym $mod+Shift+8 exec --no-startup-id new-workspace.py --move $ws8
+bindsym $mod+Shift+9 exec --no-startup-id new-workspace.py --move $ws9
+bindsym $mod+Shift+0 exec --no-startup-id new-workspace.py --move $ws10
 
 # move any window container to specific workspace in monitor 2
-bindsym $mod+Control+Shift+1 move container to workspace number $ws11
-bindsym $mod+Control+Shift+2 move container to workspace number $ws12
-bindsym $mod+Control+Shift+3 move container to workspace number $ws13
-bindsym $mod+Control+Shift+4 move container to workspace number $ws14
-bindsym $mod+Control+Shift+5 move container to workspace number $ws15
-bindsym $mod+Control+Shift+6 move container to workspace number $ws16
-bindsym $mod+Control+Shift+7 move container to workspace number $ws17
-bindsym $mod+Control+Shift+8 move container to workspace number $ws18
-bindsym $mod+Control+Shift+9 move container to workspace number $ws19
-bindsym $mod+Control+Shift+0 move container to workspace number $ws20
+bindsym $mod+Control+Shift+1 exec --no-startup-id new-workspace.py --move $ws11
+bindsym $mod+Control+Shift+2 exec --no-startup-id new-workspace.py --move $ws12
+bindsym $mod+Control+Shift+3 exec --no-startup-id new-workspace.py --move $ws13
+bindsym $mod+Control+Shift+4 exec --no-startup-id new-workspace.py --move $ws14
+bindsym $mod+Control+Shift+5 exec --no-startup-id new-workspace.py --move $ws15
+bindsym $mod+Control+Shift+6 exec --no-startup-id new-workspace.py --move $ws16
+bindsym $mod+Control+Shift+7 exec --no-startup-id new-workspace.py --move $ws17
+bindsym $mod+Control+Shift+8 exec --no-startup-id new-workspace.py --move $ws18
+bindsym $mod+Control+Shift+9 exec --no-startup-id new-workspace.py --move $ws19
+bindsym $mod+Control+Shift+0 exec --no-startup-id new-workspace.py --move $ws20
 
 # ============================ WORKSPACE-RELATED ==============================
 
@@ -263,7 +263,7 @@ bindsym $mod+u exec --no-startup-id rename-workspace.sh
 bindsym $mod+Control+t exec --no-startup-id new-workspace.py --create
 
 # move container to new workspace
-bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --move
+bindsym $mod+Shift+t exec --no-startup-id new-workspace.py --new
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
