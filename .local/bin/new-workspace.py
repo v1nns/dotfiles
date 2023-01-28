@@ -29,6 +29,17 @@ def get_args_parsed():
 # ************************************************************************************************ #
 
 
+# Contains workspace attributes based on window information retrieved from i3_tree
+class Workspace:
+
+    def __init__(self, name, number):
+        self.name = name
+        self.number = number
+
+
+# ************************************************************************************************ #
+
+
 def define_next_number(numbers):
     # extract a sorted sub-list with values starting from the active workspace number
     numbers = sorted(numbers)
@@ -59,31 +70,37 @@ def define_new_name(previous_name, new_number):
 # ************************************************************************************************ #
 
 
-def move_and_rename(i3, previous_name, new_number, rename):
-    # move current container to a new workspace and go there
+def move_and_rename(i3: i3ipc.Connection, previous_name: str, new_number: int,
+                    workspaces: list[Workspace]):
+    # move current container to a new workspace
     i3.command("move container to workspace number {}".format(new_number))
-    i3.command("workspace {}".format(new_number))
 
-    # rename new workspace with same name from the previous one
-    if rename:
-        new_name = define_new_name(previous_name, new_number)
-        i3.command("rename workspace to {}".format(new_name))
+    # check if new workspace already exists
+    wk = next((w for w in workspaces if w.number == new_number), None)
+
+    # go to new workspace
+    i3.command("workspace {}".format(wk.name if wk != None else new_number))
+
+    if wk == None:
+        # check if this is the last window in workspace
+        if sum(1 for w in workspaces if w.name == previous_name) == 1:
+            # rename new workspace with name from the previous one
+            new_name = define_new_name(previous_name, new_number)
+            i3.command("rename workspace to {}".format(new_name))
 
 
 # ************************************************************************************************ #
 
 
 def main():
+    # parse given arguments
     args = get_args_parsed()
 
     # create a connection to i3 IPC
     i3 = i3ipc.Connection()
 
-    # active workspace number and name
-    active = 0
-    name = ""
-
     # auxiliary variables
+    active = Workspace("", 0)
     workspaces = []
     greater_numbers = []
     rename = False
@@ -95,21 +112,20 @@ def main():
             #       format(con.window, con.window_class, con.focused, con.name,
             #              con.workspace().name))
             if con.focused:
-                active = con.workspace().num
-                name = con.workspace().name
+                active.name = con.workspace().name
+                active.number = con.workspace().num
 
-            if con.workspace().num >= active:
+            # append only workspaces with a greater number than the active one
+            if con.workspace().num >= active.number:
                 greater_numbers.append(con.workspace().num)
 
             # append all existent workspaces
-            workspaces.append(con.workspace().name)
+            workspaces.append(
+                Workspace(con.workspace().name,
+                          con.workspace().num))
 
     # determine next number available to use as workspace index
     number = define_next_number(greater_numbers)
-
-    # check if this is the last window in workspace
-    if workspaces.count(name) == 1:
-        rename = True
 
     # determine which command should run based on the given argument
     if args.create:
@@ -119,12 +135,12 @@ def main():
 
     elif args.new:
         # move current container to a new workspace and go there
-        move_and_rename(i3, name, number, rename)
+        move_and_rename(i3, active.name, number, workspaces)
         return
 
     elif args.move:
         # move current container to given workspace and go there
-        move_and_rename(i3, name, args.move, rename)
+        move_and_rename(i3, active.name, args.move, workspaces)
         return
 
 
