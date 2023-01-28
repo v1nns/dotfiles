@@ -59,13 +59,13 @@ def define_new_name(previous_name, new_number):
 # ************************************************************************************************ #
 
 
-def move_and_rename(i3, previous_name, new_number, count_windows):
+def move_and_rename(i3, previous_name, new_number, rename):
     # move current container to a new workspace and go there
     i3.command("move container to workspace number {}".format(new_number))
     i3.command("workspace {}".format(new_number))
 
-    # in case it was the last window, rename new workspace with same name from the previous one
-    if count_windows == 1:
+    # rename new workspace with same name from the previous one
+    if rename:
         new_name = define_new_name(previous_name, new_number)
         i3.command("rename workspace to {}".format(new_name))
 
@@ -84,8 +84,9 @@ def main():
     name = ""
 
     # auxiliary variables
-    count_windows = 0
+    workspaces = []
     greater_numbers = []
+    rename = False
 
     # list all open windows in i3
     for con in i3.get_tree():
@@ -97,14 +98,18 @@ def main():
                 active = con.workspace().num
                 name = con.workspace().name
 
-            if con.workspace().name == name:
-                count_windows += 1
-
             if con.workspace().num >= active:
                 greater_numbers.append(con.workspace().num)
 
+            # append all existent workspaces
+            workspaces.append(con.workspace().name)
+
     # determine next number available to use as workspace index
     number = define_next_number(greater_numbers)
+
+    # check if this is the last window in workspace
+    if workspaces.count(name) == 1:
+        rename = True
 
     # determine which command should run based on the given argument
     if args.create:
@@ -114,12 +119,12 @@ def main():
 
     elif args.new:
         # move current container to a new workspace and go there
-        move_and_rename(i3, name, number, count_windows)
+        move_and_rename(i3, name, number, rename)
         return
 
     elif args.move:
         # move current container to given workspace and go there
-        move_and_rename(i3, name, args.move, count_windows)
+        move_and_rename(i3, name, args.move, rename)
         return
 
 
