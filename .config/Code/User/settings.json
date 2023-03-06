@@ -4,14 +4,16 @@
   /* -------------------------------------------------------------------------------------------- */
 
   "editor.bracketPairColorization.enabled": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.detectIndentation": false,
   "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
   "editor.inlayHints.enabled": "on",
   "editor.minimap.enabled": false,
-  "editor.suggestSelection": "first",
+  "editor.renderWhitespace": "none",
   "editor.stickyScroll.enabled": true,
+  "editor.suggestSelection": "first",
   "editor.wordWrap": "on",
   "editor.rulers": [
     {
@@ -86,6 +88,7 @@
   "workbench.activityBar.visible": false,
   "workbench.colorTheme": "Tokyo Night",
   "workbench.editor.enablePreview": true,
+  "workbench.editor.labelFormat": "medium",
   "workbench.editor.showTabs": false,
   "workbench.editor.wrapTabs": true,
   "workbench.iconTheme": "material-icon-theme",
