@@ -82,9 +82,34 @@ SAVEHIST=1000
 setopt autocd
 unsetopt beep
 
-# use ssh with this alias
+# Use ssh with this alias
 alias s="kitty +kitten ssh"
 
-# enable gtest color by default
+# Enable gtest color by default
 # (read this: https://github.com/kovidgoyal/kitty/issues/4400#issuecomment-1002518875)
 export GTEST_COLOR=yes
+
+# Number format convertors
+bin2dec() {
+   echo "obase=10; ibase=2; $1" | bc
+}
+
+bin2hex() {
+   echo "obase=16; ibase=2; $1" | bc
+}
+
+dec2bin() {
+   echo "obase=2; ibase=10; $1" | bc
+}
+
+dec2hex() {
+   echo "obase=16; ibase=10; $1" | bc
+}
+
+hex2bin() {
+   echo "obase=2; ibase=16; $1" | bc
+}
+
+hex2dec() {
+   echo "obase=10; ibase=16; $1" | bc
+}
