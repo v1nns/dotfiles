@@ -2,48 +2,17 @@ alsa_monitor.enabled = true
 
 -- INFO: Use 'wpctl' command to set default sink/source and volume for each one
 rule_hdmi = {
-    matches = {
-        {
-            {
-                "node.nick",
-                "matches",
-                "HDMI*",
-            },
-        },
-    },
+    matches = {{{"node.nick", "matches", "HDMI*"}}},
     apply_properties = {
-        ["node.disabled"] = true,
-    },
+        ["node.disabled"] = true
+    }
 }
 
 rule_webcam_mic = {
-    matches = {
-        {
-            {
-                "device.name",
-                "equals",
-                "alsa_card.usb-046d_Logitech_Webcam_C925e_3E5E5DCF-02",
-            },
-        },
-    },
+    matches = {{{"device.name", "equals", "alsa_card.usb-046d_Logitech_Webcam_C925e_3E5E5DCF-02"}}},
     apply_properties = {
-        ["device.disabled"] = true,
-    },
-}
-
-rule_dac_name = {
-    matches = {
-        {
-            {
-                "device.name",
-                "equals",
-                "alsa_card.usb-FX-AUDIO-DAC-X6_FX-AUDIO-DAC-X6-01",
-            },
-        },
-    },
-    apply_properties = {
-        ["device.description"] = "DAC FX-AUDIO X6",
-    },
+        ["device.disabled"] = true
+    }
 }
 
 table.insert(alsa_monitor.rules, rule_hdmi)

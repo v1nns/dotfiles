@@ -1,5 +1,6 @@
 Here are all extensions I've been using on vscode lately.
 
+code-insiders --install-extension cheshirekow.cmake-format
 code-insiders --install-extension cschlosser.doxdocgen
 code-insiders --install-extension eamodio.gitlens
 code-insiders --install-extension enkia.tokyo-night
@@ -25,3 +26,4 @@ code-insiders --install-extension stkb.rewrap
 code-insiders --install-extension twxs.cmake
 code-insiders --install-extension vscodevim.vim
 code-insiders --install-extension wayou.vscode-todo-highlight
+code-insiders --install-extension yinfei.luahelper
