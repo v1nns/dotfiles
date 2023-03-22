@@ -356,6 +356,9 @@ exec --no-startup-id qpwgraph -m &
 # also, must add this argument to chrome.desktop:
 #  --password-store=gnome
 
+# focus animation for new window
+exec_always --no-startup-id flashfocus
+
 # ================================= CUSTOM ====================================
 
 # floating terminal with kitty
