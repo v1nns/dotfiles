@@ -129,6 +129,21 @@
     "command": "-workbench.action.compareEditor.previousChange",
     "when": "textCompareEditorVisible"
   },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-selectAllSearchEditorMatches",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-editor.action.selectHighlights",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-addCursorsAtSearchResults",
+    "when": "fileMatchOrMatchFocus && searchViewletVisible"
+  },
 
   /* -------------------------------------------------------------------------------------------- */
   /*                                            motion                                            */
@@ -259,6 +274,17 @@
     "key": "ctrl+shift+down",
     "command": "workbench.action.decreaseViewHeight",
     "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
+  },
+  {
+    "command": "runCommands",
+    "key": "ctrl+shift+l",
+    "args": {
+      "commands": [
+        "workbench.action.toggleEditorGroupLayout",
+        "workbench.action.focusActiveEditorGroup"
+      ]
+    },
+    "when": "editorTextFocus"
   },
 
   /* -------------------------------------------------------------------------------------------- */
