@@ -294,6 +294,11 @@
       "after": ["d", "d"]
     },
     {
+      "before": ["<C-n>"],
+      "commands": ["workbench.action.files.newUntitledFile"],
+      "silent": true
+    },
+    {
       "before": ["<ESC>"],
       "commands": [":nohl"],
       "silent": true
