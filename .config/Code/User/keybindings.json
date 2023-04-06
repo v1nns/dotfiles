@@ -345,6 +345,11 @@
     "when": "sideBarFocus && activeViewlet == 'workbench.view.explorer'"
   },
   {
+    "key": "space h",
+    "command": "workbench.action.maximizeEditor",
+    "when": "sideBarVisible && editorTextFocus && !terminalFocus && vim.active && vim.mode == 'Normal'"
+  },
+  {
     "key": "ctrl+shift+e",
     "command": "workbench.files.action.focusFilesExplorer",
     "when": "viewContainer.workbench.view.explorer.enabled"
