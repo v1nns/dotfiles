@@ -74,6 +74,28 @@
   "extensions.ignoreRecommendations": true,
 
   /* -------------------------------------------------------------------------------------------- */
+  /*                                        search settings                                       */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/tmp": true,
+    "**/build": true
+  },
+
+  /* -------------------------------------------------------------------------------------------- */
+  /*                                 telemetry and update settings                                */
+  /* -------------------------------------------------------------------------------------------- */
+
+  "telemetry.telemetryLevel": "off",
+  "gitlens.telemetry.enabled": false,
+  "dotnetAcquisitionExtension.enableTelemetry": false,
+  "update.mode": "none",
+  "extensions.autoCheckUpdates": false,
+  "extensions.autoUpdate": false,
+
+  /* -------------------------------------------------------------------------------------------- */
   /*                                        window settings                                       */
   /* -------------------------------------------------------------------------------------------- */
 
