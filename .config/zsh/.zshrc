@@ -83,7 +83,7 @@ setopt autocd
 unsetopt beep
 
 # Use ssh with this alias
-alias s="kitty +kitten ssh"
+alias s="TERM=xterm-256color kitty +kitten ssh"
 
 # Enable gtest color by default
 # (read this: https://github.com/kovidgoyal/kitty/issues/4400#issuecomment-1002518875)
