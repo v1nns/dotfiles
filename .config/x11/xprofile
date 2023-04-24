@@ -9,3 +9,10 @@ export GTK_THEME=Dracula
 # export monitor names as env variable
 export PRIMARY_MONITOR="$(xrandr -q | grep " connected primary" | cut -d ' ' -f1)"
 export SECONDARY_MONITOR="$(xrandr -q | grep " connected 1" | cut -d ' ' -f1)"
+
+for i in /sys/class/hwmon/hwmon*/temp*_input; do
+    if [ "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*}))" = "coretemp: Package id 0" ]; then
+        export HWMON_PATH="$i"
+        break
+    fi
+done

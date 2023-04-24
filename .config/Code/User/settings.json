@@ -5,6 +5,7 @@
 
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorSurroundingLines": 5,
   "editor.detectIndentation": false,
   "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
   "editor.fontLigatures": true,
