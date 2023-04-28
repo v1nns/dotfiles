@@ -144,6 +144,16 @@
     "command": "-addCursorsAtSearchResults",
     "when": "fileMatchOrMatchFocus && searchViewletVisible"
   },
+  {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
 
   /* -------------------------------------------------------------------------------------------- */
   /*                                            motion                                            */
@@ -155,6 +165,14 @@
   },
   {
     "key": "alt+right",
+    "command": "workbench.action.navigateForward"
+  },
+  {
+    "key": "alt+h",
+    "command": "workbench.action.navigateBack"
+  },
+  {
+    "key": "alt+l",
     "command": "workbench.action.navigateForward"
   },
   {
@@ -214,6 +232,16 @@
     "command": "workbench.action.quickOpen"
   },
   {
+    "key": "ctrl+j",
+    "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
     "key": "f1",
     "command": "workbench.files.action.showActiveFileInExplorer"
   },
@@ -244,11 +272,13 @@
   },
   {
     "key": "ctrl+j",
-    "command": "workbench.action.navigateDown"
+    "command": "workbench.action.navigateDown",
+    "when": "!inFilesPicker && !inQuickOpen"
   },
   {
     "key": "ctrl+k",
-    "command": "workbench.action.navigateUp"
+    "command": "workbench.action.navigateUp",
+    "when": "!inFilesPicker && !inQuickOpen"
   },
   {
     "key": "ctrl+l",
