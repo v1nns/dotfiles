@@ -1,0 +1,17 @@
+# To avoid getting error about relative paths, use absolute path from device
+# Copy this file to /etc/
+INTERVAL=10
+#DEVPATH=hwmon5=devices/platform/nct6687.2592
+#DEVNAME=hwmon5=nct6687
+
+FCTEMPS=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm1=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/temp5_input /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm2=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/temp5_input /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm4=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/temp5_input
+
+FCFANS=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm1=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/fan1_input /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm2=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/fan2_input /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm4=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/fan4_input
+
+MINTEMP=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm1=20 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm2=20 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm4=20
+
+MAXTEMP=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm1=70 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm2=70 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm4=70
+
+MINSTART=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm1=90 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm2=90 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm4=90
+
+MINSTOP=/sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm1=60 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm2=60 /sys/devices/platform/nct6687.2592/hwmon/hwmon[[:print:]]*/pwm4=60
