@@ -38,7 +38,17 @@
         }
       },
       {
-        "scope": ["storage.modifier.specifier", "keyword.control.return"],
+        "scope": [
+          "comment",
+          "meta.var.expr storage.type",
+          "keyword.control.flow",
+          "keyword.control.return",
+          "meta.directive.vue punctuation.separator.key-value.html",
+          "meta.directive.vue entity.other.attribute-name.html",
+          "tag.decorator.js entity.name.tag.js",
+          "tag.decorator.js punctuation.definition.tag.js",
+          "storage.modifier"
+        ],
         "settings": {
           "fontStyle": ""
         }
@@ -79,6 +89,7 @@
   /* -------------------------------------------------------------------------------------------- */
 
   "search.exclude": {
+    "**/.cache": true,
     "**/.git": true,
     "**/node_modules": true,
     "**/tmp": true,
@@ -210,12 +221,12 @@
   "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
   "C_Cpp.default.cppStandard": "c++17",
   "C_Cpp.doxygen.generatedStyle": "/**",
-  "C_Cpp.enhancedColorization": "Enabled",
-  "C_Cpp.errorSquiggles": "Enabled",
+  "C_Cpp.enhancedColorization": "enabled",
+  "C_Cpp.errorSquiggles": "enabled",
   "C_Cpp.inlayHints.autoDeclarationTypes.enabled": false,
   "C_Cpp.inlayHints.parameterNames.enabled": false,
   "C_Cpp.inlayHints.referenceOperator.enabled": true,
-  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "C_Cpp.intelliSenseEngineFallback": "enabled",
 
   /* -------------------------------------------------------------------------------------------- */
   /*                                      javascript settings                                     */
