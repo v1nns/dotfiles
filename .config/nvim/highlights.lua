@@ -58,9 +58,12 @@ M.add = {
 
 M.override = {
   -- nvdash
+  -- #55e7ff,#00ccfd,#ff34b3,#2011a2,#201148
   NvDashAscii = {
-    bg = "none",
-    fg = "white",
+    bg = "#2011a2",
+    fg = "#00ccfd",
+    -- bg = "#ff34b3",
+    -- fg = "#201148",
   },
 
   -- default highlight groups
