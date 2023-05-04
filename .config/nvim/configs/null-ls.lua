@@ -28,6 +28,9 @@ local sources = {
 
   -- CMake
   b.formatting.cmake_format,
+
+  -- snippets support
+  b.completion.luasnip,
 }
 
 null_ls.setup({

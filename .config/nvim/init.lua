@@ -19,5 +19,8 @@ vim.g.indent_blankline_char = "⡇"
 require("custom.commands").setup_autocommands()
 require("custom.commands").setup_commands()
 
+-- to stabilize buffer content on windows
+vim.opt.splitkeep="screen"
+
 -- to debug lspconfig, use this below and :LspLog
 -- vim.lsp.set_log_level("debug")

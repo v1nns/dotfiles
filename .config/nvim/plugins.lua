@@ -29,6 +29,7 @@ local plugins = {
     end,
   },
 
+  -- select window to open new buffer
   {
     "s1n7ax/nvim-window-picker",
     opts = function()
@@ -78,6 +79,7 @@ local plugins = {
   -- git conflict (in a fancy way)
   {
     "akinsho/git-conflict.nvim",
+    version = "*",
     config = true,
   },
 
@@ -90,7 +92,10 @@ local plugins = {
   },
 
   -- enable keybind window
-  { "folke/which-key.nvim",                      cmd = "WhichKey" },
+  {
+    "folke/which-key.nvim",
+    cmd = "WhichKey",
+  },
 
   -- language server protocol
   {
@@ -181,9 +186,6 @@ local plugins = {
     end,
   },
 
-  -- stabilize buffer content on window open/close events
-  { "luukvbaal/stabilize.nvim", },
-
   -- set up a virtual column (similar to a ruler in another IDEs)
   {
     "lukas-reineke/virt-column.nvim",
@@ -211,9 +213,16 @@ local plugins = {
   -- surround text selections
   {
     "kylechui/nvim-surround",
-    config = true,
+    version = "*", -- Use for stability
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
   },
 
+  -- syntax highlight for log files
   {
     "mtdl9/vim-log-highlighting",
     config = true,

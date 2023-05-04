@@ -11,6 +11,8 @@ local options = {
         "neo-tree-popup",
         "notify",
         "quickfix",
+        "nvdash",
+        "*Telescope*",
       },
 
       -- if the buffer type is one of following, the window will be ignored
