@@ -4,7 +4,7 @@ vim.opt.title = true
 -- show trailing spaces and tabs
 vim.opt.list = true
 vim.opt.listchars = {
-    trail = "~", --[[ tab = ">>" ]]
+  trail = "~", --[[ tab = ">>" ]]
 }
 
 -- change character and highlight group for git diff view

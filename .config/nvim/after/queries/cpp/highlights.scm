@@ -10,6 +10,11 @@
 (function_declarator
     parameters: (parameter_list
       (parameter_declaration
+        type: (type_identifier) @function.type)))
+
+(function_declarator
+    parameters: (parameter_list
+      (parameter_declaration
         type: (qualified_identifier
           name: (template_type
             arguments: (template_argument_list
