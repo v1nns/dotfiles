@@ -16,7 +16,7 @@ M.setup_autocommands = function()
     -- highlight config files
     autocmd(
         { "BufEnter", "BufRead" },
-        { pattern = "*conf*", command = "setf dosini" }
+        { pattern = "*.*conf*", command = "setf dosini" }
     )
 
     -- set winbar with breadcrumbs and file path
@@ -35,7 +35,7 @@ M.setup_autocommands = function()
     -- disable a few features for some filetypes
     autocmd("FileType", {
         pattern = {
-            "alpha",
+            "nvdash",
             "packer",
             "*telescope*",
             "terminal",

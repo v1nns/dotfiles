@@ -9,9 +9,9 @@ local symbol_highlight = function(client)
     -- add syntax highlight for current symbol
     if client.server_capabilities.documentHighlightProvider then
         vim.cmd([[
-                hi! LspReferenceRead cterm=bold ctermbg=63 guibg=SteelBlue guifg=#e3f2fd
-                hi! LspReferenceText cterm=bold ctermbg=63 guibg=SteelBlue guifg=#e3f2fd
-                hi! LspReferenceWrite cterm=bold ctermbg=63 guibg=SteelBlue guifg=#e3f2fd
+                hi! LspReferenceRead cterm=bold
+                hi! LspReferenceText cterm=bold
+                hi! LspReferenceWrite cterm=bold
               ]])
         vim.api.nvim_create_augroup("lsp_document_highlight", {})
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -36,7 +36,7 @@ for _, lsp in ipairs(servers) do
         on_attach = function(client, bufnr)
             on_attach(client, bufnr)
             navic.attach(client, bufnr)
-            -- symbol_highlight(client)
+            symbol_highlight(client)
         end,
         capabilities = capabilities,
     })

@@ -1,9 +1,3 @@
-local present, navic = pcall(require, "nvim-navic")
-
-if not present then
-    return
-end
-
 local options = {
     icons = {
         File = " ",
@@ -39,4 +33,4 @@ local options = {
     depth_limit_indicator = "..",
 }
 
-navic.setup(options)
+return options

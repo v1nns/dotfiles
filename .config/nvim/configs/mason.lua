@@ -19,6 +19,7 @@ local M = {
 
         -- cpp
         "clangd",
+        "clang-format",
     },
 }
 

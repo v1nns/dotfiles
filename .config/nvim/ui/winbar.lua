@@ -19,7 +19,7 @@ M.winbar_filetype_exclude = {
     "help",
     "packer",
     "NvimTree",
-    "alpha",
+    "nvdash",
     "toggleterm",
     "neo-tree",
 }

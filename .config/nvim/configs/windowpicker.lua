@@ -1,9 +1,3 @@
-local present, picker = pcall(require, "window-picker")
-
-if not present then
-    return
-end
-
 local options = {
     autoselect_one = true,
     include_current_win = true,
@@ -27,4 +21,4 @@ local options = {
     other_win_hl_color = "#e35e4f",
 }
 
-picker.setup(options)
+return options

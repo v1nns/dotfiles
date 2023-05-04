@@ -1,43 +1,45 @@
-local sep_style = vim.g.statusline_sep_style
-local separators = (type(sep_style) == "table" and sep_style)
-    or require("nvchad_ui.icons").statusline_separators[sep_style]
+local fn = vim.fn
+local config = require("core.utils").load_config().ui.statusline
+local sep_style = config.separator_style
+
+local default_sep_icons = {
+    default = {
+        left = "",
+        right = " "
+    },
+    round = {
+        left = "",
+        right = ""
+    },
+    block = {
+        left = "█",
+        right = "█"
+    },
+    arrow = {
+        left = "",
+        right = ""
+    }
+}
+
+local separators = (type(sep_style) == "table" and sep_style) or default_sep_icons[sep_style]
+
 local sep_l = separators["left"]
 local sep_r = separators["right"]
 
 return {
     fileInfo = function()
-        local fn = vim.fn
-        local icon = "  "
-        local filename = (fn.expand("%") == "" and "Empty ") or fn.expand("%:t")
-
-        if filename ~= "Empty " then
-            local devicons_present, devicons = pcall(
-                require,
-                "nvim-web-devicons"
-            )
-
-            if devicons_present then
-                local ft_icon = devicons.get_icon(filename)
-                icon = (ft_icon ~= nil and " " .. ft_icon) or ""
-            end
-
-            filename = " " .. filename .. " "
-        end
-
-        -- Hide nvim-tree/neo-tree
-        if
-            string.find(filename, "NvimTree")
-            or string.find(filename, "[1]") -- Neo-tree filesystem or buffer
-        then
-            return ""
-        else
-            return "%#St_file_info#"
-                .. icon
-                .. filename
-                .. "%#St_file_sep#"
-                .. sep_r
-        end
+       return "%#StText# "
     end,
+
+    git = function()
+        if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
+            return ""
+        end
+
+        return "%#GitBranch#  " .. vim.b.gitsigns_status_dict.head .. "  %*"
+    end,
+
+
     cursor_position = function()
         local fn = vim.fn
         local api = vim.api
@@ -54,12 +56,6 @@ return {
         local current_column = api.nvim_win_get_cursor(0)[2]
         local text_column = string.format("%3d", current_column)
 
-        return left_sep
-            .. "%#St_pos_text#"
-            .. " "
-            .. text_column
-            .. " "
-            .. text_line
-            .. " "
-    end,
+        return left_sep .. "%#St_pos_text#" .. " " .. text_column .. " " .. text_line .. " "
+    end
 }
