@@ -46,7 +46,7 @@ local options = {
             -- which window to open new file buffer
             actions.close(prompt_bufnr)
 
-            local picked_window_id = wp.pick_window()
+            local picked_window_id = wp.pick_window() or vim.api.nvim_get_current_win()
             if picked_window_id then
               vim.api.nvim_set_current_win(picked_window_id)
               vim.cmd(
