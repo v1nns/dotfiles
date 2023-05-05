@@ -38,7 +38,7 @@ M.add = {
   NeoTreeGitModified = { fg = "#e0af68" },
   NeoTreeGitUntracked = { fg = "#b4f9f8" },
 
-  --- treesitter
+  -- treesitter
   ["@type.definition"] = { fg = "#bb9af7" },
   ["@type.qualifier"] = { fg = "#bb9af7" },
   ["@attribute"] = { fg = "#b4f9f8" },
@@ -46,7 +46,7 @@ M.add = {
   ["@number"] = { fg = "#ff9e64" },
   ["@class.name"] = { fg = "#c0caf5" },
   ["@function.type"] = { fg = "#9abdf5" },
-  ["@text.todo"] = { bg = "#e0af68", fg = "#2f3549", bold = true },
+  ["@text.todo"] = { bg = "#e0af68", fg = "#2f1519", bold = true },
   ["@text.danger"] = { bg = "#f7778e", fg = "#2f3549", bold = true },
   ["@text.warning"] = { bg = "#ff9364", fg = "#2f3549", bold = true },
   ["@text.note"] = { bg = "#73daca", fg = "#2f3549", bold = true },
@@ -99,12 +99,17 @@ M.override = {
   ["@namespace"] = { fg = "#c0caf5" },
   ["@type"] = { fg = "#bb9af7" },
   ["@type.builtin"] = { fg = "#bb9af7" },
-  ["@field"] = { fg = "#9abdf5" },   -- For fields.
+  ["@field"] = { fg = "#9abdf5" }, -- For fields.
   ["@property"] = { fg = "#9abdf5" },
 
   -- indent-blankline
   -- IndentBlanklineChar = { fg= "#444b6a" },
   IndentBlanklineContextChar = { fg = "#787c99" },
+
+  -- gitsigns
+  DiffAdd = { fg = "#7ece6a" },
+  DiffChange = { fg = "#e0af68" },
+  DiffDelete = { fg = "#f7768e" },
 }
 
 M.changed_themes = {
@@ -137,41 +142,41 @@ M.changed_themes = {
       ["@constant"] = { fg = "#ff9e64" },
 
       -- operators
-      ["@operator"] = { fg = "#89ddff" },       -- For any operator: `+`, but also `->` and `*` in C.
+      ["@operator"] = { fg = "#89ddff" }, -- For any operator: `+`, but also `->` and `*` in C.
 
       --- punctuation
-      ["@punctuation.delimiter"] = { fg = "#89ddff" },       -- For delimiters ie: `.`
-      ["@punctuation.bracket"] = { fg = "#a9b1d6" },         -- For brackets and parens.
-      ["@punctuation.special"] = { fg = "#89ddff" },         -- For special punctutation that does not fall in the catagories before.
+      ["@punctuation.delimiter"] = { fg = "#89ddff" }, -- For delimiters ie: `.`
+      ["@punctuation.bracket"] = { fg = "#a9b1d6" },   -- For brackets and parens.
+      ["@punctuation.special"] = { fg = "#89ddff" },   -- For special punctutation that does not fall in the catagories before.
       ["@punctuation.special.markdown"] = { fg = "#ff9e64", bold = true },
 
       --- literals
       ["@string.documentation"] = { fg = "#e0af68" },
-      ["@string.regex"] = { fg = "#b4f9f8" },        -- For regexes.
-      ["@string.escape"] = { fg = "#bb9af7" },       -- For escape characters within a string.
+      ["@string.regex"] = { fg = "#b4f9f8" },  -- For regexes.
+      ["@string.escape"] = { fg = "#bb9af7" }, -- For escape characters within a string.
 
       --- functions
-      ["@constructor"] = { fg = "#7aa2f7" },       -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
-      ["@parameter"] = { fg = "#e0af68" },         -- For parameters of a function.
+      ["@constructor"] = { fg = "#7aa2f7" }, -- For constructor calls and definitions: `= { }` in Lua, and Java constructors.
+      ["@parameter"] = { fg = "#e0af68" },   -- For parameters of a function.
       -- ["@parameter.builtin"] = {}, -- For builtin parameters of a function, e.g. "..." or Smali's p[1-99]
 
       --- keywords
-      ["@keyword"] = { fg = "#9d7cd8", bold = true },       -- For keywords that don't fall in previous categories.
+      ["@keyword"] = { fg = "#9d7cd8", bold = true }, -- For keywords that don't fall in previous categories.
       -- ["@keyword.coroutine"] = { }, -- For keywords related to coroutines.
-      ["@keyword.function"] = { fg = "#bb9af7" },           -- For keywords used to define a fuction.
+      ["@keyword.function"] = { fg = "#bb9af7" },     -- For keywords used to define a fuction.
 
-      ["@label"] = { fg = "#7aa2f7" },                      -- For labels: `label:` in C and `:label:` in Lua.
+      ["@label"] = { fg = "#7aa2f7" },                -- For labels: `label:` in C and `:label:` in Lua.
 
       --- identifiers
-      ["@variable"] = { fg = "#9abdf5" },               -- Any variable name that does not have another highlight.
-      ["@variable.builtin"] = { fg = "#f7768e" },       -- Variable names that are defined by the languages, like `this` or `self`.
+      ["@variable"] = { fg = "#9abdf5" },         -- Any variable name that does not have another highlight.
+      ["@variable.builtin"] = { fg = "#f7768e" }, -- Variable names that are defined by the languages, like `this` or `self`.
 
       --- text
       -- ["@text.literal.markdown"] = { fg = c.blue },
       ["@text.literal.markdown_inline"] = { bg = "#414868", fg = "#7aa2f7" },
       ["@text.reference"] = { fg = "#1abc9c" },
-      ["@text.todo.unchecked"] = { fg = "#7aa2f7" },       -- For brackets and parens.
-      ["@text.todo.checked"] = { fg = "#73daca" },         -- For brackets and parens.
+      ["@text.todo.unchecked"] = { fg = "#7aa2f7" }, -- For brackets and parens.
+      ["@text.todo.checked"] = { fg = "#73daca" },   -- For brackets and parens.
       -- ["@text.warning"] = { fg = "#24283b", bg = c.warning },
       -- ["@text.danger"] = { fg = "#24283b", bg = c.error },
 

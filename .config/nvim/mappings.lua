@@ -91,7 +91,7 @@ M.general = {
     },
     ["<C-g>u"] = {
       "<cmd> Gitsigns reset_hunk<CR>",
-      "reset current hunk",
+      "undo current hunk",
     },
     ["<C-g>a"] = {
       "<cmd> Gitsigns stage_hunk<CR>",
@@ -100,6 +100,10 @@ M.general = {
     ["<C-g>r"] = {
       "<cmd> Gitsigns undo_stage_hunk<CR>",
       "unstage current hunk",
+    },
+    ["<C-g>d"] = {
+      "<cmd> Gitsigns diffthis <CR>",
+      "show git diff on current buffer",
     },
     ["<C-g>m"] = {
       "<cmd> GitMessenger <CR>",
@@ -128,6 +132,11 @@ M.general = {
       "focus previous buffer",
     },
 
+    -- close all windows/buffers
+    ["<C-w>a"] = {
+      "<cmd> CloseAllBuffers <CR>",
+      "close all buffers",
+    },
   },
 }
 
@@ -173,6 +182,16 @@ M.telescope = {
     ["<C-S-f>"] = {
       "<cmd> SearchForTextSelection<CR>",
       "search all",
+    },
+  },
+}
+
+M.comment = {
+  -- toggle comment
+  v = {
+    ["gc"] = {
+      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+      "toggle comment",
     },
   },
 }

@@ -25,11 +25,7 @@ M.winbar_filetype_exclude = {
 }
 
 local get_filename = function()
-  local filename = string.gsub(
-    vim.api.nvim_buf_get_name(0),
-    vim.fn.getcwd() .. "/",
-    ""
-  )
+  local filename = vim.fn.expand("%")
   local extension = vim.fn.expand("%:e")
 
   if not isempty(filename) then
