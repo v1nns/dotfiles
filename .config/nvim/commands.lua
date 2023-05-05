@@ -26,6 +26,11 @@ M.setup_autocommands = function()
     { pattern = "*.*conf*", command = "setf dosini" }
   )
 
+  -- auto-wrap comments, don't auto insert comment on o/O and enter
+  autocmd("FileType", {
+    command = "set formatoptions-=cro",
+  })
+
   -- set winbar with breadcrumbs and file path
   autocmd({
     "CursorMoved",
@@ -71,6 +76,59 @@ M.setup_autocommands = function()
       vim.g.git_messenger_always_into_popup = true
       vim.g.git_messenger_floating_win_opts = { border = "single" }
       vim.g.git_messenger_popup_content_margins = false
+    end,
+  })
+
+  -- monitor all buffers to include into vim.t.bufs
+  autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
+    callback = function(args)
+      if vim.t.bufs == nil then
+        vim.t.bufs = vim.api.nvim_get_current_buf() == args.buf and {} or { args.buf }
+      else
+        local bufs = vim.t.bufs
+
+        -- check for duplicates
+        if
+            not vim.tbl_contains(bufs, args.buf)
+            and (args.event == "BufEnter" or vim.bo[args.buf].buflisted)
+            and (args.event == "BufEnter" or args.buf ~= vim.api.nvim_get_current_buf())
+            and vim.api.nvim_buf_is_valid(args.buf)
+            and vim.bo[args.buf].buflisted
+        then
+          table.insert(bufs, args.buf)
+
+          -- remove unnamed buffer which isnt current buf & modified
+          for index, bufnr in ipairs(bufs) do
+            if
+                #vim.api.nvim_buf_get_name(bufnr) == 0
+                and (vim.api.nvim_get_current_buf() ~= bufnr or bufs[index + 1])
+                and not vim.api.nvim_buf_get_option(bufnr, "modified")
+            then
+              table.remove(bufs, index)
+            end
+          end
+
+          vim.t.bufs = bufs
+        end
+      end
+    end,
+  })
+
+  -- monitor all buffer deletions to remove from vim.t.bufs
+  autocmd("BufDelete", {
+    callback = function(args)
+      for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+        local bufs = vim.t[tab].bufs
+        if bufs then
+          for i, bufnr in ipairs(bufs) do
+            if bufnr == args.buf then
+              table.remove(bufs, i)
+              vim.t[tab].bufs = bufs
+              break
+            end
+          end
+        end
+      end
     end,
   })
 end

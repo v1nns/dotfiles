@@ -225,7 +225,25 @@ local plugins = {
   -- syntax highlight for log files
   {
     "mtdl9/vim-log-highlighting",
-    config = true,
+    ft = "log",
+    init = function()
+    end,
+  },
+
+  -- tab navigation
+  {
+    "nanozuki/tabby.nvim",
+    init = function()
+      require("custom.ui.tabby").setup()
+    end
+  },
+
+  -- limit buffers scope per tab
+  {
+    "tiagovla/scope.nvim",
+    init = function()
+      require("scope").setup()
+    end
   },
 
   -- -- debug applications

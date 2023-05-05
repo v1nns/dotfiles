@@ -132,6 +132,28 @@ M.general = {
       "focus previous buffer",
     },
 
+    -- tabs
+    ["<leader>ta"] = {
+      "<cmd> $tabnew <CR>",
+      "add new tab",
+    },
+    ["<leader>tc"] = {
+      "<cmd> tabclose <CR>",
+      "close tab",
+    },
+    ["<leader>to"] = {
+      "<cmd> tabonly <CR>",
+      "close other tabs except current",
+    },
+    ["<leader>tn"] = {
+      "<cmd> tabn <CR>",
+      "focus next tab",
+    },
+    ["<leader>tp"] = {
+      "<cmd> tabp <CR>",
+      "focus previous tab",
+    },
+
     -- close all windows/buffers
     ["<C-w>a"] = {
       "<cmd> CloseAllBuffers <CR>",

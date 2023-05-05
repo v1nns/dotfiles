@@ -54,6 +54,23 @@ M.add = {
 
   -- telescope
   TelescopePromptCounter = { fg = "#e0af68", bold = true },
+
+  -- tab
+  TabLine = {
+    -- bg = "#24283b",
+    bg = "#16161e",
+    fg = "#787c99",
+  },
+  TabLineFill = {
+    -- bg = "#2f3549",
+    -- bg = "#1a1b26",
+    bg = "#16161e",
+  },
+  TabLineSel = {
+    bg = "#444b6a",
+    fg = "#e0af68",
+    underline = true,
+  },
 }
 
 M.override = {
