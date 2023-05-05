@@ -154,6 +154,15 @@ M.general = {
       "focus previous tab",
     },
 
+    -- search utility
+    ["n"] = {
+      "<cmd>execute('normal! ' . v:count1 . 'n')<CR><cmd>lua require('hlslens').start()<CR>",
+    },
+
+    ["N"] = {
+      "<cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>",
+    },
+
     -- close all windows/buffers
     ["<C-w>a"] = {
       "<cmd> CloseAllBuffers <CR>",

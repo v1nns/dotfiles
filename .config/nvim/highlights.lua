@@ -71,6 +71,18 @@ M.add = {
     fg = "#e0af68",
     underline = true,
   },
+
+  -- hlslens
+  HlSearchLens = {
+    -- fg = "#00ccfd",
+    -- bg = "#201148",
+    bg = "#060606",
+    fg = "#bb9af7",
+  },
+  HlSearchLensNear = {
+    fg = "#060606",
+    bg = "#bb9af7",
+  },
 }
 
 M.override = {

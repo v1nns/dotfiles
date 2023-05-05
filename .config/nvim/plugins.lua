@@ -246,6 +246,15 @@ local plugins = {
     end
   },
 
+  -- enhance search command
+  {
+    "kevinhwang91/nvim-hlslens",
+    keys = { "/", "?", "n", "N" },
+    config = function()
+      require("hlslens").setup()
+    end,
+  },
+
   -- -- debug applications
   -- {mfussenegger/nvim-dap",
   -- },

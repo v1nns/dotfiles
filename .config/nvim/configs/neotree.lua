@@ -308,6 +308,7 @@ local options = {
         ["gc"] = "git_commit",
         ["gp"] = "git_push",
         ["gg"] = "git_commit_and_push",
+        -- TODO: map <CR> to execute :Gitsign diffthis
       },
     },
   },
