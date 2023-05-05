@@ -118,6 +118,58 @@ M.setup_commands = function()
     vim.o.textwidth = column
     vim.api.nvim_feedkeys("gwap", "n", false)
   end, { nargs = "?" })
+
+  -- go to next open buffer
+  cmd("GoToNext", function()
+    local bufs = M.bufilter() or {}
+
+    for i, v in ipairs(bufs) do
+      if vim.api.nvim_get_current_buf() == v then
+        vim.cmd(i == #bufs and "b" .. bufs[1] or "b" .. bufs[i + 1])
+        break
+      end
+    end
+  end, {})
+
+  -- go to previous open buffer
+  cmd("GoToPrev", function()
+    local bufs = M.bufilter() or {}
+
+    for i, v in ipairs(bufs) do
+      if vim.api.nvim_get_current_buf() == v then
+        vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
+        break
+      end
+    end
+  end, {})
+
+  -- close current buffer
+  cmd("CloseCurrentBuffer", function()
+    if vim.bo.buftype == "terminal" then
+      vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
+    else
+      local bufnr = vim.api.nvim_get_current_buf()
+      vim.cmd("GoToPrev")
+      vim.cmd("confirm bd" .. bufnr)
+    end
+  end, {})
+end
+
+-- get a list of filtered buffers
+M.bufilter = function()
+  local bufs = vim.t.bufs or nil
+
+  if not bufs then
+    return {}
+  end
+
+  for i = #bufs, 1, -1 do
+    if not vim.api.nvim_buf_is_valid(bufs[i]) and vim.bo[bufs[i]].buflisted then
+      table.remove(bufs, i)
+    end
+  end
+
+  return bufs
 end
 
 return M

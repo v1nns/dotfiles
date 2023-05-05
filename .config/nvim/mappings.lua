@@ -51,6 +51,8 @@ M.general = {
     -- jumplist
     ["<A-Left>"] = { "<C-O>zz", "move back" },
     ["<A-Right>"] = { "<C-I>zz", "move forward" },
+    -- ["<A-h>"] = { "<C-O>zz", "move back" },
+    -- ["<A-l"] = { "<C-I>zz", "move forward" },
 
     -- window adjusts (for kitty)
     -- TODO: create function for width based on window position
@@ -89,7 +91,15 @@ M.general = {
     },
     ["<C-g>u"] = {
       "<cmd> Gitsigns reset_hunk<CR>",
-      "undo current hunk",
+      "reset current hunk",
+    },
+    ["<C-g>a"] = {
+      "<cmd> Gitsigns stage_hunk<CR>",
+      "stage current hunk",
+    },
+    ["<C-g>r"] = {
+      "<cmd> Gitsigns undo_stage_hunk<CR>",
+      "unstage current hunk",
     },
     ["<C-g>m"] = {
       "<cmd> GitMessenger <CR>",
@@ -103,6 +113,21 @@ M.general = {
       end,
       "rename object",
     },
+
+    -- buffers
+    ["<Tab>"] = {
+      "<cmd> GoToNext <CR>",
+      "focus next buffer",
+    },
+    ["<S-Tab>"] = {
+      "<cmd> GoToPrev <CR>",
+      "focus previous buffer",
+    },
+    ["<leader>x"] = {
+      "<cmd> CloseCurrentBuffer <CR>",
+      "focus previous buffer",
+    },
+
   },
 }
 
