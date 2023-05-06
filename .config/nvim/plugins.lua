@@ -255,6 +255,15 @@ local plugins = {
     end,
   },
 
+  -- enhance code diagnostics
+  {
+    "folke/trouble.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("trouble").setup()
+    end,
+  },
+
   -- -- debug applications
   -- {mfussenegger/nvim-dap",
   -- },
