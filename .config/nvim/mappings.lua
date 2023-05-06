@@ -174,8 +174,6 @@ M.general = {
 M.telescope = {
   n = {
     -- general navigation
-    -- ["<C-S-p>"] = { "<cmd> Cheatsheet<CR>", "show commands" },
-    -- ["<?>"] = { "<cmd> Telescope keymaps<CR>", "show keyboard shortcuts" },
     ["<A-o>"] = {
       "<cmd> Telescope file_browser path=$HOME prompt_title=Open\\ folder<CR>",
       "open folder",

@@ -359,6 +359,9 @@ exec --no-startup-id qpwgraph -m &
 # focus animation for new window
 exec_always --no-startup-id flashfocus
 
+# noise reduction for microphone
+exec --no-startup-id noisetorch -i -s alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.capture.0.0 -t 95
+
 # ================================= CUSTOM ====================================
 
 # floating terminal with kitty

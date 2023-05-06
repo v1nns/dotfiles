@@ -74,14 +74,12 @@ M.add = {
 
   -- hlslens
   HlSearchLens = {
-    -- fg = "#00ccfd",
-    -- bg = "#201148",
-    bg = "#060606",
-    fg = "#bb9af7",
+    bg = "#2f3549",
+    fg = "#787c99",
   },
   HlSearchLensNear = {
     fg = "#060606",
-    bg = "#bb9af7",
+    bg = "#ff9364",
   },
 }
 
