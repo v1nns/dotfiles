@@ -211,6 +211,8 @@ M.setup_commands = function()
       vim.cmd("confirm bd" .. bufnr)
     end
   end, {})
+
+  -- TODO: create command for comment divider snippets
 end
 
 -- get a list of filtered buffers

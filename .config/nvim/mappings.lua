@@ -113,6 +113,7 @@ M.general = {
     -- rename
     ["<F2>"] = {
       function()
+        -- TODO: create my own renamer without showing curr_name
         require("nvchad_ui.renamer").open()
       end,
       "rename object",
