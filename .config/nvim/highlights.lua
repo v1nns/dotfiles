@@ -50,6 +50,7 @@ M.add = {
   ["@text.danger"] = { bg = "#f7778e", fg = "#2f3549", bold = true },
   ["@text.warning"] = { bg = "#ff9364", fg = "#2f3549", bold = true },
   ["@text.note"] = { bg = "#73daca", fg = "#2f3549", bold = true },
+  ["@namespace.identifier"] = { fg = "#0db9d7" },
   ["doxygenParam"] = { fg = "#73daca", bold = true },
 
   -- telescope
@@ -126,8 +127,11 @@ M.override = {
   ["@namespace"] = { fg = "#c0caf5" },
   ["@type"] = { fg = "#bb9af7" },
   ["@type.builtin"] = { fg = "#bb9af7" },
-  ["@field"] = { fg = "#9abdf5" }, -- For fields.
+  ["@field"] = { fg = "#9abdf5" },
   ["@property"] = { fg = "#9abdf5" },
+  ["@constant.builtin"] = { fg = "#ff9e64" },
+  ["@character"] = { fg = "#9ece6a" },
+  ["StorageClass"] = { fg = "#bb9af7" },
 
   -- indent-blankline
   -- IndentBlanklineChar = { fg= "#444b6a" },

@@ -31,3 +31,23 @@
 (class_specifier
   (base_class_clause
     (type_identifier) @type.definition))
+
+(namespace_definition
+  name: (namespace_identifier) @namespace.identifier)
+
+(qualified_identifier
+  scope: (namespace_identifier)
+  name: (type_identifier) @function.type)
+
+(
+  (function_definition
+   declarator: (reference_declarator
+    (function_declarator
+     declarator: (operator_name) @operator)))
+  (#set! "priority" 110)
+)
+
+(call_expression
+  (template_function
+    name: (identifier) @operator))
+
