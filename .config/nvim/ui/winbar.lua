@@ -51,7 +51,7 @@ local get_filename = function()
         .. file_icon
         .. "%*"
         .. " "
-        .. "%#Normal#"
+        .. "%#WinbarTitle#"
         .. filename
         .. "%*"
   end

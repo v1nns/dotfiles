@@ -37,7 +37,11 @@
 
 (qualified_identifier
   scope: (namespace_identifier)
-  name: (type_identifier) @function.type)
+  name: (type_identifier) @type)
+
+(qualified_identifier
+  scope: (namespace_identifier) @namespace
+  name: (qualified_identifier))
 
 (
   (function_definition
@@ -50,4 +54,9 @@
 (call_expression
   (template_function
     name: (identifier) @operator))
+
+(call_expression
+  (field_expression
+    (field_expression
+     field: (field_identifier) @teste)))
 

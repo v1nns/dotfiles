@@ -39,6 +39,7 @@ M.add = {
   NeoTreeGitUntracked = { fg = "#b4f9f8" },
 
   -- treesitter
+  ["@type"] = { fg = "#7dcfff" },
   ["@type.definition"] = { fg = "#bb9af7" },
   ["@type.qualifier"] = { fg = "#bb9af7" },
   ["@attribute"] = { fg = "#b4f9f8" },
@@ -82,6 +83,14 @@ M.add = {
     fg = "#060606",
     bg = "#ff9364",
   },
+
+  -- winbar
+  WinbarTitle = {
+    fg = "#a9b1d6",
+    bold = true,
+  },
+
+
 }
 
 M.override = {
@@ -102,9 +111,9 @@ M.override = {
   NonText = {
     fg = "#ff2233",
   },
-  -- WinSeparator = {
-  --     fg = "#484852",
-  -- },
+  WinSeparator = {
+    fg = "#16161e",
+  },
 
   -- nvimtree
   NvimTreeRootFolder = {
@@ -124,11 +133,10 @@ M.override = {
   },
 
   -- treesitter
-  ["@namespace"] = { fg = "#c0caf5" },
-  ["@type"] = { fg = "#bb9af7" },
   ["@type.builtin"] = { fg = "#bb9af7" },
+  ["@namespace"] = { fg = "#c0caf5" },
   ["@field"] = { fg = "#9abdf5" },
-  ["@property"] = { fg = "#9abdf5" },
+  ["@property"] = { fg = "#73daca" },
   ["@constant.builtin"] = { fg = "#ff9e64" },
   ["@character"] = { fg = "#9ece6a" },
   ["StorageClass"] = { fg = "#bb9af7" },

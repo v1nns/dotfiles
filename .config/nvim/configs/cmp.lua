@@ -1,3 +1,21 @@
+local next = function(fallback)
+  local cmp = require("cmp")
+  if cmp.visible() then
+    cmp.select_next_item()
+  else
+    fallback()
+  end
+end
+
+local previous = function(fallback)
+  local cmp = require("cmp")
+  if cmp.visible() then
+    cmp.select_prev_item()
+  else
+    fallback()
+  end
+end
+
 local options = {
   snippet = {
     expand = function(args)
@@ -14,21 +32,19 @@ local options = {
   },
   mapping = {
     ["<Tab>"] = function(fallback)
-      local cmp = require("cmp")
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
+      return next(fallback)
     end,
 
     ["<S-Tab>"] = function(fallback)
-      local cmp = require("cmp")
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
+      return previous(fallback)
+    end,
+
+    ["<C-j>"] = function(fallback)
+      return next(fallback)
+    end,
+
+    ["<C-k>"] = function(fallback)
+      return previous(fallback)
     end,
 
     ["<CR>"] = function(fallback)

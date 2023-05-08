@@ -54,6 +54,15 @@ local options = {
               )
             end
           end,
+
+          ["<C-k>"] = function(prompt_bufnr)
+            -- select previous entry
+            require("telescope.actions").move_selection_previous(prompt_bufnr)
+          end,
+          ["<C-j>"] = function(prompt_bufnr)
+            -- select next entry
+            require("telescope.actions").move_selection_next(prompt_bufnr)
+          end,
         },
       },
     },
