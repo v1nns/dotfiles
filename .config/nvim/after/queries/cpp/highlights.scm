@@ -25,6 +25,10 @@
   (qualified_identifier
     scope: (namespace_identifier) @namespace))
 
+(function_definition
+  (qualified_identifier
+    scope: (namespace_identifier) @namespace))
+
 (class_specifier
   name: (type_identifier) @class.name)
 

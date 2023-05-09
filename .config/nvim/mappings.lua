@@ -181,10 +181,12 @@ M.general = {
     -- search utility
     ["n"] = {
       "<cmd>execute('normal! ' . v:count1 . 'n')<CR><cmd>lua require('hlslens').start()<CR>",
+      "repeat last search"
     },
 
     ["N"] = {
       "<cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>",
+      "repeat last search (in opposite direction)"
     },
   },
 }

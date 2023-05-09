@@ -149,6 +149,9 @@ M.override = {
   DiffAdd = { fg = "#7ece6a" },
   DiffChange = { fg = "#e0af68" },
   DiffDelete = { fg = "#f7768e" },
+
+  -- nvchad ui statusline
+  St_cwd = { fg = "#2ac3de", },
 }
 
 M.changed_themes = {

@@ -3,6 +3,27 @@ local options = {
     mappings = {
       n = {
         ["q"] = require("telescope.actions").close,
+
+        ["<C-k>"] = function(prompt_bufnr)
+          -- select previous entry
+          require("telescope.actions").move_selection_previous(prompt_bufnr)
+        end,
+
+        ["<C-j>"] = function(prompt_bufnr)
+          -- select next entry
+          require("telescope.actions").move_selection_next(prompt_bufnr)
+        end,
+      },
+      i = {
+        ["<C-k>"] = function(prompt_bufnr)
+          -- select previous entry
+          require("telescope.actions").move_selection_previous(prompt_bufnr)
+        end,
+
+        ["<C-j>"] = function(prompt_bufnr)
+          -- select next entry
+          require("telescope.actions").move_selection_next(prompt_bufnr)
+        end,
       },
     },
   },
@@ -54,15 +75,6 @@ local options = {
               )
             end
           end,
-
-          ["<C-k>"] = function(prompt_bufnr)
-            -- select previous entry
-            require("telescope.actions").move_selection_previous(prompt_bufnr)
-          end,
-          ["<C-j>"] = function(prompt_bufnr)
-            -- select next entry
-            require("telescope.actions").move_selection_next(prompt_bufnr)
-          end,
         },
       },
     },
@@ -89,6 +101,7 @@ local options = {
       },
     },
     lsp_document_symbols = {
+      symbol_width = 80,
       mappings = {
         i = {
           ["<CR>"] = require("telescope.actions").select_default
