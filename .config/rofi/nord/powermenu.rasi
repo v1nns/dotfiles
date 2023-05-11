@@ -55,7 +55,7 @@ window {
     location: center;
     anchor:   center;
     transparency: "screenshot";
-    padding: 10px;
+    padding: 0px;
     border:  0px;
     border-radius: 6px;
 

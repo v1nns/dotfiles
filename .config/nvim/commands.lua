@@ -26,6 +26,12 @@ M.setup_autocommands = function()
     { pattern = "*.*conf*", command = "setf dosini" }
   )
 
+  -- highlight rofi theme files
+  autocmd(
+    { "BufEnter", "BufRead" },
+    { pattern = "*.rasi", command = "setf css" }
+  )
+
   -- auto-wrap comments, don't auto insert comment on o/O and enter
   autocmd("FileType", {
     command = "set formatoptions-=cro",

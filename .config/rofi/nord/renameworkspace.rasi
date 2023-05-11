@@ -60,36 +60,28 @@ window {
     padding: 10px;
     border:  0px;
     border-radius: 6px;
-    height: 80px;
+    height: 65px;
     width: 500px;
 
-    background-color: @transparent;
     spacing: 0;
     children:  [mainbox];
     orientation: horizontal;
-}
 
-mainbox {
-    spacing: 0;
-    /* children: [ inputbar, message ]; */
+    background-color: @nord1;
+
+    border: 1px;
+    border-radius:  6px 6px 6px 6px;
+    border-color: @nord10;
 }
 
 message {
     color: @nord0;
     padding: 5;
-    border-color: @foreground;
-    border:  0px 2px 2px 2px;
-    background-color: @nord7;
 }
 
 inputbar {
     color: @nord6;
     padding: 11px;
-    background-color: #3b4252;
-
-    border: 1px;
-    border-radius:  6px 6px 6px 6px;
-    border-color: @nord10;
 
     children: [prompt, entry];
 }

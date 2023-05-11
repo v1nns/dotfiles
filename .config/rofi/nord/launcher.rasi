@@ -56,8 +56,6 @@ window {
     location: center;
     anchor:   center;
     transparency: "screenshot";
-    /* padding: 10px;
-    border:  0px; */
     border-radius: 6px;
 
     background-color: @transparent;
@@ -82,7 +80,7 @@ message {
 inputbar {
     color: @nord6;
     padding: 11px;
-    background-color: #3b4252;
+    background-color: @nord1;
 
     border: 1px;
     border-radius:  6px 6px 0px 0px;
