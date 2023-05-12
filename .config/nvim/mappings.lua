@@ -174,6 +174,13 @@ M.lspconfig = {
       "list all symbol references",
     },
   },
+
+  v = {
+    ["<leader>fm"] = {
+      "gq",
+      "format code selection",
+    },
+  },
 }
 
 M.general = {
@@ -188,6 +195,18 @@ M.general = {
       "<cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>",
       "repeat last search (in opposite direction)"
     },
+
+    ["<leader>fw"] = {
+      "<cmd> WrapTextAtColumn <CR>",
+      "wrap paragraph"
+    }
+  },
+
+  v = {
+    ["<leader>fw"] = {
+      "<cmd> WrapTextAtColumn <CR>",
+      "wrap text selection"
+    }
   },
 }
 

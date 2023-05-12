@@ -179,9 +179,21 @@ M.setup_commands = function()
   -- TODO: implement this for range formatting, read this:
   -- https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion
   cmd("WrapTextAtColumn", function(opts)
-    local column = tonumber(opts.args) or 100
+    local column = tonumber(opts.args) or tonumber(vim.fn.input("Column to wrap: "))
+    if column == nil then
+      return
+    end
+
+    -- set maximum text width
     vim.o.textwidth = column
-    vim.api.nvim_feedkeys("gwap", "n", false)
+
+    -- based on current mode, use different motion to apply word wrap
+    local mode = vim.fn.mode()
+    if mode == "n" then
+      vim.api.nvim_feedkeys("gwap", "n", false)
+    elseif mode == "v" then
+      vim.api.nvim_feedkeys("gq", "v", false)
+    end
   end, { nargs = "?" })
 
   -- go to next open buffer
