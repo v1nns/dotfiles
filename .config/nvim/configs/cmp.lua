@@ -60,6 +60,12 @@ local options = {
     completeopt = "menuone,noselect",
   },
   enabled = function()
+    -- disable completion in telescope window
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+
+    if string.find(ft, "Telescope") then return false end
+
     -- disable completion in comments
     local context = require "cmp.config.context"
 
