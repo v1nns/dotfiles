@@ -175,9 +175,7 @@ M.setup_commands = function()
     neotree.execute({ action = "show" })
   end, {})
 
-  -- wrap text at column X (or 100 if no arg is passed)
-  -- TODO: implement this for range formatting, read this:
-  -- https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#range-formatting-with-a-motion
+  -- wrap text at column X (or value is asked)
   cmd("WrapTextAtColumn", function(opts)
     local column = tonumber(opts.args) or tonumber(vim.fn.input("Column to wrap: "))
     if column == nil then
@@ -231,7 +229,65 @@ M.setup_commands = function()
     end
   end, {})
 
-  -- TODO: create command for comment divider snippets
+  -- create command for comment divider snippets
+  -- TODO: maybe split to another lua file like utils or something like that
+  cmd("InsertCommentDivider", function()
+    local mapped = {
+      ["n"] = function()
+        local line = vim.api.nvim_get_current_line()
+        local empty = true and line == nil or line == '' or false
+
+        -- format new line
+        if empty == true then
+          line = "/* " .. string.rep("*", 94) .. " */"
+        else
+          -- trim all the whitespaces
+          line = line:gsub("^%s*(.-)%s*$", "%1")
+
+          -- length of current buffer line
+          local line_length = line:len()
+
+          -- calculate how many characters are needed for minimum seperator
+          -- /* - text - */
+          local delimiter_length = (92 - line_length) / 2
+
+          -- create left separator
+          local left = string.rep("-", delimiter_length)
+
+          -- if final string won't fill entire line (100 columns)
+          -- fix it by adding another delimiter to right side
+          if 96 > (line_length + 2 * delimiter_length) then
+            delimiter_length = delimiter_length + 1
+          end
+
+          -- create right separator
+          local right = string.rep("-", delimiter_length)
+
+          line = "/* " .. left .. " " .. line .. " " .. right .. " */"
+        end
+
+        vim.api.nvim_set_current_line(line)
+      end,
+
+      ["v"] = function()
+        -- TODO: implement...
+        -- local vstart = vim.fn.getpos("'<")
+        -- local vend = vim.fn.getpos("'>")
+        --
+        -- local line_start = vstart[2]
+        -- local line_end = vend[2]
+        --
+        -- -- or use api.nvim_buf_get_lines
+        -- local lines = vim.fn.getline(line_start, line_end)
+      end,
+    }
+
+    local mode = vim.fn.mode()
+
+    if mapped[mode] then
+      mapped[mode]()
+    end
+  end, {})
 end
 
 -- get a list of filtered buffers

@@ -273,11 +273,30 @@ M.telescope = {
 }
 
 M.comment = {
+  n = {
+    ["<A-y>"] = {
+      "<cmd> InsertCommentDivider <CR>",
+      "add divider line",
+    }
+  },
+
+  i = {
+    ["<A-y>"] = {
+      "<ESC><cmd> InsertCommentDivider <CR>",
+      "add divider line",
+    }
+  },
+
   v = {
     ["gc"] = {
       "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
       "toggle comment",
     },
+
+    ["<A-y>"] = {
+      "<cmd> InsertCommentDivider <CR>",
+      "add divider line",
+    }
   },
 }
 
