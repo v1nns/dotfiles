@@ -50,6 +50,9 @@ M.setup_autocommands = function()
     end,
   })
 
+  -- enable line number in telescope previewer
+  autocmd("User", { pattern = "TelescopePreviewerLoaded", command = "setlocal number" })
+
   -- disable a few features for some filetypes
   autocmd("FileType", {
     pattern = {
