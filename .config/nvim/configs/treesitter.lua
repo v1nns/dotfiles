@@ -15,6 +15,7 @@ local options = {
     "cmake",
     "make",
     "comment",
+    "yaml",
     "yang",
   },
 
