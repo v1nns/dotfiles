@@ -246,7 +246,7 @@ M.telescope = {
             "open folder",
         },
         ["<A-p>"] = {
-            "<cmd> Telescope find_files hidden=true prompt_title=Open\\ file<CR>",
+            "<cmd> Telescope find_files prompt_title=Open\\ file<CR>",
             "open file",
         },
         ["<A-r>"] = {

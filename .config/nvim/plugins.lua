@@ -115,7 +115,9 @@ local plugins = {
             "nvim-telescope/telescope-file-browser.nvim",
             "s1n7ax/nvim-window-picker",
         },
-        opts = require("custom.configs.telescope"),
+        opts = function()
+           return require("custom.configs.telescope")
+        end,
     },
 
     -- session management (1/2)
