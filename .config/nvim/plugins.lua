@@ -71,6 +71,16 @@ local plugins = {
         config = true,
     },
 
+    -- git diff in a separate view
+    {
+        "sindrets/diffview.nvim",
+        cmd = { "DiffviewOpen", "DiffviewClose" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        opts = require("custom.configs.diffview"),
+    },
+
     -- portable package manager
     {
         "williamboman/mason.nvim",

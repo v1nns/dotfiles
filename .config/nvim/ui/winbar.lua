@@ -22,6 +22,7 @@ M.winbar_filetype_exclude = {
   "nvdash",
   "toggleterm",
   "neo-tree",
+  "DiffviewFiles",
 }
 
 local get_filename = function()
