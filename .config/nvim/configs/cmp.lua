@@ -17,19 +17,6 @@ local previous = function(fallback)
 end
 
 local options = {
-  snippet = {
-    expand = function(args)
-      require("luasnip").lsp_expand(args.body)
-    end,
-  },
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "nvim_lua" },
-    { name = "path" },
-    { name = "neorg" },
-  },
   mapping = {
     ["<Tab>"] = function(fallback)
       return next(fallback)
@@ -57,7 +44,7 @@ local options = {
     end,
   },
   completion = {
-    completeopt = "menuone,noselect",
+    completeopt = "menu,menuone,noselect",
   },
   enabled = function()
     -- disable completion in any telescope window
