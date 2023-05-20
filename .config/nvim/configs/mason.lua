@@ -12,6 +12,7 @@ local options = {
     "deno",
     "emmet-ls",
     "json-lsp",
+    "prettier",
 
     -- shell
     "shfmt",

@@ -10,7 +10,7 @@ local plugins = {
     -- disable default file explorer
     {
         "nvim-tree/nvim-tree.lua",
-        disable = true,
+        enabled = false,
     },
 
     -- instead, use neo-tree as file/buffer/git explorer

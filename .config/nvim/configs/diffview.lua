@@ -129,6 +129,9 @@ local tbl_union_extend = function(t, ...)
 end
 
 local options = {
+    default_args = {
+        DiffviewOpen = { "--imply-local" },
+    },
     hooks = {
         view_opened = function(view)
             -- Highlight 'DiffChange' as 'DiffDelete' on the left, and 'DiffAdd' on

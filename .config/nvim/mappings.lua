@@ -210,11 +210,11 @@ M.general = {
 M.neotree = {
     n = {
         ["<leader>e"] = {
-            "<cmd>Neotree filesystem toggle left <CR>",
+            "<cmd> Neotree filesystem toggle left <CR>",
             "toggle file tree",
         },
         ["<leader>b"] = {
-            "<cmd>Neotree buffers toggle left <CR>",
+            "<cmd> Neotree buffers toggle left <CR>",
             "toggle buffer tree",
         },
         -- ["<leader>g"] = {
