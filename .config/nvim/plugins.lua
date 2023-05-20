@@ -116,7 +116,7 @@ local plugins = {
             "s1n7ax/nvim-window-picker",
         },
         opts = function()
-           return require("custom.configs.telescope")
+            return require("custom.configs.telescope")
         end,
     },
 
@@ -156,8 +156,14 @@ local plugins = {
 
     -- fast highlight for unique character in current line
     {
-        "unblevable/quick-scope",
+        "jinh0/eyeliner.nvim",
         lazy = false,
+        init = function()
+            require("eyeliner").setup({
+                highlight_on_key = true,
+                dim = true,
+            })
+        end,
     },
 
     -- breadcrumbs using winbar
@@ -237,6 +243,14 @@ local plugins = {
         cmd = "Trouble",
         init = function()
             require("trouble").setup()
+        end,
+    },
+
+    -- smooth scrolling
+    {
+        "karb94/neoscroll.nvim",
+        init = function()
+            require("neoscroll").setup()
         end,
     },
 

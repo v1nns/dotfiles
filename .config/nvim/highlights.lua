@@ -2,11 +2,17 @@ local M = {}
 
 M.add = {
     -- quickscope highlight colors
-    QuickScopePrimary = {
+    EyelinerPrimary = {
         fg = "#afff5f",
+        underline = true,
+        bold = true,
     },
-    QuickScopeSecondary = {
+    EyelinerSecondary = {
         fg = "#5fffff",
+        underline = true,
+    },
+    EyelinerDimmed = {
+        fg = "#444b6a",
     },
 
     -- virt-column color
