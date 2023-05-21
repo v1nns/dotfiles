@@ -97,10 +97,10 @@ M.add = {
     },
 
     -- gitsigns
-    GitSignDiffAdd = { fg = "#7ece6a" },
-    GitSignDiffChange = { fg = "#e0af68" },
-    GitSignDiffDelete = { fg = "#f7768e" },
-    GitSignDiffText = { fg = "#c0caf5" },
+    GitSignDiffAdd = { fg = "#7ece6a", bg = "none" },
+    GitSignDiffChange = { fg = "#e0af68", bg = "none" },
+    GitSignDiffDelete = { fg = "#f7768e", bg = "none" },
+    GitSignDiffText = { fg = "#c0caf5", bg = "none" },
 
     -- diffview
     DiffviewDiffAddAsDelete = { bg = "#3f2d3d", fg = "none" },

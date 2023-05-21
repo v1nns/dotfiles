@@ -187,15 +187,13 @@ M.setup_commands = function()
         end
 
         if count == 1 then
-            print("caiu aqui 1")
-            vim.cmd("%bd!")
+            vim.cmd("%bd")
         else
-            print("caiu aqui 2")
             vim.cmd(":windo bd")
         end
 
         -- show neo-tree again (filesystem is default option)
-        neotree.execute({ action = "show" })
+        -- neotree.execute({ action = "show" })
     end, {})
 
     -- wrap text at column X (or value is asked)

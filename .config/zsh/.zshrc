@@ -9,7 +9,7 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH
 
 # Path to oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -84,6 +84,7 @@ unsetopt beep
 
 # Use ssh with this alias
 alias s="TERM=xterm-256color kitty +kitten ssh"
+alias clear-nvim="rm -rf ~/.local/share/nvim/ ~/.cache/nvim ~/.local/state/nvim"
 
 # Enable gtest color by default
 # (read this: https://github.com/kovidgoyal/kitty/issues/4400#issuecomment-1002518875)

@@ -62,5 +62,5 @@
 (call_expression
   (field_expression
     (field_expression
-     field: (field_identifier) @teste)))
+     field: (field_identifier) @operator)))
 

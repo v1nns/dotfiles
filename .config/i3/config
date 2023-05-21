@@ -193,6 +193,9 @@ bindsym $mod+Mod1+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
+# toggle layout for split or tabbed (to get a fake fullscreen)
+bindsym $mod+Control+f layout toggle splith tabbed
+
 # TODO: create script/rofi to change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
 # bindsym $mod+w layout tabbed
@@ -345,7 +348,6 @@ exec --no-startup-id pasystray &
 
 # start compositor
 exec --no-startup-id picom --backend glx -b
-# flashfocus
 
 # Patchbay GUI for Pipewire
 exec --no-startup-id qpwgraph -m &
@@ -361,10 +363,10 @@ exec --no-startup-id qpwgraph -m &
 #  --password-store=gnome
 
 # focus animation for new window
-exec_always --no-startup-id flashfocus
+# exec_always --no-startup-id flashfocus &
 
 # noise reduction for microphone
-exec --no-startup-id noisetorch -i -s alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.capture.0.0 -t 95
+exec --no-startup-id noisetorch -i -s alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.capture.0.0 -t 90
 
 # ================================= CUSTOM ====================================
 
