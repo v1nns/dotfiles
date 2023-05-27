@@ -29,6 +29,15 @@ local sources = {
 
     -- CMake
     formatting.cmake_format,
+
+    -- Python
+    formatting.autopep8,
+    formatting.autopep8.with({
+        extra_args = {
+            "--max-line-length",
+            "100",
+        },
+    }),
 }
 
 null_ls.setup({

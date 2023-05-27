@@ -21,6 +21,9 @@ local options = {
     -- cpp
     "clangd",
     "clang-format",
+
+    -- python
+    "autopep8",
   },
 }
 
