@@ -32,6 +32,12 @@ M.setup_autocommands = function()
         { pattern = "*.rasi", command = "setf css" }
     )
 
+    -- highlight c++ files
+    autocmd(
+        { "BufEnter", "BufRead" },
+        { pattern = { "*.cc", "*.h", "*.cpp" }, command = "setf cpp" }
+    )
+
     -- auto-wrap comments, don't auto insert comment on o/O and enter
     autocmd("FileType", {
         command = "set formatoptions-=cro",

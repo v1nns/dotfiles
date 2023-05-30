@@ -87,6 +87,18 @@ M.window = {
         ["<C-S-Left>"] = { "<cmd> winc < <CR>", "decrease width" },
         ["<C-S-Up>"] = { "<cmd> winc - <CR>", "increase height" },
         ["<C-S-Down>"] = { "<cmd> winc + <CR>", "decrease height" },
+
+        -- window focus
+        ["<C-1>"] = { "<cmd> :1wincmd w <CR>", "focus window 1" },
+        ["<C-2>"] = { "<cmd> :2wincmd w <CR>", "focus window 2" },
+        ["<C-3>"] = { "<cmd> :3wincmd w <CR>", "focus window 3" },
+        ["<C-4>"] = { "<cmd> :4wincmd w <CR>", "focus window 4" },
+        ["<C-5>"] = { "<cmd> :5wincmd w <CR>", "focus window 5" },
+        ["<C-6>"] = { "<cmd> :6wincmd w <CR>", "focus window 6" },
+        ["<C-7>"] = { "<cmd> :7wincmd w <CR>", "focus window 7" },
+        ["<C-8>"] = { "<cmd> :8wincmd w <CR>", "focus window 8" },
+        ["<C-9>"] = { "<cmd> :9wincmd w <CR>", "focus window 9" },
+        ["<C-0>"] = { "<cmd> :0wincmd w <CR>", "focus window 10" },
     },
 }
 
