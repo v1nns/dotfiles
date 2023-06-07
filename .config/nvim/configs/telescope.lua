@@ -102,23 +102,22 @@ local options = {
             mappings = {
                 i = {
                     ["<CR>"] = function(prompt_bufnr)
-                        local success, wp = pcall(require, "window-picker")
                         local actions = require("telescope.actions")
                         local entry =
                             require("telescope.actions.state").get_selected_entry()
 
-                        -- In case, that nvim-window-picker is not installed, use default action
-                        if not success or not entry.path then
+                        -- Use default action if entry does not contain a path
+                        if not entry.path then
                             actions.select_default(prompt_bufnr)
                             return
                         end
 
-                        -- otherwise, close telescope and use nvim-window-picker to choose
+                        -- Otherwise, close telescope and use nvim-window-picker to choose
                         -- which window to open new file buffer
                         actions.close(prompt_bufnr)
 
-                        local picked_window_id = wp.pick_window()
-                            or vim.api.nvim_get_current_win()
+                        local picked_window_id = require("custom.configs.windowpicker").pick_window()
+
                         if picked_window_id then
                             vim.api.nvim_set_current_win(picked_window_id)
                             vim.cmd("edit " .. vim.fn.fnameescape(entry.path))

@@ -30,7 +30,12 @@ local plugins = {
     -- select window to open new buffer
     {
         "s1n7ax/nvim-window-picker",
-        opts = require("custom.configs.windowpicker"),
+        name = "window-picker",
+        event = "VeryLazy",
+        version = "2.*",
+        config = function()
+            require("window-picker").setup()
+        end,
     },
 
     -- syntax highlight for coding
