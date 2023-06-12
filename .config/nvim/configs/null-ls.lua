@@ -9,16 +9,14 @@ local sources = {
     formatting.prettierd.with({ filetypes = { "html", "markdown", "css" } }),
 
     -- Lua
-    formatting.stylua,
     formatting.stylua.with({
-        extra_args = { "--column-width", "80", "--indent-type", "Spaces" },
+        extra_args = { "--column-width", "100", "--indent-type", "Spaces" },
     }),
 
     -- Cpp
-    formatting.clang_format,
     formatting.clang_format.with({
         extra_args = {
-            "-style",
+            "--style",
             "{BasedOnStyle: Google, Standard: c++17, ColumnLimit: 100}",
         },
     }),
@@ -31,7 +29,6 @@ local sources = {
     formatting.cmake_format,
 
     -- Python
-    formatting.autopep8,
     formatting.autopep8.with({
         extra_args = {
             "--max-line-length",
