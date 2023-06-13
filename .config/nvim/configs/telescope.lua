@@ -54,16 +54,12 @@ local options = {
 
                 ["<C-k>"] = function(prompt_bufnr)
                     -- select previous entry
-                    require("telescope.actions").move_selection_previous(
-                        prompt_bufnr
-                    )
+                    require("telescope.actions").move_selection_previous(prompt_bufnr)
                 end,
 
                 ["<C-j>"] = function(prompt_bufnr)
                     -- select next entry
-                    require("telescope.actions").move_selection_next(
-                        prompt_bufnr
-                    )
+                    require("telescope.actions").move_selection_next(prompt_bufnr)
                 end,
 
                 ["<C-BS>"] = { "<c-s-w>", type = "command" },
@@ -71,16 +67,12 @@ local options = {
             i = {
                 ["<C-k>"] = function(prompt_bufnr)
                     -- select previous entry
-                    require("telescope.actions").move_selection_previous(
-                        prompt_bufnr
-                    )
+                    require("telescope.actions").move_selection_previous(prompt_bufnr)
                 end,
 
                 ["<C-j>"] = function(prompt_bufnr)
                     -- select next entry
-                    require("telescope.actions").move_selection_next(
-                        prompt_bufnr
-                    )
+                    require("telescope.actions").move_selection_next(prompt_bufnr)
                 end,
 
                 ["<C-BS>"] = { "<c-s-w>", type = "command" },
@@ -103,8 +95,7 @@ local options = {
                 i = {
                     ["<CR>"] = function(prompt_bufnr)
                         local actions = require("telescope.actions")
-                        local entry =
-                            require("telescope.actions.state").get_selected_entry()
+                        local entry = require("telescope.actions.state").get_selected_entry()
 
                         -- Use default action if entry does not contain a path
                         if not entry.path then
@@ -116,12 +107,21 @@ local options = {
                         -- which window to open new file buffer
                         actions.close(prompt_bufnr)
 
-                        local picked_window_id = require("custom.configs.windowpicker").pick_window()
-
-                        if picked_window_id then
-                            vim.api.nvim_set_current_win(picked_window_id)
-                            vim.cmd("edit " .. vim.fn.fnameescape(entry.path))
+                        local all_windows = vim.api.nvim_tabpage_list_wins(0)
+                        local count = 0
+                        for _ in pairs(all_windows) do
+                            count = count + 1
                         end
+
+                        if count > 1 then
+                            local window_id = require("custom.configs.windowpicker").pick_window()
+
+                            if window_id then
+                                vim.api.nvim_set_current_win(window_id)
+                            end
+                        end
+
+                        vim.cmd("edit " .. vim.fn.fnameescape(entry.path))
                     end,
                 },
             },
@@ -143,8 +143,9 @@ local options = {
             end,
             mappings = {
                 i = {
-                    ["<CR>"] = require("telescope.actions").select_default
-                        + require("telescope.actions").center,
+                    ["<CR>"] = require("telescope.actions").select_default + require(
+                        "telescope.actions"
+                    ).center,
                 },
             },
         },
@@ -152,8 +153,9 @@ local options = {
             symbol_width = 80,
             mappings = {
                 i = {
-                    ["<CR>"] = require("telescope.actions").select_default
-                        + require("telescope.actions").center,
+                    ["<CR>"] = require("telescope.actions").select_default + require(
+                        "telescope.actions"
+                    ).center,
                 },
             },
         },
