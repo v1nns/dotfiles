@@ -228,9 +228,7 @@ local options = {
                         -- end custom code
 
                         local id = node:get_id()
-                        if
-                            node.type == "directory" and not node:is_expanded()
-                        then
+                        if node.type == "directory" and not node:is_expanded() then
                             toggle_directory(state, node)
                             node = state.tree:get_node(id)
                         end

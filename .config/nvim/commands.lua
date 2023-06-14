@@ -21,16 +21,10 @@ M.setup_autocommands = function()
     })
 
     -- highlight config files
-    autocmd(
-        { "BufEnter", "BufRead" },
-        { pattern = "*.*conf*", command = "setf dosini" }
-    )
+    autocmd({ "BufEnter", "BufRead" }, { pattern = "*.*conf*", command = "setf dosini" })
 
     -- highlight rofi theme files
-    autocmd(
-        { "BufEnter", "BufRead" },
-        { pattern = "*.rasi", command = "setf css" }
-    )
+    autocmd({ "BufEnter", "BufRead" }, { pattern = "*.rasi", command = "setf css" })
 
     -- highlight c++ files
     autocmd(
@@ -57,10 +51,7 @@ M.setup_autocommands = function()
     })
 
     -- enable line number in telescope previewer
-    autocmd(
-        "User",
-        { pattern = "TelescopePreviewerLoaded", command = "setlocal number" }
-    )
+    autocmd("User", { pattern = "TelescopePreviewerLoaded", command = "setlocal number" })
 
     -- disable a few features for some filetypes
     autocmd("FileType", {
@@ -103,8 +94,7 @@ M.setup_autocommands = function()
     autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
         callback = function(args)
             if vim.t.bufs == nil then
-                vim.t.bufs = vim.api.nvim_get_current_buf() == args.buf and {}
-                    or { args.buf }
+                vim.t.bufs = vim.api.nvim_get_current_buf() == args.buf and {} or { args.buf }
             else
                 local bufs = vim.t.bufs
 
@@ -123,10 +113,7 @@ M.setup_autocommands = function()
                         if
                             #vim.api.nvim_buf_get_name(bufnr) == 0
                             and (vim.api.nvim_get_current_buf() ~= bufnr or bufs[index + 1])
-                            and not vim.api.nvim_buf_get_option(
-                                bufnr,
-                                "modified"
-                            )
+                            and not vim.api.nvim_buf_get_option(bufnr, "modified")
                         then
                             table.remove(bufs, index)
                         end
@@ -204,8 +191,7 @@ M.setup_commands = function()
 
     -- wrap text at column X (or value is asked)
     cmd("WrapTextAtColumn", function(opts)
-        local column = tonumber(opts.args)
-            or tonumber(vim.fn.input("Column to wrap: "))
+        local column = tonumber(opts.args) or tonumber(vim.fn.input("Column to wrap: "))
         if column == nil then
             return
         end
@@ -327,9 +313,7 @@ M.bufilter = function()
     end
 
     for i = #bufs, 1, -1 do
-        if
-            not vim.api.nvim_buf_is_valid(bufs[i]) and vim.bo[bufs[i]].buflisted
-        then
+        if not vim.api.nvim_buf_is_valid(bufs[i]) and vim.bo[bufs[i]].buflisted then
             table.remove(bufs, i)
         end
     end
