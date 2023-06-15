@@ -91,13 +91,21 @@ local options = {
                     return
                 end
 
-                -- Otherwise, use nvim-window-picker to choose which window to open new file buffer
-                local picked_window_id = require("custom.configs.windowpicker").pick_window()
-
-                if picked_window_id then
-                    vim.api.nvim_set_current_win(picked_window_id)
-                    vim.cmd("edit " .. vim.fn.fnameescape(node.path))
+                local all_windows = vim.api.nvim_tabpage_list_wins(0)
+                local count = 0
+                for _ in pairs(all_windows) do
+                    count = count + 1
                 end
+
+                if count > 1 then
+                    local window_id = require("custom.configs.windowpicker").pick_window()
+
+                    if window_id then
+                        vim.api.nvim_set_current_win(window_id)
+                    end
+                end
+
+                vim.cmd("edit " .. vim.fn.fnameescape(node.path))
             end,
             ["S"] = "open_split",
             ["s"] = "open_vsplit",
