@@ -107,20 +107,7 @@ local options = {
                         -- which window to open new file buffer
                         actions.close(prompt_bufnr)
 
-                        local all_windows = vim.api.nvim_tabpage_list_wins(0)
-                        local count = 0
-                        for _ in pairs(all_windows) do
-                            count = count + 1
-                        end
-
-                        if count > 1 then
-                            local window_id = require("custom.configs.windowpicker").pick_window()
-
-                            if window_id then
-                                vim.api.nvim_set_current_win(window_id)
-                            end
-                        end
-
+                        require("custom.configs.windowpicker").pick_window()
                         vim.cmd("edit " .. vim.fn.fnameescape(entry.path))
                     end,
                 },

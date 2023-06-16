@@ -1,6 +1,17 @@
 local M = {}
 
 M.pick_window = function()
+    -- Check if got enough windows to select, otherwise do not execute window-picker extension
+    local all_windows = vim.api.nvim_tabpage_list_wins(0)
+    local count = 0
+    for _ in pairs(all_windows) do
+        count = count + 1
+    end
+
+    if count <= 1 then
+        return false
+    end
+
     local options = {
         -- hint = "floating-big-letter",
         prompt_message = "",
@@ -47,7 +58,13 @@ M.pick_window = function()
     }
 
     -- require("window-picker").setup(options)
-    return require("window-picker").pick_window(options)
+    local window_id = require("window-picker").pick_window(options)
+
+    if window_id then
+        vim.api.nvim_set_current_win(window_id)
+    end
+
+    return true
 end
 
 return M
