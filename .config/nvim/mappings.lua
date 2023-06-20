@@ -17,6 +17,7 @@ M.disabled = {
         ["<C-n>"] = {},
         ["<leader>e"] = {},
         ["<leader>b"] = {},
+        ["<leader>x"] = {},
         ["gr"] = {},
     },
 }
@@ -62,7 +63,7 @@ M.buffer = {
             "focus previous buffer",
         },
         ["<leader>x"] = {
-            "<cmd> CloseCurrentBuffer <CR>",
+            "<cmd> Bdelete <CR>",
             "close current buffer",
         },
         ["<C-w>a"] = {

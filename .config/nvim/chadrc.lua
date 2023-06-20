@@ -12,7 +12,7 @@ M.ui = {
     hl_add = highlights.add,
 
     nvdash = {
-        load_on_startup = true,
+        load_on_startup = false,
         header = nvdash.header,
         buttons = nvdash.buttons,
     },

@@ -20,6 +20,21 @@ M.setup_autocommands = function()
         end,
     })
 
+    -- open nvdash on startup
+    autocmd({ "UIEnter" }, {
+        callback = function()
+            M.show_dashboard()
+        end,
+    })
+
+    -- open nvdash after deleted all buffers (requires bufdelete.nvim)
+    autocmd("User", {
+        pattern = "BDeletePost*",
+        callback = function()
+            M.show_dashboard()
+        end,
+    })
+
     -- highlight config files
     autocmd({ "BufEnter", "BufRead" }, { pattern = "*.*conf*", command = "setf dosini" })
 
@@ -319,6 +334,42 @@ M.bufilter = function()
     end
 
     return bufs
+end
+
+-- get a list of listed buffers =P
+M.get_listed_buffers = function()
+    local buffers = {}
+    local len = 0
+    for buffer = 1, vim.fn.bufnr("$") do
+        if vim.fn.buflisted(buffer) == 1 then
+            len = len + 1
+            buffers[len] = buffer
+        end
+    end
+
+    return buffers
+end
+
+-- check if must open nvdash
+M.show_dashboard = function()
+    local found_non_empty_buffer = false
+    local buffers = M.get_listed_buffers()
+
+    for _, bufnr in ipairs(buffers) do
+        if not found_non_empty_buffer then
+            local name = vim.api.nvim_buf_get_name(bufnr)
+            local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+
+            if name ~= "" and ft ~= "nvdash" then
+                found_non_empty_buffer = true
+            end
+        end
+    end
+
+    if not found_non_empty_buffer then
+        require("neo-tree").close_all()
+        vim.cmd("Nvdash")
+    end
 end
 
 return M

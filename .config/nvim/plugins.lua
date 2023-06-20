@@ -260,6 +260,13 @@ local plugins = {
         end,
     },
 
+    -- delete buffers without losing window layout
+    {
+        "famiu/bufdelete.nvim",
+        lazy = false,
+        init = function() end,
+    },
+
     -- -- debug applications
     -- {mfussenegger/nvim-dap",
     -- },

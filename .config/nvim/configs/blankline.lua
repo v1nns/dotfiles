@@ -9,6 +9,7 @@ local options = {
         "TelescopePrompt",
         "TelescopeResults",
         "nvchad_cheatsheet",
+        "nvdash",
         "lsp-installer",
         "norg",
         "",
