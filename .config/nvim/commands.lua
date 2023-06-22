@@ -76,6 +76,7 @@ M.setup_autocommands = function()
             "*Telescope*",
             "terminal",
             "mason",
+            "Trouble",
         },
         callback = function()
             -- disable ruler (aka virtual column)
