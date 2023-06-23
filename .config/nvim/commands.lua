@@ -72,6 +72,7 @@ M.setup_autocommands = function()
     autocmd("FileType", {
         pattern = {
             "nvdash",
+            "nvcheatsheet",
             "packer",
             "*Telescope*",
             "terminal",
