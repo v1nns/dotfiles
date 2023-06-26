@@ -267,6 +267,24 @@ local plugins = {
         init = function() end,
     },
 
+    -- word motion using search
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+        keys = {
+            {
+                "s",
+                mode = { "n", "x", "o" },
+                function()
+                    -- default options: exact mode, multi window, all directions, with a backdrop
+                    require("flash").jump()
+                end,
+                desc = "Flash",
+            },
+        },
+    },
+
     -- -- debug applications
     -- {mfussenegger/nvim-dap",
     -- },
