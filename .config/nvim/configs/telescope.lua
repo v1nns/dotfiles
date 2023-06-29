@@ -76,6 +76,9 @@ local options = {
                 end,
 
                 ["<C-BS>"] = { "<c-s-w>", type = "command" },
+
+                -- do not use this
+                ["<C-l>"] = false,
             },
         },
     },
@@ -130,9 +133,8 @@ local options = {
             end,
             mappings = {
                 i = {
-                    ["<CR>"] = require("telescope.actions").select_default + require(
-                        "telescope.actions"
-                    ).center,
+                    ["<CR>"] = require("telescope.actions").select_default
+                        + require("telescope.actions").center,
                 },
             },
         },
@@ -140,9 +142,8 @@ local options = {
             symbol_width = 80,
             mappings = {
                 i = {
-                    ["<CR>"] = require("telescope.actions").select_default + require(
-                        "telescope.actions"
-                    ).center,
+                    ["<CR>"] = require("telescope.actions").select_default
+                        + require("telescope.actions").center,
                 },
             },
         },
