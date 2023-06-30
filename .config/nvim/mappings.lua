@@ -183,6 +183,20 @@ M.lspconfig = {
             "<cmd> TroubleToggle lsp_references<CR>",
             "list all symbol references",
         },
+
+        ["<leader>ld"] = {
+            function()
+                vim.diagnostic.disable()
+            end,
+            "disable lsp diagnostics",
+        },
+
+        ["<leader>le"] = {
+            function()
+                vim.diagnostic.enable()
+            end,
+            "enable lsp diagnostics",
+        },
     },
 
     v = {
