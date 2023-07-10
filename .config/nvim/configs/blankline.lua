@@ -12,6 +12,7 @@ local options = {
         "nvdash",
         "lsp-installer",
         "norg",
+        "mason",
         "",
     },
     -- max_indent_increase = 1,
