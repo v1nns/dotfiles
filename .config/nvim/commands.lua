@@ -356,8 +356,10 @@ end
 M.show_dashboard = function()
     local found_non_empty_buffer = false
     local buffers = M.get_listed_buffers()
+    local count = 0
 
     for _, bufnr in ipairs(buffers) do
+        count = count + 1
         if not found_non_empty_buffer then
             local name = vim.api.nvim_buf_get_name(bufnr)
             local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
@@ -368,8 +370,11 @@ M.show_dashboard = function()
         end
     end
 
-    if not found_non_empty_buffer then
+    if count > 1 then
         require("neo-tree").close_all()
+    end
+
+    if not found_non_empty_buffer then
         vim.cmd("Nvdash")
     end
 end
