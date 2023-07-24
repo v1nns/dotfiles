@@ -370,11 +370,8 @@ M.show_dashboard = function()
         end
     end
 
-    if count > 1 then
+    if not found_non_empty_buffer and count > 1 then
         require("neo-tree").close_all()
-    end
-
-    if not found_non_empty_buffer then
         vim.cmd("Nvdash")
     end
 end
