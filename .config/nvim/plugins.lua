@@ -142,35 +142,6 @@ local plugins = {
         config = true,
     },
 
-    -- code navigation using word-motion
-    {
-        "phaazon/hop.nvim",
-        cmd = {
-            "HopAnywhere",
-            "HopChar1",
-            "HopChar2",
-            "HopLine",
-            "HopLineStart",
-            "HopVertical",
-            "HopPattern",
-            "HopWord",
-        },
-        branch = "v2",
-        config = true,
-    },
-
-    -- fast highlight for unique character in current line
-    {
-        "jinh0/eyeliner.nvim",
-        lazy = false,
-        init = function()
-            require("eyeliner").setup({
-                highlight_on_key = true,
-                dim = true,
-            })
-        end,
-    },
-
     -- breadcrumbs using winbar
     {
         "SmiteshP/nvim-navic",
