@@ -270,7 +270,24 @@ M.setup_commands = function()
 
                 -- format new line
                 if empty == true then
-                    line = "/* " .. string.rep("*", 94) .. " */"
+                    -- get current cursor position
+                    table.unpack = table.unpack or unpack
+                    local _, _, _, _, cursor_position = table.unpack(vim.fn.getcurpos())
+                    cursor_position = cursor_position - 1
+
+                    -- quantity of ASCII characters for comment divider
+                    local size = 94
+
+                    if cursor_position > 0 then
+                        size = size - cursor_position
+                        line = string.rep(" ", cursor_position)
+                            -- TODO: replace '/*' with info from vim.bo.comments
+                            .. "/* "
+                            .. string.rep("-", size)
+                            .. " */"
+                    else
+                        line = "/* " .. string.rep("*", size) .. " */"
+                    end
                 else
                     -- trim all the whitespaces
                     line = line:gsub("^%s*(.-)%s*$", "%1")

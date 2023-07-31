@@ -16,6 +16,9 @@ vim.g.indent_blankline_char = "⡇"
 vim.o.sessionoptions =
     "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+-- allow virtual editing in all modes
+vim.opt.virtualedit = "all"
+
 -- setup commands
 require("custom.commands").setup_autocommands()
 require("custom.commands").setup_commands()
