@@ -331,7 +331,7 @@ exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/nord_monter
 # P.S.: I won't upload mp4 here, so if you want to use it something similar, just look for any
 # wallpaper from Wallpaper Engine Workshop.
 # pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4
-exec_always --no-startup-id video-wallpaper.sh --stop; video-wallpaper.sh --start "/$HOME/Pictures/Wallpapers/floating_in_space.mp4"
+exec_always --no-startup-id video-wallpaper.sh --stop; video-wallpaper.sh --start "/$HOME/Pictures/Wallpapers/marooned.mp4"
 
 # To setup monitor layout, apply current meta mode using NVIDIA X Server Settings
 # https://wiki.archlinux.org/title/NVIDIA#Using_nvidia-settings
@@ -360,7 +360,7 @@ exec --no-startup-id qpwgraph -m &
 # password, check if gnome-keyring-daemon is running, if not, add this:
 #  gnome-keyring-daemon --start --components=secrets
 # also, must add this argument to chrome.desktop:
-#  --password-store=gnome
+#  --password-store=gnome-libsecret
 
 # focus animation for new window
 # exec_always --no-startup-id flashfocus &

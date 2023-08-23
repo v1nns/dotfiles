@@ -248,6 +248,7 @@ M.changed_themes = {
             ["@text.reference"] = { fg = "#1abc9c" },
             ["@text.todo.unchecked"] = { fg = "#7aa2f7" }, -- For brackets and parens.
             ["@text.todo.checked"] = { fg = "#73daca" }, -- For brackets and parens.
+            ["@text.uri"] = { fg = "#2ac3de" }, -- For URIs.
             -- ["@text.warning"] = { fg = "#24283b", bg = c.warning },
             -- ["@text.danger"] = { fg = "#24283b", bg = c.error },
 

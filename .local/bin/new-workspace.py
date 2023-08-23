@@ -2,7 +2,6 @@
 # Author: Vinicius M Longaray
 # Github: @v1nns
 import argparse
-import json
 import i3ipc
 
 
@@ -79,9 +78,9 @@ def move_and_rename(i3: i3ipc.Connection, previous_name: str, new_number: int,
     wk = next((w for w in workspaces if w.number == new_number), None)
 
     # go to new workspace
-    i3.command("workspace {}".format(wk.name if wk != None else new_number))
+    i3.command("workspace {}".format(wk.name if wk is not None else new_number))
 
-    if wk == None:
+    if wk is None:
         # check if this is the last window in workspace
         if sum(1 for w in workspaces if w.name == previous_name) == 1:
             # rename new workspace with name from the previous one
@@ -103,7 +102,6 @@ def main():
     active = Workspace("", 0)
     workspaces = []
     greater_numbers = []
-    rename = False
 
     # list all open windows in i3
     for con in i3.get_tree():
@@ -140,6 +138,8 @@ def main():
 
     elif args.move:
         # move current container to given workspace and go there
+        # TODO: get name from targeted workspace
+        # for example, move to 1:web, it will create a 1 workspace
         move_and_rename(i3, active.name, args.move, workspaces)
         return
 

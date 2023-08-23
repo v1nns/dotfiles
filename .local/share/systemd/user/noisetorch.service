@@ -1,16 +1,19 @@
 [Unit]
 Description=Noisetorch Noise Cancelling
+Requires=pipewire.socket
 Requires=sys-devices-pci0000:00-0000:00:14.0-usb1-1\x2d3-1\x2d3.1-1\x2d3.1.2-1\x2d3.1.2:1.0-sound-card3-controlC3.device
 After=sys-devices-pci0000:00-0000:00:14.0-usb1-1\x2d3-1\x2d3.1-1\x2d3.1.2-1\x2d3.1.2:1.0-sound-card3-controlC3.device
 After=pipewire.service
+StartLimitIntervalSec=35
+StartLimitBurst=9
 
 [Service]
 Type=simple
 RemainAfterExit=yes
 ExecStart=%h/.local/bin/noisetorch -i -s alsa_input.usb-Kingston_HyperX_Quadcast_4110-00.capture.0.0 -t 95
 ExecStop=%h/.local/bin/noisetorch -u
-Restart=on-failure
-RestartSec=3
+Restart=always
+RestartSec=10
 
 [Install]
 WantedBy=default.target
