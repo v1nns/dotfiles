@@ -14,7 +14,7 @@ local options = {
         "python",
         "cmake",
         "make",
-        "comment",
+        -- "comment",
         "yaml",
         "yang",
     },

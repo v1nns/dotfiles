@@ -20,6 +20,11 @@ M.setup_autocommands = function()
         end,
     })
 
+    -- preserve equal size for splitted windows after resize
+    autocmd({ "VimResized" }, {
+        command = "wincmd =",
+    })
+
     -- open nvdash on startup
     autocmd({ "UIEnter" }, {
         callback = function()
