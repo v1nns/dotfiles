@@ -27,7 +27,7 @@ local symbol_highlight = function(client)
     end
 end
 
-local servers = { "html", "cssls", "clangd", "pylsp" }
+local servers = { "html", "cssls", "clangd", "jsonls", "pylsp" }
 capabilities.offsetEncoding = { "utf-32" }
 
 for _, lsp in ipairs(servers) do

@@ -14,7 +14,7 @@ vim.g.indent_blankline_char = "⡇"
 
 -- set info to be saved with the underlying :mksession
 vim.o.sessionoptions =
-    "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+    "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions,globals"
 
 -- allow virtual editing in all modes
 vim.opt.virtualedit = "all"
