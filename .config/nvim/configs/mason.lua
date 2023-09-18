@@ -18,6 +18,10 @@ local options = {
         "shfmt",
         "shellcheck",
 
+        -- cmake
+        "cmake-language-server",
+        "cmakelang",
+
         -- cpp
         "clangd",
         "clang-format",

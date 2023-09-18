@@ -27,7 +27,7 @@ local symbol_highlight = function(client)
     end
 end
 
-local servers = { "html", "cssls", "clangd", "jsonls", "pylsp" }
+local servers = { "html", "cssls", "cmake", "clangd", "jsonls", "pylsp" }
 capabilities.offsetEncoding = { "utf-32" }
 
 for _, lsp in ipairs(servers) do
@@ -49,8 +49,10 @@ for _, lsp in ipairs(servers) do
         settings = settings,
         on_attach = function(client, bufnr)
             on_attach(client, bufnr)
-            navic.attach(client, bufnr)
-            symbol_highlight(client)
+            if not lsp == "cmake" then
+                navic.attach(client, bufnr)
+                symbol_highlight(client)
+            end
         end,
         capabilities = capabilities,
     })
