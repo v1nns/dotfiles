@@ -97,7 +97,7 @@ M.setup_autocommands = function()
     autocmd({ "VimLeavePre" }, {
         callback = function()
             vim.cmd(":DiffviewClose")
-            vim.cmd(":Neotree close")
+            vim.cmd(":tabdo Neotree close")
         end,
     })
 

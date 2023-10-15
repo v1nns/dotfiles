@@ -256,6 +256,15 @@ local plugins = {
         },
     },
 
+    -- scrollbar
+    {
+        "dstein64/nvim-scrollview",
+        lazy = false,
+        init = function()
+            require("scrollview").setup()
+        end,
+    },
+
     -- -- debug applications
     -- {mfussenegger/nvim-dap",
     -- },
