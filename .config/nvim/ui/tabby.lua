@@ -28,17 +28,17 @@ M.setup = function()
         return {
             {
                 { "  ", hl = theme.head },
-                line.sep("█", theme.head, theme.fill),
+                -- line.sep("█", theme.head, theme.fill),
             },
             line.tabs().foreach(function(tab)
                 local hl = tab.is_current() and theme.current_tab or theme.tab
                 return {
-                    line.sep("█", hl, theme.fill),
+                    line.sep(" ", hl, theme.fill),
                     tab.is_current() and "󰄲" or "",
                     -- tab.number(),
                     tab.name(),
                     tab.close_btn(""),
-                    line.sep("█", hl, theme.fill),
+                    line.sep(" ", hl, theme.fill),
                     hl = hl,
                     margin = " ",
                 }

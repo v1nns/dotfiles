@@ -265,6 +265,14 @@ local plugins = {
         end,
     },
 
+    -- highlight TODO comments
+    {
+        "folke/todo-comments.nvim",
+        lazy = false,
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {},
+    },
+
     -- -- debug applications
     -- {mfussenegger/nvim-dap",
     -- },

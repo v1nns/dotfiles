@@ -76,8 +76,10 @@ M.add = {
     },
     TabLineSel = {
         bg = "#444b6a",
-        fg = "#e0af68",
+        -- fg = "#73daca",
+        fg = "#7dcfff",
         underline = true,
+        bold = true,
     },
 
     -- hlslens
