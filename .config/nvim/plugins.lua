@@ -50,12 +50,6 @@ local plugins = {
         opts = require("custom.configs.cmp"),
     },
 
-    -- add indentation guide to code blocks
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        opts = require("custom.configs.blankline"),
-    },
-
     -- git integration with buffers
     {
         "lewis6991/gitsigns.nvim",
