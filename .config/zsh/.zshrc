@@ -114,3 +114,11 @@ hex2bin() {
 hex2dec() {
    echo "obase=10; ibase=16; $1" | bc
 }
+
+oct2dec() {
+   echo "obase=10; ibase=8; $1" | bc
+}
+
+dec2oct() {
+   echo "obase=8; ibase=10; $1" | bc
+}

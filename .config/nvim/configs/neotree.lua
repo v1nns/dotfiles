@@ -243,6 +243,12 @@ local options = {
                     renderer.redraw(state)
                 end,
             },
+            fuzzy_finder_mappings = {
+                ["<down>"] = "move_cursor_down",
+                ["<C-j>"] = "move_cursor_down",
+                ["<up>"] = "move_cursor_up",
+                ["<C-k>"] = "move_cursor_up",
+            },
         },
     },
     buffers = {
