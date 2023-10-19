@@ -4,19 +4,43 @@ local M = {}
 M.setup_autocommands = function()
     local autocmd = vim.api.nvim_create_autocmd
 
-    -- setup title string
+    -- automatic commands to execute when neovim is opened
     autocmd({ "VimEnter", "DirChanged" }, {
         callback = function()
+            -- setup title string
             -- TODO: show empty when in HOME?
             local cwd = vim.fn.getcwd()
             vim.o.titlestring = vim.fn.fnamemodify(cwd, ":t") .. " - " .. cwd
+
+            -- force highlights reload
+            require("base46").load_all_highlights()
         end,
     })
 
-    -- force highlights reload
-    autocmd({ "VimEnter", "DirChanged" }, {
+    -- auto load session when neovim is opened
+    autocmd({ "VimEnter" }, {
         callback = function()
-            require("base46").load_all_highlights()
+            -- only load the session if nvim was started with no args
+            if vim.fn.argc(-1) == 0 then
+                local resession = require("resession")
+
+                -- Save these to a different directory, so our manual sessions don't get polluted
+                resession.load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
+            end
+        end,
+    })
+
+    -- close some stuff before exitting and save a session
+    autocmd({ "VimLeavePre" }, {
+        callback = function()
+            vim.cmd(":DiffviewClose")
+            vim.cmd(":tabdo Neotree close")
+
+            -- exclude some paths to avoid saving any session
+            if vim.fn.getcwd() ~= vim.env.HOME and string.find(vim.fn.getcwd(), "/tmp/") == nil then
+                -- save session
+                require("resession").save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+            end
         end,
     })
 
@@ -47,10 +71,10 @@ M.setup_autocommands = function()
     autocmd({ "BufEnter", "BufRead" }, { pattern = "*.rasi", command = "setf css" })
 
     -- highlight c++ files
-    autocmd(
-        { "BufEnter", "BufRead" },
-        { pattern = { "*.cc", "*.h", "*.cpp" }, command = "setf cpp" }
-    )
+    -- autocmd(
+    --     { "BufEnter", "BufRead" },
+    --     { pattern = { "*.cc", "*.h", "*.cpp" }, command = "setf cpp" }
+    -- )
 
     -- auto-wrap comments, don't auto insert comment on o/O and enter
     autocmd("FileType", {
@@ -90,14 +114,6 @@ M.setup_autocommands = function()
 
             -- disable quickscope highlight
             vim.b.qs_local_disable = 1
-        end,
-    })
-
-    -- close some stuff before exitting (otherwise, it is buggy with autosession)
-    autocmd({ "VimLeavePre" }, {
-        callback = function()
-            vim.cmd(":DiffviewClose")
-            vim.cmd(":tabdo Neotree close")
         end,
     })
 
@@ -392,8 +408,10 @@ M.show_dashboard = function()
         end
     end
 
-    if not found_non_empty_buffer and count > 1 then
-        require("neo-tree").close_all()
+    if not found_non_empty_buffer then
+        if count > 1 then
+            require("neo-tree").close_all()
+        end
         vim.cmd("Nvdash")
     end
 end

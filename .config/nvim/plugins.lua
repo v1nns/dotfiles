@@ -119,21 +119,20 @@ local plugins = {
         end,
     },
 
-    -- session management (1/2)
+    -- session management + limit buffers scope per tab
     {
-        "rmagatti/auto-session",
+        "stevearc/resession.nvim",
         lazy = false,
-        opts = require("custom.configs.autosession"),
-    },
-    -- session management (2/2)
-    {
-        "rmagatti/session-lens",
-        cmd = "SearchSession",
         dependencies = {
-            "rmagatti/auto-session",
-            "nvim-telescope/telescope.nvim",
+            {
+                "tiagovla/scope.nvim",
+                lazy = false,
+                config = true,
+            },
         },
-        config = true,
+        opts = function()
+            return require("custom.configs.resession")
+        end,
     },
 
     -- breadcrumbs using winbar
@@ -186,14 +185,6 @@ local plugins = {
         "nanozuki/tabby.nvim",
         init = function()
             require("custom.ui.tabby").setup()
-        end,
-    },
-
-    -- limit buffers scope per tab
-    {
-        "tiagovla/scope.nvim",
-        init = function()
-            require("scope").setup()
         end,
     },
 

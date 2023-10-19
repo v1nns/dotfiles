@@ -224,6 +224,13 @@ M.general = {
             "<cmd> WrapTextAtColumn <CR>",
             "wrap paragraph",
         },
+
+        ["<A-r>"] = {
+            function()
+                require("resession").load(nil, { dir = "dirsession" })
+            end,
+            "recent folders",
+        },
     },
 
     v = {
@@ -276,11 +283,6 @@ M.telescope = {
             "<cmd> Telescope find_files prompt_title=Open\\ file<CR>",
             "open file",
         },
-        ["<A-r>"] = {
-            "<cmd> SearchSession<CR>",
-            "recent folders",
-        },
-
         ["<C-S-b>"] = { "<cmd> Telescope marks<CR>", "open bookmarks" },
         ["<C-S-f>"] = {
             "<cmd> Telescope live_grep prompt_title=Search\\ all<CR>",

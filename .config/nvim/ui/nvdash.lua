@@ -67,7 +67,11 @@ return {
             "Alt p",
             "Telescope find_files prompt_title=Open\\ file hidden=true",
         },
-        { "  Recent folders", "Alt r", "SearchSession" },
+        {
+            "  Recent folders",
+            "Alt r",
+            'lua require("resession").load(nil, { dir = "dirsession" })',
+        },
         { "  Themes", "Spc t h", "Telescope themes" },
         { "  Mappings", "Spc c h", "NvCheatsheet" },
     },
