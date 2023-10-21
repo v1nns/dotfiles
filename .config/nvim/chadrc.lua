@@ -17,11 +17,11 @@ M.ui = {
         buttons = nvdash.buttons,
     },
 
+    -- will include navic's base46 hlgroup cache in base46's auto-compile functionality
+    extended_integrations = { "navic" },
+
     statusline = {
         theme = "vscode_colored",
-        overriden_modules = function()
-            return require("custom.ui.statusline")
-        end,
     },
 
     tabufline = {

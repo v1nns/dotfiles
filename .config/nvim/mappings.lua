@@ -8,6 +8,7 @@ M.disabled = {
         ["<leader>fw"] = {},
         ["<leader>fb"] = {},
         ["<leader>fh"] = {},
+        ["<leader>fm"] = {},
         ["<leader>fo"] = {},
         ["<leader>tk"] = {},
         ["<leader>cm"] = {},
@@ -196,6 +197,13 @@ M.lspconfig = {
                 vim.diagnostic.enable()
             end,
             "enable lsp diagnostics",
+        },
+
+        ["<leader>fm"] = {
+            function()
+                require("conform").format({ async = true, lsp_fallback = true })
+            end,
+            "format code",
         },
     },
 

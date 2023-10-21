@@ -180,6 +180,9 @@ M.override = {
 
     -- nvchad ui statusline
     St_cwd = { fg = "#2ac3de" },
+
+    -- navic breadcrumb
+    NavicText = { fg = "#b4f9f8" },
 }
 
 M.changed_themes = {

@@ -89,16 +89,22 @@ local plugins = {
     -- language server protocol
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            "jose-elias-alvarez/null-ls.nvim",
-            config = function()
-                -- format and lint
-                require("custom.configs.null-ls")
-            end,
-        },
+        lazy = false,
         config = function()
             require("plugins.configs.lspconfig")
             require("custom.configs.lspconfig")
+        end,
+    },
+
+    -- code formatting
+    {
+        "stevearc/conform.nvim",
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        opts = require("custom.configs.conform"),
+        init = function()
+            -- Set formatexpr
+            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
     },
 
@@ -138,7 +144,13 @@ local plugins = {
     -- breadcrumbs using winbar
     {
         "SmiteshP/nvim-navic",
-        opts = require("custom.configs.navic"),
+        dependencies = { "neovim/nvim-lspconfig" },
+        config = function()
+            dofile(vim.g.base46_cache .. "navic") -- load its hl groups cache!
+            local opts = require("custom.configs.navic")
+
+            require("nvim-navic").setup(opts)
+        end,
     },
 
     -- set up a virtual column (similar to a ruler in another IDEs)
