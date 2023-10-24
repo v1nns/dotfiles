@@ -36,6 +36,11 @@ M.setup_autocommands = function()
             vim.cmd(":DiffviewClose")
             vim.cmd(":tabdo Neotree close")
 
+            -- do not save session if current buffer is a gitcommit
+            if vim.bo.filetype == "gitcommit" then
+                return
+            end
+
             -- exclude some paths to avoid saving any session
             if vim.fn.getcwd() ~= vim.env.HOME and string.find(vim.fn.getcwd(), "/tmp/") == nil then
                 -- save session
