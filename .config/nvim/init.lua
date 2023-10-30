@@ -9,7 +9,8 @@ vim.opt.listchars = { trail = "~", tab = "» " }
 vim.opt.fillchars = { eob = " ", diff = "⣿" }
 
 -- change character for indent_blankline, to use a 6-dot braille cell
-vim.g.indent_blankline_char = "⡇"
+vim.g.indent_blankline_char = "▏"
+-- vim.g.indent_blankline_char = "⡇"
 -- vim.g.indent_blankline_context_char = "⣿"
 
 -- set info to be saved with the underlying :mksession
