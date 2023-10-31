@@ -101,6 +101,12 @@ M.window = {
         ["<C-8>"] = { "<cmd> :8wincmd w <CR>", "focus window 8" },
         ["<C-9>"] = { "<cmd> :9wincmd w <CR>", "focus window 9" },
         ["<C-0>"] = { "<cmd> :0wincmd w <CR>", "focus window 10" },
+
+        -- center focused buffer
+        ["<leader>cb"] = {
+            "<cmd> ZenMode <CR>",
+            "center current buffer",
+        },
     },
 }
 
@@ -238,6 +244,11 @@ M.general = {
                 require("resession").load(nil, { dir = "dirsession" })
             end,
             "recent folders",
+        },
+
+        ["<leader>tt"] = {
+            "<cmd> Twilight <CR>",
+            "toggle code dimming",
         },
     },
 

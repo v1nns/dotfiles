@@ -270,6 +270,28 @@ local plugins = {
         opts = {},
     },
 
+    -- dim unfocused code
+    {
+        "folke/twilight.nvim",
+        cmd = "Twilight",
+        opts = {},
+    },
+
+    -- zen mode (center current buffer)
+    {
+        "folke/zen-mode.nvim",
+        cmd = "ZenMode",
+        opts = {
+            plugins = {
+                options = {
+                    enabled = true,
+                },
+                twilight = {
+                    enabled = true,
+                },
+            },
+        },
+    },
     -- -- debug applications
     -- {mfussenegger/nvim-dap",
     -- },
