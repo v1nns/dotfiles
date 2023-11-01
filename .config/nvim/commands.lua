@@ -27,6 +27,11 @@ M.setup_autocommands = function()
                 -- Save these to a different directory, so our manual sessions don't get polluted
                 resession.load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
             end
+
+            -- enable treesitter-based folding
+            vim.cmd("set foldmethod=expr")
+            vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
+            vim.cmd("set nofoldenable")
         end,
     })
 
