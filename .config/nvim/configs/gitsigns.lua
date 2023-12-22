@@ -32,6 +32,7 @@ local options = {
             linehl = "GitSignsAddLn",
         },
     },
+    _git_version = "2.43.0",
 }
 
 return options
