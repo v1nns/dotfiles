@@ -134,8 +134,7 @@ local options = {
     },
     hooks = {
         view_opened = function(view)
-            -- Highlight 'DiffChange' as 'DiffDelete' on the left, and 'DiffAdd' on
-            -- the right.
+            -- Highlight 'DiffChange' as 'DiffDelete' on the left, and 'DiffAdd' on the right.
             local function post_layout()
                 tbl_ensure(view, "winopts.diff2.a")
                 tbl_ensure(view, "winopts.diff2.b")
@@ -158,6 +157,8 @@ local options = {
 
             view.emitter:on("post_layout", post_layout)
             post_layout()
+
+            vim.cmd(":TabRename diff")
         end,
     },
 }

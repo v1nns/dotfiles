@@ -1,7 +1,11 @@
 local M = {}
 
 M.setup = function()
-    local options = { performance_mode = true }
+    local options = {
+        hide_cursor = false,
+        performance_mode = false,
+    }
+
     require("neoscroll").setup(options)
 
     local t = {}
@@ -10,11 +14,11 @@ M.setup = function()
     -- Use the "sine" easing function
     t["<C-u>"] = {
         "scroll",
-        { "-vim.wo.scroll", "true", "100", [['sine']] },
+        { "-vim.wo.scroll", "true", "200", [['sine']] },
     }
     t["<C-d>"] = {
         "scroll",
-        { "vim.wo.scroll", "true", "100", [['sine']] },
+        { "vim.wo.scroll", "true", "200", [['sine']] },
     }
 
     require("neoscroll.config").set_mappings(t)
