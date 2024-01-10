@@ -14,11 +14,11 @@ M.setup = function()
     -- Use the "sine" easing function
     t["<C-u>"] = {
         "scroll",
-        { "-vim.wo.scroll", "true", "200", [['sine']] },
+        { "-vim.wo.scroll", "true", "150", [['sine']] },
     }
     t["<C-d>"] = {
         "scroll",
-        { "vim.wo.scroll", "true", "200", [['sine']] },
+        { "vim.wo.scroll", "true", "150", [['sine']] },
     }
 
     require("neoscroll.config").set_mappings(t)
