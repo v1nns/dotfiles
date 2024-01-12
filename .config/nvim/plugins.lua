@@ -64,6 +64,10 @@ local plugins = {
     -- git integration with buffers
     {
         "lewis6991/gitsigns.nvim",
+        -- override init from nvchad
+        init = function()
+            require("core.utils").lazy_load("gitsigns.nvim")
+        end,
         opts = require("custom.configs.gitsigns"),
     },
 

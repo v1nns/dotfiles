@@ -138,64 +138,15 @@ M.setup_autocommands = function()
             vim.g.git_messenger_popup_content_margins = false
         end,
     })
-
-    -- monitor all buffers to include into vim.t.bufs
-    autocmd({ "BufAdd", "BufEnter", "tabnew" }, {
-        callback = function(args)
-            if vim.t.bufs == nil then
-                vim.t.bufs = vim.api.nvim_get_current_buf() == args.buf and {} or { args.buf }
-            else
-                local bufs = vim.t.bufs
-
-                -- check for duplicates
-                if
-                    not vim.tbl_contains(bufs, args.buf)
-                    and (args.event == "BufEnter" or vim.bo[args.buf].buflisted)
-                    and (args.event == "BufEnter" or args.buf ~= vim.api.nvim_get_current_buf())
-                    and vim.api.nvim_buf_is_valid(args.buf)
-                    and vim.bo[args.buf].buflisted
-                then
-                    table.insert(bufs, args.buf)
-
-                    -- remove unnamed buffer which isnt current buf & modified
-                    for index, bufnr in ipairs(bufs) do
-                        if
-                            #vim.api.nvim_buf_get_name(bufnr) == 0
-                            and (vim.api.nvim_get_current_buf() ~= bufnr or bufs[index + 1])
-                            and not vim.api.nvim_buf_get_option(bufnr, "modified")
-                        then
-                            table.remove(bufs, index)
-                        end
-                    end
-
-                    vim.t.bufs = bufs
-                end
-            end
-        end,
-    })
-
-    -- monitor all buffer deletions to remove from vim.t.bufs
-    autocmd("BufDelete", {
-        callback = function(args)
-            for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
-                local bufs = vim.t[tab].bufs
-                if bufs then
-                    for i, bufnr in ipairs(bufs) do
-                        if bufnr == args.buf then
-                            table.remove(bufs, i)
-                            vim.t[tab].bufs = bufs
-                            break
-                        end
-                    end
-                end
-            end
-        end,
-    })
 end
 
 -- Commands
 M.setup_commands = function()
     local cmd = vim.api.nvim_create_user_command
+
+    -- workaround to save session with multitabs (go to last tab before exitting nvim)
+    -- NOTE: after reloading a session, buffers per tab-scoping will not properly work without this
+    vim.cmd([[:cno qa :tablast \| :qa]])
 
     -- remove trailing spaces from current buffer
     cmd("RemoveTrailingSpace", function()
@@ -222,7 +173,6 @@ M.setup_commands = function()
         neotree.execute({ action = "close" })
 
         -- close all buffers
-        -- TODO: close all windows in tab, instead of everything
         local count = 0
         for _, _ in ipairs(vim.api.nvim_list_tabpages()) do
             count = count + 1
@@ -256,41 +206,6 @@ M.setup_commands = function()
             vim.api.nvim_feedkeys("gq", "v", false)
         end
     end, { nargs = "?" })
-
-    -- go to next open buffer
-    cmd("GoToNext", function()
-        local bufs = M.bufilter() or {}
-
-        for i, v in ipairs(bufs) do
-            if vim.api.nvim_get_current_buf() == v then
-                vim.cmd(i == #bufs and "b" .. bufs[1] or "b" .. bufs[i + 1])
-                break
-            end
-        end
-    end, {})
-
-    -- go to previous open buffer
-    cmd("GoToPrev", function()
-        local bufs = M.bufilter() or {}
-
-        for i, v in ipairs(bufs) do
-            if vim.api.nvim_get_current_buf() == v then
-                vim.cmd(i == 1 and "b" .. bufs[#bufs] or "b" .. bufs[i - 1])
-                break
-            end
-        end
-    end, {})
-
-    -- close current buffer
-    cmd("CloseCurrentBuffer", function()
-        if vim.bo.buftype == "terminal" then
-            vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
-        else
-            local bufnr = vim.api.nvim_get_current_buf()
-            vim.cmd("GoToPrev")
-            vim.cmd("confirm bd" .. bufnr)
-        end
-    end, {})
 
     -- create command for comment divider snippets
     -- TODO: maybe split to another lua file like utils or something like that
@@ -368,23 +283,6 @@ M.setup_commands = function()
             mapped[mode]()
         end
     end, {})
-end
-
--- get a list of filtered buffers
-M.bufilter = function()
-    local bufs = vim.t.bufs or nil
-
-    if not bufs then
-        return {}
-    end
-
-    for i = #bufs, 1, -1 do
-        if not vim.api.nvim_buf_is_valid(bufs[i]) and vim.bo[bufs[i]].buflisted then
-            table.remove(bufs, i)
-        end
-    end
-
-    return bufs
 end
 
 -- get a list of listed buffers =P

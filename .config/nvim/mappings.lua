@@ -55,19 +55,11 @@ M.buffer = {
     n = {
         ["<C-n>"] = { "<cmd> enew <CR>", "new buffer" },
 
-        ["<Tab>"] = { "<cmd> GoToNext <CR>", "focus next buffer" },
-        ["<S-Tab>"] = {
-            "<cmd> GoToPrev <CR>",
-            "focus previous buffer",
-        },
-        ["<leader>x"] = {
-            "<cmd> Bdelete <CR>",
-            "close current buffer",
-        },
-        ["<C-w>a"] = {
-            "<cmd> CloseAllBuffers <CR>",
-            "close all buffers",
-        },
+        ["<Tab>"] = { "<cmd> bnext <CR>", "focus next buffer" },
+        ["<S-Tab>"] = { "<cmd> bprev <CR>", "focus previous buffer" },
+
+        ["<leader>x"] = { "<cmd> Bdelete <CR>", "close current buffer" },
+        ["<C-w>a"] = { "<cmd> CloseAllBuffers <CR>", "close all buffers" },
     },
 }
 
