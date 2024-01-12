@@ -4,7 +4,18 @@ local plugins = {
     {
         "nvim-treesitter/playground",
         lazy = false,
-        enabled = true,
+        enabled = false,
+    },
+
+    -- replace UI for messages, cmdline and the popupmenu
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = require("custom.configs.noice"),
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
     },
 
     -- disable default file explorer
@@ -16,7 +27,7 @@ local plugins = {
     -- instead, use neo-tree as file/buffer/git explorer
     {
         "nvim-neo-tree/neo-tree.nvim",
-        branch = "main",
+        branch = "v3.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
@@ -292,6 +303,15 @@ local plugins = {
             },
         },
     },
+
+    -- line motion using marks
+    {
+        "chentoast/marks.nvim",
+        init = function()
+            require("marks").setup()
+        end,
+    },
+
     -- -- debug applications
     -- {mfussenegger/nvim-dap",
     -- },

@@ -55,10 +55,7 @@ M.buffer = {
     n = {
         ["<C-n>"] = { "<cmd> enew <CR>", "new buffer" },
 
-        ["<Tab>"] = {
-            "<cmd> GoToNext <CR>",
-            "focus next buffer",
-        },
+        ["<Tab>"] = { "<cmd> GoToNext <CR>", "focus next buffer" },
         ["<S-Tab>"] = {
             "<cmd> GoToPrev <CR>",
             "focus previous buffer",
@@ -112,26 +109,25 @@ M.window = {
 
 M.tab = {
     n = {
-        ["<leader>ta"] = {
-            "<cmd> $tabnew <CR>",
-            "add new tab",
-        },
-        ["<leader>tc"] = {
-            "<cmd> tabclose <CR>",
-            "close tab",
-        },
+        ["<leader>ta"] = { "<cmd> $tabnew <CR>", "add new tab" },
+        ["<leader>tc"] = { "<cmd> tabclose <CR>", "close tab" },
         ["<leader>to"] = {
             "<cmd> tabonly <CR>",
             "close other tabs except current",
         },
-        ["<leader>tn"] = {
-            "<cmd> tabn <CR>",
-            "focus next tab",
-        },
-        ["<leader>tp"] = {
-            "<cmd> tabp <CR>",
-            "focus previous tab",
-        },
+        ["<leader>tn"] = { "<cmd> tabn <CR>", "focus next tab" },
+        ["<leader>tp"] = { "<cmd> tabp <CR>", "focus previous tab" },
+
+        ["<leader>1"] = { "<cmd> tabn 1 <CR>", "go to tab 1" },
+        ["<leader>2"] = { "<cmd> tabn 2 <CR>", "go to tab 2" },
+        ["<leader>3"] = { "<cmd> tabn 3 <CR>", "go to tab 3" },
+        ["<leader>4"] = { "<cmd> tabn 4 <CR>", "go to tab 4" },
+        ["<leader>5"] = { "<cmd> tabn 5 <CR>", "go to tab 5" },
+        ["<leader>6"] = { "<cmd> tabn 6 <CR>", "go to tab 6" },
+        ["<leader>7"] = { "<cmd> tabn 7 <CR>", "go to tab 7" },
+        ["<leader>8"] = { "<cmd> tabn 8 <CR>", "go to tab 8" },
+        ["<leader>9"] = { "<cmd> tabn 9 <CR>", "go to tab 9" },
+        ["<leader>0"] = { "<cmd> tabn 0 <CR>", "go to tab 0" },
     },
 }
 
@@ -214,10 +210,7 @@ M.lspconfig = {
     },
 
     v = {
-        ["<leader>fm"] = {
-            "gq",
-            "format code selection",
-        },
+        ["<leader>fm"] = { "gq", "format code selection" },
     },
 }
 

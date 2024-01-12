@@ -117,6 +117,7 @@ M.setup_autocommands = function()
             "terminal",
             "mason",
             "Trouble",
+            "Lazy",
         },
         callback = function()
             -- disable ruler (aka virtual column)
