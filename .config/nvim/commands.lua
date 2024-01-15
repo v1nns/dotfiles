@@ -180,6 +180,7 @@ M.setup_commands = function()
 
         if count == 1 then
             vim.cmd("%bd")
+            M.show_dashboard()
         else
             vim.cmd(":windo bd")
         end
@@ -309,9 +310,9 @@ M.show_dashboard = function()
         count = count + 1
         if not found_non_empty_buffer then
             local name = vim.api.nvim_buf_get_name(bufnr)
-            local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+            local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
-            if name ~= "" and ft ~= "nvdash" then
+            if name ~= "" and filetype ~= "nvdash" then
                 found_non_empty_buffer = true
             end
         end
