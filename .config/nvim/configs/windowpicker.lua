@@ -13,7 +13,7 @@ M.pick_window = function()
     end
 
     local options = {
-        -- hint = "floating-big-letter",
+        hint = "floating-big-letter",
         prompt_message = "",
 
         selection_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
@@ -35,7 +35,7 @@ M.pick_window = function()
                 },
 
                 -- if the buffer type is one of following, the window will be ignored
-                buftype = { "terminal" },
+                buftype = { "terminal", "nofile" },
             },
         },
 
@@ -57,7 +57,6 @@ M.pick_window = function()
         },
     }
 
-    -- require("window-picker").setup(options)
     local window_id = require("window-picker").pick_window(options)
 
     if window_id then
