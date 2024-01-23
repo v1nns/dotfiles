@@ -1,4 +1,21 @@
 #!/usr/bin/env python3
+"""Monitor notification messages sent through D-Bus protocol
+Author: Vinicius M. Longaray
+
+Monitor-notification is a flexible, not-so powerful, script to listen for
+notifications sent by any program that uses the D-Bus protocol. The main idea
+here is to filter these received notifications and save it in a file (default
+path is /tmp/notifications.log), thus making it possible to display this info in
+a cool way (like using a dialog with rofi).
+
+# How to use
+
+For my personal use, I'm running it detached in the beginning of i3 session, for
+example:
+
+  monitor-notification.py &> /dev/null
+
+"""
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import GLib
@@ -12,6 +29,7 @@ log_file = "/tmp/notifications.log"
 # store last string wrote to file
 last_string = "dummy"
 
+
 # utility
 def remove_html_tags(text):
     """Remove html tags from a string"""
@@ -19,26 +37,21 @@ def remove_html_tags(text):
     return TAG_RE.sub("", text)
 
 
-def filter_message(app, summary, body):
-    """Filter notification to display a friendly message"""
-    if app == "notify-send":
-        if summary == "DUNST_COMMAND_RESUME":
-            summary = "Notifications resumed"
-        elif summary == "DUNST_COMMAND_PAUSE":
-            summary = "Notifications paused"
-
-    return summary, body
-
-
 # Callback for any notification received from D-BUS
 def notifications(bus, message):
     # before doing any kind of magic,
     # check docs: https://developer.gnome.org/notification-spec/#command-notify
+    if message.get_interface() != 'org.freedesktop.Notifications' or message.get_member() != 'Notify':
+        return
 
     # parse arguments from MethodCallMessage
     args = message.get_args_list()
-    app_name = args[0]
 
+    # do nothing if message is empty
+    if len(args) == 0:
+        return
+
+    app_name = args[0]
     if len(app_name) > 0:
         global last_string
         summary = args[3].replace("\n", "")
@@ -47,9 +60,6 @@ def notifications(bus, message):
         # strip any HTML tag from summary and body
         summary = remove_html_tags(summary)
         body = remove_html_tags(body)
-
-        # for aesthetics, filter notification message
-        summary, body = filter_message(app_name, summary, body)
 
         # get current timestamp
         timestamp = time.strftime("%Y/%m/%d %H:%M")
@@ -75,11 +85,14 @@ def notifications(bus, message):
 
 def main():
     DBusGMainLoop(set_as_default=True)
-
     bus = dbus.SessionBus()
-    bus.add_match_string_non_blocking(
-        "eavesdrop=true, interface='org.freedesktop.Notifications', member='Notify'"
-    )
+
+    obj_dbus = bus.get_object('org.freedesktop.DBus',
+                              '/org/freedesktop/DBus')
+    obj_dbus.BecomeMonitor(["interface='org.freedesktop.Notifications'"],
+                           dbus.UInt32(0),
+                           interface='org.freedesktop.Notifications')
+
     bus.add_message_filter(notifications)
 
     main_loop = GLib.MainLoop()
