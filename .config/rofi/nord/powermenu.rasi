@@ -8,106 +8,109 @@
 
 configuration {
 
-    font: "JetBrains Mono 10";
-    width: 30;
-    lines: 5;
-    columns: 1;
+  font: "JetBrains Mono 10";
+  columns: 1;
 
-    display-ssh:    "";
-    display-run:    "";
-    display-drun:   "";
-    display-window: "";
-    display-combi:  "";
-    show-icons:     true;
+  display-ssh: "";
+  display-run: "";
+  display-drun: "";
+  display-window: "";
+  display-combi: "";
+  show-icons: true;
 }
 
 * {
-    nord0: #2e3440;
-    nord1: #3b4252;
-    nord2: #434c5e;
-    nord3: #4c566a;
+  nord0: #2e3440;
+  nord1: #3b4252;
+  nord2: #434c5e;
+  nord3: #4c566a;
 
-    nord4: #d8dee9;
-    nord5: #e5e9f0;
-    nord6: #eceff4;
+  nord4: #d8dee9;
+  nord5: #e5e9f0;
+  nord6: #eceff4;
 
-    nord7: #8fbcbb;
-    nord8: #88c0d0;
-    nord9: #81a1c1;
-    nord10: #5e81ac;
-    nord11: #bf616a;
+  nord7: #8fbcbb;
+  nord8: #88c0d0;
+  nord9: #81a1c1;
+  nord10: #5e81ac;
+  nord11: #bf616a;
 
-    nord12: #d08770;
-    nord13: #ebcb8b;
-    nord14: #a3be8c;
-    nord15: #b48ead;
+  nord12: #d08770;
+  nord13: #ebcb8b;
+  nord14: #a3be8c;
+  nord15: #b48ead;
 
-    foreground:  @nord9;
-    backlight:   #ccffeedd;
-    background-color:  transparent;
+  foreground: @nord9;
+  backlight: #ccffeedd;
+  background-color: transparent;
 
-    highlight:     underline bold #eceff4;
+  highlight: underline bold #eceff4;
 
-    transparent: rgba(46,52,64,0);
+  transparent: rgba(46, 52, 64, 0);
 }
 
 window {
-    location: center;
-    anchor:   center;
-    transparency: "screenshot";
-    padding: 0px;
-    border:  0px;
-    border-radius: 6px;
+  height: 235px;
+  width: 20%;
+  location: center;
+  anchor: center;
+  transparency: "screenshot";
+  padding: 0px;
+  border: 0px;
+  border-radius: 6px;
 
-    background-color: @transparent;
-    spacing: 0;
-    children:  [ mainbox ];
-    orientation: horizontal;
+  background-color: @transparent;
+  spacing: 0;
+  children: [ mainbox];
+  orientation: horizontal;
 }
 
 mainbox {
-    spacing: 0;
-    children: [ inputbar, listview ];
+  spacing: 0;
+  children: [ inputbar, listview];
 }
 
 inputbar {
-    color: @nord6;
-    padding: 11px;
-    background-color: #3b4252;
+  color: @nord6;
+  padding: 11px;
+  background-color: #3b4252;
 
-    border: 1px;
-    border-radius:  6px 6px 0px 0px;
-    border-color: @nord10;
+  border: 1px;
+  border-radius: 6px 6px 0px 0px;
+  border-color: @nord10;
 
-    children: [ prompt ];
+  children: [ prompt];
 }
 
-entry, prompt, case-indicator {
-    text-font: inherit;
-    text-color:inherit;
+entry,
+prompt,
+case-indicator {
+  text-font: inherit;
+  text-color: inherit;
 }
 
 prompt {
-    margin: 0px 0.3em 0em 0em ;
+  margin: 0px 0.3em 0em 0em;
 }
 
 listview {
-    padding: 6px 4px;
-    border-radius: 0px 0px 6px 6px;
-    border-color: @nord10;
-    border: 0px 1px 1px 1px;
-    background-color: rgba(46,52,64,0.9);
-    dynamic: false;
+  padding: 6px 4px;
+  border-radius: 0px 0px 6px 6px;
+  border-color: @nord10;
+  border: 0px 1px 1px 1px;
+  background-color: rgba(46, 52, 64, 0.9);
+  dynamic: false;
 }
 
 element-text {
-    padding: 8px -11px;
-    border-radius: 4px;
-    background-color: transparent;
-    text-color: @nord4;
+  padding: 8px -11px;
+  border-radius: 4px;
+  background-color: transparent;
+  text-color: @nord4;
 }
 
-element selected, element-text selected {
-    background-color: @nord7;
-    text-color: @nord0;
+element selected,
+element-text selected {
+  background-color: @nord7;
+  text-color: @nord0;
 }
