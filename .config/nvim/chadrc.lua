@@ -7,6 +7,7 @@ local nvdash = require("custom.ui.nvdash")
 M.ui = {
     theme = "tokyonight",
     changed_themes = highlights.changed_themes,
+    lsp_semantic_tokens = true,
 
     hl_override = highlights.override,
     hl_add = highlights.add,

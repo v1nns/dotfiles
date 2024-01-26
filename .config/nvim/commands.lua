@@ -166,6 +166,19 @@ M.setup_commands = function()
         })
     end, {})
 
+    -- close current active buffer
+    cmd("CloseBuffer", function()
+        local neotree = require("neo-tree.command")
+        -- must hide neo-tree before closing all buffers
+        neotree.execute({ action = "close" })
+
+        -- change to previous and delete alternate buffer
+        vim.cmd("bnext")
+        vim.cmd("bdelete #")
+
+        M.show_dashboard()
+    end, {})
+
     -- close all opened buffers
     cmd("CloseAllBuffers", function()
         local neotree = require("neo-tree.command")

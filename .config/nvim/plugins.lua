@@ -243,13 +243,6 @@ local plugins = {
         end,
     },
 
-    -- delete buffers without losing window layout
-    {
-        "famiu/bufdelete.nvim",
-        lazy = false,
-        init = function() end,
-    },
-
     -- word motion using search
     {
         "folke/flash.nvim",

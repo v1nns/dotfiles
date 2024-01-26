@@ -9,7 +9,7 @@ M.pick_window = function()
     end
 
     if count <= 1 then
-        return false
+        return true
     end
 
     local options = {
@@ -59,10 +59,11 @@ M.pick_window = function()
 
     local window_id = require("window-picker").pick_window(options)
 
-    if window_id then
-        vim.api.nvim_set_current_win(window_id)
+    if not window_id then
+        return false
     end
 
+    vim.api.nvim_set_current_win(window_id)
     return true
 end
 

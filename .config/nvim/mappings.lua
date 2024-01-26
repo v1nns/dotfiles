@@ -58,7 +58,7 @@ M.buffer = {
         ["<Tab>"] = { "<cmd> bnext <CR>", "focus next buffer" },
         ["<S-Tab>"] = { "<cmd> bprev <CR>", "focus previous buffer" },
 
-        ["<leader>x"] = { "<cmd> Bdelete <CR>", "close current buffer" },
+        ["<leader>x"] = { "<cmd> CloseBuffer <CR>", "close current buffer" },
         ["<C-w>a"] = { "<cmd> CloseAllBuffers <CR>", "close all buffers" },
     },
 }

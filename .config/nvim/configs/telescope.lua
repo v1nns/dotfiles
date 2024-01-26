@@ -110,8 +110,12 @@ local options = {
                         -- which window to open new file buffer
                         actions.close(prompt_bufnr)
 
-                        require("custom.configs.windowpicker").pick_window()
-                        vim.cmd("edit " .. vim.fn.fnameescape(entry.path))
+                        local is_window_picked =
+                            require("custom.configs.windowpicker").pick_window()
+
+                        if is_window_picked then
+                            vim.cmd("edit " .. vim.fn.fnameescape(entry.path))
+                        end
                     end,
                 },
             },
