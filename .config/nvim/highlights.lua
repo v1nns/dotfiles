@@ -183,6 +183,11 @@ M.override = {
 
     -- navic breadcrumb
     NavicText = { fg = "#b4f9f8" },
+
+    -- document highlight using LSP
+    LspReferenceRead = { bg = "#2f3549", fg = "none" },
+    LspReferenceText = { bg = "#2f3549", fg = "none" },
+    LspReferenceWrite = { bg = "#2f3549", fg = "none" },
 }
 
 M.changed_themes = {

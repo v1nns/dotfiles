@@ -6,6 +6,9 @@ local options = {
             ["vim.lsp.util.stylize_markdown"] = false,
             ["cmp.entry.get_documentation"] = false,
         },
+        signature = {
+            enabled = false,
+        },
     },
     -- you can enable a preset for easier configuration
     presets = {
@@ -40,6 +43,12 @@ local options = {
                 icon = "󰏫",
                 ft = "regex",
                 opts = { border = { text = { top = " Set filetype " } } },
+            },
+            edit = {
+                pattern = "^:e ",
+                icon = "",
+                ft = "regex",
+                opts = { border = { text = { top = " Open file " } } },
             },
         },
     },

@@ -72,6 +72,10 @@ local options = {
                 and not context.in_syntax_group("Comment")
         end
     end,
+    window = {
+        completion = require("cmp").config.window.bordered(),
+        documentation = require("cmp").config.window.bordered(),
+    },
 }
 
 return options
