@@ -278,8 +278,11 @@ bindsym $mod+Return exec kitty
 # kill focused window
 bindsym $mod+Shift+q [con_id="__focused__" title="^(?!dropdown-terminal).*$"] kill
 
+# visually focus another window
+bindsym $mod+Tab exec --no-startup-id switch-window.sh --focus
+
 # list all windows opened and choose which one you want to switch to
-bindsym $mod+Tab exec --no-startup-id switch-window.sh
+bindsym $mod+Shift+Tab exec --no-startup-id switch-window.sh --switch
 
 # start custom-themed rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id launcher.sh
@@ -319,10 +322,10 @@ exec --no-startup-id kitty --title dropdown-terminal -e zsh -o 'ignoreeof' &
 #exec_always --no-startup-id numlockx &
 
 # run monitor to save any notification message sent through DBus
-exec --no-startup-id monitor-notification.py &> /dev/null
+exec --no-startup-id monitor-notification.py & > /dev/null
 
 # (old way) setup wallpaper
-exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/nord_monterey.png
+exec_always --no-startup-id feh --bg-tile $HOME/Pictures/Wallpapers/gta.png
 
 # use nitrogen to set wallpaper in the second monitor
 # nitrogen --restore
@@ -331,7 +334,7 @@ exec_always --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/nord_monter
 # P.S.: I won't upload mp4 here, so if you want to use it something similar, just look for any
 # wallpaper from Wallpaper Engine Workshop.
 # pkill xwinwrap; wallpaper-animated.sh $HOME/Pictures/Wallpapers/in_the_clouds.mp4
-exec_always --no-startup-id video-wallpaper.sh --stop; video-wallpaper.sh --start "/$HOME/Pictures/Wallpapers/marooned.mp4"
+# exec_always --no-startup-id video-wallpaper.sh --stop; video-wallpaper.sh --start "/$HOME/Pictures/Wallpapers/marooned.mp4"
 
 # To setup monitor layout, apply current meta mode using NVIDIA X Server Settings
 # https://wiki.archlinux.org/title/NVIDIA#Using_nvidia-settings
