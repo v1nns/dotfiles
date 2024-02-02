@@ -83,7 +83,10 @@ M.setup_autocommands = function()
     -- highlight c++ files
     -- autocmd(
     --     { "BufEnter", "BufRead" },
-    --     { pattern = { "*.cc", "*.h", "*.cpp" }, command = "setf cpp" }
+    --     {
+    --         pattern = { "*.cc", "*.h", "*.cpp" },
+    --         command = "setf cpp | setlocal spell spelllang=en_us",
+    --     }
     -- )
 
     -- auto-wrap comments, don't auto insert comment on o/O and enter
@@ -168,10 +171,7 @@ M.setup_commands = function()
 
     -- close current active buffer
     cmd("CloseBuffer", function()
-        local neotree = require("neo-tree.command")
-        -- must hide neo-tree before closing all buffers
-        neotree.execute({ action = "close" })
-
+        -- TODO: WIP
         -- change to previous and delete alternate buffer
         vim.cmd("bnext")
         vim.cmd("bdelete #")
@@ -299,42 +299,39 @@ M.setup_commands = function()
     end, {})
 end
 
--- get a list of listed buffers =P
-M.get_listed_buffers = function()
-    local buffers = {}
-    local len = 0
-    for buffer = 1, vim.fn.bufnr("$") do
-        if vim.fn.buflisted(buffer) == 1 then
-            len = len + 1
-            buffers[len] = buffer
+M.get_non_empty_buffers = function()
+    local count_non_empty = 0
+
+    for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.fn.buflisted(buffer) ~= 0 then
+            local name = vim.api.nvim_buf_get_name(buffer)
+            local filetype = vim.api.nvim_get_option_value("filetype", { buf = buffer })
+
+            -- Do not count new buffer or nvdashboard
+            -- NOTE: it looks like neo-tree filesystem does not appear in this list, so we are fine
+            if name ~= nil and name ~= "" and filetype ~= "nvdash" then
+                count_non_empty = count_non_empty + 1
+            end
+
+            -- TODO: maybe return table with current buffers
+            -- local buffer_name = vim.api.nvim_buf_get_name(buffer)
+            -- if buffer_name == nil or buffer_name == "" then
+            --     buffer_name = "[No Name]#" .. buffer
+            -- end
         end
     end
 
-    return buffers
+    return count_non_empty
 end
 
 -- check if must open nvdash
 M.show_dashboard = function()
-    local found_non_empty_buffer = false
-    local buffers = M.get_listed_buffers()
-    local count = 0
+    local count = M.get_non_empty_buffers()
+    -- if count > 1 then
+    --     require("neo-tree").close_all()
+    -- end
 
-    for _, bufnr in ipairs(buffers) do
-        count = count + 1
-        if not found_non_empty_buffer then
-            local name = vim.api.nvim_buf_get_name(bufnr)
-            local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-
-            if name ~= "" and filetype ~= "nvdash" then
-                found_non_empty_buffer = true
-            end
-        end
-    end
-
-    if not found_non_empty_buffer then
-        if count > 1 then
-            require("neo-tree").close_all()
-        end
+    if count == 0 then
         vim.cmd("Nvdash")
     end
 end
