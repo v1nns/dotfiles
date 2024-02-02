@@ -1,4 +1,5 @@
 set guioptions none
+show-recent  0
 
 # Got colors from:
 # Base16 Nord (Author: arcticicestudio)
