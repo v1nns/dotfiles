@@ -1,7 +1,7 @@
 [color]
 	ui = true
 [user]
-	name = Vinicius M. Longaray
+	name = Vinicius Longaray
 	email = vmouralongaray@gmail.com
 [alias]
 	co = checkout
@@ -11,9 +11,4 @@
 	unstage = reset HEAD --
 	last = log -1 HEAD
 [pull]
-	rebase = false
-[core]
-	excludesfile = /home/vinicius/.gitignore_global
-	editor = nvim
-[push]
-	autoSetupRemote = true
+	ff = only
