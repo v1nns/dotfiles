@@ -1,0 +1,98 @@
+{
+  "position": "bottom",
+  "layer": "top",
+  "height": 18,
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "temperature#cpu",
+    "temperature#gpu",
+    "cpu",
+    "memory",
+    "disk",
+    "network",
+    "custom/date",
+    "clock",
+    "wireplumber",
+    "battery",
+    "tray"
+  ],
+  "hyprland/window": {
+    "max-length": 200,
+    "separate-outputs": true
+  },
+  "temperature#cpu": {
+    "hwmon-path": "/sys/devices/platform/dell_smm_hwmon/hwmon/hwmon4/temp1_input",
+    "format": "󰏈  <span color=\"#c0caf5\">{temperatureC}°C</span>",
+    "tooltip-format": "CPU {temperatureC}°C"
+  },
+  "temperature#gpu": {
+    "hwmon-path": "/sys/devices/platform/dell_smm_hwmon/hwmon/hwmon4/temp4_input",
+    "format": "󰏈  <span color=\"#c0caf5\">{temperatureC}°C</span>",
+    "tooltip-format": "GPU {temperatureC}°C"
+  },
+  "cpu": {
+    "format": "  <span color=\"#c0caf5\">{usage}%</span>"
+  },
+  "memory": {
+    "format": "  <span color=\"#c0caf5\">{used} GiB</span>"
+  },
+  "disk": {
+    "format": "󰋊  <span color=\"#c0caf5\">{percentage_used}%</span>"
+  },
+  "custom/date": {
+    "format": "󰸗 <span color=\"#c0caf5\">{}</span>",
+    "interval": 3600,
+    "exec": "date +\"%a, %d %b %Y\""
+  },
+  "clock": {
+    "format": "󰅐 <span color=\"#c0caf5\">{:%H:%M}</span>",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-full": "󱈑 {capacity}%",
+    "format-icons": [
+      "󱊡",
+      "󱊢",
+      "󱊣"
+    ]
+  },
+  "network": {
+    "format-wifi": "  <span color=\"#c0caf5\">{essid}</span>",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "󰤮 Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "wireplumber": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰖁 Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ],
+      "on-click": "pavucontrol"
+    }
+  },
+  "tray": {
+    "icon-size": 21
+  }
+}

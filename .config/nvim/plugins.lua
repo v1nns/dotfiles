@@ -116,9 +116,11 @@ local plugins = {
         "stevearc/conform.nvim",
         event = { "BufWritePre" },
         cmd = { "ConformInfo" },
-        opts = require("custom.configs.conform"),
-        init = function()
-            -- Set formatexpr
+        config = function()
+            local opts =require("custom.configs.conform")
+            require("conform").setup(opts)
+
+             -- Set formatexpr
             vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
     },

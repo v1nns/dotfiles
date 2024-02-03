@@ -1,0 +1,23 @@
+#!/bin/sh
+
+####################################################################################################
+# Environment variables
+
+# export monitor names as env variable
+export PRIMARY_MONITOR="$(xrandr -q | grep " connected primary" | cut -d ' ' -f1)"
+export SECONDARY_MONITOR="$(xrandr -q | grep " connected 1" | cut -d ' ' -f1)"
+
+# You may not need this, or may need to modify in order to use it within polybar
+for i in /sys/class/hwmon/hwmon*/temp*_input; do
+    if [ "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*}))" = "nct6687: CPU Socket" ]; then
+        export HWMON_PATH="$i"
+        break
+    fi
+done
+
+for i in /sys/class/thermal/thermal_zone*; do
+    if [[ $(<$i/type) = "acpitz" ]]; then
+        export THERMAL_ZONE="${i:0-1}"
+        break
+    fi
+done

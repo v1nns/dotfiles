@@ -1,0 +1,4 @@
+timeout 10 'if pgrep -x swaylock; then hyprctl dispatch dpms off; fi'
+timeout 300 'if ! pgrep -x swaylock; then swaylock -f; fi'
+timeout 305 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
+before-sleep 'if ! pgrep -x swaylock; then swaylock -f; fi'

@@ -195,7 +195,7 @@ M.lspconfig = {
 
         ["<leader>fm"] = {
             function()
-                require("conform").format({ async = true, lsp_fallback = true })
+                require("conform").format({ async = true, lsp_fallback = "always" })
             end,
             "format code",
         },

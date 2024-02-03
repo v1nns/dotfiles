@@ -1,0 +1,76 @@
+/**
+ * Tokyo night rofi theme
+ * Adapted by Vinicius <vmouralongaray@gmail.com>
+ */
+
+configuration {
+
+  font: "JetBrainsMono NF 10";
+
+  disable-history: false;
+  fullscreen: false;
+  hide-scrollbar: true;
+  sidebar-mode: false;
+}
+
+* {
+  bg: #24283b;
+  hv: #9274ca;
+  primary: #c0caf5;
+  ug: #0B2447;
+  kl: #7aa2f7;
+  black: #000000;
+
+  transparent: rgba(46, 52, 64, 0);
+
+  foreground: @primary;
+  background-color: @bg;
+
+  backlight: #ccffee;
+  highlight: underline bold #eceff4;
+
+  transparent: rgba(46, 52, 64, 0);
+}
+
+window {
+  location: center;
+  anchor: center;
+  transparency: "screenshot";
+  padding: 10px;
+
+  border: 2px;
+  border-radius: 7px;
+  border-color: @kl;
+
+  height: 65px;
+  width: 500px;
+
+  spacing: 0;
+  children: [mainbox];
+  orientation: horizontal;
+
+}
+
+message {
+  color: @kl;
+  padding: 5;
+}
+
+inputbar {
+  color: @primary;
+  padding: 11px;
+
+  children: [prompt, entry];
+}
+
+entry,
+prompt,
+case-indicator {
+  text-font: inherit;
+  text-color: inherit;
+}
+
+prompt {
+  font: "JetBrainsMono NF Bold 10";
+  margin: 0px 0.3em 0em 0em;
+}

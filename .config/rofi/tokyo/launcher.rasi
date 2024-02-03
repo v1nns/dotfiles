@@ -1,0 +1,111 @@
+/**
+ * Tokyo night rofi theme
+ * Adapted by Vinicius <vmouralongaray@gmail.com>
+ */
+
+configuration {
+
+  font: "JetBrainsMono NF 10";
+
+  display-ssh: "";
+  display-run: "";
+  display-drun: "";
+  display-window: "";
+  display-combi: "";
+  show-icons: true;
+}
+
+* {
+  bg-dark: #1f2335;
+  bg: #24283b;
+  hv: #9274ca;
+  primary: #c0caf5;
+  ug: #0B2447;
+  kl: #7aa2f7;
+  black: #000000;
+
+  transparent: rgba(46, 52, 64, 0);
+
+  foreground: @primary;
+  background-color: @bg;
+
+  backlight: #ccffee;
+  highlight: underline bold #eceff4;
+
+  transparent: rgba(46, 52, 64, 0);
+}
+
+window {
+  height: 300px;
+  width: 450px;
+  location: center;
+  anchor: center;
+  transparency: "screenshot";
+
+  border: 2px;
+  border-radius: 7px;
+  border-color: @kl;
+
+  background-color: @bg;
+  spacing: 0;
+  children: [mainbox];
+  orientation: horizontal;
+}
+
+mainbox {
+  spacing: 0;
+  children: [ inputbar, message, listview];
+}
+
+inputbar {
+  background-color: @bg-dark;
+  color: @primary;
+  padding: 12px;
+}
+
+entry,
+prompt,
+case-indicator {
+  background-color: @bg-dark;
+  text-font: inherit;
+  text-color: inherit;
+}
+
+prompt {
+  margin: 0px 0.3em 0em 0em;
+}
+
+listview {
+  margin: 1px 0px 0px 0px;
+  background-color: rgba(46, 52, 64, 0.9);
+  dynamic: false;
+  background-color: @bg;
+}
+
+element-icon {
+  padding: 0px 0px 0px 10px;
+  size: 2.7ch;
+}
+
+element-text {
+  padding: 8px 8px;
+  vertical-align: 0.5;
+  background-color: @bg;
+  text-color: @primary;
+}
+
+element selected,
+element-text selected,
+element-icon selected {
+  background-color: @kl;
+  text-color: @ug;
+}
+
+textbox {
+  transparency: "screenshot";
+  padding: 5px;
+
+  color: @primary;
+  text-color: rgb(216, 222, 233);
+  background-color: rgba(46, 52, 64, 0.9);
+}

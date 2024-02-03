@@ -26,7 +26,7 @@ local symbol_highlight = function(client, bufnr)
     end
 end
 
-local servers = { "html", "cssls", "cmake", "clangd", "jsonls", "pylsp" }
+local servers = { "html", "bashls", "cssls", "cmake", "clangd", "jsonls", "pylsp" }
 
 for _, lsp in ipairs(servers) do
     local settings = {}
