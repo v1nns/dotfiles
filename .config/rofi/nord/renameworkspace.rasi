@@ -8,7 +8,7 @@
 
 configuration {
 
-  font: "JetBrains Mono 10";
+  font: "JetBrainsMono NF 10";
 
   disable-history: false;
   fullscreen: false;
@@ -89,6 +89,6 @@ case-indicator {
 }
 
 prompt {
-  font: "JetBrains Mono Bold 10";
+  font: "JetBrainsMono NF Bold 10";
   margin: 0px 0.3em 0em 0em;
 }

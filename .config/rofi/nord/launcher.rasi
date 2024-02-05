@@ -8,7 +8,7 @@
 
 configuration {
 
-  font: "JetBrains Mono 10";
+  font: "JetBrainsMono NF 10";
   columns: 1;
 
   display-ssh: "";

@@ -127,8 +127,6 @@ yay_default = (
     # Fonts (Nerd Font)
     'ttf-hack-nerd'
     'ttf-iosevka'
-    'ttf-jetbrain-mono-nerd'
-    'ttf-jetbrain-nerd'
     'ttf-jetbrains-mono-nerd'
     'ttf-jetbrains-nerd'
 )

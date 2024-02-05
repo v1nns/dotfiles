@@ -7,7 +7,7 @@
  */
 
 configuration {
-  font: "JetBrains Mono Bold 10";
+  font: "JetBrainsMono NF Bold 10";
   width: 30;
 }
 

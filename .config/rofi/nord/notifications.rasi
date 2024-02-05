@@ -8,7 +8,7 @@
 
 configuration {
 
-  font: "JetBrains Mono 10";
+  font: "JetBrainsMono NF 10";
   width: 900;
   line-margin: 10;
   lines: 20;
