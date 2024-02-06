@@ -3,7 +3,7 @@
 Version=1.0
 Type=Application
 Terminal=false
-Exec=wlogout
+Exec=wlogout -b 2
 Icon=system-shutdown-symbolic
 Name=Shutdown
 Comment=Shutdown computer
