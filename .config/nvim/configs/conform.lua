@@ -23,7 +23,15 @@ local options = {
       },
     },
     stylua = {
-      prepend_args = { "--column-width", "100", "--indent-type", "Spaces" },
+      inherit = true,
+      prepend_args = {
+        "--column-width",
+        "100",
+        "--indent-type",
+        "Spaces",
+        "--indent-width",
+        "4",
+      },
     },
     shfmt = {
       prepend_args = { "-i", "4" },
