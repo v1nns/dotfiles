@@ -46,16 +46,16 @@ local get_filename = function()
       file_icon_color = ""
     end
 
-    return " "
+    return "%#WinbarTitle#"
+        .. " "
         .. "%#"
         .. hl_group
         .. "#"
         .. file_icon
         .. "%*"
-        .. " "
         .. "%#WinbarTitle#"
+        .. " "
         .. filename
-        .. "%*"
   end
 end
 
@@ -102,15 +102,17 @@ M.setup = function()
     if not isempty(navic_value) then
       navic_added = true
     end
-  end
 
-  if not isempty(value) and get_buf_option("mod") then
-    local mod = "%#DiffModified#  %*"
-    if navic_added then
-      value = value .. " " .. mod
-    else
-      value = value .. mod
+    if get_buf_option("mod") then
+      local mod = "%#DiffModified#  %*"
+      if navic_added then
+        value = value .. " " .. mod
+      else
+        value = value .. mod
+      end
     end
+
+    value = value .. "%#WinbarTitle#"
   end
 
   local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })

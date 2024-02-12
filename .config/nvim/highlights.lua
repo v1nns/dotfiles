@@ -95,6 +95,7 @@ M.add = {
   -- winbar
   WinbarTitle = {
     fg = "#a9b1d6",
+    bg = "none",
     bold = true,
   },
 
