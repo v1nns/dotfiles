@@ -325,7 +325,7 @@ exec --no-startup-id kitty --title dropdown-terminal -e zsh -o 'ignoreeof' &
 exec --no-startup-id monitor-notification.py & > /dev/null
 
 # (old way) setup wallpaper
-exec_always --no-startup-id feh --bg-tile $HOME/Pictures/Wallpapers/gta.png
+exec_always --no-startup-id feh --bg-fill $HOME/Pictures/Wallpapers/journey.png
 
 # use nitrogen to set wallpaper in the second monitor
 # nitrogen --restore

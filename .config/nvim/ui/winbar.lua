@@ -98,18 +98,13 @@ M.setup = function()
   local navic_added = false
   if not isempty(value) then
     local navic_value = get_navic()
-    value = value .. " " .. navic_value
     if not isempty(navic_value) then
-      navic_added = true
+      value = value .. " " .. navic_value .. "%#WinbarTitle#"
     end
 
     if get_buf_option("mod") then
       local mod = "%#DiffModified#  %*"
-      if navic_added then
-        value = value .. " " .. mod
-      else
-        value = value .. mod
-      end
+      value = value .. mod
     end
 
     value = value .. "%#WinbarTitle#"
