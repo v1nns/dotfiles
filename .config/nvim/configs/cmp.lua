@@ -35,11 +35,15 @@ local options = {
     end,
 
     ["<CR>"] = function(fallback)
+      return fallback()
+    end,
+
+    ["<C-Enter>"] = function(fallback)
       local cmp = require("cmp")
       if cmp.visible() then
-        cmp.confirm()
+        return cmp.confirm()
       else
-        fallback()
+        return fallback()
       end
     end,
   },
