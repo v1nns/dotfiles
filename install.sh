@@ -35,6 +35,9 @@ pacman_default =(
     'zsh-autosuggestions'
 
     # Development
+    'cmake'
+    'clang'
+
     'rustup'
 
     'nodejs'
@@ -355,6 +358,8 @@ install_x11() {
     cp ${DOTFILES}/x11/xresources $HOME/.xresources
 
     ln -s ${DOTFILES}/x11/shutdown.desktop $HOME/.local/share/applications/shutdown.desktop
+
+    # TODO: include /etc/profile with PATH dir
 }
 
 
