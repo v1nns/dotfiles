@@ -64,3 +64,5 @@
     (field_expression
      field: (field_identifier) @operator)))
 
+(break_statement) @keyword
+

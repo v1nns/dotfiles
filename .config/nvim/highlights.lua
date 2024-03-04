@@ -219,6 +219,7 @@ M.changed_themes = {
       ["@function"] = { fg = "#7aa2f7" },
       ["@function.call"] = { fg = "#7aa2f7" },
       ["@constant"] = { fg = "#ff9e64" },
+      ["@comment"] = { fg = "#4caf50" },
 
       -- operators
       ["@operator"] = { fg = "#89ddff" },       -- For any operator: `+`, but also `->` and `*` in C.
