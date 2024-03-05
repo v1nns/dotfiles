@@ -5,7 +5,7 @@
 #
 
 # Base packages to be installed using pacman
-pacman_default =(
+pacman_default = (
     # Essentials
     'base-devel'    # Basic tools to build packages
     'git'           # Version control
@@ -294,6 +294,13 @@ install_wallpaper() {
     cp ${DOTFILES}/wallpaper/* $HOME/Pictures/Wallpapers/
 }
 
+install_greeter() {
+    echo -e "${GREEN}Installing greeter for SDDM (arcade theme)...${RESET}"
+    git clone https://github.com/v1nns/sddm-arcade /tmp/arcade
+    sudo mv /tmp/arcade /usr/share/sddm/themes/
+
+    # TODO: sed /usr/lib/sddm/sddm.conf.d/default.conf to include theme name
+}
 
 install_custom_icons() {
     echo -e "${GREEN}Installing custom icons...${RESET}"
@@ -402,8 +409,8 @@ disable_login_lock
 copy_configs
 install_gtk_theme
 install_wallpaper
+install_greeter
 # TODO:
-# install_greeter
 # adjust missing tokyo-night themes for rofi (launcher and rename are ok)
 # create tokyo-night theme for wlogout
 # update README with new stuff
