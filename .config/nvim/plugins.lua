@@ -321,6 +321,18 @@ local plugins = {
   -- -- debug applications
   -- {mfussenegger/nvim-dap",
   -- },
+
+  -- flutter utilities
+  {
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    after = "nvim-lspconfig",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",       -- optional for vim.ui.select
+    },
+    opts = require("custom.configs.fluttertools"),
+  },
 }
 
 return plugins
