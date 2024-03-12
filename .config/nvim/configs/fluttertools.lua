@@ -4,8 +4,8 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local options = {
 
   dev_log = {
-    enabled = false,
-    open_cmd = "tabedit",     -- command to use to open the log buffer
+    enabled = true,
+    open_cmd = "10new",     -- command to use to open the log buffer
   },
 
   dev_tools = {

@@ -88,7 +88,7 @@ local plugins = {
   -- git diff in a separate view
   {
     "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewClose" },
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory" },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
