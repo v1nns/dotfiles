@@ -148,7 +148,8 @@ gaps inner 5
 for_window [class="^.*"] border pixel 3
 
 # color class            border  backgr. text    indicator child_border
-client.focused           #bd93f9 #285577 #ffffff #2e9ef4   #bd93f9
+client.focused           #7aa2f7 #285577 #ffffff #2e9ef4   #7aa2f7
+# client.focused           #bd93f9 #285577 #ffffff #2e9ef4   #bd93f9
 #client.focused_inactive  #16161d #16161d #c0caf5 #16161d   #000000
 #client.unfocused         #16161d #16161d #c0caf5 #16161d   #000000
 #client.background        #000000

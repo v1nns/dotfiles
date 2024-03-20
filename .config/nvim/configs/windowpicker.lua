@@ -4,8 +4,15 @@ M.pick_window = function()
   -- Check if got enough windows to select, otherwise do not execute window-picker extension
   local all_windows = vim.api.nvim_tabpage_list_wins(0)
   local count = 0
-  for _ in pairs(all_windows) do
-    count = count + 1
+
+  for _, v in pairs(all_windows) do
+    local bufnr = vim.api.nvim_win_get_buf(v)
+    local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+
+    -- must filter it manually, otherwise window-picker will recognize it unproperly
+    if ft ~= "neo-tree" then
+      count = count + 1
+    end
   end
 
   if count <= 1 then
@@ -30,8 +37,8 @@ M.pick_window = function()
           "neo-tree-popup",
           "notify",
           "quickfix",
-          "nvdash",
           "*Telescope*",
+          -- "nvdash", -- we can't filter nvdash...
         },
 
         -- if the buffer type is one of following, the window will be ignored
