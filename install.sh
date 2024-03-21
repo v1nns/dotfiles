@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Install @v1nns/dotfiles on Arch-based systeas
+# Install @v1nns/dotfiles on Arch-based systems
 # Author: Vinicius M. Longaray
 #
 
@@ -13,6 +13,8 @@ pacman_default = (
     'ranger'        # Directory browser
     'tmux'          # Term multiplexer
     'wget'          # Download files
+    'alsa-firmware' # For audio
+    # 'sof-firmware'  # For audio on notebook
 
     # CLI Power Basics
     'ack'           # Yet another better grep
