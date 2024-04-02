@@ -20,6 +20,9 @@ M.setup = function()
     "scroll",
     { "vim.wo.scroll", "true", "150", [['sine']] },
   }
+  t["zt"] = { "zt", { "200" } }
+  t["zz"] = { "zz", { "200" } }
+  t["zb"] = { "zb", { "200" } }
 
   require("neoscroll.config").set_mappings(t)
 end

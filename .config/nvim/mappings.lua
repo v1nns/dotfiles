@@ -3,6 +3,10 @@ local M = {}
 M.disabled = {
   n = {
     -- disable defaults
+    ["<A-h>"] = {},
+    ["<C-n>"] = {},
+    ["<C-u>"] = {},
+    ["<C-d>"] = {},
     ["<leader>ff"] = {},
     ["<leader>fa"] = {},
     ["<leader>fw"] = {},
@@ -14,12 +18,14 @@ M.disabled = {
     ["<leader>cm"] = {},
     ["<leader>gt"] = {},
     ["<leader>pt"] = {},
-    ["<A-h>"] = {},
-    ["<C-n>"] = {},
     ["<leader>e"] = {},
     ["<leader>b"] = {},
     ["<leader>x"] = {},
     ["gr"] = {},
+    [";"] = {},
+    ["zt"] = {},
+    ["zz"] = {},
+    ["zb"] = {},
   },
 }
 
@@ -234,6 +240,11 @@ M.general = {
     ["<leader>tt"] = {
       "<cmd> Twilight <CR>",
       "toggle code dimming",
+    },
+
+    [";"] = {
+      "<cmd> MarksListAll <CR><cmd>lcl<CR><cmd>Telescope loclist prompt_title=Marks<CR>",
+      "show all marks",
     },
   },
 
