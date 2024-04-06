@@ -34,7 +34,7 @@ from dataclasses import dataclass, field
 from pid import PidFileError
 from pid.decorator import pidfile
 
-gi.require_version('Notify', '0.8')
+gi.require_version('Notify', '0.7')
 from gi.repository import GObject, Notify
 
 # ----------------------------------- Cache from temporary file ---------------------------------- #
@@ -45,6 +45,7 @@ DEFAULT_ICON_PATH = "/home/vinicius/.local/share/icons/custom"
 CLIENT_ID = ""
 CLIENT_SECRET = ""
 
+REQUEST_TIMEOUT = 2
 
 @dataclass
 class Cache():
@@ -155,7 +156,7 @@ class SpotifyWebApi:
         data['grant_type'] = "client_credentials"
         data['scope'] = "user-modify-playback-state"
 
-        req = requests.post(url, headers=headers, data=data)
+        req = requests.post(url, headers=headers, data=data, timeout=REQUEST_TIMEOUT)
 
         token = req.json()['access_token']
 
@@ -182,7 +183,7 @@ class SpotifyWebApi:
                 "Authorization": "Bearer {}".format(self.access_token)
             }
 
-            req = requests.get(url, headers=headers)
+            req = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
             data = req.json()
 
             # Only get info in case of success
@@ -223,7 +224,7 @@ class SpotifyWebApi:
                 "Authorization": "Bearer {}".format(self.access_token)
             }
 
-            req = requests.get(url, headers=headers)
+            req = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
             data = req.json()
 
             # Only get info in case of success
@@ -286,7 +287,7 @@ def notify_daemon(state: str, info: object):
         else:
             interface.stop()
 
-    except Exception as e:
+    except Exception:
         # Just ignore the exception, possibly, it didn't find any running music daemon to notify
         pass
 
@@ -298,8 +299,7 @@ def update_cache(state: str, info: str, cache: Cache):
     if cache.song == info["song"]:
         # Necessary to check if values are already in a valid state. In
         # other words, it has already been updated.
-        already_updated = True if (cache.state == "playing"
-                                   and state == "playing") else False
+        already_updated = True if (cache.state == "playing" and state == "playing") else False
 
         # Ignore the event and that's it, life moves on
         if already_updated:
@@ -364,6 +364,6 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except PidFileError as e:
+    except PidFileError:
         # that's ok, you can have only one instance running simultaneously
         pass

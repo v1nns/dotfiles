@@ -101,9 +101,9 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except PidFileError as e:
+    except PidFileError:
         # that's ok, you can have only one instance running simultaneously
         pass
-    except KeyboardInterrupt as e:
+    except KeyboardInterrupt:
         # that's also ok
         pass

@@ -30,7 +30,7 @@ from time import sleep
 CLIENT_ID = ""
 CLIENT_SECRET = ""
 
-REDIRECT_URI = "http://127.0.0.1:8888"
+REDIRECT_URI = "http://localhost:8888/callback"
 
 DEFAULT_DEVICE = "vinicius@cookie"
 
@@ -91,7 +91,7 @@ def authenticate_on_spotify(client_id, client_secret) -> spotipy.Spotify:
                                   redirect_uri=REDIRECT_URI,
                                   cache_handler=spotipy.CacheFileHandler(
                                       cache_path=DEFAULT_CACHE_PATH),
-                                  open_browser=False))
+                                  open_browser=True), requests_timeout=2)
 
     return spotify
 
@@ -116,7 +116,7 @@ def notify_daemon_music_stopped():
         sleep(1)
         interface.stop()
 
-    except Exception as e:
+    except Exception:
         # Just ignore the exception, possibly, it didn't find any running music daemon to notify
         pass
 
@@ -183,7 +183,6 @@ def main():
         decrease = lambda a, b: a - b if a - b >= 0 else 0
         volume = decrease(volume, 5)
         spotify.volume(device_id=device_id, volume_percent=volume)
-
 
 
 # ------------------------------------------------------------------------------------------------ #
