@@ -8,54 +8,21 @@ one thing I can tell you for sure: ricing can be very addictive!
 
 ### Screenshot :star_struck:
 
-![](screenshot/screenshot3.png?raw=true)
+![](screenshot/screenshot4.png?raw=true)
 
-**You can check the older ones inside the **screenshot** folder.*
+*Current screenshot (check the older ones inside the **screenshot** folder.)*
 
 ## Motivation :monocle_face:
 
 Using the GNOME as default GUI was getting really boring, and a few stutterings
-were annoying me.
+were annoying me. So I also decided to move away from Ubuntu, I use Arch BTW =P
 
-## Package dependencies :link:
+## Installation guide (WIP :construction_worker:)
 
-* zsh
-* oh-my-zsh
-* powerlevel10k theme for zsh
-* alacritty
-* neovim
-* rofi
-* dunst
-* jq
-* feh *~OR~* nitrogen (used this to set a different background for each monitor)
-* imwheel
-* i3-gaps
-* polybar
-* picom
-* spotify
-* yad
-* maim
-* pasystray
-* numlockx
-* lxappearance
-
-Also, I've installed Hack font.
-
-**I'm using Ubuntu distro and some of these packages are not available by
-default. In order for you to install it using your default package manager, the
-easiest way is to add PPA from Regolith.*
-## Installation guide (still fixing it :construction_worker:)
-
-```bash
-git clone (...)
-cd ./dotfiles
-cp ./wallpaper/* ~/Pictures/Wallpapers/
-cp -sR .../full/path/dotfiles/.config/* ~/.config/
-cp -sR .../full/path/dotfiles/.local/* ~/.local/
-```
-
-**GNU **cp** has an option to create symlinks instead of copying (-s).*
-
+Instead of manually configure everything, I created a draft of an installation script (install.sh).
+It is not finished yet, neither did a fresh isntall with it, so be careful! At least, you may check
+it to see all packages that I have installed currently or even to check how I configure all my stuff
+(greeter screen, GTK style, custom icons, systemd services, neovim settings, etc).
 
 ### Possible modifications you may want to do
 
@@ -93,14 +60,12 @@ working really fine!*
 
 Last but not least, a rice is never *done*.
 
-## TODO :memo:
-
-There a few things missing, like:
+## TODO list :memo:
 
 - [x] Improve color palette on Cosmonaut's theme.
 - [x] Find an alternative to Spotify client as a running service.
-- [ ] Improve installation guide;
-- [ ] Check all package dependencies;
+- [x] Improve installation guide;
+- [x] Check all package dependencies;
 - [ ] A good script to install these files automatically, including
-  dependencies;
+  dependencies (in progress);
 - [ ] Add global gitignore config;
