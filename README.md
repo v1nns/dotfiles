@@ -1,16 +1,18 @@
-# Dotfiles
+<h1 align="center">
+  <br>
+  dotfiles :rocket:
+  <br>
+</h1>
 
 Surely, dotfiles are really personal, but yet it is something good to share and
 check how others customize your own desktop.
 
-Lately, I've been using i3-gaps + polybar with my own custom theme, and there is
-one thing I can tell you for sure: ricing can be very addictive!
-
-### Screenshot :star_struck:
+Lately, I've been using i3 + polybar with my own custom theme, and there is one
+thing I can tell you for sure: <b>ricing can be very addictive!</b>
 
 ![](screenshot/screenshot4.png?raw=true)
 
-*Current screenshot (check the older ones inside the **screenshot** folder.)*
+<p align="center"><sup>Current screenshot (check the older ones inside the <b>screenshot</b> folder)</sup></p>
 
 ## Motivation :monocle_face:
 
@@ -20,7 +22,7 @@ were annoying me. So I also decided to move away from Ubuntu, I use Arch BTW =P
 ## Installation guide (WIP :construction_worker:)
 
 Instead of manually configure everything, I created a draft of an installation script (install.sh).
-It is not finished yet, neither did a fresh isntall with it, so be careful! At least, you may check
+It is not finished yet, neither did a fresh install with it, so be careful! At least, you may check
 it to see all packages that I have installed currently or even to check how I configure all my stuff
 (greeter screen, GTK style, custom icons, systemd services, neovim settings, etc).
 
