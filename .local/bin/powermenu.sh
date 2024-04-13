@@ -5,31 +5,17 @@
 # Adapted by: Vinicius Longaray
 # Github: @v1nns
 
-dir="~/.config/rofi/nord"
+dir="~/.config/rofi/tokyo"
 uptime=$(uptime -p | sed -e 's/up //g')
 
 rofi_command="rofi -theme $dir/powermenu.rasi"
 
 # Options
-shutdown=" Shutdown"
-reboot=" Restart"
-lock=" Lock"
-suspend="󰒲 Sleep"
-logout="󰍃 Logout"
-
-# Confirmation
-confirm_exit() {
-    rofi -dmenu\
-        -i\
-        -no-fixed-num-lines\
-        -p "Are You Sure? "\
-        -theme $dir/confirm.rasi
-}
-
-# Message
-msg() {
-    rofi -theme "$dir/message.rasi" -e "Available Options  -  yes / y / no / n"
-}
+shutdown="  Shutdown"
+reboot="  Restart"
+lock="  Lock"
+suspend="󰒲  Sleep"
+logout="󰍃  Logout"
 
 # kill any process that can get stuck on shutdown
 hasta_la_vista_baby() {
@@ -42,26 +28,12 @@ options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 0)"
 case $chosen in
     $shutdown)
-        ans=$(confirm_exit &)
-        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            hasta_la_vista_baby
-            systemctl poweroff
-        elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-            exit 0
-        else
-            msg
-        fi
+        hasta_la_vista_baby
+        systemctl poweroff
         ;;
     $reboot)
-        ans=$(confirm_exit &)
-        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            hasta_la_vista_baby
-            systemctl reboot
-        elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-            exit 0
-        else
-            msg
-        fi
+        hasta_la_vista_baby
+        systemctl reboot
         ;;
     $lock)
         if [[ -f /usr/bin/i3lock ]]; then
@@ -71,31 +43,17 @@ case $chosen in
         fi
         ;;
     $suspend)
-        ans=$(confirm_exit &)
-        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            mpc -q pause
-            amixer set Master mute
-            systemctl suspend
-        elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-            exit 0
-        else
-            msg
-        fi
+        mpc -q pause
+        amixer set Master mute
+        systemctl suspend
         ;;
     $logout)
-        ans=$(confirm_exit &)
-        if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
-                openbox --exit
-            elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
-                bspc quit
-            elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
-                i3-msg exit
-            fi
-        elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
-            exit 0
-        else
-            msg
+        if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
+            openbox --exit
+        elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
+            bspc quit
+        elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
+            i3-msg exit
         fi
         ;;
 esac

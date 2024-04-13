@@ -4,6 +4,7 @@
  */
 
 configuration {
+
   font: "JetBrainsMono NF 10";
 
   display-ssh: "";
@@ -33,8 +34,8 @@ configuration {
 }
 
 window {
-  height: 318px;
-  width: 450px;
+  height: 225px;
+  width: 400px;
   location: center;
   anchor: center;
   transparency: "screenshot";
@@ -51,13 +52,15 @@ window {
 
 mainbox {
   spacing: 0;
-  children: [ inputbar, message, listview];
+  children: [ inputbar, listview];
 }
 
 inputbar {
   background-color: @bg-dark;
   color: @primary;
   padding: 12px;
+
+  children: [prompt];
 }
 
 entry,
@@ -81,11 +84,11 @@ listview {
 
 element-icon {
   padding: 0px 0px 0px 10px;
-  size: 4.7ch;
+  size: 2.7ch;
 }
 
 element-text {
-  padding: 8px 8px;
+  padding: 8px -20px;
   vertical-align: 0.5;
   background-color: @bg;
   text-color: @primary;
@@ -96,12 +99,4 @@ element-text selected,
 element-icon selected {
   background-color: @kl;
   text-color: @ug;
-}
-
-textbox {
-  transparency: "screenshot";
-
-  color: @primary;
-  text-color: rgb(216, 222, 233);
-  background-color: rgba(46, 52, 64, 0.9);
 }

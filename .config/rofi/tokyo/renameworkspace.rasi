@@ -28,8 +28,6 @@ configuration {
 
   backlight: #ccffee;
   highlight: underline bold #eceff4;
-
-  transparent: rgba(46, 52, 64, 0);
 }
 
 window {
