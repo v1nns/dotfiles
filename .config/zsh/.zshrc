@@ -125,3 +125,5 @@ oct2dec() {
 dec2oct() {
    echo "obase=8; ibase=10; $1" | bc
 }
+
+eval "$(atuin init zsh)"
