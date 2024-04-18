@@ -92,7 +92,7 @@ class MusicEventDaemon(dbus.service.Object):
 @pidfile()
 def main():
     DBusGMainLoop(set_as_default=True)
-    server = MusicEventDaemon()
+    MusicEventDaemon()
     Gtk.main()
 
 
