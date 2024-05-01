@@ -4,9 +4,6 @@
  */
 
 configuration {
-
-  font: "JetBrainsMono NF 10";
-
   disable-history: false;
   fullscreen: false;
   hide-scrollbar: true;
@@ -68,7 +65,11 @@ case-indicator {
   text-color: inherit;
 }
 
+entry {
+  font: "JetBrainsMono NF 11.5";
+}
+
 prompt {
-  font: "JetBrainsMono NF Bold 10";
+  font: "JetBrainsMono NF Bold 11.5";
   margin: 0px 0.3em 0em 0em;
 }

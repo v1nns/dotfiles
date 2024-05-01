@@ -4,8 +4,7 @@
  */
 
 configuration {
-  font: "JetBrainsMono NF Bold 10";
-  width: 30;
+  font: "JetBrainsMono NF Bold 11.5";
 }
 
 * {
@@ -38,7 +37,7 @@ window {
   background-color: @bg;
   spacing: 0;
 
-  width: 225px;
+  width: 260px;
   padding: 25px;
   y-offset: -2em;
 }

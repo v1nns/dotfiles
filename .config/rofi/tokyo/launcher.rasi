@@ -4,7 +4,7 @@
  */
 
 configuration {
-  font: "JetBrainsMono NF 10";
+  font: "JetBrainsMono NF 11.5";
 
   display-ssh: "";
   display-run: "";
@@ -33,7 +33,7 @@ configuration {
 }
 
 window {
-  height: 318px;
+  height: 312px;
   width: 450px;
   location: center;
   anchor: center;
