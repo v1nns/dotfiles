@@ -50,7 +50,7 @@ rename_workspace_hyprland() {
     execute_rofi $name
 
     # check output from rofi
-    if [ -z $output]
+    if [ -z $output ]
     then
         # $input is empty, set workspace name only with its number
         hyprctl dispatch renameworkspace $index "$index"
