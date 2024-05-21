@@ -32,10 +32,14 @@ plugins=(
     zsh-autosuggestions
     docker
     docker-compose
+    tmux
 )
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# Enable TMUX by default on start
+# export ZSH_TMUX_AUTOSTART=true
 
 # Plugins - BGNotify
 function bgnotify_formatted {
