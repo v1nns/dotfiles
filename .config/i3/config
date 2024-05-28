@@ -351,7 +351,10 @@ exec --no-startup-id pasystray &
 # imwheel -b "4 5"
 
 # start compositor
-exec --no-startup-id picom --backend glx -b
+# exec --no-startup-id picom --backend glx -b
+
+# compositor (allusive-dev/compfy)
+exec --no-startup-id compfy -b
 
 # Patchbay GUI for Pipewire
 exec --no-startup-id qpwgraph -m &
