@@ -4,6 +4,6 @@ Xft.autohint: 0
 Xft.rgba: rgb
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
-Xft.dpi: 96
+Xft.dpi: 108
 Xcursor.size: 14
 Xcursor.theme: Dracula
