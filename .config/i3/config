@@ -373,7 +373,7 @@ exec --no-startup-id qpwgraph -m &
 # password, check if gnome-keyring-daemon is running, if not, add this:
 #  gnome-keyring-daemon --start --components=secrets
 # also, must add this argument to chrome.desktop:
-#  --password-store=gnome-libsecret
+#  --password-store=gnome-libsecret --force-device-scale-factor=n --high-dpi-support=1
 
 # focus animation for new window
 # exec_always --no-startup-id flashfocus &
