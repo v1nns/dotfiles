@@ -47,7 +47,6 @@ function bgnotify_formatted {
     (( $3 >= 60 )) && elapsed="$((( $3 % 3600) / 60 ))m $elapsed"
     (( $3 >= 3600 )) && elapsed="$(( $3 / 3600 ))h $elapsed"
     [ $1 -eq 0 ] && bgnotify "#success 👍 ($elapsed)" "$2" || bgnotify "#fail 👎 ($elapsed)" "$2"
-#   fi
 }
 source $HOME/.oh-my-zsh/plugins/bgnotify/bgnotify.plugin.zsh
 
@@ -72,12 +71,23 @@ alias pullclean='git checkout develop && git reset --hard origin/develop && git 
 # Generate completion files
 compinit
 
-# Development
+# Development (directory navigation)
 dev() {
   if [ -z "$@" ]; then
     cd ~/projects/;
   else
     cd ~/projects/$@;
+
+    # filter index and name (if existing) from focused workspace (with i3)
+    local index="$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].num')"
+    local name="$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].name' | cut -d ':' -f 2 -s | xargs)"
+    local count_nodes="$(i3-msg -t get_tree | jq -r 'recurse(.nodes[];.nodes!=null)|select(.nodes[].focused)|.nodes[]|.name' | wc -l)"
+
+    if [ -z "$name" ] && [ $count_nodes -eq 1 ]
+    then
+        # $input is empty, set workspace to "<number>:<dir>"
+        i3-msg rename workspace to "$index:$*" > /dev/null
+    fi
   fi
 }
 compctl -/ -W ~/projects dev
@@ -104,7 +114,7 @@ alias clear-nvim="rm -rf ~/.local/share/nvim/ ~/.cache/nvim ~/.local/state/nvim"
 # (read this: https://github.com/kovidgoyal/kitty/issues/4400#issuecomment-1002518875)
 export GTEST_COLOR=yes
 
-# Number format convertors
+# Base converters
 bin2dec() {
    echo "obase=10; ibase=2; $1" | bc
 }
