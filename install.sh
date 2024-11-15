@@ -15,6 +15,7 @@ pacman_default = (
     'wget'          # Download files
     'alsa-firmware' # For audio
     # 'sof-firmware'  # For audio on notebook
+    'docker'        # Container virtualization
 
     # CLI Power Basics
     'ack'           # Yet another better grep
@@ -134,6 +135,9 @@ yay_default = (
     'ttf-iosevka'
     'ttf-jetbrains-mono-nerd'
     'ttf-jetbrains-nerd'
+
+    # for battery save
+    'auto-cpufreq'
 )
 
 yay_wayland = (
@@ -199,7 +203,7 @@ update_database() {
 
 set_timezone() {
     echo -e "" >&2
-    read -n 1 -r -s -p "Do you want to change tiaezone to America/Sao_Paulo? (y/N)" answer
+    read -n 1 -r -s -p "Do you want to change timezone to America/Sao_Paulo? (y/N)" answer
     echo -e "" >&2
 
     case $answer in

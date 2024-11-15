@@ -1,0 +1,9 @@
+ {
+    "runtimes": {
+        "nvidia": {
+            "args": [],
+            "path": "nvidia-container-runtime"
+        }
+    },
+    "data-root": "/home/vinicius/docker"
+}
