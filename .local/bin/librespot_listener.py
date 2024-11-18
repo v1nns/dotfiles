@@ -29,13 +29,16 @@ import gi
 import json
 import requests
 import os
+import logging
+
+from gi.repository import GObject, Notify
+from systemd.journal import JournalHandler
 
 from dataclasses import dataclass, field
 from pid import PidFileError
 from pid.decorator import pidfile
 
 gi.require_version('Notify', '0.7')
-from gi.repository import GObject, Notify
 
 # ----------------------------------- Cache from temporary file ---------------------------------- #
 
@@ -46,6 +49,7 @@ CLIENT_ID = ""
 CLIENT_SECRET = ""
 
 REQUEST_TIMEOUT = 2
+
 
 @dataclass
 class Cache():
@@ -322,10 +326,19 @@ def main():
     # Filter event from librespot
     state = os.getenv("PLAYER_EVENT")
 
-    # Simply ignore this event
-    ignored_states = ["volume_set", "started", "preloading"]
-    if state is None or state in ignored_states:
+    # Initialize logging system (using systemd journal)
+    log = logging.getLogger()
+    log.addHandler(JournalHandler())
+
+    log.setLevel(logging.INFO)
+    log.info("Initializing spotify wrapper")
+
+    # Only acceptable states, otherwise do not even handle it
+    acceptable_states = ["playing", "paused", "stopped"]
+    if state is None or state not in acceptable_states:
         return
+
+    log.info("Received state: {}".format(state))
 
     # Initialize cache and spotify
     cache = Cache()
@@ -352,6 +365,8 @@ def main():
 
     # Update information in cache file
     if update_cache(state, info, cache):
+        log.info("Cache has been update, notify music daemon")
+
         # Send a notification to show in OS as a popup
         notify_system(state, info)
 
