@@ -28,8 +28,8 @@ plugins=(
     bgnotify
     git
     sudo
-    fast-syntax-highlighting
-    zsh-autosuggestions
+    #fast-syntax-highlighting
+    #zsh-autosuggestions
     docker
     docker-compose
     tmux
@@ -78,15 +78,29 @@ dev() {
   else
     cd ~/projects/$@;
 
-    # filter index and name (if existing) from focused workspace (with i3)
-    local index="$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].num')"
-    local name="$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].name' | cut -d ':' -f 2 -s | xargs)"
-    local count_nodes="$(i3-msg -t get_tree | jq -r 'recurse(.nodes[];.nodes!=null)|select(.nodes[].focused)|.nodes[]|.name' | wc -l)"
+    # Check which tiling manager is running
+    if pgrep -x i3 > /dev/null; then
+      # Filter index and name (if existing) from focused workspace (with i3)
+      local index="$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].num')"
+      local name="$(i3-msg -t get_workspaces | jq -r 'map(select(.focused))[0].name' | cut -d ':' -f 2 -s | xargs)"
+      local count_nodes="$(i3-msg -t get_tree | jq -r 'recurse(.nodes[];.nodes!=null)|select(.nodes[].focused)|.nodes[]|.name' | wc -l)"
 
-    if [ -z "$name" ] && [ $count_nodes -eq 1 ]
-    then
-        # $input is empty, set workspace to "<number>:<dir>"
-        i3-msg rename workspace to "$index:$*" > /dev/null
+      # Only rename if workspace name is empty and it is the only window on it
+      if [ -z "$name" ] && [ $count_nodes -eq 1 ]
+      then
+          # $input is empty, set workspace to "<number>:<dir>"
+          i3-msg rename workspace to "$index:$*" > /dev/null
+      fi
+    elif pgrep -x Hyprland > /dev/null; then
+      # Filter index and name (if existing) from focused workspace (with hyprland)
+      local index="$(hyprctl activeworkspace -j | jq -r .id)"
+      local name="$(hyprctl activeworkspace -j | jq -r .name | cut -d ':' -f 2 -s)"
+      local count_nodes="$(hyprctl activeworkspace -j | jq -r .windows)"
+
+      # Only rename if workspace name is empty and it is the only window on it
+      if [ -z "$name" ] && [ $count_nodes -eq 1 ]; then
+          hyprctl dispatch renameworkspace $index "$index:$*" > /dev/null
+      fi
     fi
   fi
 }
@@ -148,3 +162,7 @@ dec2oct() {
 }
 
 eval "$(atuin init zsh)"
+
+# For plugins installed via pacman
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
