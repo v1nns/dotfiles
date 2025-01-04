@@ -5,14 +5,15 @@
   "modules-left": [
     "hyprland/workspaces"
   ],
-  "modules-center": [],
+  "modules-center": [
+    "hyprland/submap"
+  ],
   "modules-right": [
     "temperature#cpu",
-    "temperature#gpu",
+    "custom/gpu",
     "cpu",
     "memory",
     "disk",
-    "network",
     "custom/date",
     "clock",
     "wireplumber",
@@ -23,15 +24,21 @@
     "max-length": 200,
     "separate-outputs": true
   },
+  "hyprland/submap": {
+   "format": "{}",
+   "tooltip": false
+  },
   "temperature#cpu": {
-    "hwmon-path": "/sys/devices/platform/dell_smm_hwmon/hwmon/hwmon4/temp1_input",
+    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+    "input-filename": "temp1_input",
     "format": "󰏈  <span color=\"#c0caf5\">{temperatureC}°C</span>",
     "tooltip-format": "CPU {temperatureC}°C"
   },
-  "temperature#gpu": {
-    "hwmon-path": "/sys/devices/platform/dell_smm_hwmon/hwmon/hwmon4/temp4_input",
-    "format": "󰏈  <span color=\"#c0caf5\">{temperatureC}°C</span>",
-    "tooltip-format": "GPU {temperatureC}°C"
+  "custom/gpu": {
+    "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
+    "format": "󰏈  <span color=\"#c0caf5\">{}°C</span>",
+    "tooltip-format": "GPU {}°C",
+    "interval": 10
   },
   "cpu": {
     "format": "  <span color=\"#c0caf5\">{usage}%</span>"
@@ -93,6 +100,6 @@
     }
   },
   "tray": {
-    "icon-size": 21
+    "icon-size": 18
   }
 }

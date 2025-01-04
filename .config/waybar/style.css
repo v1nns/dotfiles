@@ -37,8 +37,9 @@ window#waybar {
   border-radius: 5px;
 }
 
+#submap
 #temperature.cpu,
-#temperature.gpu,
+#custom-gpu,
 #cpu,
 #memory,
 #disk,
@@ -61,7 +62,7 @@ window#waybar {
   margin-left: 10px;
 }
 
-#temperature.gpu {
+#custom-gpu {
   color: #9d7cd8;
 }
 
@@ -101,19 +102,20 @@ window#waybar {
   color: #9ece6a;
 }
 
-#battery.warning:not(.charging) {
+#battery.warning:not(.charging),
+#battery.critical {
   background-color: #f7768e;
-  color: #f7768e;
+  color:black;
   border-radius: 5px 5px 5px 5px;
 }
 
 
 #tray {
-  background-color: #1a1b26;
+  background-color: #1f2335;
   margin-left: 0px;
-  margin-right: 6px;
+  margin-right: 3px;
   border-radius: 5px;
-  padding: 0 10px;
+  padding: 0 5px;
 }
 
 #tray>* {
