@@ -5,9 +5,7 @@
 #
 
 # Base packages to be installed using pacman
-pacman_default = (
-    # Essentials
-    'base-devel'    # Basic tools to build packages
+pacman_default=('base-devel'    # Basic tools to build packages
     'git'           # Version control
     'neovim'        # Code editor
     'ranger'        # Directory browser
@@ -31,6 +29,8 @@ pacman_default = (
     'procs'         # Better ps
     'ripgrep'       # Better grep
     'tokei'         # Count total lines of code
+    'termdown'      # Timer
+    "feh"           # Image viewer
 
     # z-shell
     'zsh'
@@ -64,6 +64,7 @@ pacman_default = (
     'pavucontrol'
     'pasystray'
     'pamixer'
+    'qpwgraph'
 
     # Video
     'vlc'
@@ -97,18 +98,18 @@ pacman_default = (
 )
 
 # Packages to use within Wayland (considering archinstall already installed Hyprland)
-pacman_wayland = (
+pacman_wayland=(
     'hyprpaper'      # Set wallpaper
     'nwg-look'       # Customize GTK settings
     'swayidle'       # Idle management daemon
     'swaylock'       # Screen locker
     'waybar'         # Status bar
     'wl-clipboard'   # Copy/paste utilities
+    'ibus'           # For compatibility with keyboard using US intl layout (i.e. microsoft edge)
 )
 
 # Packages to use within X11 (considering archinstall already installed i3wm)
-pacman_x11 = (
-    'feh'            # Set wallpaper
+pacman_x11=(
     'lxappearance'   # Customize GTK settings
     'picom'          # Compositor
     'polybar'        # Status bar
@@ -137,12 +138,13 @@ yay_default = (
     'ttf-jetbrains-nerd'
 
     # for battery save
-    'auto-cpufreq'
+    # 'auto-cpufreq'
 )
 
-yay_wayland = (
+yay_wayland=(
     'rofi-lbonn-wayland-git'  # Dialog utilities (menu/launcher/etc)
     'wlogout'                 # Logout menu
+    'hyprpolkitagent'         # Polkit authentication daemon
 )
 
 
@@ -217,7 +219,8 @@ set_timezone() {
 
 
 install_pacman_packages() {
-    for package in ${$1[@]}; do
+    local arr=("$@")
+    for package in "${arr[@]}"; do
         if hash "${package}" 2> /dev/null; then
             echo -e "${YELLOW}[Skipping]${LIGHT} ${package} is already installed${RESET}"
         elif [[ $(echo $(pacman -Qk $(echo $package | tr 'A-Z' 'a-z') 2> /dev/null )) == *"total files"* ]]; then
@@ -232,7 +235,8 @@ install_pacman_packages() {
 }
 
 install_yay_packages() {
-    for package in ${$1[@]}; do
+    local arr=("$@")
+    for package in "${arr[@]}"; do
         if [[ $(echo $(pacman -Qk $(echo $package | tr 'A-Z' 'a-z') 2> /dev/null )) == *"total files"* ]]; then
             echo -e "${YELLOW}[Skipping]${LIGHT} ${package} is already installed via yay${RESET}"
         else
@@ -245,7 +249,7 @@ install_yay_packages() {
 
 install_base() {
     echo -e "${GREEN}Installing base packages...${RESET}"
-    install_pacman_packages pacman_default
+    install_pacman_packages "${pacman_default[@]}"
 }
 
 
@@ -257,7 +261,7 @@ install_yay() {
     cd ${DOTFILES}
 
     echo -e "${GREEN}Installing yay packages...${RESET}"
-    install_yay_packages yay_default
+    install_yay_packages "${yay_default[@]}"
 }
 
 
@@ -279,15 +283,17 @@ copy_configs() {
     shopt -s extglob
     mkdir -p $HOME/.config
 
-    cp -sR ${DOTFILES}/.config/!(nvim) $HOME/.config/
+    cp -sR ${DOTFILES}/.config/* $HOME/.config/
 }
 
 
+# TODO: maybe use install script from theme
 install_gtk_theme() {
     echo -e "${GREEN}Installing GTK theme...${RESET}"
     git clone https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme.git /tmp/tokyogtk
 
     mkdir -p $HOME/.themes/
+    # fix directory name
     cp -r /tmp/tokyogtk/themes/Tokyonight-Dark-BL $HOME/.themes/
 
     cp -sR ${DOTFILES}/.config/gtk-3.0 $HOME/.config/
@@ -303,7 +309,7 @@ install_wallpaper() {
 install_greeter() {
     echo -e "${GREEN}Installing greeter for SDDM (arcade theme)...${RESET}"
     git clone https://github.com/v1nns/sddm-arcade /tmp/arcade
-    sudo mv /tmp/arcade /usr/share/sddm/themes/
+    sudo mv /tmp/arcade /usr/share/sddm/themes/arcade
 
     # TODO: sed /usr/lib/sddm/sddm.conf.d/default.conf to include theme name
 }
@@ -350,22 +356,11 @@ install_ohmyzsh() {
     chsh -s /usr/bin/zsh
 }
 
-
-install_nvchad() {
-    echo -e "${GREEN}Installing NvChad with local configs...${RESET}"
-    git clone https://github.com/NvChad/NvChad $HOME/.config/nvim --depth 1
-
-    shopt -s extglob
-
-    cp -sR ${DOTFILES}/.config/nvim/!(after) $HOME/.config/nvim/lua/custom/
-    cp -sR ${DOTFILES}/.config/nvim/after $HOME/.config/nvim/lua/
-}
-
-
 install_x11() {
     echo -e "${GREEN}Installing X11 packages...${RESET}"
-    install_pacman_packages pacman_x11
+    install_pacman_packages "${pacman_x11[@]}"
 
+    # TODO: This copy should also be done for wayland
     echo -e "${GREEN}Installing X11 configs...${RESET}"
     cp ${DOTFILES}/x11/xprofile $HOME/.xprofile
     cp ${DOTFILES}/x11/xresources $HOME/.xresources
@@ -378,11 +373,18 @@ install_x11() {
 
 install_wayland() {
     echo -e "${GREEN}Installing Wayland packages...${RESET}"
-    install_pacman_packages pacman_wayland
-    install_yay_packages yay_wayland
+    install_pacman_packages "${pacman_wayland[@]}"
+    install_yay_packages "${yay_wayland[@]}"
 
     echo -e "${GREEN}Installing Wayland configs...${RESET}"
     ln -s ${DOTFILES}/x11/shutdown.desktop $HOME/.local/share/applications/shutdown.desktop
+}
+
+install_wayland_plugins() {
+    echo -e "${GREEN}Installing Wayland plugins...${RESET}"
+    hyprpm update
+    hyprpm add https://github.com/outfoxxed/hy3
+    hyprpm enable hy3
 }
 
 
@@ -425,6 +427,5 @@ install_custom_scripts
 install_desktop_apps
 install_systemd_services
 install_ohmyzsh
-install_nvchad
 pick_display_server
 outro
