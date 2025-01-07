@@ -76,6 +76,11 @@ dev() {
   if [ -z "$@" ]; then
     cd ~/projects/;
   else
+    # Do nothing when dir do not exist
+    if [ ! -d ~/projects/$@ ]; then
+      return
+    fi
+
     cd ~/projects/$@;
 
     # Check which tiling manager is running
@@ -161,8 +166,8 @@ dec2oct() {
    echo "obase=8; ibase=10; $1" | bc
 }
 
-eval "$(atuin init zsh)"
-
 # For plugins installed via pacman
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+eval "$(atuin init zsh)"
