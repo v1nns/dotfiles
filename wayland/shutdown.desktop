@@ -3,7 +3,7 @@
 Version=1.0
 Type=Application
 Terminal=false
-Exec=wlogout -b 2
+Exec=bash -c "/home/vinicius/.local/bin/powermenu.sh &"
 Icon=system-shutdown-symbolic
 Name=Shutdown
 Comment=Shutdown computer
