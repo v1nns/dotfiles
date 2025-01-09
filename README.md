@@ -68,6 +68,6 @@ Last but not least, a rice is never *done*.
 - [x] Find an alternative to Spotify client as a running service.
 - [x] Improve installation guide;
 - [x] Check all package dependencies;
-- [ ] A good script to install these files automatically, including
-  dependencies (in progress);
+- [x] A good script to install these files automatically, including
+  dependencies;
 - [ ] Add global gitignore config;

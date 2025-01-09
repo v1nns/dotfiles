@@ -108,7 +108,7 @@ pacman_wayland=(
   'swaylock'     # Screen locker
   'waybar'       # Status bar
   'wl-clipboard' # Copy/paste utilities
-  'ibus'         # For compatibility with keyboard using US intl layout (i.e. microsoft edge)
+  'fcitx5'       # For compatibility with keyboard using US intl layout (i.e. microsoft edge)
 )
 
 # Packages to use within X11 (considering archinstall already installed i3wm)
@@ -149,6 +149,8 @@ yay_wayland=(
   'wlogout'                # Logout menu
   'hyprpolkitagent'        # Polkit authentication daemon
   'hyprswitch'             # Switch between windows in hyprland
+  'pwvucontrol'            # Pipewire volume control
+  'wttrbar'                # Weather info for waybar
 )
 
 # ANSI color codes
@@ -291,6 +293,7 @@ install_gtk_theme() {
   cp -r /tmp/tokyogtk/themes/Tokyonight-Dark-BL $HOME/.themes/
 
   cp -sR ${DOTFILES}/.config/gtk-3.0 $HOME/.config/
+  # TODO: install gtk-4 also
 }
 
 install_wallpaper() {
@@ -305,7 +308,12 @@ install_greeter() {
   git clone https://github.com/v1nns/sddm-arcade /tmp/arcade
   sudo mv /tmp/arcade /usr/share/sddm/themes/arcade
 
-  # TODO: sed /usr/lib/sddm/sddm.conf.d/default.conf to include theme name
+  sudo mkdir -p /etc/sddm.conf.d/
+  sudo tee theme.conf <<EOF
+[Theme]
+# Current theme name
+Current=arcade
+EOF
 }
 
 install_custom_icons() {
@@ -397,6 +405,21 @@ pick_display_server() {
 }
 
 ####################################################################################################
+
+# TODO:
+# create list picker
+#
+#zenity  --list --checklist \
+#   --title="Dotfiles installation"\
+#   --column="Select"  \
+#   --column="Option"  \
+#   --column="Description"  \
+#TRUE "teste1" "um teste elaborado"\
+#FALSE "teste2" "um teste elaborado"\
+#TRUE "teste3" "um teste elaborado"
+
+# setup rust env
+#  rustup default stable
 
 intro
 check_requirements

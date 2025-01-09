@@ -61,7 +61,6 @@ set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
 
-# TODO: move this to some shell script/python
 set $primary "DP-4"
 set $secondary "DP-2"
 
@@ -197,7 +196,6 @@ bindsym $mod+f fullscreen toggle
 # toggle layout for split or tabbed (to get a fake fullscreen)
 bindsym $mod+Control+f layout toggle splith tabbed
 
-# TODO: create script/rofi to change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
 # bindsym $mod+w layout tabbed
 # bindsym $mod+e layout toggle split

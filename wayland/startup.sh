@@ -6,10 +6,13 @@
 waybar &
 hyprpaper &
 hyprswitch init --show-title --size-factor 3 --workspaces-per-row 5 &
-swayidle -w
-qpwgraph &
-systemctl --user start hyprpolkitagent
+swayidle -w &
+qpwgraph -m &
+
 sleep 1 && hyprpm reload -n
 
-# this is not good...
-hyprctl plugin load /home/vinicius/.local/share/hyprpm/hy3/hy3.so
+# workaround with xwayland applications
+fcitx5 &
+clipse -listen
+
+systemctl --user start hyprpolkitagent

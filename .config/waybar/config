@@ -16,6 +16,7 @@
     "disk",
     "custom/date",
     "clock",
+    "custom/weather",
     "wireplumber",
     "battery",
     "tray"
@@ -58,6 +59,13 @@
     "format": "󰅐 <span color=\"#c0caf5\">{:%H:%M}</span>",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
+  "custom/weather": {
+    "format": "{}°",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "wttrbar",
+    "return-type": "json"
+  },
   "battery": {
     "states": {
       "warning": 30,
@@ -95,9 +103,9 @@
         "",
         "",
         ""
-      ],
-      "on-click": "pavucontrol"
-    }
+      ]
+    },
+    "on-click": "pwvucontrol"
   },
   "tray": {
     "icon-size": 18
