@@ -421,6 +421,10 @@ pick_display_server() {
 # setup rust env
 #  rustup default stable
 
+# setup docker
+#  sudo groupadd docker
+#  sudo usermod -aG docker $USER
+
 intro
 check_requirements
 update_database

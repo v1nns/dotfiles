@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Author: Aditya Shakya
-#
 # Adapted by: Vinicius Longaray
 # Github: @v1nns
 
@@ -15,11 +14,11 @@ shutdown="  Shutdown"
 reboot="  Restart"
 lock="  Lock"
 suspend="󰒲  Sleep"
-logout="󰍃  Logout"
+logout="󰗽  Logout"
 
 # kill any process that can get stuck on shutdown
 hasta_la_vista_baby() {
-    killall -s 9 /usr/bin/kdocker
+  killall -s 9 /usr/bin/kdocker
 }
 
 # Variable passed to rofi
@@ -27,33 +26,33 @@ options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
 
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 0)"
 case $chosen in
-    $shutdown)
-        hasta_la_vista_baby
-        systemctl poweroff
-        ;;
-    $reboot)
-        hasta_la_vista_baby
-        systemctl reboot
-        ;;
-    $lock)
-        if [[ -f /usr/bin/i3lock ]]; then
-            i3lock
-        elif [[ -f /usr/bin/betterlockscreen ]]; then
-            betterlockscreen -l
-        fi
-        ;;
-    $suspend)
-        mpc -q pause
-        amixer set Master mute
-        systemctl suspend
-        ;;
-    $logout)
-        if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
-            openbox --exit
-        elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
-            bspc quit
-        elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
-            i3-msg exit
-        fi
-        ;;
+$shutdown)
+  hasta_la_vista_baby
+  systemctl poweroff
+  ;;
+$reboot)
+  hasta_la_vista_baby
+  systemctl reboot
+  ;;
+$lock)
+  if [[ -f /usr/bin/i3lock ]]; then
+    i3lock
+  elif [[ -f /usr/bin/betterlockscreen ]]; then
+    betterlockscreen -l
+  elif [[ -f /usr/bin/swaylock ]]; then
+    swaylock -f
+  fi
+  ;;
+$suspend)
+  mpc -q pause
+  amixer set Master mute
+  systemctl suspend
+  ;;
+$logout)
+  if [[ "$DESKTOP_SESSION" == "i3" ]]; then
+    i3-msg exit
+  elif [[ "$DESKTOP_SESSION" == "hyprland" ]]; then
+    hyprctl dispatch exit
+  fi
+  ;;
 esac
