@@ -60,9 +60,9 @@
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "custom/weather": {
-    "format": "{}°",
+    "format": "<span color=\"#c0caf5\">{}°</span>",
     "tooltip": true,
-    "interval": 3600,
+    "interval": 1800,
     "exec": "wttrbar",
     "return-type": "json"
   },

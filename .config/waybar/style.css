@@ -46,6 +46,7 @@ window#waybar {
 #network,
 #custom-date,
 #clock,
+#custom-weather,
 #wireplumber,
 #battery {
   padding: 0px 7px;
@@ -94,10 +95,7 @@ window#waybar {
   color: #e0af68;
 }
 
-#battery {
-  color: #9ece6a;
-}
-
+#battery,
 #battery.charging {
   color: #9ece6a;
 }
@@ -109,11 +107,8 @@ window#waybar {
   border-radius: 5px 5px 5px 5px;
 }
 
-
 #tray {
   background-color: #1f2335;
-  margin-left: 0px;
-  margin-right: 3px;
   border-radius: 5px;
   padding: 0 5px;
 }
