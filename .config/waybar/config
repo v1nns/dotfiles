@@ -14,7 +14,6 @@
     "cpu",
     "memory",
     "disk",
-    "custom/date",
     "clock",
     "custom/weather",
     "wireplumber",
@@ -26,8 +25,8 @@
     "separate-outputs": true
   },
   "hyprland/submap": {
-   "format": "{}",
-   "tooltip": false
+    "format": "{}",
+    "tooltip": false
   },
   "temperature#cpu": {
     "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
@@ -50,14 +49,29 @@
   "disk": {
     "format": "󰋊  <span color=\"#c0caf5\">{percentage_used}%</span>"
   },
-  "custom/date": {
-    "format": "󰸗 <span color=\"#c0caf5\">{}</span>",
-    "interval": 3600,
-    "exec": "date +\"%a, %d %b %Y\""
-  },
   "clock": {
-    "format": "󰅐 <span color=\"#c0caf5\">{:%H:%M}</span>",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    "format": "󰸗 <span color=\"#c0caf5\">{:%a, %d %b %Y  <span color=\"#b4f9f8\">󰅐</span> %H:%M}</span>",
+    "tooltip-format": "<big>Calendar</big>\n{calendar}",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "tz_up",
+      "on-scroll-down": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
   },
   "custom/weather": {
     "format": "<span color=\"#c0caf5\">{}°</span>",
@@ -75,7 +89,7 @@
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󰂄 {capacity}%",
     "format-alt": "{time} {icon}",
-    "format-full": "󱈑 {capacity}%",
+    "format-full": "󰁹 {capacity}%",
     "format-icons": [
       "󱊡",
       "󱊢",
@@ -90,21 +104,13 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "wireplumber": {
-    "format": "{icon}  {volume}%",
+    "format": "{icon} {volume}%",
     "format-muted": "󰖁 Muted",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
-    },
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
     "on-click": "pwvucontrol"
   },
   "tray": {

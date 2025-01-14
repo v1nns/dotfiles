@@ -44,7 +44,6 @@ window#waybar {
 #memory,
 #disk,
 #network,
-#custom-date,
 #clock,
 #custom-weather,
 #wireplumber,
@@ -83,12 +82,8 @@ window#waybar {
   color: #2ac3de;
 }
 
-#custom-date {
-  color: #7dcfff;
-}
-
 #clock {
-  color: #b48ead;
+  color: #7dcfff;
 }
 
 #wireplumber {
