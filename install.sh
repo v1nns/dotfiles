@@ -61,12 +61,14 @@ pacman_default=('base-devel' # Basic tools to build packages
 
   # Audio-related (considering pipewire+wireplumber are already installed)
   'pipewire-libcamera'
-  'easyeffects'
   'realtime-privileges'
   'pavucontrol'
   'pasystray'
   'pamixer'
   'qpwgraph'
+  'lsp-plugins-lv2'
+  'calf'
+  'easyeffects'
 
   # Video
   'vlc'
