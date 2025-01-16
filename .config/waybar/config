@@ -50,7 +50,7 @@
     "format": "󰋊  <span color=\"#c0caf5\">{percentage_used}%</span>"
   },
   "clock": {
-    "format": "󰸗 <span color=\"#c0caf5\">{:%a, %d %b %Y  <span color=\"#b4f9f8\">󰅐</span> %H:%M}</span>",
+    "format": "󰸗 <span color=\"#c0caf5\">{:%a, %d %b %Y <span color=\"#b4f9f8\">󰅐</span> %H:%M}</span>",
     "tooltip-format": "<big>Calendar</big>\n{calendar}",
     "calendar": {
       "mode": "year",
@@ -74,7 +74,7 @@
     }
   },
   "custom/weather": {
-    "format": "<span color=\"#c0caf5\">{}°</span>",
+    "format": "<span color=\"#c0caf5\">{}°C</span>",
     "tooltip": true,
     "interval": 1800,
     "exec": "wttrbar",
@@ -104,7 +104,7 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "wireplumber": {
-    "format": "{icon} {volume}%",
+    "format": "{icon}  {volume}%",
     "format-muted": "󰖁 Muted",
     "format-icons": [
       "",
