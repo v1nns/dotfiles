@@ -52,6 +52,8 @@ pacman_default=('base-devel' # Basic tools to build packages
   'python-gi'
   'python-gobject'
   'python-pip'
+  'python-lsp-server'
+  'autopep8'
 
   # Monitoring, management and stats
   'btop'          # System resource monitoring
