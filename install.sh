@@ -109,10 +109,11 @@ pacman_wayland=(
   'hyprpaper'    # Set wallpaper
   'nwg-look'     # Customize GTK settings
   'swayidle'     # Idle management daemon
-  'swaylock'     # Screen locker
   'waybar'       # Status bar
   'wl-clipboard' # Copy/paste utilities
   'fcitx5'       # For compatibility with keyboard using US intl layout (i.e. microsoft edge)
+  'socat'        # Listen for socket events
+  'hyprlock'     # Screen locker
 )
 
 # Packages to use within X11 (considering archinstall already installed i3wm)
