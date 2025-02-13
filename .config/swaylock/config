@@ -1,13 +1,13 @@
 ignore-empty-password
 indicator-caps-lock
 
-color=24283b
-font="Inter 14"
+color=1a1b26
+font="JetBrainsMono NF 14"
 indicator-radius=80
 indicator-thickness=20
 key-hl-color=bb9af7
 
-inside-color=1d202f
+inside-color=1a1b26
 inside-clear-color=1d202f
 inside-caps-lock-color=f7768e
 inside-ver-color=9ece6a
