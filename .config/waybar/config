@@ -16,6 +16,7 @@
     "disk",
     "clock",
     "custom/weather",
+    "custom/dunst",
     "wireplumber",
     "battery",
     "tray"
@@ -38,7 +39,7 @@
     "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
     "format": "󰏈  <span color=\"#c0caf5\">{}°C</span>",
     "tooltip-format": "GPU {}°C",
-    "interval": 10
+    "interval": 5
   },
   "cpu": {
     "format": "  <span color=\"#c0caf5\">{usage}%</span>"
@@ -79,6 +80,13 @@
     "interval": 1800,
     "exec": "wttrbar",
     "return-type": "json"
+  },
+  "custom/dunst": {
+    "exec": "~/.local/bin/dunst.sh",
+    "format": "<span color=\"#c0caf5\">{}</span>",
+    "on-click": "dunstctl set-paused toggle",
+    "restart-interval": 1,
+    "tooltip": false
   },
   "battery": {
     "states": {

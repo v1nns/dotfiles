@@ -37,8 +37,7 @@ window#waybar {
   border-radius: 5px;
 }
 
-#submap
-#temperature.cpu,
+#submap #temperature.cpu,
 #custom-gpu,
 #cpu,
 #memory,
@@ -46,6 +45,7 @@ window#waybar {
 #network,
 #clock,
 #custom-weather,
+#custom-dunst,
 #wireplumber,
 #battery {
   padding: 0px 5px;
@@ -98,7 +98,7 @@ window#waybar {
 #battery.warning:not(.charging),
 #battery.critical {
   background-color: #f7768e;
-  color:black;
+  color: black;
   border-radius: 5px 5px 5px 5px;
 }
 
