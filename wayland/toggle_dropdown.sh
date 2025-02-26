@@ -9,7 +9,8 @@ hyprctl dispatch focusmonitor +1
 hyprctl dispatch focusmonitor -1
 
 #hyprctl dispatch resizeactive exact 55% 60%
-hyprctl dispatch resizewindowpixel exact 55% 60%, title:\^\(dropdown-terminal\)\$
+hyprctl dispatch resizewindowpixel exact 55% 60%, 'title:^(dropdown-terminal)$'
 
 hyprctl dispatch togglespecialworkspace dropdown
 hyprctl dispatch centerwindow
+hyprctl dispatch focuswindow 'class:^(kitty)$, title:^(dropdown-terminal)$'
