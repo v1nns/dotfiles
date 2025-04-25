@@ -10,7 +10,7 @@ execute_rofi() {
     local rofi_command="rofi -theme $ROFI_THEME_DIR/renameworkspace.rasi"
 
     # open rofi window asking for new name
-    output="$($rofi_command -dmenu -lines 0 -p 'Rename workspace:' -filter $1)"
+    output="$($rofi_command -dmenu -lines 0 -p 'Rename workspace:' -filter "'$*'")"
 
     # if rofi has exitted by Esc, just exit from script
     [[ ${PIPESTATUS[0]} -ne 0 ]] && exit 0
@@ -28,8 +28,7 @@ rename_workspace_i3() {
     execute_rofi $name
 
     # check output from rofi
-    if [ -z $output ]
-    then
+    if [ -z $output ]; then
         # $input is empty, set workspace name only with its number
         i3-msg rename workspace to "$index"
     else
@@ -39,19 +38,42 @@ rename_workspace_i3() {
 }
 
 rename_workspace_hyprland() {
-    # get info from current workspace
-    local workspace_info="hyprctl activeworkspace"
-    eval "$workspace_info"
+    # get info from current active window
+    local window_info="hyprctl activewindow -j"
+    eval "$window_info"
 
     # filter index and name (if existing) from focused workspace
-    local index="$($workspace_info | grep -oP "workspace ID \d* \(" | grep -oP "\d*")"
-    local name="$($workspace_info | grep -oP "\(.*\)" | cut -d ':' -f 2 -s | rev | cut -c2- | rev)"
+    local index="$($window_info | jq -r .workspace.id)"
+    local name="$($window_info | jq -r .workspace.name | cut -d ':' -f 2 -s | xargs)"
 
-    execute_rofi $name
+    # if special workspace with "dropdown" window is focused, do not rename workspace
+    if [[ "$name" == "dropdown" ]]; then
+        exit
+    fi
+
+    # otherwise, we have to get info from the actual workspace
+    local workspace_info="hyprctl activeworkspace -j"
+    eval "$workspace_info"
+
+    index="$($workspace_info | jq -r .id)"
+    name="$($workspace_info | jq -r .name | cut -d ':' -f 2 -s | xargs)"
+
+    if [[ "$#" -eq 0 ]]; then
+        execute_rofi $name
+    else
+        # do not rename workspace that already has a name
+        if [[ -n $name ]]; then
+            exit
+        fi
+
+        # remove quotes from begin and end
+        local temp="${@%\"}"
+        temp="${temp#\"}"
+        output=$temp
+    fi
 
     # check output from rofi
-    if [ -z $output ]
-    then
+    if [ -z $output ]; then
         # $input is empty, set workspace name only with its number
         hyprctl dispatch renameworkspace $index "$index"
     else
@@ -62,7 +84,7 @@ rename_workspace_hyprland() {
 
 # Check which tiling manager is running
 if pgrep -x i3; then
-    rename_workspace_i3;
+    rename_workspace_i3
 elif pgrep -x Hyprland; then
-    rename_workspace_hyprland;
+    rename_workspace_hyprland $@
 fi

@@ -24,6 +24,4 @@ selection-background = #283457
 selection-foreground = #c0caf5
 
 font-family = JetBrainsMono Nerd Font
-font-size = 9.5
-
-freetype-load-flags = no-hinting,no-force-autohint,monochrome
+font-size = 9
