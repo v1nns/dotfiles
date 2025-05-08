@@ -19,6 +19,7 @@
     "custom/dunst",
     "wireplumber",
     "battery",
+    "idle_inhibitor",
     "tray"
   ],
   "hyprland/window": {
@@ -123,5 +124,12 @@
   },
   "tray": {
     "icon-size": 18
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": " ",
+      "deactivated": " "
+    }
   }
 }
