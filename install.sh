@@ -391,6 +391,9 @@ install_wayland_plugins() {
   hyprpm add https://github.com/outfoxxed/hy3
   hyprpm enable hy3
   hyprpm update
+  hyprpm add https://github.com/zakk4223/hyprland-easymotion
+  hyprpm enable hyprEasymotion
+  hyprpm update
 }
 
 pick_display_server() {

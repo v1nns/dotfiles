@@ -41,6 +41,9 @@ source $ZSH/oh-my-zsh.sh
 # Enable TMUX by default on start
 # export ZSH_TMUX_AUTOSTART=true
 
+# Use neovim as to read manpage
+export MANPAGER='nvim +Man!'
+
 # Plugins - BGNotify
 function bgnotify_formatted {
     elapsed="$(( $3 % 60 ))s"
