@@ -2,7 +2,7 @@
   border: none;
   border-radius: 0;
   font-family: Iosevka NF;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 14px;
   min-height: 0;
   padding: 0;
@@ -23,6 +23,7 @@ window#waybar {
 #workspaces button {
   padding: 0px 8px;
   color: #c0caf5;
+  /* min-width: 100px; */
 }
 
 #workspaces button.active {
