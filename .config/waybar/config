@@ -9,6 +9,7 @@
     "hyprland/submap"
   ],
   "modules-right": [
+    "privacy",
     "temperature#cpu",
     "custom/gpu",
     "cpu",
@@ -16,9 +17,9 @@
     "disk",
     "clock",
     "custom/weather",
-    "custom/dunst",
     "wireplumber",
     "battery",
+    "custom/dunst",
     "idle_inhibitor",
     "tray"
   ],
@@ -29,6 +30,22 @@
   "hyprland/submap": {
     "format": "{}",
     "tooltip": false
+  },
+  "privacy": {
+    "icon-size": 16,
+    "icon-spacing": 2,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 16
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 16
+      }
+    ]
   },
   "temperature#cpu": {
     "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
@@ -70,9 +87,7 @@
     "actions": {
       "on-click-right": "mode",
       "on-scroll-up": "tz_up",
-      "on-scroll-down": "tz_down",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
+      "on-scroll-down": "tz_down"
     }
   },
   "custom/weather": {
@@ -84,7 +99,7 @@
   },
   "custom/dunst": {
     "exec": "~/.local/bin/dunst.sh",
-    "format": "<span color=\"#c0caf5\">{}</span>",
+    "format": "{}",
     "on-click": "dunstctl set-paused toggle",
     "restart-interval": 1,
     "tooltip": false

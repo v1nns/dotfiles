@@ -38,7 +38,8 @@ window#waybar {
   border-radius: 5px;
 }
 
-#submap #temperature.cpu,
+#submap,
+#temperature.cpu,
 #custom-gpu,
 #cpu,
 #memory,
@@ -105,8 +106,7 @@ window#waybar {
 
 #tray {
   background-color: #1f2335;
-  border-radius: 5px;
-  padding: 0 5px;
+  padding: 0 2px;
 }
 
 #tray>* {
