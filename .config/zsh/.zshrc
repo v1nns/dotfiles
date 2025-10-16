@@ -8,8 +8,11 @@ fi
 # PowerLevel10k - to customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# zplug initialization (plugin manager)
+source /usr/share/zsh/scripts/zplug/init.zsh
+
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:/opt/flutter/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.npm/bin:/opt/flutter/bin:$PATH
 
 # Export config to use it later by flutter
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
@@ -21,19 +24,32 @@ export ZSH=$HOME/.oh-my-zsh
 # Custom themes may be added to ~/.oh-my-zsh/custom/themes/
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    bgnotify
-    git
-    sudo
-    #fast-syntax-highlighting
-    #zsh-autosuggestions
-    docker
-    docker-compose
-    tmux
-)
+# Load plugins from oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/bgnotify", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/sudo", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/docker-compose", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+
+# Load plugins from GitHub
+zplug "zdharma-continuum/fast-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+
+# zplug "jeffreytse/zsh-vi-mode"
+# zplug "IngoMeyer441/zsh-easy-motion"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -168,9 +184,5 @@ oct2dec() {
 dec2oct() {
    echo "obase=8; ibase=10; $1" | bc
 }
-
-# For plugins installed via pacman
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(atuin init zsh)"

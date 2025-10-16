@@ -131,6 +131,7 @@ pacman_x11=(
 
 # Base packages from AUR
 yay_default=(
+  'zplug'         # zsh plugin manager
   'google-chrome' # Internet browser
   'iwgtk'         # Wi-Fi manager
 
