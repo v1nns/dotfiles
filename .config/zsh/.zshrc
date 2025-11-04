@@ -116,6 +116,11 @@ dev() {
           i3-msg rename workspace to "$index:$*" > /dev/null
       fi
     elif pgrep -x Hyprland > /dev/null; then
+      local active_window="$(hyprctl activewindow -j| jq -r .workspace.name | cut -d ':' -f 1 -s | xargs)"
+      if [ "$active_window" = "special" ]; then
+        return
+      fi
+
       # Filter index and name (if existing) from focused workspace (with hyprland)
       local index="$(hyprctl activeworkspace -j | jq -r .id)"
       local name="$(hyprctl activeworkspace -j | jq -r .name | cut -d ':' -f 2 -s)"

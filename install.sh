@@ -35,8 +35,6 @@ pacman_default=('base-devel' # Basic tools to build packages
 
   # z-shell
   'zsh'
-  'zsh-completion'
-  'zsh-autosuggestions'
 
   # Development
   'cmake'

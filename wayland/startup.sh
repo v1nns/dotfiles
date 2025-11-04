@@ -3,7 +3,6 @@
 #
 # Execute a list of applications after wayland startup
 
-waybar &
 hyprpaper &
 # hyprswitch init --show-title --size-factor 3 --workspaces-per-row 5 &
 hypridle &
