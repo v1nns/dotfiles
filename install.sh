@@ -8,7 +8,7 @@
 pacman_default=('base-devel' # Basic tools to build packages
   'git'                      # Version control
   'neovim'                   # Code editor
-  'ranger'                   # Directory browser
+  'nemo'                     # File browser
   'tmux'                     # Term multiplexer
   'wget'                     # Download files
   'alsa-firmware'            # For audio
@@ -155,6 +155,12 @@ yay_wayland=(
   'hyprswitch'             # Switch between windows in hyprland
   'pwvucontrol'            # Pipewire volume control
   'wttrbar'                # Weather info for waybar
+
+  # TODO: create installer
+  'sysc-greet-hyprland'    # TUI greeter
+
+  # TODO: create installer section including extensions
+  'vicinae-bin'
 )
 
 # ANSI color codes
@@ -444,9 +450,6 @@ copy_configs
 install_gtk_theme
 install_wallpaper
 install_greeter
-# TODO:
-# adjust missing tokyo-night themes for rofi (launcher and rename are ok)
-# create tokyo-night theme for wlogout
 # update README with new stuff
 install_custom_icons
 install_custom_scripts
