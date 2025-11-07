@@ -1,0 +1,145 @@
+{
+  "hyprland/window": {
+    "max-length": 200,
+    "separate-outputs": true
+  },
+  "hyprland/submap": {
+    "format": "{}",
+    "tooltip": false
+  },
+  "mpris": {
+    "format": "{status_icon} {artist} - {title}",
+    "artist-len": 20,
+    "title-len": 25,
+    "status-icons": {
+      "playing": "🎵",
+      "paused": "⏸"
+    },
+    "ignored-players": [
+      "chromium"
+    ]
+  },
+  "privacy": {
+    "icon-size": 16,
+    "icon-spacing": 2,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 16
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 16
+      }
+    ]
+  },
+  "temperature#cpu": {
+    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+    "input-filename": "temp1_input",
+    "format": "󰏈  <span color=\"#c0caf5\">{temperatureC}°C</span>",
+    "tooltip-format": "CPU {temperatureC}°C"
+  },
+  "cpu": {
+    "format": "  <span color=\"#c0caf5\">{usage}%</span>"
+  },
+  "memory": {
+    "format": "  <span color=\"#c0caf5\">{used} GiB</span>"
+  },
+  "disk": {
+    "format": "󰋊  <span color=\"#c0caf5\">{percentage_used}%</span>"
+  },
+  "clock": {
+    "format": "󰸗 <span color=\"#c0caf5\">{:%a, %d %b %Y <span color=\"#b4f9f8\">󰅐</span> %H:%M}</span>",
+    "tooltip-format": "<big>Calendar</big>\n{calendar}",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "tz_up",
+      "on-scroll-down": "tz_down"
+    }
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "󱊡",
+      "󱊢",
+      "󱊣"
+    ],
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%"
+  },
+  "network": {
+    "format-wifi": "  <span color=\"#c0caf5\">{essid}</span>",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "󰤮 Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "wireplumber": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰖁 Muted",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ],
+    "on-click": "pwvucontrol",
+    "on-click-right": "~/.local/bin/toggle_sink.py"
+  },
+  "tray": {
+    "icon-size": 18
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": " ",
+      "deactivated": " "
+    }
+  },
+  "custom/gpu": {
+    "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
+    "format": "󰏈  <span color=\"#c0caf5\">{}°C</span>",
+    "tooltip-format": "GPU {}°C",
+    "interval": 5
+  },
+  "custom/dunst": {
+    "exec": "~/.local/bin/dunst.sh",
+    "format": "{}",
+    "on-click": "dunstctl set-paused toggle",
+    "restart-interval": 1,
+    "tooltip": false
+  },
+  "custom/weather": {
+    "format": "<span color='#c0caf5'>{}</span>",
+    "return-type": "json",
+    "exec": "~/.local/bin/weather_info.py --city 'Barra do Ribeiro' --api-key='<API>' --waybar",
+    "interval": 1800,
+    "tooltip": true
+  },
+  "custom/openvpn": {
+    "exec": "~/.local/bin/toggle_openvpn.sh status",
+    "on-click": "~/.local/bin/toggle_openvpn.sh toggle",
+    "format": "<span color='#c0caf5'>{}</span>",
+    "tooltip": true,
+    "tooltip-format": "Click to toggle VPN connection",
+    "interval": 5
+  }
+}

@@ -44,6 +44,8 @@ window#waybar {
 }
 
 #submap,
+#mpris,
+#custom-openvpn,
 #temperature.cpu,
 #custom-gpu,
 #cpu,
@@ -115,4 +117,12 @@ window#waybar {
 #tray>* {
   padding: 0 2px;
   margin: 0 2px;
+}
+
+#mpris.playing {
+  color: #c0caf5;
+}
+
+#mpris.paused {
+  color:  #444b6a;
 }
