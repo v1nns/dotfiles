@@ -8,7 +8,7 @@ After=network-online.target sound.target
 [Service]
 Restart=always
 RestartSec=10
-ExecStart=/home/vinicius/.cargo/bin/librespot --name "%u@%H" -b 320 -c /home/vinicius/.cache/librespot --format F32 --initial-volume 75 --dither none --onevent /home/vinicius/.local/bin/librespot_listener.py
+ExecStart=librespot --name "%u@%H" -b 320 -c /home/vinicius/.cache/librespot --format F32 --initial-volume 65 --dither none
 
 [Install]
 WantedBy=default.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Spotify Player TUI (using it for MPRIS support)
+Documentation=https://github.com/aome510/spotify-player
+Documentation=https://github.com/aome510/spotify-player/blob/master/README.md
+Wants=network-online.target sound.target librespot.service
+After=network-online.target sound.target librespot.service
+
+[Service]
+Type=forking
+ExecStart=spotify_player --daemon
+
+[Install]
+WantedBy=default.target
