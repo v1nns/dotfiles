@@ -49,10 +49,14 @@ do_the_magic_with() {
     sleep 3
   fi
 
-  if [[ "$DESKTOP_SESSION" == "i3" ]]; then
+  if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
     move_i3 data_ref
-  elif [[ "$DESKTOP_SESSION" == "hyprland" ]]; then
+  elif [[ "$XDG_CURRENT_DESKTOP" == "Hyprland" ]]; then
     move_hyprland data_ref
+  else
+    echo "Unsupported desktop environment: $XDG_CURRENT_DESKTOP"
+    bgnotify "Unsupported desktop environment: $XDG_CURRENT_DESKTOP"
+    exit 1
   fi
 
 }

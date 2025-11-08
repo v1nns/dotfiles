@@ -34,8 +34,8 @@ class WeatherAPI:
         """
         self.api_key = api_key
 
-    def get_forecast(self, lat: float = None, lon: float = None,
-                     city: str = None, units: str = "metric") -> dict:
+    def get_forecast(self, lat: float | None = None, lon: float | None = None,
+                     city: str | None = None, units: str = "metric") -> dict:
         """Fetch 5-day forecast data (3-hour intervals).
 
         Args:
@@ -58,8 +58,8 @@ class WeatherAPI:
         if city:
             params['q'] = city
         elif lat is not None and lon is not None:
-            params['lat'] = lat
-            params['lon'] = lon
+            params['lat'] = str(lat)
+            params['lon'] = str(lon)
         else:
             raise ValueError("Must provide either city or lat/lon coordinates")
 
@@ -76,7 +76,7 @@ class WeatherAPI:
         except urllib.error.URLError as e:
             raise Exception(f"URL Error: {e.reason}")
 
-    def get_weather_icon(self, condition: str, timestamp: int = None, sunrise: int = None, sunset: int = None, ignore_night: bool = False) -> str:
+    def get_weather_icon(self, condition: str, timestamp: int | None = None, sunrise: int | None = None, sunset: int | None = None, ignore_night: bool = False) -> str:
         """Get weather icon based on condition description and time of day.
 
         Args:
