@@ -30,7 +30,7 @@ from time import sleep
 CLIENT_ID = ""
 CLIENT_SECRET = ""
 
-REDIRECT_URI = "http://localhost:8888/callback"
+REDIRECT_URI = "http://127.0.0.1:8888/callback"
 
 DEFAULT_DEVICE = "vinicius@cookie"
 
@@ -174,13 +174,15 @@ def main():
 
     # Increment volume percent
     if args.inc_volume:
-        increase = lambda a, b: a + b if a + b <= 100 else 100
+        def increase(a, b):
+            return a + b if a + b <= 100 else 100
         volume = increase(volume, 5)
         spotify.volume(device_id=device_id, volume_percent=volume)
 
     # Decrement volume percent
     if args.dec_volume:
-        decrease = lambda a, b: a - b if a - b >= 0 else 0
+        def decrease(a, b):
+            return a - b if a - b >= 0 else 0
         volume = decrease(volume, 5)
         spotify.volume(device_id=device_id, volume_percent=volume)
 
