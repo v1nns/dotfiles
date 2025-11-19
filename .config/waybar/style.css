@@ -12,9 +12,10 @@ window#waybar {
   background: #1f2335;
   color: white;
 
+  /* for simple border, use:
   border-style: solid;
   border-width: 1px 0 0 0;
-  border-color: #444b6a;
+  border-color: #444b6a; */
 
   /* for gradient border, use:
   border-color: transparent;
