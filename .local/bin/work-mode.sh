@@ -7,7 +7,7 @@
 
 move_i3() {
   # move it between workspaces
-  i3-msg '[class="'${data_ref[className]}'"] move workspace '${data_ref[workspaceId]}
+  i3-msg 'workspace '${data_ref[workspaceId]}
   i3-msg 'workspace '${data_ref[workspaceId]}',' \
     'rename workspace to "'${data_ref[workspaceName]}'",' \
     'move workspace to output '${data_ref[outputMonitor]}
@@ -19,7 +19,7 @@ move_i3() {
 
 move_hyprland() {
   # move it between workspaces
-  hyprctl dispatch movetoworkspace ${data_ref[workspaceId]}, class:'^('${data_ref[className]}')$'
+  hyprctl dispatch workspace ${data_ref[workspaceId]}
   hyprctl dispatch renameworkspace ${data_ref[workspaceId]} ${data_ref[workspaceName]}
 }
 
@@ -31,22 +31,11 @@ do_the_magic_with() {
   local -n data_ref=$1
   cmd="ps ax | grep ${data_ref[name]} | grep -v grep | wc -l"
 
-  # if not running yet
   appCount=$(eval "$cmd")
-  if [ "$appCount" -le "0" ]; then
-    # start application detached
-    (${data_ref[command]} &)
-  fi
+  if [ ! "$appCount" -le "0" ]; then
+    # do not move if already running
 
-  # wait until program starts running wild
-  while [ "$appCount" -le "0" ]; do
-    sleep 1
-    appCount=$(eval "$cmd")
-  done
-
-  # workaround for slow loading screen =(
-  if [[ "${data_ref[className]}" == "teams" ]]; then
-    sleep 3
+    return
   fi
 
   if [[ "$XDG_CURRENT_DESKTOP" == "i3" ]]; then
@@ -59,6 +48,19 @@ do_the_magic_with() {
     exit 1
   fi
 
+  # start application detached
+  (${data_ref[command]} &)
+
+  # wait until program starts running wild
+  while [ "$appCount" -le "0" ]; do
+    sleep 1
+    appCount=$(eval "$cmd")
+  done
+
+  # workaround for slow loading screen =(
+  if [[ "${data_ref[className]}" == "teams" ]]; then
+    sleep 3
+  fi
 }
 
 # ---------------------------------------------------------------------------- #
