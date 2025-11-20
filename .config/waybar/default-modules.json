@@ -141,5 +141,10 @@
     "tooltip": true,
     "tooltip-format": "Click to toggle VPN connection",
     "interval": 5
+  },
+  "custom/musicdaemon": {
+    "exec": "~/.local/bin/music_daemon.py --bar waybar",
+    "format": "{}",
+    "tooltip": false
   }
 }

@@ -12,7 +12,7 @@
     ],
     "modules-center": [
       "hyprland/submap",
-      "mpris"
+      "custom/musicdaemon"
     ],
     "modules-right": [
       "privacy",

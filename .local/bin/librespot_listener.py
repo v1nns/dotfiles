@@ -25,25 +25,64 @@ to DEFAULT_ICON_PATH.
 """
 import base64
 import dbus
+import fcntl
 import gi
 import json
-import requests
-import os
 import logging
+import os
+import requests
+import sys
 
-from gi.repository import GObject, Notify
 from systemd.journal import JournalHandler
-
 from dataclasses import dataclass, field
-from pid import PidFileError
-from pid.decorator import pidfile
 
 gi.require_version('Notify', '0.7')
+from gi.repository import GObject, Notify  # noqa: E402
+
+
+class SingleInstance:
+    """
+    Context manager to ensure only one instance of script runs at a time.
+    Uses file locking (fcntl) to prevent multiple instances. If another instance
+    is already running, the script will exit with code 1.
+
+    Note:
+        - The lock file is automatically created and removed
+        - The lock is released even if the script crashes
+        - Works on Linux/Unix systems (requires fcntl module)
+    """
+
+    def __init__(self, lockfile):
+        self.lockfile = lockfile
+        self.fp = None
+
+    def __enter__(self):
+        self.fp = open(self.lockfile, 'w')
+        try:
+            fcntl.flock(self.fp.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except IOError:
+            print("Another instance is already running.", file=sys.stderr)
+            sys.exit(1)
+
+        # Write PID to file
+        self.fp.write(str(os.getpid()))
+        self.fp.flush()
+        return self.fp
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.fp:
+            fcntl.flock(self.fp.fileno(), fcntl.LOCK_UN)
+            self.fp.close()
+            try:
+                os.unlink(self.lockfile)
+            except Exception:
+                pass
+
 
 # ----------------------------------- Cache from temporary file ---------------------------------- #
 
 DEFAULT_TMP_FILE = "/home/vinicius/.cache/librespot/custom_cache.json"
-DEFAULT_ICON_PATH = "/home/vinicius/.local/share/icons/custom"
+DEFAULT_ICON_PATH = "/home/vinicius/.local/share/icons"
 
 CLIENT_ID = ""
 CLIENT_SECRET = ""
@@ -62,17 +101,20 @@ class Cache():
         self.load_from_file()
 
     def load_from_file(self):
-        if os.path.exists(DEFAULT_TMP_FILE):
+        """Load state from JSON file if it exists."""
+        if not os.path.exists(DEFAULT_TMP_FILE):
+            return
+
+        try:
             with open(DEFAULT_TMP_FILE) as json_file:
                 obj = json.load(json_file)
-                if "state" in obj:
-                    self.state = obj["state"]
-                if "access_token" in obj:
-                    self.access_token = obj["access_token"]
-                if "artist" in obj:
-                    self.artist = obj["artist"]
-                if "song" in obj:
-                    self.song = obj["song"]
+
+            for key in ("state", "access_token", "artist", "song"):
+                if key in obj:
+                    setattr(self, key, obj[key])
+
+        except (json.JSONDecodeError, IOError) as e:
+            print(f"Warning: Could not load from {DEFAULT_TMP_FILE}: {e}", file=sys.stderr)
 
     def save_to_file(self):
         with open(DEFAULT_TMP_FILE, 'w+') as out:
@@ -96,28 +138,25 @@ class LibrespotNotifier(GObject.Object):
         notify.show()
 
     def _get_icon_path(self, state, error):
-        icon = ""
-
-        # alright, do not use any icon
+        """Get the appropriate icon path based on state and error status."""
         if not os.path.exists(DEFAULT_ICON_PATH):
-            return icon
+            return ""
 
+        # Map states to icon names
         if error:
-            icon = "error"
-        elif state == "playing":
-            icon = "play"
-        elif state == "paused":
-            icon += "pause"
-        elif state == "stopped":
-            icon += "stop"
+            icon_name = "error"
+        else:
+            state_icons = {
+                "playing": "play",
+                "paused": "pause",
+                "stopped": "stop"
+            }
+            icon_name = state_icons.get(state)
+            if not icon_name:
+                return ""  # Unknown state
 
-        icon = f"{DEFAULT_ICON_PATH}/{icon}.png"
-
-        # directory exists, but icon doesn't
-        if not os.path.exists(icon):
-            icon = ""
-
-        return icon
+        icon_path = os.path.join(DEFAULT_ICON_PATH, f"{icon_name}.png")
+        return icon_path if os.path.exists(icon_path) else ""
 
 
 # ---------------------------------------- Spotify Web API --------------------------------------- #
@@ -321,7 +360,6 @@ def update_cache(state: str, info: str, cache: Cache):
 # ------------------------------------------ Main method ----------------------------------------- #
 
 
-@pidfile()
 def main():
     # Filter event from librespot
     state = os.getenv("PLAYER_EVENT")
@@ -377,8 +415,5 @@ def main():
 # ------------------------------------------------------------------------------------------------ #
 
 if __name__ == '__main__':
-    try:
+    with SingleInstance("/tmp/librespot_listener.lock"):
         main()
-    except PidFileError:
-        # that's ok, you can have only one instance running simultaneously
-        pass
