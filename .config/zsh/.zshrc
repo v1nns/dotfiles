@@ -11,15 +11,6 @@ fi
 # zplug initialization (plugin manager)
 source /usr/share/zsh/scripts/zplug/init.zsh
 
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.npm/bin:/opt/flutter/bin:$PATH
-
-# Export config to use it later by flutter
-export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
-
-# Path to oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-
 # Standard themes can be found in ~/.oh-my-zsh/themes/*
 # Custom themes may be added to ~/.oh-my-zsh/custom/themes/
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -53,12 +44,6 @@ zplug load
 
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-
-# Enable TMUX by default on start
-# export ZSH_TMUX_AUTOSTART=true
-
-# Use neovim as to read manpage
-export MANPAGER='nvim +Man!'
 
 # Plugins - BGNotify
 function bgnotify_formatted {
@@ -152,10 +137,6 @@ unsetopt beep
 # Use ssh with this alias
 alias s="TERM=xterm-256color kitty +kitten ssh"
 alias clear-nvim="rm -rf ~/.local/share/nvim/ ~/.cache/nvim ~/.local/state/nvim"
-
-# Enable gtest color by default
-# (read this: https://github.com/kovidgoyal/kitty/issues/4400#issuecomment-1002518875)
-export GTEST_COLOR=yes
 
 # Base converters
 bin2dec() {
