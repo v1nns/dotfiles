@@ -1,0 +1,35 @@
+{
+  "closeOnFocusLoss": false,
+  "faviconService": "twenty",
+  "font": {
+    "size": 10.5
+  },
+  "keybinding": "default",
+  "keybinds": {},
+  "popToRootOnClose": true,
+  "rootSearch": {
+    "searchFiles": false
+  },
+  "theme": {
+    "dark": {
+      "name": "tokyo-night"
+    }
+  },
+  "window": {
+    "csd": true,
+    "opacity": 0.98,
+    "rounding": 10
+  },
+  "favorites": [
+    "applications:google-chrome"
+  ],
+  "providers": {
+    "applications": {
+      "entrypoints": {
+        "shutdown": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}
