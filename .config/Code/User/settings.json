@@ -119,11 +119,11 @@
   /*                                      workbench settings                                      */
   /* -------------------------------------------------------------------------------------------- */
 
-  "workbench.activityBar.visible": false,
+  "workbench.activityBar.location": "hidden",
   "workbench.colorTheme": "Tokyo Night",
   "workbench.editor.enablePreview": true,
   "workbench.editor.labelFormat": "medium",
-  "workbench.editor.showTabs": false,
+  "workbench.editor.showTabs": "single",
   "workbench.editor.wrapTabs": true,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",

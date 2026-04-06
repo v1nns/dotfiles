@@ -1,27 +1,28 @@
 {
-  "closeOnFocusLoss": false,
-  "faviconService": "twenty",
+  "close_on_focus_loss": false,
+  "favicon_service": "twenty",
   "font": {
     "size": 10.5
   },
   "keybinding": "default",
   "keybinds": {},
-  "popToRootOnClose": true,
-  "rootSearch": {
-    "searchFiles": false
-  },
+  "pop_to_root_on_close": true,
+  "search_files_in_root": false,
   "theme": {
     "dark": {
       "name": "tokyo-night"
     }
   },
-  "window": {
-    "csd": true,
+  "launcher_window": {
     "opacity": 0.98,
-    "rounding": 10
+    "client_side_decorations": {
+      "enabled": true,
+      "rounding": 10,
+      "border_width": 1
+    }
   },
   "favorites": [
-    "applications:google-chrome"
+    "applications:brave-browser"
   ],
   "providers": {
     "applications": {

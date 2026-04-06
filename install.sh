@@ -93,13 +93,14 @@ pacman_default=('base-devel' # Basic tools to build packages
   'zathura'   # PDF viewer
   'zathura-cb'
   'zathura-pdf-mupdf'
+  'yazi'      # TUI file browser
 
   # User-interface
   'noto-fonts-emoji'     # Support for emojis
   'qt5'                  # Dependency for sddm
   'qt5-quickcontrols'    # Dependency for sddm
   'qt5-graphicaleffects' # Dependency for sddm
-  'sddm'                 # Display manager (greeter)
+  #'sddm'                 # Display manager (greeter)
 )
 
 # Packages to use within Wayland (considering archinstall already installed Hyprland)
@@ -154,7 +155,6 @@ yay_wayland=(
   'hyprpolkitagent'        # Polkit authentication daemon
   'hyprswitch'             # Switch between windows in hyprland
   'pwvucontrol'            # Pipewire volume control
-  'wttrbar'                # Weather info for waybar
 
   # TODO: create installer
   'sysc-greet-hyprland'    # TUI greeter
@@ -357,6 +357,7 @@ install_ohmyzsh() {
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
   ln -s ${DOTFILES}/.config/zsh/.zshrc $HOME/.zshrc
+  ln -s ${DOTFILES}/.config/zsh/.zshenv $HOME/.zshenv
   ln -s ${DOTFILES}/.config/zsh/.p10k.zsh $HOME/.p10k.zsh
 
   git clone https://github.com/z-shell/F-Sy-H.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/F-Sy-H

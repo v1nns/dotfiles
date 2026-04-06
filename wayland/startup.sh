@@ -4,7 +4,6 @@
 # Execute a list of applications after wayland startup
 
 hyprpaper &
-# hyprswitch init --show-title --size-factor 3 --workspaces-per-row 5 &
 hypridle &
 qpwgraph -m &
 
@@ -15,3 +14,5 @@ fcitx5 &
 clipse -listen
 
 systemctl --user start hyprpolkitagent
+
+~/.local/bin/hyprland_handler.sh &
