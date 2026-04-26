@@ -4,6 +4,8 @@
 # Author: Vinicius M. Longaray
 #
 
+set -euo pipefail
+
 # Base packages to be installed using pacman
 pacman_default=('base-devel' # Basic tools to build packages
   'git'                      # Version control
@@ -172,8 +174,8 @@ CYAN_B='\033[1;96m'
 LIGHT='\x1b[2m'
 RESET='\033[0m'
 
-# Current working directory
-declare -r DOTFILES=$(pwd)
+# Directory where this script lives
+declare -r DOTFILES=$(dirname "$(realpath "$0")")
 
 intro() {
   echo -e "\n${PURPLE}"
@@ -201,8 +203,7 @@ check_requirements() {
   if [ "$EUID" -ne 0 ]; then
     echo -e "${YELLOW}Elevated permissions are required to adjust system settings."
     echo -e "${CYAN_B}Please enter your password...${RESET}"
-    sudo -v
-    if [ $? -eq 1 ]; then
+    if ! sudo -v; then
       echo -e "${RED}Exiting, as not being run as sudo...${RESET}"
       exit 1
     fi
@@ -211,7 +212,7 @@ check_requirements() {
 
 update_database() {
   echo -e "${GREEN}Updating database...${RESET}"
-  sudo pacman -Syy --noconfirm
+  sudo pacman -Syu --noconfirm
 }
 
 set_timezone() {
@@ -233,15 +234,11 @@ set_timezone() {
 install_pacman_packages() {
   local arr=("$@")
   for package in "${arr[@]}"; do
-    if hash "${package}" 2>/dev/null; then
+    if [[ $(pacman -Qk "${package,,}" 2>/dev/null) == *"total files"* ]]; then
       echo -e "${YELLOW}[Skipping]${LIGHT} ${package} is already installed${RESET}"
-    elif [[ $(echo $(pacman -Qk $(echo $package | tr 'A-Z' 'a-z') 2>/dev/null)) == *"total files"* ]]; then
-      echo -e "${YELLOW}[Skipping]${LIGHT} ${package} is already installed via Pacman${RESET}"
-    elif hash flatpak 2>/dev/null && [[ ! -z $(echo $(flatpak list --columns=ref | grep $package)) ]]; then
-      echo -e "${YELLOW}[Skipping]${LIGHT} ${package} is already installed via Flatpak${RESET}"
     else
       echo -e "${PURPLE}[Installing]${LIGHT} Downloading ${package}...${RESET}"
-      sudo pacman -S ${package} --needed --noconfirm
+      sudo pacman -S "${package}" --needed --noconfirm
     fi
   done
 }
@@ -249,11 +246,11 @@ install_pacman_packages() {
 install_yay_packages() {
   local arr=("$@")
   for package in "${arr[@]}"; do
-    if [[ $(echo $(pacman -Qk $(echo $package | tr 'A-Z' 'a-z') 2>/dev/null)) == *"total files"* ]]; then
+    if [[ $(pacman -Qk "${package,,}" 2>/dev/null) == *"total files"* ]]; then
       echo -e "${YELLOW}[Skipping]${LIGHT} ${package} is already installed via yay${RESET}"
     else
       echo -e "${PURPLE}[Installing]${LIGHT} Downloading ${package}...${RESET}"
-      yes | yay -S ${package}
+      yay -S "${package}" --noconfirm --answerdiff None --answerclean None
     fi
   done
 }
@@ -264,11 +261,14 @@ install_base() {
 }
 
 install_yay() {
-  echo -e "${GREEN}Installing yay...${RESET}"
-  git clone https://aur.archlinux.org/yay.git /tmp/yay
-  cd /tmp/yay
-  makepkg -si
-  cd ${DOTFILES}
+  if ! command -v yay &>/dev/null; then
+    echo -e "${GREEN}Installing yay...${RESET}"
+    rm -rf /tmp/yay
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay
+    makepkg -si --noconfirm
+    cd "${DOTFILES}"
+  fi
 
   echo -e "${GREEN}Installing yay packages...${RESET}"
   install_yay_packages "${yay_default[@]}"
@@ -276,8 +276,9 @@ install_yay() {
 
 add_user_to_groups() {
   echo -e "${GREEN}Adding logged user to some required groups...${RESET}"
-  sudo usermod -aG input $(logname)
-  sudo usermod -aG realtime $(logname)
+  sudo groupadd -f docker
+  sudo usermod -aG input,realtime,docker "$(logname)"
+  sudo systemctl enable --now docker
 }
 
 disable_login_lock() {
@@ -296,13 +297,11 @@ copy_configs() {
 # TODO: maybe use install script from theme
 install_gtk_theme() {
   echo -e "${GREEN}Installing GTK theme...${RESET}"
+  rm -rf /tmp/tokyogtk
   git clone https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme.git /tmp/tokyogtk
 
-  mkdir -p $HOME/.themes/
-  # fix directory name
-  cp -r /tmp/tokyogtk/themes/Tokyonight-Dark-BL $HOME/.themes/
-
-  cp -sR ${DOTFILES}/.config/gtk-3.0 $HOME/.config/
+  mkdir -p "$HOME/.themes/"
+  cp -r /tmp/tokyogtk/themes/Tokyonight-Dark-BL "$HOME/.themes/"
   # TODO: install gtk-4 also
 }
 
@@ -319,7 +318,7 @@ install_greeter() {
   sudo mv /tmp/arcade /usr/share/sddm/themes/arcade
 
   sudo mkdir -p /etc/sddm.conf.d/
-  sudo tee theme.conf <<EOF
+  sudo tee /etc/sddm.conf.d/theme.conf <<EOF
 [Theme]
 # Current theme name
 Current=arcade
@@ -346,21 +345,22 @@ install_desktop_apps() {
 
 install_systemd_services() {
   echo -e "${GREEN}Installing custom systemd services...${RESET}"
-  mkdir -p $HOME/.local/share
-  cp -sR ${DOTFILES}/.local/share/systemd $HOME/.local/share/
-  # TODO: systemd daemon-reload?
+  mkdir -p "$HOME/.local/share"
+  cp -sR "${DOTFILES}/.local/share/systemd" "$HOME/.local/share/"
+  systemctl --user daemon-reload
 }
 
 install_ohmyzsh() {
   echo -e "${GREEN}Installing oh-my-zsh, power10k theme and custom plugins...${RESET}"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 
-  ln -s ${DOTFILES}/.config/zsh/.zshrc $HOME/.zshrc
-  ln -s ${DOTFILES}/.config/zsh/.zshenv $HOME/.zshenv
-  ln -s ${DOTFILES}/.config/zsh/.p10k.zsh $HOME/.p10k.zsh
+  rm -f "$HOME/.zshrc"
+  ln -sf "${DOTFILES}/.config/zsh/.zshrc" "$HOME/.zshrc"
+  ln -sf "${DOTFILES}/.config/zsh/.zshenv" "$HOME/.zshenv"
+  ln -sf "${DOTFILES}/.config/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
 
-  git clone https://github.com/z-shell/F-Sy-H.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/F-Sy-H
+  git clone https://github.com/z-shell/F-Sy-H.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/F-Sy-H"
 
   chsh -s /usr/bin/zsh
 }
@@ -374,7 +374,7 @@ install_x11() {
   cp ${DOTFILES}/x11/xprofile $HOME/.xprofile
   cp ${DOTFILES}/x11/xresources $HOME/.xresources
 
-  ln -s ${DOTFILES}/x11/shutdown.desktop $HOME/.local/share/applications/shutdown.desktop
+  ln -sf "${DOTFILES}/x11/shutdown.desktop" "$HOME/.local/share/applications/shutdown.desktop"
 
   # TODO: include /etc/profile with PATH dir
 }
@@ -385,10 +385,12 @@ install_wayland() {
   install_yay_packages "${yay_wayland[@]}"
 
   echo -e "${GREEN}Installing Wayland configs...${RESET}"
-  ln -s ${DOTFILES}/x11/shutdown.desktop $HOME/.local/share/applications/shutdown.desktop
+  ln -sf "${DOTFILES}/x11/shutdown.desktop" "$HOME/.local/share/applications/shutdown.desktop"
 
   echo -e "${GREEN}Installing Wayland scripts...${RESET}"
-  cp -s ${DOTFILES}/wayland/*.sh $HOME/.local/bin/
+  cp -s "${DOTFILES}"/wayland/*.sh "$HOME/.local/bin/"
+
+  install_wayland_plugins
 }
 
 install_wayland_plugins() {
@@ -418,6 +420,13 @@ pick_display_server() {
   esac
 }
 
+setup_rust() {
+  if command -v rustup &>/dev/null; then
+    echo -e "${GREEN}Setting up Rust toolchain...${RESET}"
+    rustup default stable
+  fi
+}
+
 ####################################################################################################
 
 # TODO:
@@ -432,18 +441,12 @@ pick_display_server() {
 #FALSE "teste2" "um teste elaborado"\
 #TRUE "teste3" "um teste elaborado"
 
-# setup rust env
-#  rustup default stable
-
-# setup docker
-#  sudo groupadd docker
-#  sudo usermod -aG docker $USER
-
 intro
 check_requirements
 update_database
 set_timezone
 install_base
+setup_rust
 install_yay
 add_user_to_groups
 disable_login_lock
