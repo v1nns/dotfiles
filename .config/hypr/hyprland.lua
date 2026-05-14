@@ -32,7 +32,6 @@ hl.monitor({
 ---- BASE CONFIG ----
 ---------------------
 
--- xwayland settings
 hl.config({
   xwayland = {
     force_zero_scaling = true,
@@ -108,6 +107,50 @@ hl.on("window.active", function(w)
   hl.dispatch(hl.dsp.window.center({ window = w }))
 end)
 
+-- Map window class+title -> workspace name
+local class_names = {
+  { class = "firefox", name = "web" },
+  { class = "obsidian", name = "notes" },
+  { class = "ffplay", title = "rtsp", name = "camera" },
+}
+
+local function match_window_name(w)
+  for _, rule in ipairs(class_names) do
+    local class_ok = rule.class == nil or w.class:match(rule.class)
+    local title_ok = rule.title == nil or w.title:match(rule.title)
+    if class_ok and title_ok then
+      return rule.name
+    end
+  end
+  return nil
+end
+
+local function auto_rename_workspace(w)
+  -- skip any scratchpads
+  if w == nil or w.workspace == nil or w.workspace.name:match("^special:") then
+    return
+  end
+
+  local name = match_window_name(w)
+  if name == nil then
+    return
+  end
+
+  -- Only rename if workspace has no custom name yet
+  local current = w.workspace.name:match("^%d+:(.+)$")
+  if current ~= nil then
+    return
+  end
+
+  hl.dispatch(hl.dsp.workspace.rename({
+    workspace = w.workspace.id,
+    name = tostring(w.workspace.id) .. ":" .. name,
+  }))
+end
+
+hl.on("window.open", auto_rename_workspace)
+hl.on("window.move_to_workspace", auto_rename_workspace)
+
 --------------------------
 ---- DEFAULT PROGRAMS ----
 --------------------------
@@ -169,7 +212,7 @@ hl.config({
       inactive_border = "rgba(595959aa)",
     },
 
-    layout = "hy3",
+    layout = "dwindle",
 
     allow_tearing = false,
     resize_on_border = true,
@@ -204,7 +247,7 @@ hl.config({
 
   dwindle = {
     preserve_split = true,
-    smart_split = true,
+    -- smart_split = true,
     use_active_for_splits = false,
   },
 
@@ -251,28 +294,26 @@ hl.animation({
 ---- WORKSPACE & WINDOW RULES ----
 ---------------------------------
 
--- Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
+-- Setup all workspaces
+for i = 1, 10 do
+  hl.workspace_rule({ workspace = tostring(i), monitor = primary })
+end
+for i = 11, 20 do
+  hl.workspace_rule({ workspace = tostring(i), monitor = secondary })
+end
+
+-- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
-hl.workspace_rule({ workspace = "w[t1]", gaps_out = 0, gaps_in = 0 })
-hl.workspace_rule({ workspace = "w[tg1]", gaps_out = 0, gaps_in = 0 })
+hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
 hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
-
 hl.window_rule({
-  name = "smart-gap-1",
-  match = { float = false, workspace = "w[t1]" },
+  name = "no-gaps-wtv1",
+  match = { float = false, workspace = "w[tv1]" },
   border_size = 0,
   rounding = 0,
 })
-
 hl.window_rule({
-  name = "smart-gap-2",
-  match = { float = false, workspace = "w[tg1]" },
-  border_size = 0,
-  rounding = 0,
-})
-
-hl.window_rule({
-  name = "smart-gap-3",
+  name = "no-gaps-f1",
   match = { float = false, workspace = "f[1]" },
   border_size = 0,
   rounding = 0,
@@ -284,7 +325,7 @@ hl.window_rule({
   match = { class = "^(kitty)$", title = "^(dropdown-terminal)$" },
   float = true,
   workspace = "special:dropdown silent",
-  focus_on_activate = true,
+  stay_focused = true,
 })
 
 -- Volume control
@@ -304,13 +345,6 @@ hl.window_rule({
   focus_on_activate = true,
 })
 
--- Setup all workspaces
-for i = 1, 10 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = primary })
-end
-for i = 11, 20 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = secondary })
-end
 
 --------------------------
 ---- CUSTOM FUNCTIONS ----
@@ -335,7 +369,7 @@ local function set_fullscreen()
     hl.dispatch(hl.dsp.window.fullscreen({ action = "toggle" }))
     hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
   else
-    hl.dispatch(hl.dsp.window.fullscreen_state({ internal = 2 }))
+    hl.dispatch(hl.dsp.window.fullscreen_state({ internal = 1, client = 2, action = "toggle" }))
   end
 end
 
@@ -351,6 +385,10 @@ local function rename_workspace(preset_name)
   end
 
   local ws = hl.get_active_workspace()
+  if(ws == nil) then
+    return
+  end
+
   local id = ws.id
   local name = (ws.name:match("^%d+:(.+)$") or ""):match("^%s*(.-)%s*$")
 
@@ -473,7 +511,7 @@ hl.bind(mainMod .. " + U", function()
   rename_workspace()
 end)
 hl.bind(mainMod .. " + F", set_fullscreen)
--- hl.bind(mainMod .. " + Y",        hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + Y", hl.dsp.layout("togglesplit"))
 -- hl.bind(mainMod .. " + TAB",      hl.dsp.exec_cmd(window_picker))
 hl.bind(mainMod .. " + T", hl.dsp.workspace.toggle_special("dropdown"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(work_mode))
