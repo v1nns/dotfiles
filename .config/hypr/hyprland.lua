@@ -75,7 +75,18 @@ hl.config({
 
 -- Execute initial programs once on startup (exec-once equivalent)
 hl.on("hyprland.start", function()
-  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/startup.sh")
+  hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("hypridle")
+  hl.exec_cmd("qpwgraph -m")
+
+  hl.exec_cmd("sleep 1 && hyprpm reload -n")
+
+  -- workaround with xwayland applications
+  hl.exec_cmd("fcitx5")
+
+  hl.exec_cmd("clipse -listen")
+  hl.exec_cmd("systemctl --user start hyprpolkitagent")
+
   hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
   hl.exec_cmd("vicinae server")
   hl.exec_cmd("waybar")
@@ -109,7 +120,7 @@ end)
 
 -- Map window class+title -> workspace name
 local class_names = {
-  { class = "firefox", name = "web" },
+  { class = "brave", name = "web" },
   { class = "obsidian", name = "notes" },
   { class = "ffplay", title = "rtsp", name = "camera" },
 }
@@ -345,7 +356,6 @@ hl.window_rule({
   focus_on_activate = true,
 })
 
-
 --------------------------
 ---- CUSTOM FUNCTIONS ----
 --------------------------
@@ -385,7 +395,7 @@ local function rename_workspace(preset_name)
   end
 
   local ws = hl.get_active_workspace()
-  if(ws == nil) then
+  if ws == nil then
     return
   end
 

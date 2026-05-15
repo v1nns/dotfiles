@@ -18,7 +18,7 @@ pacman_default=('base-devel' # Basic tools to build packages
   'docker' # Container virtualization
 
   # CLI Power Basics
-  'ack'       # Yet another better grep
+  'ripgrep'   # Yet another better grep
   'bat'       # Better cat
   'bc'        # Calculator
   'broot'     # Dir navigation
@@ -33,7 +33,7 @@ pacman_default=('base-devel' # Basic tools to build packages
   'ripgrep'   # Better grep
   'tokei'     # Count total lines of code
   'termdown'  # Timer
-  "feh"       # Image viewer
+  'feh'       # Image viewer
 
   # z-shell
   'zsh'
@@ -49,7 +49,6 @@ pacman_default=('base-devel' # Basic tools to build packages
 
   'python'
   'python-dbus'
-  'python-gi'
   'python-gobject'
   'python-pip'
   'python-lsp-server'
@@ -81,6 +80,7 @@ pacman_default=('base-devel' # Basic tools to build packages
   'gnome-keyring' # Store security credentials
   'dunst'         # Notification daemon
   'firefox'       # Internet browser
+  'brave-bin'     # Another good browser
   'qalculate-gtk' # Calculator
 
   # CLI Fun
@@ -96,6 +96,7 @@ pacman_default=('base-devel' # Basic tools to build packages
   'zathura-cb'
   'zathura-pdf-mupdf'
   'yazi'      # TUI file browser
+  'grim'      # Screenshot
 
   # User-interface
   'noto-fonts-emoji'     # Support for emojis
@@ -103,6 +104,8 @@ pacman_default=('base-devel' # Basic tools to build packages
   'qt5-quickcontrols'    # Dependency for sddm
   'qt5-graphicaleffects' # Dependency for sddm
   #'sddm'                 # Display manager (greeter)
+
+  'atuin'                # Shell history
 )
 
 # Packages to use within Wayland (considering archinstall already installed Hyprland)
@@ -115,6 +118,7 @@ pacman_wayland=(
   'fcitx5'       # For compatibility with keyboard using US intl layout (i.e. microsoft edge)
   'socat'        # Listen for socket events
   'hyprlock'     # Screen locker
+  'slurp'        # Get screen region on wayland
 )
 
 # Packages to use within X11 (considering archinstall already installed i3wm)
@@ -136,14 +140,15 @@ yay_default=(
   'google-chrome' # Internet browser
   'iwgtk'         # Wi-Fi manager
 
-  'dracula-cursors-git'    # GTK cursor
-  'papirus-icon-theme-git' # GTK icons
+  'dracula-cursors-git'      # GTK cursor
+  'papirus-icon-theme-git'   # GTK icons
+  'tokyonight-gtk-theme-git' # GTK theme
 
   'python-pid'
 
   # Fonts (Nerd Font)
   'ttf-hack-nerd'
-  'ttf-iosevka'
+  'ttf-iosevka-nerd'
   'ttf-jetbrains-mono-nerd'
   'ttf-jetbrains-nerd'
 
@@ -294,17 +299,6 @@ copy_configs() {
   cp -sR ${DOTFILES}/.config/* $HOME/.config/
 }
 
-# TODO: maybe use install script from theme
-install_gtk_theme() {
-  echo -e "${GREEN}Installing GTK theme...${RESET}"
-  rm -rf /tmp/tokyogtk
-  git clone https://github.com/Fausto-Korpsvart/Tokyo-Night-GTK-Theme.git /tmp/tokyogtk
-
-  mkdir -p "$HOME/.themes/"
-  cp -r /tmp/tokyogtk/themes/Tokyonight-Dark-BL "$HOME/.themes/"
-  # TODO: install gtk-4 also
-}
-
 install_wallpaper() {
   echo -e "${GREEN}Installing wallpapers...${RESET}"
   mkdir -p $HOME/Pictures/Wallpapers/
@@ -324,6 +318,14 @@ install_greeter() {
 Current=arcade
 EOF
 }
+
+# TODO: create install for sysc-greet
+# must disable current greetd service to enable this one
+# create user for greeter
+
+
+# TODO: create install for vicinae
+# must modify original file to import custom settings
 
 install_custom_icons() {
   echo -e "${GREEN}Installing custom icons...${RESET}"
@@ -427,6 +429,17 @@ setup_rust() {
   fi
 }
 
+# TODO: create fancontrol settings (ask if user wants it)
+# 1. copy fancontrol file to /etc
+# 2. echo "blacklist nct6683" | sudo tee /etc/modprobe.d/nct6683.conf
+# 3. Force remove nct6683 and load nct6687:
+# sudo modprobe -r nct6683
+# sudo modprobe nct6687
+# 4. Ensure nct6687 loads at boot:
+# echo "nct6687" | sudo tee /etc/modules-load.d/nct6687.conf
+
+# TODO: add git aliases
+
 ####################################################################################################
 
 # TODO:
@@ -451,9 +464,8 @@ install_yay
 add_user_to_groups
 disable_login_lock
 copy_configs
-install_gtk_theme
 install_wallpaper
-install_greeter
+# install_greeter
 # update README with new stuff
 install_custom_icons
 install_custom_scripts

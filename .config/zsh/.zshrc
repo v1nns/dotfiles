@@ -113,7 +113,13 @@ dev() {
 
       # Only rename if workspace name is empty and it is the only window on it
       if [ -z "$name" ] && [ $count_nodes -eq 1 ]; then
-          hyprctl dispatch renameworkspace $index "$index:$*" > /dev/null
+          local hypr_minor="$(hyprctl version | head -1 | grep -oP '\d+\.\K\d+' | head -1)"
+          if [ "${hypr_minor:-0}" -ge 55 ]; then
+            # Hyprland 0.55+ (Lua config): use Lua dispatcher syntax
+            hyprctl dispatch "hl.dsp.workspace.rename({ workspace = $index, name = \"$index:$*\" })" > /dev/null
+          else
+            hyprctl dispatch renameworkspace $index "$index:$*" > /dev/null
+          fi
       fi
     fi
   fi
