@@ -87,9 +87,12 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("clipse -listen")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
-  hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
   hl.exec_cmd("vicinae server")
   hl.exec_cmd("waybar")
+
+  -- programs for special workspaces
+  hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
+  hl.exec_cmd("kitty --title dropdown-player -e zsh -o 'ignoreeof' -c 'exec ncspot'")
 end)
 
 -- Execute programs on every config reload (exec equivalent)
@@ -102,7 +105,7 @@ local dropdown_w_pct = 0.5
 local dropdown_h_pct = 0.5
 
 hl.on("window.active", function(w)
-  if w.workspace == nil or w.workspace.name ~= "special:dropdown" then
+  if w.workspace == nil or not w.workspace.name:match("^special:") then
     return
   end
 
@@ -123,6 +126,7 @@ local class_names = {
   { class = "brave", name = "web" },
   { class = "obsidian", name = "notes" },
   { class = "ffplay", title = "rtsp", name = "camera" },
+  { class = "jellyfin", name = "jellyfin" },
 }
 
 local function match_window_name(w)
@@ -170,8 +174,6 @@ local terminal = "kitty"
 local file_manager = "nemo"
 local launcher = "vicinae toggle"
 
-local work_mode = os.getenv("HOME") .. "/.local/bin/work-mode.sh"
-
 ------------------------------
 ---- ENVIRONMENT VARIABLES ----
 ------------------------------
@@ -212,7 +214,7 @@ hl.config({
 
 hl.config({
   general = {
-    gaps_in = 3,
+    gaps_in = 5,
     gaps_out = 5,
 
     border_size = 2,
@@ -258,7 +260,7 @@ hl.config({
 
   dwindle = {
     preserve_split = true,
-    -- smart_split = true,
+    smart_split = true,
     use_active_for_splits = false,
   },
 
@@ -332,10 +334,19 @@ hl.window_rule({
 
 -- Dropdown terminal
 hl.window_rule({
-  name = "dropdown",
+  name = "dropdown-terminal",
   match = { class = "^(kitty)$", title = "^(dropdown-terminal)$" },
   float = true,
   workspace = "special:dropdown silent",
+  stay_focused = true,
+})
+
+-- Dropdown player
+hl.window_rule({
+  name = "dropdown-player",
+  match = { class = "^(kitty)$", title = "^(dropdown-player)$" },
+  float = true,
+  workspace = "special:player silent",
   stay_focused = true,
 })
 
@@ -365,7 +376,7 @@ local ROFI_THEME_DIR = os.getenv("HOME") .. "/.config/rofi/tokyo"
 -- Custom command helpers
 local function is_dropdown()
   local w = hl.get_active_window()
-  return w ~= nil and w.title == "dropdown-terminal"
+  return w ~= nil and w.title == "dropdown-terminal" or w.title == "dropdown-player"
 end
 
 local function killactive()
@@ -383,14 +394,11 @@ local function set_fullscreen()
   end
 end
 
--- Rename the active workspace interactively via rofi, or apply a preset name.
--- preset_name: if provided, rename silently (only if workspace is still unnamed).
--- Without preset_name, opens rofi pre-filled with the current name so the user
--- can edit it; an empty submission resets the name back to just the numeric ID.
+-- Rename the active workspace interactively via rofi, or apply a preset name
 local function rename_workspace(preset_name)
   -- Ignore when the dropdown terminal is the focused window
   local win = hl.get_active_window()
-  if win ~= nil and win.workspace.name == "special:dropdown" then
+  if win ~= nil and win.workspace.name:match("^special:") then
     return
   end
 
@@ -440,17 +448,17 @@ local function rename_workspace(preset_name)
   end
 end
 
--- Move active window to a specific workspace.
--- If the source workspace had a custom name and the window was the only one there,
--- carry that name over to the target workspace (unless it already has a custom name)
+-- Move active window to a specific workspace. If the source workspace had a custom name and the
+-- window was the only one there, carry that name over to the target workspace (unless it already
+-- has a custom name)
 local function move_to(target)
   local old_ws = hl.get_active_workspace()
   if old_ws == nil then
     return
   end
 
-  -- Snapshot all values before any dispatch: old_ws may be a live proxy and
-  -- fields like .windows can change once the move executes.
+  -- Snapshot all values before any dispatch: old_ws may be a live proxy and fields like .windows
+  -- can change once the move executes.
   local win_count = old_ws.windows
   local custom_name = old_ws.name:match("^%d+:(.+)$")
   local target_ws = hl.get_workspace(tostring(target))
@@ -507,97 +515,97 @@ end
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER"
+local main_mod = "SUPER"
 
 -- General binds
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + SHIFT + Q", killactive)
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(file_manager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(launcher))
-hl.bind(mainMod .. " + U", function()
+hl.bind(main_mod .. " + Return", hl.dsp.exec_cmd(terminal))
+hl.bind(main_mod .. " + SHIFT + Q", killactive)
+hl.bind(main_mod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
+hl.bind(main_mod .. " + CTRL + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(file_manager))
+hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(main_mod .. " + D", hl.dsp.exec_cmd(launcher))
+hl.bind(main_mod .. " + U", function()
   rename_workspace()
 end)
-hl.bind(mainMod .. " + F", set_fullscreen)
-hl.bind(mainMod .. " + Y", hl.dsp.layout("togglesplit"))
+hl.bind(main_mod .. " + F", set_fullscreen)
+hl.bind(main_mod .. " + Y", hl.dsp.layout("togglesplit"))
 -- hl.bind(mainMod .. " + TAB",      hl.dsp.exec_cmd(window_picker))
-hl.bind(mainMod .. " + T", hl.dsp.workspace.toggle_special("dropdown"))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(work_mode))
-hl.bind(mainMod .. " + O", function()
+hl.bind(main_mod .. " + T", hl.dsp.workspace.toggle_special("dropdown"))
+hl.bind(main_mod .. " + M", hl.dsp.workspace.toggle_special("player"))
+hl.bind(main_mod .. " + O", function()
   rename_workspace("notes")
   hl.dispatch(hl.dsp.exec_cmd("obsidian"))
 end)
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "l" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "r" }))
-hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "u" }))
-hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "d" }))
+hl.bind(main_mod .. " + left", hl.dsp.focus({ direction = "l" }))
+hl.bind(main_mod .. " + right", hl.dsp.focus({ direction = "r" }))
+hl.bind(main_mod .. " + up", hl.dsp.focus({ direction = "u" }))
+hl.bind(main_mod .. " + down", hl.dsp.focus({ direction = "d" }))
 
 -- Move focus with mainMod + hjkl
-hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "l" }))
-hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "r" }))
-hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "u" }))
-hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "d" }))
+hl.bind(main_mod .. " + h", hl.dsp.focus({ direction = "l" }))
+hl.bind(main_mod .. " + l", hl.dsp.focus({ direction = "r" }))
+hl.bind(main_mod .. " + k", hl.dsp.focus({ direction = "u" }))
+hl.bind(main_mod .. " + j", hl.dsp.focus({ direction = "d" }))
 
 -- Move active window to a direction
-hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.move({ direction = "l" }))
-hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.move({ direction = "r" }))
-hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.move({ direction = "u" }))
-hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.move({ direction = "d" }))
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "l" }))
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "u" }))
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "d" }))
+hl.bind(main_mod .. " + SHIFT + h", hl.dsp.window.move({ direction = "l" }))
+hl.bind(main_mod .. " + SHIFT + l", hl.dsp.window.move({ direction = "r" }))
+hl.bind(main_mod .. " + SHIFT + k", hl.dsp.window.move({ direction = "u" }))
+hl.bind(main_mod .. " + SHIFT + j", hl.dsp.window.move({ direction = "d" }))
+hl.bind(main_mod .. " + SHIFT + left", hl.dsp.window.move({ direction = "l" }))
+hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
+hl.bind(main_mod .. " + SHIFT + up", hl.dsp.window.move({ direction = "u" }))
+hl.bind(main_mod .. " + SHIFT + down", hl.dsp.window.move({ direction = "d" }))
 
 -- Switch workspaces with mainMod + [0-9]
 for i = 1, 9 do
-  hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
+  hl.bind(main_mod .. " + " .. i, hl.dsp.focus({ workspace = i }))
 end
-hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
+hl.bind(main_mod .. " + 0", hl.dsp.focus({ workspace = 10 }))
 
 -- Switch workspaces with mainMod + CTRL + [0-9] (secondary monitor)
 for i = 1, 9 do
-  hl.bind(mainMod .. " + CTRL + " .. i, hl.dsp.focus({ workspace = 10 + i }))
+  hl.bind(main_mod .. " + CTRL + " .. i, hl.dsp.focus({ workspace = 10 + i }))
 end
-hl.bind(mainMod .. " + CTRL + 0", hl.dsp.focus({ workspace = 20 }))
+hl.bind(main_mod .. " + CTRL + 0", hl.dsp.focus({ workspace = 20 }))
 
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 9 do
-  hl.bind(mainMod .. " + SHIFT + " .. i, function()
+  hl.bind(main_mod .. " + SHIFT + " .. i, function()
     move_to(i)
   end)
 end
-hl.bind(mainMod .. " + SHIFT + 0", function()
+hl.bind(main_mod .. " + SHIFT + 0", function()
   move_to(10)
 end)
 
 -- Move active window to a workspace with mainMod + CTRL + SHIFT + [0-9]
 for i = 1, 9 do
-  hl.bind(mainMod .. " + CTRL + SHIFT + " .. i, function()
+  hl.bind(main_mod .. " + CTRL + SHIFT + " .. i, function()
     move_to(10 + i)
   end)
 end
-hl.bind(mainMod .. " + CTRL + SHIFT + 0", function()
+hl.bind(main_mod .. " + CTRL + SHIFT + 0", function()
   move_to(20)
 end)
 
 -- Move active window to next empty workspace
-hl.bind(mainMod .. " + SHIFT + T", move_to_empty)
+hl.bind(main_mod .. " + SHIFT + T", move_to_empty)
 
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(main_mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Dunst notifications
 hl.bind("CTRL + Space", hl.dsp.exec_cmd("dunstctl close"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("dunstctl history-pop"))
+hl.bind(main_mod .. " + N", hl.dsp.exec_cmd("dunstctl history-pop"))
 
 -- Media control
 hl.bind(
@@ -609,11 +617,12 @@ hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ toggle"))
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SOURCE@ toggle"))
 
--- TODO: play stuff
--- hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("spotify_ctl.py --toggle-play"))
--- hl.bind("XF86AudioStop", hl.dsp.exec_cmd("spotify_ctl.py --stop"))
--- hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("spotify_ctl.py --previous"))
--- hl.bind("XF86AudioNext", hl.dsp.exec_cmd("spotify_ctl.py --next"))
+-- Using ncspot to play from spotify via MPRIS (player name may vary, so filter dynamically)
+local ncspot = 'sh -c "playerctl -l 2>/dev/null | grep -im1 ncspot | xargs -I{} playerctl -p {} '
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ncspot .. 'play-pause"'))
+hl.bind("XF86AudioStop", hl.dsp.exec_cmd(ncspot .. 'stop"'))
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ncspot .. 'previous"'))
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ncspot .. 'next"'))
 
 -- Brightness
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"))
@@ -628,9 +637,9 @@ hl.bind(
       .. ' $(xdg-user-dir PICTURES)/$(date +\'%s_grim.png\'); notify-send "INFO 🧐" "Took a screenshot from primary monitor"'
   )
 )
-hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd('wl-copy < <(grim -g "$(slurp)" -)'))
+hl.bind(main_mod .. " + Print", hl.dsp.exec_cmd('wl-copy < <(grim -g "$(slurp)" -)'))
 hl.bind(
-  mainMod .. " + SHIFT + Print",
+  main_mod .. " + SHIFT + Print",
   hl.dsp.exec_cmd(
     "grim -o "
       .. secondary
@@ -639,7 +648,7 @@ hl.bind(
 )
 
 -- Submap to resize window
-hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
+hl.bind(main_mod .. " + R", hl.dsp.submap("resize"))
 
 hl.define_submap("resize", function()
   hl.bind("right", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
@@ -653,5 +662,16 @@ hl.define_submap("resize", function()
   hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
--- google-chrome settings (for future reference)
--- --password-store=gnome-libsecret --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WaylandPerSurfaceScale,WaylandUiScale --gtk-version=4 --force-device-scale-factor=1
+--------------------------------
+---- CUSTOM RUNTIME LAYOUTS ----
+--------------------------------
+
+-- local home_mode = require("custom.home")
+-- hl.bind(main_mod .. " + CTRL + C", function()
+--   home_mode(hl)
+-- end)
+
+local work_mode = require("custom.work")
+hl.bind(main_mod .. " + W", function()
+  work_mode(hl)
+end)

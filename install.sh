@@ -323,6 +323,17 @@ EOF
 # must disable current greetd service to enable this one
 # create user for greeter
 
+# avoid messing with audio:
+# sudo mkdir -p /var/lib/greeter/.config/systemd/user && \
+# sudo ln -sf /dev/null /var/lib/greeter/.config/systemd/user/pipewire.service && \
+# sudo ln -sf /dev/null /var/lib/greeter/.config/systemd/user/pipewire-pulse.service && \
+# sudo ln -sf /dev/null /var/lib/greeter/.config/systemd/user/wireplumber.service && \
+# sudo chown -R greeter:greeter /var/lib/greeter/.config
+
+# force some monitor (old hyprland syntax)
+# windowrule = match:class ^(kitty)$, workspace 1
+# workspace = 1, monitor:DP-3
+# exec-once = hyprctl dispatch workspace 1
 
 # TODO: create install for vicinae
 # must modify original file to import custom settings
