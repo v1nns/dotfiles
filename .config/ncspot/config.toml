@@ -1,6 +1,7 @@
 use_nerdfont = true
 initial_screen = "library"
 library_tabs = ["playlists", "podcasts", "browse"]
+playback_state = "Stopped"
 
 [theme]
 background = "#1a1b26"

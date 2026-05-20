@@ -82,6 +82,7 @@ pacman_default=('base-devel' # Basic tools to build packages
   'firefox'       # Internet browser
   'brave-bin'     # Another good browser
   'qalculate-gtk' # Calculator
+  'yt-dlp'        # YouTube downloader
 
   # CLI Fun
   'lolcat'   # Rainbow colored terminal output
