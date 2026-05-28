@@ -114,7 +114,6 @@ pacman_wayland=(
   'hyprpaper'    # Set wallpaper
   'nwg-look'     # Customize GTK settings
   'swayidle'     # Idle management daemon
-  'waybar'       # Status bar
   'wl-clipboard' # Copy/paste utilities
   'fcitx5'       # For compatibility with keyboard using US intl layout (i.e. microsoft edge)
   'socat'        # Listen for socket events
@@ -155,6 +154,8 @@ yay_default=(
 
   # for battery save
   # 'auto-cpufreq'
+
+  'noctalia-shell'
 )
 
 yay_wayland=(
@@ -166,9 +167,6 @@ yay_wayland=(
 
   # TODO: create installer
   'sysc-greet-hyprland'    # TUI greeter
-
-  # TODO: create installer section including extensions
-  'vicinae-bin'
 )
 
 # ANSI color codes
@@ -335,9 +333,6 @@ EOF
 # windowrule = match:class ^(kitty)$, workspace 1
 # workspace = 1, monitor:DP-3
 # exec-once = hyprctl dispatch workspace 1
-
-# TODO: create install for vicinae
-# must modify original file to import custom settings
 
 install_custom_icons() {
   echo -e "${GREEN}Installing custom icons...${RESET}"

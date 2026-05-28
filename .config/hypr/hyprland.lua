@@ -84,11 +84,9 @@ hl.on("hyprland.start", function()
   -- workaround with xwayland applications
   hl.exec_cmd("fcitx5")
 
-  hl.exec_cmd("clipse -listen")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
-  hl.exec_cmd("vicinae server")
-  hl.exec_cmd("waybar")
+  hl.exec_cmd("qs -c noctalia-shell")
 
   -- programs for special workspaces
   hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
@@ -96,9 +94,9 @@ hl.on("hyprland.start", function()
 end)
 
 -- Execute programs on every config reload (exec equivalent)
-hl.on("config.reloaded", function()
-  hl.exec_cmd("pkill waybar; waybar")
-end)
+-- hl.on("config.reloaded", function()
+--   hl.exec_cmd("killall qs; qs -c noctalia-shell")
+-- end)
 
 -- Resize and center the dropdown on whichever monitor is active when toggled
 local dropdown_w_pct = 0.5
@@ -172,18 +170,27 @@ hl.on("window.move_to_workspace", auto_rename_workspace)
 
 local terminal = "kitty"
 local file_manager = "nemo"
-local launcher = "vicinae toggle"
+
+local ipc = "qs -c noctalia-shell ipc call "
+local launcher = ipc .. "launcher toggle"
+local control_center = ipc .. "controlCenter toggle"
 
 ------------------------------
 ---- ENVIRONMENT VARIABLES ----
 ------------------------------
 
-hl.env("XCURSOR_SIZE", "24")
-hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
--- Check info from https://wiki.hyprland.org/Configuring/Multi-GPU
-hl.env("WLR_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
+local envs = {
+  XCURSOR_SIZE = "24",
+  QT_QPA_PLATFORMTHEME = "qt5ct",
+  LIBVA_DRIVER_NAME = "nvidia",
+  __GLX_VENDOR_LIBRARY_NAME = "nvidia",
+  -- Check info from https://wiki.hyprland.org/Configuring/Multi-GPU
+  WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1",
+}
+
+for key, value in pairs(envs) do
+  hl.env(key, value)
+end
 
 ---------------
 ---- INPUT ----
@@ -215,9 +222,9 @@ hl.config({
 hl.config({
   general = {
     gaps_in = 5,
-    gaps_out = 5,
+    gaps_out = 10,
 
-    border_size = 2,
+    -- border_size = 2,
 
     col = {
       -- active_border   = { colors = {"rgba(7aa2f7ee)", "rgba(907af7ee)"}, angle = 45 },
@@ -237,13 +244,14 @@ hl.config({
 
     blur = {
       enabled = false,
-      size = 1,
-      passes = 1,
-      new_optimizations = true,
-      xray = true,
-      ignore_opacity = true,
-      noise = 0.3,
-      brightness = 0.90,
+      size = 3,
+      passes = 2,
+      vibrancy = 0.1696,
+      -- new_optimizations = true,
+      -- xray = true,
+      -- ignore_opacity = true,
+      -- noise = 0.3,
+      -- brightness = 0.90,
     },
 
     shadow = {
@@ -376,7 +384,7 @@ local ROFI_THEME_DIR = os.getenv("HOME") .. "/.config/rofi/tokyo"
 -- Custom command helpers
 local function is_dropdown()
   local w = hl.get_active_window()
-  return w ~= nil and w.title == "dropdown-terminal" or w.title == "dropdown-player"
+  return w ~= nil and (w.title == "dropdown-terminal" or w.title == "dropdown-player")
 end
 
 local function killactive()
@@ -525,6 +533,7 @@ hl.bind(main_mod .. " + CTRL + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(main_mod .. " + E", hl.dsp.exec_cmd(file_manager))
 hl.bind(main_mod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(main_mod .. " + D", hl.dsp.exec_cmd(launcher))
+hl.bind(main_mod .. " + S", hl.dsp.exec_cmd(control_center))
 hl.bind(main_mod .. " + U", function()
   rename_workspace()
 end)
@@ -602,10 +611,6 @@ hl.bind(main_mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(main_mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-
--- Dunst notifications
-hl.bind("CTRL + Space", hl.dsp.exec_cmd("dunstctl close"))
-hl.bind(main_mod .. " + N", hl.dsp.exec_cmd("dunstctl history-pop"))
 
 -- Media control
 hl.bind(
