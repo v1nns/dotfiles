@@ -86,7 +86,8 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
-  hl.exec_cmd("qs -c noctalia-shell")
+  hl.exec_cmd("xembedsniproxy")
+  hl.exec_cmd("noctalia")
 
   -- programs for special workspaces
   hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
@@ -94,9 +95,9 @@ hl.on("hyprland.start", function()
 end)
 
 -- Execute programs on every config reload (exec equivalent)
--- hl.on("config.reloaded", function()
---   hl.exec_cmd("killall qs; qs -c noctalia-shell")
--- end)
+hl.on("config.reloaded", function()
+  hl.exec_cmd("killall noctalia; noctalia")
+end)
 
 -- Resize and center the dropdown on whichever monitor is active when toggled
 local dropdown_w_pct = 0.5
@@ -171,9 +172,9 @@ hl.on("window.move_to_workspace", auto_rename_workspace)
 local terminal = "kitty"
 local file_manager = "nemo"
 
-local ipc = "qs -c noctalia-shell ipc call "
-local launcher = ipc .. "launcher toggle"
-local control_center = ipc .. "controlCenter toggle"
+local ipc = "noctalia msg panel-toggle "
+local launcher = ipc .. "launcher"
+local control_center = ipc .. "control-center"
 
 ------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -375,6 +376,13 @@ hl.window_rule({
   focus_on_activate = true,
 })
 
+-- Brave popup
+hl.window_rule({
+  name = "brave",
+  match = { class = "^(brave)$", title = "(.*Extension:.*)" },
+  float = true,
+})
+
 --------------------------
 ---- CUSTOM FUNCTIONS ----
 --------------------------
@@ -541,6 +549,7 @@ hl.bind(main_mod .. " + F", set_fullscreen)
 hl.bind(main_mod .. " + Y", hl.dsp.layout("togglesplit"))
 -- hl.bind(mainMod .. " + TAB",      hl.dsp.exec_cmd(window_picker))
 hl.bind(main_mod .. " + T", hl.dsp.workspace.toggle_special("dropdown"))
+-- hl.bind(main_mod .. " + T", hl.dsp.window.move({ workspace = "special:dropdown" }))
 hl.bind(main_mod .. " + M", hl.dsp.workspace.toggle_special("player"))
 hl.bind(main_mod .. " + O", function()
   rename_workspace("notes")
