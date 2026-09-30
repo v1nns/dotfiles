@@ -282,6 +282,7 @@ hl.config({
     enable_swallow = true,
     swallow_regex = "^(kitty)$",
     initial_workspace_tracking = 0,
+    on_focus_under_fullscreen = 2,
   },
 })
 
