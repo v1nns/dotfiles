@@ -377,11 +377,12 @@ hl.window_rule({
   focus_on_activate = true,
 })
 
--- Brave popup
+-- Brave extension popouts (class is brave-<extension-id>-<profile>)
 hl.window_rule({
-  name = "brave",
-  match = { class = "^(brave)$", title = "(.*Extension:.*)" },
+  name = "brave-extension-popout",
+  match = { class = "^(brave-[a-p]{32}-.*)$" },
   float = true,
+  center = true,
 })
 
 --------------------------
