@@ -274,6 +274,26 @@ hl.config({
     use_active_for_splits = false,
   },
 
+  group = {
+    -- indicator and border colors come from the Noctalia theme
+    groupbar = {
+      font_family = "JetBrainsMono NF",
+      font_size = 12,
+      font_weight_active = "bold",
+      font_weight_inactive = "normal",
+      text_color = "rgb(c0caf5)",
+      text_color_inactive = "rgb(8089b3)",
+
+      height = 18,
+      indicator_height = 2,
+      rounding = 1,
+      gaps_in = 4,
+      gaps_out = 2,
+      gradients = false,
+      keep_upper_gap = false,
+    },
+  },
+
   misc = {
     force_default_wallpaper = 0,
     disable_hyprland_logo = true,
@@ -559,6 +579,9 @@ end)
 hl.bind(main_mod .. " + F", set_fullscreen)
 hl.bind(main_mod .. " + Y", hl.dsp.layout("togglesplit"))
 hl.bind(main_mod .. " + TAB", hl.dsp.exec_cmd(window_picker))
+hl.bind(main_mod .. " + G", hl.dsp.group.toggle())
+hl.bind(main_mod .. " + N", hl.dsp.group.next())
+hl.bind(main_mod .. " + P", hl.dsp.group.prev())
 hl.bind(main_mod .. " + T", hl.dsp.workspace.toggle_special("dropdown"))
 -- hl.bind(main_mod .. " + T", hl.dsp.window.move({ workspace = "special:dropdown" }))
 hl.bind(main_mod .. " + M", hl.dsp.workspace.toggle_special("player"))
