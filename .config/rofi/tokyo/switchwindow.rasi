@@ -1,0 +1,192 @@
+/**
+ * Tokyo night rofi theme
+ * Adapted by Vinicius <vmouralongaray@gmail.com>
+ */
+
+configuration {
+  font: "JetBrainsMono NF 11";
+  show-icons: true;
+  hide-scrollbar: true;
+  sidebar-mode: false;
+}
+
+* {
+  bg: #1a1b26;
+  primary: #c0caf5;
+  bright: #eef0fb;
+  dim: #8089b3;
+  kl: #7aa2f7;
+  line: rgba(192, 202, 245, 10%);
+  keycap: rgba(192, 202, 245, 18%);
+  selected: rgba(122, 162, 247, 16%);
+
+  transparent: rgba(0, 0, 0, 0);
+
+  background-color: @transparent;
+  text-color: @primary;
+}
+
+window {
+  location: center;
+  anchor: center;
+  transparency: "real";
+
+  width: 640px;
+
+  border: 1px;
+  border-radius: 16px;
+  border-color: @line;
+
+  background-color: @bg;
+  spacing: 0;
+  children: [mainbox];
+}
+
+mainbox {
+  spacing: 0;
+  children: [inputbar, listview, footer];
+}
+
+inputbar {
+  padding: 18px 22px;
+  spacing: 14px;
+
+  border: 0px 0px 1px 0px;
+  border-color: @line;
+
+  children: [prompt, entry, num-filtered-rows, textbox-num-sep, num-rows];
+}
+
+prompt {
+  text-color: @dim;
+  vertical-align: 0.5;
+}
+
+entry {
+  text-color: @bright;
+  vertical-align: 0.5;
+  placeholder: "Jump to a window or workspace";
+  placeholder-color: @dim;
+  cursor-color: @kl;
+}
+
+num-filtered-rows,
+textbox-num-sep,
+num-rows {
+  expand: false;
+  font: "JetBrainsMono NF 9";
+  text-color: @dim;
+  vertical-align: 0.5;
+}
+
+textbox-num-sep {
+  str: "of";
+  margin: 0px -8px;
+}
+
+listview {
+  padding: 8px;
+  spacing: 2px;
+  lines: 6;
+  columns: 1;
+  dynamic: true;
+  fixed-height: false;
+  scrollbar: false;
+  border: 0px;
+}
+
+element {
+  padding: 10px 14px;
+  spacing: 14px;
+  border-radius: 10px;
+  children: [element-icon, element-text];
+}
+
+element normal.normal,
+element normal.active,
+element normal.urgent,
+element alternate.normal,
+element alternate.active,
+element alternate.urgent {
+  background-color: @transparent;
+  text-color: @primary;
+}
+
+element selected.normal,
+element selected.active,
+element selected.urgent {
+  background-color: @selected;
+  text-color: @bright;
+}
+
+element-icon {
+  size: 32px;
+  vertical-align: 0.5;
+  background-color: @transparent;
+}
+
+element-text {
+  vertical-align: 0.5;
+  background-color: @transparent;
+  text-color: inherit;
+  highlight: bold underline #ffffff;
+}
+
+footer {
+  expand: false;
+  orientation: horizontal;
+  padding: 12px 22px;
+  spacing: 8px;
+
+  border: 1px 0px 0px 0px;
+  border-color: @line;
+
+  children: [textbox-hint, textbox-key-enter, textbox-label-enter, textbox-key-esc, textbox-label-esc];
+}
+
+textbox-hint,
+textbox-key-enter,
+textbox-label-enter,
+textbox-key-esc,
+textbox-label-esc {
+  font: "JetBrainsMono NF 9";
+  text-color: @dim;
+  vertical-align: 0.5;
+}
+
+textbox-hint {
+  expand: true;
+  str: "most recent first";
+}
+
+textbox-key-enter,
+textbox-key-esc {
+  expand: false;
+  padding: 2px 7px;
+  border: 1px;
+  border-radius: 5px;
+  border-color: @keycap;
+  text-color: @primary;
+}
+
+textbox-label-enter,
+textbox-label-esc {
+  expand: false;
+}
+
+textbox-key-enter {
+  str: "enter";
+}
+
+textbox-label-enter {
+  str: "open";
+  margin: 0px 8px 0px 0px;
+}
+
+textbox-key-esc {
+  str: "esc";
+}
+
+textbox-label-esc {
+  str: "close";
+}

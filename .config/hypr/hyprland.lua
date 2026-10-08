@@ -175,6 +175,7 @@ local file_manager = "nemo"
 local ipc = "noctalia msg panel-toggle "
 local launcher = ipc .. "launcher"
 local control_center = ipc .. "control-center"
+local window_picker = os.getenv("HOME") .. "/.local/bin/window-switcher.sh"
 
 ------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -298,6 +299,7 @@ hl.animation({ leaf = "border", enabled = true, speed = 10, bezier = "default" }
 hl.animation({ leaf = "borderangle", enabled = true, speed = 8, bezier = "default" })
 hl.animation({ leaf = "fade", enabled = true, speed = 2.5, bezier = "fluent_decel" })
 hl.animation({ leaf = "fadeLayersIn", enabled = false })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 2, bezier = "fluent_decel" })
 hl.animation({
   leaf = "workspaces",
   enabled = true,
@@ -358,6 +360,13 @@ hl.window_rule({
   float = true,
   workspace = "special:player silent",
   stay_focused = true,
+})
+
+-- Rofi pops in place instead of sliding in from a screen edge
+hl.layer_rule({
+  name = "rofi",
+  match = { namespace = "^(rofi)$" },
+  animation = "popin 92%",
 })
 
 -- Volume control
@@ -549,7 +558,7 @@ hl.bind(main_mod .. " + U", function()
 end)
 hl.bind(main_mod .. " + F", set_fullscreen)
 hl.bind(main_mod .. " + Y", hl.dsp.layout("togglesplit"))
--- hl.bind(mainMod .. " + TAB",      hl.dsp.exec_cmd(window_picker))
+hl.bind(main_mod .. " + TAB", hl.dsp.exec_cmd(window_picker))
 hl.bind(main_mod .. " + T", hl.dsp.workspace.toggle_special("dropdown"))
 -- hl.bind(main_mod .. " + T", hl.dsp.window.move({ workspace = "special:dropdown" }))
 hl.bind(main_mod .. " + M", hl.dsp.workspace.toggle_special("player"))
