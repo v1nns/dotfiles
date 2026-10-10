@@ -185,7 +185,6 @@ yay_wayland=(
   'pwvucontrol'            # Pipewire volume control
   'xembedsniproxy'         # Tray support for XEmbed applications
 
-  # TODO: create installer
   'sysc-greet-hyprland'    # TUI greeter
 )
 
@@ -338,21 +337,31 @@ Current=arcade
 EOF
 }
 
-# TODO: create install for sysc-greet
-# must disable current greetd service to enable this one
-# create user for greeter
+# Package sysc-greet-hyprland already creates the greeter user and its home dir
+install_sysc_greet() {
+  echo -e "${GREEN}Installing greeter for greetd (sysc-greet)...${RESET}"
+  sudo install -m 644 "${DOTFILES}/.config/sysc-greet/hyprland-greeter-install.conf" /etc/greetd/hyprland-greeter-config.conf
 
-# avoid messing with audio:
-# sudo mkdir -p /var/lib/greeter/.config/systemd/user && \
-# sudo ln -sf /dev/null /var/lib/greeter/.config/systemd/user/pipewire.service && \
-# sudo ln -sf /dev/null /var/lib/greeter/.config/systemd/user/pipewire-pulse.service && \
-# sudo ln -sf /dev/null /var/lib/greeter/.config/systemd/user/wireplumber.service && \
-# sudo chown -R greeter:greeter /var/lib/greeter/.config
+  sudo tee /etc/greetd/config.toml <<EOF
+[terminal]
+vt = 1
 
-# force some monitor (old hyprland syntax)
-# windowrule = match:class ^(kitty)$, workspace 1
-# workspace = 1, monitor:DP-3
-# exec-once = hyprctl dispatch workspace 1
+[default_session]
+command = "start-hyprland -- -c /etc/greetd/hyprland-greeter-config.conf"
+user = "greeter"
+EOF
+
+  # Avoid greeter session messing with audio
+  local greeter_units="/var/lib/greeter/.config/systemd/user"
+  sudo mkdir -p "${greeter_units}"
+  for unit in pipewire pipewire-pulse wireplumber; do
+    sudo ln -sf /dev/null "${greeter_units}/${unit}.service"
+  done
+  sudo chown -R greeter:greeter /var/lib/greeter/.config
+
+  # Replace any other display manager already enabled
+  sudo systemctl enable --force greetd.service
+}
 
 install_custom_icons() {
   echo -e "${GREEN}Installing custom icons...${RESET}"
@@ -431,6 +440,8 @@ install_wayland() {
 
   echo -e "${GREEN}Installing Wayland scripts...${RESET}"
   cp -sf "${DOTFILES}"/wayland/*.sh "$HOME/.local/bin/"
+
+  install_sysc_greet
 
   install_wayland_plugins
 }
