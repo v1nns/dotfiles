@@ -13,7 +13,7 @@
 [pull]
 	rebase = false
 [core]
-	excludesfile = /home/vinicius/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = nvim
 [push]
 	autoSetupRemote = true

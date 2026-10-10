@@ -12,13 +12,14 @@ pacman_default=('base-devel' # Basic tools to build packages
   'neovim'                   # Code editor
   'nemo'                     # File browser
   'tmux'                     # Term multiplexer
+  'zellij'                   # Another term multiplexer
+  'kitty'                    # Terminal emulator
   'wget'                     # Download files
   'alsa-firmware'            # For audio
   # 'sof-firmware'  # For audio on notebook
   'docker' # Container virtualization
 
   # CLI Power Basics
-  'ripgrep'   # Yet another better grep
   'bat'       # Better cat
   'bc'        # Calculator
   'broot'     # Dir navigation
@@ -52,6 +53,10 @@ pacman_default=('base-devel' # Basic tools to build packages
   'python-gobject'
   'python-pip'
   'python-lsp-server'
+  'python-requests'
+  'python-systemd'
+  'python-gtts'
+  'python-mpv'
   'autopep8'
 
   # Monitoring, management and stats
@@ -70,23 +75,28 @@ pacman_default=('base-devel' # Basic tools to build packages
   'lsp-plugins-lv2'
   'calf'
   'easyeffects'
+  'playerctl' # Control media players via MPRIS
+  'ncspot'    # TUI Spotify client
 
   # Video
   'vlc'
   'mpv'
+  'ffmpeg' # ffplay
 
   # Misc
   'brightnessctl' # Control screen brightness
   'gnome-keyring' # Store security credentials
   'dunst'         # Notification daemon
   'firefox'       # Internet browser
-  'brave-bin'     # Another good browser
   'qalculate-gtk' # Calculator
   'yt-dlp'        # YouTube downloader
+  'obsidian'      # Notes
+  'libnotify'     # notify-send command
+  'xdg-user-dirs' # Manage user directories
 
   # CLI Fun
   'lolcat'   # Rainbow colored terminal output
-  'neofetch' # Show system info
+  'fastfetch' # Show system info
 
   # Utils
   'unzip'     # File archiver
@@ -100,6 +110,7 @@ pacman_default=('base-devel' # Basic tools to build packages
   'grim'      # Screenshot
 
   # User-interface
+  'noto-fonts'           # GTK default font
   'noto-fonts-emoji'     # Support for emojis
   'qt5'                  # Dependency for sddm
   'qt5-quickcontrols'    # Dependency for sddm
@@ -118,6 +129,12 @@ pacman_wayland=(
   'fcitx5'       # For compatibility with keyboard using US intl layout (i.e. microsoft edge)
   'socat'        # Listen for socket events
   'hyprlock'     # Screen locker
+  'hypridle'     # Idle management daemon
+  'rofi'         # Dialog utilities (menu/launcher/etc)
+  'cliphist'     # Clipboard history
+  'qt5ct'        # Qt5 theme settings
+  'fcitx5-gtk'   # fcitx5 GTK input module
+  'fcitx5-qt'    # fcitx5 Qt input module
   'slurp'        # Get screen region on wayland
 )
 
@@ -132,12 +149,15 @@ pacman_x11=(
   'xsel'         # Manage contents of the X selection
   'xss-lock'     # Idle screen lock utility
   'yad'          # GTK calendar
+  'python-i3ipc' # i3 IPC for custom scripts
 )
 
 # Base packages from AUR
 yay_default=(
   'zplug'         # zsh plugin manager
   'google-chrome' # Internet browser
+  'brave-bin'     # Another good browser
+  'microsoft-edge-stable-bin' # Browser used on work mode
   'iwgtk'         # Wi-Fi manager
 
   'dracula-cursors-git'      # GTK cursor
@@ -145,25 +165,25 @@ yay_default=(
   'tokyonight-gtk-theme-git' # GTK theme
 
   'python-pid'
+  'python-spotipy'
 
   # Fonts (Nerd Font)
   'ttf-hack-nerd'
   'ttf-iosevka-nerd'
   'ttf-jetbrains-mono-nerd'
-  'ttf-jetbrains-nerd'
 
   # for battery save
   # 'auto-cpufreq'
 
-  'noctalia-shell'
+  'noctalia-git'
 )
 
 yay_wayland=(
-  'rofi-lbonn-wayland-git' # Dialog utilities (menu/launcher/etc)
   'wlogout'                # Logout menu
   'hyprpolkitagent'        # Polkit authentication daemon
   'hyprswitch'             # Switch between windows in hyprland
   'pwvucontrol'            # Pipewire volume control
+  'xembedsniproxy'         # Tray support for XEmbed applications
 
   # TODO: create installer
   'sysc-greet-hyprland'    # TUI greeter
@@ -199,7 +219,7 @@ outro() {
 check_requirements() {
   # Check pacman actually installed
   if ! hash pacman 2>/dev/null; then
-    echo "${RED}Pacman doesn't seem to be present on your system. Exiting...${RESET}"
+    echo -e "${RED}Pacman doesn't seem to be present on your system. Exiting...${RESET}"
     exit 1
   fi
 
@@ -281,7 +301,7 @@ install_yay() {
 add_user_to_groups() {
   echo -e "${GREEN}Adding logged user to some required groups...${RESET}"
   sudo groupadd -f docker
-  sudo usermod -aG input,realtime,docker "$(logname)"
+  sudo usermod -aG input,realtime,docker "$USER"
   sudo systemctl enable --now docker
 }
 
@@ -295,7 +315,7 @@ copy_configs() {
   shopt -s extglob
   mkdir -p $HOME/.config
 
-  cp -sR ${DOTFILES}/.config/* $HOME/.config/
+  cp -sRf ${DOTFILES}/.config/* $HOME/.config/
 }
 
 install_wallpaper() {
@@ -337,39 +357,55 @@ EOF
 install_custom_icons() {
   echo -e "${GREEN}Installing custom icons...${RESET}"
   mkdir -p $HOME/.local/share
-  cp -sR ${DOTFILES}/.local/share/icons $HOME/.local/share/
+  cp -sRf ${DOTFILES}/.local/share/icons $HOME/.local/share/
 }
 
 install_custom_scripts() {
   echo -e "${GREEN}Installing custom scripts...${RESET}"
   mkdir -p $HOME/.local
-  cp -sR ${DOTFILES}/.local/bin $HOME/.local/
+  cp -sRf ${DOTFILES}/.local/bin $HOME/.local/
 }
 
 install_desktop_apps() {
   echo -e "${GREEN}Installing custom desktop applications...${RESET}"
   mkdir -p $HOME/.local/share
-  cp -sR ${DOTFILES}/.local/share/applications $HOME/.local/share/
+  cp -sRf ${DOTFILES}/.local/share/applications $HOME/.local/share/
 }
 
 install_systemd_services() {
   echo -e "${GREEN}Installing custom systemd services...${RESET}"
   mkdir -p "$HOME/.local/share"
-  cp -sR "${DOTFILES}/.local/share/systemd" "$HOME/.local/share/"
+  cp -sRf "${DOTFILES}/.local/share/systemd" "$HOME/.local/share/"
   systemctl --user daemon-reload
+  systemctl --user enable easyeffects.service
+}
+
+install_git_config() {
+  echo -e "${GREEN}Installing git config...${RESET}"
+  ln -sf "${DOTFILES}/.config/git/.gitconfig" "$HOME/.gitconfig"
+  ln -sf "${DOTFILES}/.config/git/.gitignore_global" "$HOME/.gitignore_global"
 }
 
 install_ohmyzsh() {
   echo -e "${GREEN}Installing oh-my-zsh, power10k theme and custom plugins...${RESET}"
-  RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+  local custom_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
+
+  if [ ! -d "${custom_dir}/themes/powerlevel10k" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${custom_dir}/themes/powerlevel10k"
+  fi
 
   rm -f "$HOME/.zshrc"
   ln -sf "${DOTFILES}/.config/zsh/.zshrc" "$HOME/.zshrc"
   ln -sf "${DOTFILES}/.config/zsh/.zshenv" "$HOME/.zshenv"
   ln -sf "${DOTFILES}/.config/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
 
-  git clone https://github.com/z-shell/F-Sy-H.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/F-Sy-H"
+  if [ ! -d "${custom_dir}/plugins/F-Sy-H" ]; then
+    git clone https://github.com/z-shell/F-Sy-H.git "${custom_dir}/plugins/F-Sy-H"
+  fi
 
   chsh -s /usr/bin/zsh
 }
@@ -393,16 +429,18 @@ install_wayland() {
   install_pacman_packages "${pacman_wayland[@]}"
   install_yay_packages "${yay_wayland[@]}"
 
-  echo -e "${GREEN}Installing Wayland configs...${RESET}"
-  ln -sf "${DOTFILES}/x11/shutdown.desktop" "$HOME/.local/share/applications/shutdown.desktop"
-
   echo -e "${GREEN}Installing Wayland scripts...${RESET}"
-  cp -s "${DOTFILES}"/wayland/*.sh "$HOME/.local/bin/"
+  cp -sf "${DOTFILES}"/wayland/*.sh "$HOME/.local/bin/"
 
   install_wayland_plugins
 }
 
 install_wayland_plugins() {
+  if ! command -v hyprpm &>/dev/null; then
+    echo -e "${YELLOW}[Skipping]${LIGHT} hyprpm not found, no plugins installed${RESET}"
+    return
+  fi
+
   echo -e "${GREEN}Installing Wayland plugins...${RESET}"
   hyprpm update
   hyprpm add https://github.com/outfoxxed/hy3
@@ -445,8 +483,6 @@ setup_rust() {
 # 4. Ensure nct6687 loads at boot:
 # echo "nct6687" | sudo tee /etc/modules-load.d/nct6687.conf
 
-# TODO: add git aliases
-
 ####################################################################################################
 
 # TODO:
@@ -478,6 +514,7 @@ install_custom_icons
 install_custom_scripts
 install_desktop_apps
 install_systemd_services
+install_git_config
 install_ohmyzsh
 pick_display_server
 outro
