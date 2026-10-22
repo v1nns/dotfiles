@@ -91,7 +91,7 @@ hl.on("hyprland.start", function()
 
   -- programs for special workspaces
   hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
-  hl.exec_cmd("kitty --title dropdown-player -e zsh -o 'ignoreeof' -c 'exec ncspot'")
+  hl.exec_cmd("kitty --title dropdown-player -e zsh -o 'ignoreeof' -c 'exec spectrum'")
 end)
 
 -- Execute programs on every config reload (exec equivalent)
@@ -108,16 +108,20 @@ hl.on("window.active", function(w)
     return
   end
 
-  local mon = hl.get_active_monitor()
-  if mon == nil then
-    return
-  end
+  -- Defer to the next tick: resizing synchronously inside the focus event
+  -- fired by toggle_special crashes Hyprland 0.56.2 in CSpace::resizeTarget.
+  hl.timer(function()
+    local mon = hl.get_active_monitor()
+    if mon == nil then
+      return
+    end
 
-  local new_w = math.floor((mon.width / mon.scale) * dropdown_w_pct)
-  local new_h = math.floor((mon.height / mon.scale) * dropdown_h_pct)
+    local new_w = math.floor((mon.width / mon.scale) * dropdown_w_pct)
+    local new_h = math.floor((mon.height / mon.scale) * dropdown_h_pct)
 
-  hl.dispatch(hl.dsp.window.resize({ x = new_w, y = new_h, window = w }))
-  hl.dispatch(hl.dsp.window.center({ window = w }))
+    hl.dispatch(hl.dsp.window.resize({ x = new_w, y = new_h, window = w }))
+    hl.dispatch(hl.dsp.window.center({ window = w }))
+  end, { timeout = 1, type = "oneshot" })
 end)
 
 -- Map window class+title -> workspace name
@@ -234,7 +238,7 @@ hl.config({
       inactive_border = "rgba(595959aa)",
     },
 
-    layout = "dwindle",
+    layout = "master",
 
     allow_tearing = false,
     resize_on_border = true,
@@ -266,12 +270,6 @@ hl.config({
 
   animations = {
     enabled = true,
-  },
-
-  dwindle = {
-    preserve_split = true,
-    smart_split = true,
-    use_active_for_splits = false,
   },
 
   group = {
@@ -343,8 +341,9 @@ hl.animation({
 for i = 1, 10 do
   hl.workspace_rule({ workspace = tostring(i), monitor = primary })
 end
+-- Secondary monitor is vertical, so stack windows top to bottom
 for i = 11, 20 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = secondary })
+  hl.workspace_rule({ workspace = tostring(i), monitor = secondary, layout_opts = { orientation = "top" } })
 end
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
@@ -577,7 +576,10 @@ hl.bind(main_mod .. " + U", function()
   rename_workspace()
 end)
 hl.bind(main_mod .. " + F", set_fullscreen)
-hl.bind(main_mod .. " + Y", hl.dsp.layout("togglesplit"))
+hl.bind(main_mod .. " + Y", hl.dsp.layout("orientationcycle left top"))
+hl.bind(main_mod .. " + SHIFT + Return", hl.dsp.layout("swapwithmaster"))
+hl.bind(main_mod .. " + I", hl.dsp.layout("addmaster"))
+hl.bind(main_mod .. " + SHIFT + I", hl.dsp.layout("removemaster"))
 hl.bind(main_mod .. " + TAB", hl.dsp.exec_cmd(window_picker))
 hl.bind(main_mod .. " + G", hl.dsp.group.toggle())
 hl.bind(main_mod .. " + N", hl.dsp.group.next())
@@ -723,3 +725,17 @@ local work_mode = require("custom.work")
 hl.bind(main_mod .. " + W", function()
   work_mode(hl)
 end)
+
+-- NVR cameras (password comes from the keyring)
+local function nvr_view(channel)
+  return hl.dsp.exec_cmd(
+    'ffplay -rtsp_transport tcp "rtsp://admin:$(secret-tool lookup service nvr user admin)@nvr.home:554/ch'
+      .. channel
+      .. '/main/av_stream"'
+  )
+end
+hl.bind(main_mod .. " + ALT + 1", nvr_view(1))
+hl.bind(main_mod .. " + ALT + 2", nvr_view(2))
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()
