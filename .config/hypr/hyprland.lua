@@ -91,7 +91,8 @@ hl.on("hyprland.start", function()
 
   -- programs for special workspaces
   hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
-  hl.exec_cmd("kitty --title dropdown-player -e zsh -o 'ignoreeof' -c 'exec spectrum'")
+  -- Wait for PipeWire, then respawn spectrum whenever it exits so the window survives Ctrl-C
+  hl.exec_cmd("kitty --title dropdown-player -e zsh -c 'trap : INT; until wpctl inspect @DEFAULT_AUDIO_SINK@ >/dev/null 2>&1; do sleep 0.5; done; while true; do spectrum; sleep 0.5; done'")
 end)
 
 -- Execute programs on every config reload (exec equivalent)
