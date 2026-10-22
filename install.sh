@@ -112,16 +112,15 @@ pacman_default=('base-devel' # Basic tools to build packages
   # User-interface
   'noto-fonts'           # GTK default font
   'noto-fonts-emoji'     # Support for emojis
-  'qt5'                  # Dependency for sddm
-  'qt5-quickcontrols'    # Dependency for sddm
-  'qt5-graphicaleffects' # Dependency for sddm
   #'sddm'                 # Display manager (greeter)
 
   'atuin'                # Shell history
 )
 
-# Packages to use within Wayland (considering archinstall already installed Hyprland)
+# Packages to use within Wayland
 pacman_wayland=(
+  'hyprland'     # Compositor (hyprland.lua requires a recent version)
+  'waybar'       # Status bar (used by hyprland.conf)
   'hyprpaper'    # Set wallpaper
   'nwg-look'     # Customize GTK settings
   'swayidle'     # Idle management daemon
@@ -174,8 +173,6 @@ yay_default=(
 
   # for battery save
   # 'auto-cpufreq'
-
-  'noctalia-git'
 )
 
 yay_wayland=(
@@ -184,6 +181,7 @@ yay_wayland=(
   'hyprswitch'             # Switch between windows in hyprland
   'pwvucontrol'            # Pipewire volume control
   'xembedsniproxy'         # Tray support for XEmbed applications
+  'noctalia-git'           # Desktop shell (used by hyprland.lua)
 
   'sysc-greet-hyprland'    # TUI greeter
 )
@@ -416,7 +414,9 @@ install_ohmyzsh() {
     git clone https://github.com/z-shell/F-Sy-H.git "${custom_dir}/plugins/F-Sy-H"
   fi
 
-  chsh -s /usr/bin/zsh
+  if [ "$(getent passwd "$USER" | cut -d: -f7)" != "/usr/bin/zsh" ]; then
+    chsh -s /usr/bin/zsh
+  fi
 }
 
 install_x11() {
