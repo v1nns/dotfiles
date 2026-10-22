@@ -128,7 +128,7 @@ end)
 local class_names = {
   { class = "brave", name = "web" },
   { class = "obsidian", name = "notes" },
-  { class = "ffplay", title = "rtsp", name = "camera" },
+  { class = "mpv", title = "^camera", name = "camera" },
   { class = "jellyfin", name = "jellyfin" },
 }
 
@@ -397,10 +397,10 @@ hl.window_rule({
   center = true,
 })
 
--- RTSP streams from ffplay
+-- RTSP streams from mpv
 hl.window_rule({
-  name = "ffplay",
-  match = { class = "^(ffplay)$", title = "(.*rtsp.*)" },
+  name = "camera",
+  match = { class = "^(mpv)$", title = "^(camera-.*)$" },
   workspace = "10",
   focus_on_activate = true,
 })
@@ -729,7 +729,9 @@ end)
 -- NVR cameras (password comes from the keyring)
 local function nvr_view(channel)
   return hl.dsp.exec_cmd(
-    'ffplay -rtsp_transport tcp "rtsp://admin:$(secret-tool lookup service nvr user admin)@nvr.home:554/ch'
+    "mpv --profile=low-latency --hwdec=auto --rtsp-transport=tcp --title=camera-"
+      .. channel
+      .. ' "rtsp://admin:$(secret-tool lookup service nvr user admin)@nvr.home:554/ch'
       .. channel
       .. '/main/av_stream"'
   )

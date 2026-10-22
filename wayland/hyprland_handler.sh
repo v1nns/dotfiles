@@ -22,8 +22,8 @@ on_window_open() {
     google-chrome* | brave-browser*)
       hyprctl dispatch renameworkspace $window_workspace "$window_workspace:web"
       ;;
-    ffplay*)
-      if [[ "$window_title" == *rtsp://* ]]; then
+    mpv*)
+      if [[ "$window_title" == camera-* ]]; then
         hyprctl dispatch renameworkspace $window_workspace "$window_workspace:camera"
       fi
       ;;
