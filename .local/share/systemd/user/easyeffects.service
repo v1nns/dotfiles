@@ -2,7 +2,8 @@
 Description=EasyEffects service
 Documentation=https://github.com/wwmm/easyeffects
 Wants=network.target sound.target
-After=network.target sound.target
+After=network.target sound.target graphical-session.target
+PartOf=graphical-session.target
 
 [Service]
 Restart=always
@@ -11,4 +12,4 @@ RestartSec=10
 ExecStart=/usr/bin/easyeffects --load-preset music --gapplication-service
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
