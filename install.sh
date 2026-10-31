@@ -338,14 +338,14 @@ EOF
 # Package sysc-greet-hyprland already creates the greeter user and its home dir
 install_sysc_greet() {
   echo -e "${GREEN}Installing greeter for greetd (sysc-greet)...${RESET}"
-  sudo install -m 644 "${DOTFILES}/.config/sysc-greet/hyprland-greeter-install.conf" /etc/greetd/hyprland-greeter-config.conf
+  sudo install -m 644 "${DOTFILES}/.config/sysc-greet/hyprland-greeter-config.lua" /etc/greetd/hyprland-greeter-config.lua
 
   sudo tee /etc/greetd/config.toml <<EOF
 [terminal]
 vt = 1
 
 [default_session]
-command = "start-hyprland -- -c /etc/greetd/hyprland-greeter-config.conf"
+command = "start-hyprland -- -c /etc/greetd/hyprland-greeter-config.lua"
 user = "greeter"
 EOF
 
