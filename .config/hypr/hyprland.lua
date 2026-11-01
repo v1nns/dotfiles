@@ -340,11 +340,33 @@ hl.animation({
 
 -- Setup all workspaces
 for i = 1, 10 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = primary })
+  hl.workspace_rule({ workspace = tostring(i), monitor = primary, layout = "master" })
 end
--- Secondary monitor is vertical, so stack windows top to bottom
+-- Secondary monitor is vertical, so stack windows top to bottom in equal rows
+-- Super+Y flips a workspace between rows and columns
+local use_columns = {}
+local function layout_workspace_id(ctx)
+  local target = ctx.targets[1]
+  return target and target.window and target.window.workspace.id
+end
+hl.layout.register("rows", {
+  recalculate = function(ctx)
+    local cell = use_columns[layout_workspace_id(ctx)] and ctx.column or ctx.row
+    for i, target in ipairs(ctx.targets) do
+      target:place(cell(ctx, i, #ctx.targets))
+    end
+  end,
+  layout_msg = function(ctx, msg)
+    local id = layout_workspace_id(ctx)
+    if id and msg:match("^orientationcycle") then
+      use_columns[id] = not use_columns[id]
+      return true
+    end
+    return false
+  end,
+})
 for i = 11, 20 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = secondary, layout_opts = { orientation = "top" } })
+  hl.workspace_rule({ workspace = tostring(i), monitor = secondary, layout = "lua:rows" })
 end
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
