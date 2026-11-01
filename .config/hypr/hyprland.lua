@@ -105,7 +105,7 @@ local dropdown_w_pct = 0.5
 local dropdown_h_pct = 0.5
 
 hl.on("window.active", function(w)
-  if w.workspace == nil or not w.workspace.name:match("^special:") then
+  if w == nil or w.workspace == nil or not w.workspace.name:match("^special:") then
     return
   end
 
