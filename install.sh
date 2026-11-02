@@ -313,6 +313,9 @@ copy_configs() {
   mkdir -p $HOME/.config
 
   cp -sRf ${DOTFILES}/.config/* $HOME/.config/
+
+  mkdir -p "$HOME/.local/state/noctalia"
+  ln -sf "${DOTFILES}/.local/state/noctalia/settings.toml" "$HOME/.local/state/noctalia/settings.toml"
 }
 
 install_wallpaper() {

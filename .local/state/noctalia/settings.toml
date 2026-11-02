@@ -1,0 +1,291 @@
+[audio]
+enable_overdrive = true
+
+[bar.default]
+capsule_groups = [ "temp", "usage", "date" ]
+capsule_opacity = 0.74999998323619366
+capsule_padding = 3.0
+capsule_radius = 8
+center = [ "media" ]
+end = [ "privacy", "group:g1", "group:g2", "group:g3", "group:g6", "group:g4", "group:g5" ]
+font_weight = 400
+margin_ends = 0
+padding = 0
+panel_overlap = 0
+position = "bottom"
+radius = 0
+start = [ "workspaces" ]
+thickness = 26
+widget_spacing = 5
+
+    [bar.default.monitor.DP-2]
+    center = []
+    end = [ "cpu", "GPU", "ram", "disk", "weather", "date", "clock" ]
+
+    [[bar.default.capsule_group]]
+    border = ""
+    enabled = true
+    fill = "surface_variant"
+    id = "g1"
+    members = [ "cpu", "GPU", "temp_cpu", "temp_gpu" ]
+    opacity = 0.75
+    padding = 3.0
+    radius = 3.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "ram", "disk" ]
+    opacity = 0.75
+    padding = 3.0
+    radius = 3.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g4"
+    members = [ "date", "clock" ]
+    opacity = 0.75
+    padding = 3.0
+    radius = 3.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g5"
+    members = [ "notifications", "caffeine", "tray" ]
+    opacity = 0.75
+    padding = 3.0
+    radius = 3.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g3"
+    members = [ "weather" ]
+    opacity = 0.75
+    padding = 3.0
+    radius = 8.0
+
+    [[bar.default.capsule_group]]
+    enabled = true
+    fill = "surface_variant"
+    id = "g6"
+    members = [ "volume" ]
+    opacity = 0.75
+    padding = 3.0
+    radius = 8.0
+
+[control_center]
+width = 840
+
+[desktop_widgets]
+enabled = false
+
+[dock]
+pinned = [ "brave-browser" ]
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-3", "lockscreen-login-box@DP-2" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 540.0
+    cy = 1801.0
+    output = "DP-2"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1321.0
+    output = "DP-3"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+[notification]
+offset_y = 20.0
+
+[osd]
+offset_y = 20
+
+[shell]
+font_family = "JetBrainsMono NF"
+lang = "en"
+settings_show_advanced = true
+telemetry_enabled = false
+
+    [shell.launcher]
+    session_search = true
+
+    [shell.mpris]
+    blacklist = [ "brave" ]
+
+    [[shell.session.actions]]
+    action = "lock"
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "suspend"
+    enabled = false
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
+
+[system.monitor]
+gpu_poll_seconds = 5
+
+[theme]
+builtin = "Tokyo-Night"
+
+[weather]
+refresh_minutes = 15
+
+[widget.123]
+type = "spacer"
+
+[widget.GPU]
+capsule = true
+capsule_group = "usage"
+display = "text"
+enabled = true
+icon_color = "primary"
+stat = "gpu_usage"
+type = "sysmon"
+
+[widget.clock]
+capsule = true
+capsule_group = "date"
+capsule_radius = 8.0
+font_weight = 700
+
+[widget.cpu]
+capsule = true
+capsule_group = "usage"
+display = "text"
+icon_color = "primary"
+
+[widget.date]
+capsule = true
+capsule_group = "date"
+capsule_radius = 8.0
+
+[widget.disk]
+capsule = true
+capsule_group = "usage"
+display = "text"
+icon_color = "secondary"
+stat = "disk_pct"
+type = "sysmon"
+
+[widget.media]
+anchor = true
+color = "tertiary"
+hide_when_no_media = true
+max_length = 335
+title_scroll = "on_hover"
+
+[widget.privacy]
+icon_spacing = 2
+scale = 1.05
+
+[widget.ram]
+capsule = true
+capsule_group = "usage"
+display = "text"
+icon_color = "tertiary"
+
+[widget.sysmon]
+capsule = true
+capsule_group = "usage"
+capsule_radius = "auto"
+stat = "gpu_usage"
+
+[widget.temp]
+capsule = true
+
+[widget.temp_cpu]
+capsule = true
+capsule_group = "temp"
+display = "text"
+icon_color = "error"
+stat = "cpu_temp"
+type = "sysmon"
+
+[widget.temp_gpu]
+capsule = true
+capsule_foreground = "secondary"
+capsule_group = "temp"
+display = "text"
+enabled = true
+icon_color = "error"
+stat = "gpu_temp"
+type = "sysmon"
+
+[widget.volume]
+icon_color = "#ECF77A"
+
+[widget.weather]
+icon_color = "#76B1FF"
+show_condition = false
+
+[widget.workspaces]
+capsule_radius = 2
+display = "name"
+empty_color = "surface_variant"
+focused_output_only = true
+max_label_chars = 20
+occupied_color = "surface_variant"
+scale = 1.25
