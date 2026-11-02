@@ -92,7 +92,9 @@ hl.on("hyprland.start", function()
   -- programs for special workspaces
   hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
   -- Wait for PipeWire, then respawn spectrum whenever it exits so the window survives Ctrl-C
-  hl.exec_cmd("kitty --title dropdown-player -e zsh -c 'trap : INT; until wpctl inspect @DEFAULT_AUDIO_SINK@ >/dev/null 2>&1; do sleep 0.5; done; while true; do spectrum; sleep 0.5; done'")
+  hl.exec_cmd(
+    "kitty --title dropdown-player -e zsh -c 'trap : INT; until wpctl inspect @DEFAULT_AUDIO_SINK@ >/dev/null 2>&1; do sleep 0.5; done; while true; do spectrum; sleep 0.5; done'"
+  )
 end)
 
 -- Execute programs on every config reload (exec equivalent)
@@ -436,6 +438,13 @@ hl.window_rule({
   center = true,
 })
 
+-- Windows marked to be grouped together (see group_marked)
+hl.window_rule({
+  name = "marked-for-group",
+  match = { tag = "marked" },
+  border_color = "rgb(ff9e64) rgb(ff9e64)", -- active, inactive
+})
+
 --------------------------
 ---- CUSTOM FUNCTIONS ----
 --------------------------
@@ -580,6 +589,44 @@ local function move_to_empty()
   end
 end
 
+-- Merge every marked window on the active workspace into one group, then clear the marks.
+-- The active window's group is reused when it is marked, otherwise the first marked window's.
+local function group_marked()
+  local ws = hl.get_active_workspace()
+  if ws == nil then
+    return
+  end
+
+  local marked = hl.get_windows({ tag = "marked", workspace = ws.id })
+  if #marked == 0 then
+    return
+  end
+
+  local active = hl.get_active_window()
+  local anchor = marked[1]
+  for _, w in ipairs(marked) do
+    if active ~= nil and w.address == active.address then
+      anchor = w
+    end
+  end
+
+  if anchor.group == nil then
+    hl.dispatch(hl.dsp.focus({ window = anchor }))
+    hl.dispatch(hl.dsp.group.toggle())
+  end
+
+  local group = hl.get_window("address:" .. anchor.address).group
+  if group == nil then
+    return
+  end
+  for _, w in ipairs(marked) do
+    if w.group == nil then
+      group:add(w)
+    end
+    hl.dispatch(hl.dsp.window.tag({ tag = "-marked", window = w }))
+  end
+end
+
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -605,6 +652,8 @@ hl.bind(main_mod .. " + I", hl.dsp.layout("addmaster"))
 hl.bind(main_mod .. " + SHIFT + I", hl.dsp.layout("removemaster"))
 hl.bind(main_mod .. " + TAB", hl.dsp.exec_cmd(window_picker))
 hl.bind(main_mod .. " + G", hl.dsp.group.toggle())
+hl.bind(main_mod .. " + CTRL + G", hl.dsp.window.tag({ tag = "marked" }))
+hl.bind(main_mod .. " + SHIFT + G", group_marked)
 hl.bind(main_mod .. " + N", hl.dsp.group.next())
 hl.bind(main_mod .. " + P", hl.dsp.group.prev())
 hl.bind(main_mod .. " + T", hl.dsp.workspace.toggle_special("dropdown"))
@@ -691,11 +740,12 @@ hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ toggle")
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SOURCE@ toggle"))
 
 -- Using ncspot to play from spotify via MPRIS (player name may vary, so filter dynamically)
-local ncspot = 'sh -c "playerctl -l 2>/dev/null | grep -im1 ncspot | xargs -I{} playerctl -p {} '
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ncspot .. 'play-pause"'))
-hl.bind("XF86AudioStop", hl.dsp.exec_cmd(ncspot .. 'stop"'))
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ncspot .. 'previous"'))
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ncspot .. 'next"'))
+-- local ncspot = 'sh -c "playerctl -l 2>/dev/null | grep -im1 ncspot | xargs -I{} playerctl -p {} '
+local spectrum = 'sh -c "playerctl -l 2>/dev/null | grep -im1 spectrum| xargs -I{} playerctl -p {} '
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(spectrum .. 'play-pause"'))
+hl.bind("XF86AudioStop", hl.dsp.exec_cmd(spectrum .. 'stop"'))
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(spectrum .. 'previous"'))
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(spectrum .. 'next"'))
 
 -- Brightness
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +5%"))
