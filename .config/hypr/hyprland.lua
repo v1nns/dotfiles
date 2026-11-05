@@ -26,6 +26,8 @@ hl.monitor({
   transform = 1,
 })
 
+-- Portable third monitor lives in portable.lua (loaded below, after keybind helpers)
+
 -- hl.monitor({ output = "", mode = "highrr", position = "auto", scale = 1 }) -- auto find monitor
 
 ---------------------
@@ -809,8 +811,11 @@ local function nvr_view(channel)
       .. '/main/av_stream"'
   )
 end
-hl.bind(main_mod .. " + ALT + 1", nvr_view(1))
-hl.bind(main_mod .. " + ALT + 2", nvr_view(2))
+hl.bind(main_mod .. " + ALT + F1", nvr_view(1))
+hl.bind(main_mod .. " + ALT + F2", nvr_view(2))
+
+-- Portable monitor: workspaces 21-25 on mainMod + ALT + [1-5]
+require("portable")(hl, main_mod, move_to)
 
 -- For Noctalia Color templates
 require("noctalia").apply_theme()

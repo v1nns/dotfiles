@@ -129,6 +129,7 @@ pacman_wayland=(
   'socat'        # Listen for socket events
   'hyprlock'     # Screen locker
   'hypridle'     # Idle management daemon
+  'ddcutil'      # Control external monitor brightness over DDC/CI
   'rofi'         # Dialog utilities (menu/launcher/etc)
   'cliphist'     # Clipboard history
   'qt5ct'        # Qt5 theme settings
