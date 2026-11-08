@@ -52,6 +52,10 @@ hl.config({
   cursor = {
     no_hardware_cursors = true,
   },
+
+  render = {
+    cm_auto_hdr = 0,
+  },
 })
 
 -------------------
@@ -348,29 +352,9 @@ for i = 1, 10 do
 end
 -- Secondary monitor is vertical, so stack windows top to bottom in equal rows
 -- Super+Y flips a workspace between rows and columns
-local use_columns = {}
-local function layout_workspace_id(ctx)
-  local target = ctx.targets[1]
-  return target and target.window and target.window.workspace.id
-end
-hl.layout.register("rows", {
-  recalculate = function(ctx)
-    local cell = use_columns[layout_workspace_id(ctx)] and ctx.column or ctx.row
-    for i, target in ipairs(ctx.targets) do
-      target:place(cell(ctx, i, #ctx.targets))
-    end
-  end,
-  layout_msg = function(ctx, msg)
-    local id = layout_workspace_id(ctx)
-    if id and msg:match("^orientationcycle") then
-      use_columns[id] = not use_columns[id]
-      return true
-    end
-    return false
-  end,
-})
+local rows_layout = require("rows")(hl)
 for i = 11, 20 do
-  hl.workspace_rule({ workspace = tostring(i), monitor = secondary, layout = "lua:rows" })
+  hl.workspace_rule({ workspace = tostring(i), monitor = secondary, layout = rows_layout })
 end
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
@@ -648,6 +632,7 @@ hl.bind(main_mod .. " + U", function()
   rename_workspace()
 end)
 hl.bind(main_mod .. " + F", set_fullscreen)
+-- Also handled by the rows layout in rows.lua
 hl.bind(main_mod .. " + Y", hl.dsp.layout("orientationcycle left top"))
 hl.bind(main_mod .. " + SHIFT + Return", hl.dsp.layout("swapwithmaster"))
 hl.bind(main_mod .. " + I", hl.dsp.layout("addmaster"))
@@ -775,15 +760,26 @@ hl.bind(
 -- Submap to resize window
 hl.bind(main_mod .. " + R", hl.dsp.submap("resize"))
 
+-- Lua layouts ignore window.resize, so route those through layout_msg instead
+local function resize_by(x, y)
+  return function()
+    local ws = hl.get_active_workspace()
+    if ws and ws.tiled_layout == rows_layout then
+      hl.dispatch(hl.dsp.layout("resize " .. x .. " " .. y))
+    else
+      hl.dispatch(hl.dsp.window.resize({ x = x, y = y, relative = true }))
+    end
+  end
+end
 hl.define_submap("resize", function()
-  hl.bind("right", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
-  hl.bind("left", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
-  hl.bind("up", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
-  hl.bind("down", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
-  hl.bind("l", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
-  hl.bind("h", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
-  hl.bind("k", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
-  hl.bind("j", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+  hl.bind("right", resize_by(10, 0), { repeating = true })
+  hl.bind("left", resize_by(-10, 0), { repeating = true })
+  hl.bind("up", resize_by(0, -10), { repeating = true })
+  hl.bind("down", resize_by(0, 10), { repeating = true })
+  hl.bind("l", resize_by(10, 0), { repeating = true })
+  hl.bind("h", resize_by(-10, 0), { repeating = true })
+  hl.bind("k", resize_by(0, -10), { repeating = true })
+  hl.bind("j", resize_by(0, 10), { repeating = true })
   hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
