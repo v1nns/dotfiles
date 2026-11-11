@@ -106,6 +106,7 @@ end)
 -- Execute programs on every config reload (exec equivalent)
 hl.on("config.reloaded", function()
   hl.exec_cmd("killall noctalia; noctalia")
+  hl.exec_cmd("killall hyprpaper; hyprpaper")
 end)
 
 -- Resize and center the dropdown on whichever monitor is active when toggled
@@ -355,6 +356,10 @@ end
 local rows_layout = require("rows")(hl)
 for i = 11, 20 do
   hl.workspace_rule({ workspace = tostring(i), monitor = secondary, layout = rows_layout })
+end
+-- On-demand workspaces created by window-switcher.sh (31+) always open on the primary monitor
+for i = 31, 130 do
+  hl.workspace_rule({ workspace = tostring(i), monitor = primary, layout = "master" })
 end
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
@@ -809,6 +814,7 @@ local function nvr_view(channel)
 end
 hl.bind(main_mod .. " + ALT + F1", nvr_view(1))
 hl.bind(main_mod .. " + ALT + F2", nvr_view(2))
+hl.bind(main_mod .. " + ALT + F3", nvr_view(3))
 
 -- Portable monitor: workspaces 21-25 on mainMod + ALT + [1-5]
 require("portable")(hl, main_mod, move_to)

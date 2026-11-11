@@ -17,7 +17,7 @@ return function(hl, main_mod, move_to)
   -- Capped at 50: on PC USB power it browns out and reboots above ~55; raise once on a PD charger
   hl.on("monitor.added", function(m)
     if m.name == output then
-      hl.exec_cmd("sleep 3 && ddcutil --sn " .. serials.portable .. " setvcp 10 50")
+      hl.exec_cmd("sleep 3 && ddcutil --sn " .. serials.portable .. " setvcp 10 60")
     end
   end)
 

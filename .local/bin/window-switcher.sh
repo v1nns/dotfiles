@@ -8,8 +8,8 @@
 # custom theme for rofi
 declare -r ROFI_THEME="$HOME/.config/rofi/tokyo/switchwindow.rasi"
 
-# workspaces 1-20 are pinned to monitors, on-demand ones start after them
-declare -r FIRST_EXTRA_WORKSPACE=21
+# workspaces 1-30 are reserved for monitors, on-demand ones start after them
+declare -r FIRST_EXTRA_WORKSPACE=31
 
 # record separator between rofi rows (each row has two lines)
 declare -r ROW_SEP=$'\x1e'
