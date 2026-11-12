@@ -308,6 +308,25 @@ disable_login_lock() {
   sudo sed -i 's/# deny.*$/deny = 0/' /etc/security/faillock.conf
 }
 
+# Avahi already publishes the hostname over mDNS, and systemd-resolved doing the same makes avahi
+# see its own name as taken and rename itself in a loop (bluemoon-2, bluemoon-3, ...)
+disable_resolved_mdns() {
+  echo -e "${GREEN}Disabling mDNS on systemd-resolved (leave it to avahi)...${RESET}"
+  sudo mkdir -p /etc/systemd/resolved.conf.d/
+  sudo tee /etc/systemd/resolved.conf.d/no-mdns.conf <<EOF
+[Resolve]
+MulticastDNS=no
+EOF
+}
+
+# USB autosuspend on the Intel Bluetooth adapter causes audio gaps on Bluetooth headsets
+disable_bluetooth_autosuspend() {
+  echo -e "${GREEN}Disabling USB autosuspend for Bluetooth adapters...${RESET}"
+  sudo tee /etc/modprobe.d/btusb-no-autosuspend.conf <<EOF
+options btusb enable_autosuspend=0
+EOF
+}
+
 copy_configs() {
   echo -e "${GREEN}Copying all programs configs...${RESET}"
   shopt -s extglob
@@ -521,6 +540,8 @@ setup_rust
 install_yay
 add_user_to_groups
 disable_login_lock
+disable_resolved_mdns
+disable_bluetooth_autosuspend
 copy_configs
 install_wallpaper
 # install_greeter
