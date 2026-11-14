@@ -1,0 +1,21 @@
+{
+    "output": {
+        "blocklist": [],
+        "equalizer#0": {
+            "balance": 0.0,
+            "bypass": false,
+            "input-gain": -5.0,
+            "output-gain": 0.0,
+            "mode": "IIR",
+            "num-bands": 1,
+            "split-channels": false,
+            "left": {
+                "band0": { "type": "Bell", "mode": "RLC (BT)", "slope": "x1", "frequency": 80.0, "gain": 5.0, "q": 0.8, "mute": false, "solo": false }
+            },
+            "right": {
+                "band0": { "type": "Bell", "mode": "RLC (BT)", "slope": "x1", "frequency": 80.0, "gain": 5.0, "q": 0.8, "mute": false, "solo": false }
+            }
+        },
+        "plugins_order": [ "equalizer#0" ]
+    }
+}

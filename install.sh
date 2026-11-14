@@ -336,6 +336,9 @@ copy_configs() {
 
   mkdir -p "$HOME/.local/state/noctalia"
   ln -sf "${DOTFILES}/.local/state/noctalia/settings.toml" "$HOME/.local/state/noctalia/settings.toml"
+
+  mkdir -p "$HOME/.local/share"
+  cp -sRf "${DOTFILES}/.local/share/easyeffects" "$HOME/.local/share/"
 }
 
 install_wallpaper() {
