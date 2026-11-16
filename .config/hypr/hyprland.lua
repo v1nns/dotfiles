@@ -441,6 +441,16 @@ hl.window_rule({
   focus_on_activate = true,
 })
 
+-- Jellyfin starts fullscreen and requests an output itself (lands on the portable monitor);
+-- ignore that so it stays on the monitor it was opened from, and open it maximized
+-- (keeps the bar) while the app still believes it is fullscreen
+hl.window_rule({
+  name = "jellyfin-fullscreen",
+  match = { class = "^(org\\.jellyfin\\.JellyfinDesktop)$" },
+  suppress_event = "fullscreenoutput",
+  fullscreen_state = "1 2",
+})
+
 -- Brave extension popouts (class is brave-<extension-id>-<profile>)
 hl.window_rule({
   name = "brave-extension-popout",
