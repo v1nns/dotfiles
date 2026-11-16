@@ -79,6 +79,26 @@ hl.config({
 ---- EVENT HANDLING ----
 ------------------------
 
+-- Apps whose launcher usage count is removed whenever Noctalia (re)starts
+local launcher_ignore = { "microsoft-edge" }
+
+local function start_noctalia()
+  local dir = os.getenv("HOME") .. "/.local/state/noctalia/"
+  local ignore = '["' .. table.concat(launcher_ignore, '","') .. '"]'
+  -- Entries are keyed by full .desktop path; match on the basename without extension
+  local keep = '(split("/") | last | rtrimstr(".desktop")) as $id | $ign | index($id) | not'
+  local function prune(file, filter)
+    local f = dir .. file
+    return string.format("jq --argjson ign '%s' '%s' %s > %s.tmp && mv %s.tmp %s", ignore, filter, f, f, f, f)
+  end
+  hl.exec_cmd(table.concat({
+    "killall -q noctalia; while pgrep -x noctalia >/dev/null; do sleep 0.1; done",
+    prune("usage_counts.json", ".Applications |= with_entries(select(.key | " .. keep .. "))"),
+    prune("recently_used.json", ".Applications |= map(select(" .. keep .. "))"),
+    "exec noctalia",
+  }, "; "))
+end
+
 -- Execute initial programs once on startup (exec-once equivalent)
 hl.on("hyprland.start", function()
   hl.exec_cmd("hyprpaper")
@@ -93,7 +113,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
   hl.exec_cmd("xembedsniproxy")
-  hl.exec_cmd("noctalia")
+  start_noctalia()
 
   -- programs for special workspaces
   hl.exec_cmd("kitty --title dropdown-terminal -e zsh -o 'ignoreeof'")
@@ -105,7 +125,7 @@ end)
 
 -- Execute programs on every config reload (exec equivalent)
 hl.on("config.reloaded", function()
-  hl.exec_cmd("killall noctalia; noctalia")
+  start_noctalia()
   hl.exec_cmd("killall hyprpaper; hyprpaper")
 end)
 
